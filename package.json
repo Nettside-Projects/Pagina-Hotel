@@ -1,0 +1,23 @@
+{
+  "name": "pagina-hotel",
+  "version": "1.0.0",
+  "description": "Programa donde se gestionará la entrada y salida de los huespedes",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nettside-Projects/Pagina-Hotel.git"
+  },
+  "author": "Nettside",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nettside-Projects/Pagina-Hotel/issues"
+  },
+  "homepage": "https://github.com/Nettside-Projects/Pagina-Hotel#readme",
+  "dependencies": {
+    "electron": "^30.0.8"
+  }
+}
