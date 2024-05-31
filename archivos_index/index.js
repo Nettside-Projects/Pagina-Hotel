@@ -1,18 +1,23 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('login-form');
-    const errorMessage = document.getElementById('error-message');
+document.addEventListener("DOMContentLoaded", function() {
+    const inputs = document.querySelectorAll('.frame-input, .frame-input-4');
 
-    loginForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            const span = this.parentElement.querySelector('span');
+            if (span) {
+                span.style.display = 'none';
+            }
+            this.parentElement.classList.add('focused');
+        });
 
-        if (username === "admin" && password === "password123") {
-            // Simula una redirección después de un inicio de sesión exitoso
-            window.location.href = "welcome.html";
-        } else {
-            errorMessage.textContent = "Invalid username or password.";
-        }
+        input.addEventListener('blur', function() {
+            if (this.value === '') {
+                const span = this.parentElement.querySelector('span');
+                if (span) {
+                    span.style.display = 'block';
+                }
+                this.parentElement.classList.remove('focused');
+            }
+        });
     });
 });
