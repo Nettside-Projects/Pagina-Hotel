@@ -4,7 +4,7 @@
       "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
       "Source Han Sans CN", sans-serif;
   }
-  
+
   .main-container {
     overflow: hidden;
   }
@@ -13,7 +13,7 @@
   .main-container * {
     box-sizing: border-box;
   }
-  
+
   input,
   select,
   textarea,
