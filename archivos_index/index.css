@@ -87,7 +87,7 @@
     position: relative;
     width: 420px;
     height: 381px;
-  
+    box-shadow: inset 1px 5px #21BEFF;
     background: #d9d9d9;
     z-index: 1;
     overflow: visible auto;
@@ -132,6 +132,7 @@
     z-index: 6;
     outline: none;
     padding: 0 0 0 28px;
+    font-size: 19px;
   }
   .frame-1 {
     display: flex;
@@ -275,7 +276,7 @@
     gap: 10px;
     position: relative;
     width: 88px;
-    margin: 14px 0 0 0;
+    margin: 20px 0 0 0;
     padding: 10px 10px 10px 10px;
     z-index: 15;
   }
@@ -293,5 +294,11 @@
     text-transform: capitalize;
     white-space: nowrap;
     z-index: 16;
+    margin: 20px 0 0 0;
   }
-  
+  .ojo_pasword{
+    height: 24px;
+    width: 24px;
+   /*  position: fixed;
+    right: 44%; */
+  }
