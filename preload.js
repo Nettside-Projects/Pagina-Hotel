@@ -1,8 +1,10 @@
-// preload.js
-const { contextBridge } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 
-// Exponer una función al contexto del renderizador
-contextBridge.exposeInMainWorld('miFuncion', () => {
-    // Aquí puedes definir la lógica de tu función
-    console.log('¡Hola desde la función de precarga!');
+contextBridge.exposeInMainWorld('preload', {
+    /* funcionDeEjemplo: (variableInformacion) => ipcRenderer.send("informacion",(variableInformacion)),
+ funcionDeEjemploRecibir: (callback) => ipcRenderer.on("recibir",(e,html)=> callback(e,html)), */
+    validarUsuario: (datosValidacion) =>
+        ipcRenderer.send('validacion', datosValidacion),
+    mensajesDeValidacion: (callback) =>
+        ipcRenderer.on('mensajes', (e, html) => callback(e, html)),
 });

@@ -1,16 +1,70 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
+const {app,BrowserWindow, ipcMain} = require("electron")
+const path = require("path")
+const sqlite3 = require('sqlite3').verbose();
+const {validarUsuario} = require("./crud")
+const db = new sqlite3.Database(path.join(path.join(__dirname,"/db","data.db")))
 
-function createWindow() {
-    const windowMain = new BrowserWindow({
+
+let windowLogin;
+function createWindow (){
+    let dato = "hola mundo"
+    windowLogin = new BrowserWindow({
         width: 600,
         height: 400,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'), // Ruta al archivo de precarga
-        },
-    });
-
-    windowMain.loadFile('index.html');
+            nodeIntegration: true,
+            preload: path.join(__dirname, 'preload.js')
+        }
+    })
+   
+    windowLogin.loadFile("index.html")
+    
 }
 
-app.whenReady().then(createWindow);
+/* if (process.env.NODE_ENV !== 'production') {
+    templateMenuMain.push({
+        label: 'DevTools',
+        submenu: [
+            {
+                label: 'Show/Hide Dev Tools',
+                click(item, focusedWindow) {
+                    focusedWindow.toggleDevTools()
+                },
+
+            },
+            {
+                role: 'reload'
+            }
+        ]
+    })
+} */
+
+app.whenReady().then(()=>{
+   /*  ipcMain.on("informacion",(event,i)=>{
+      console.log(i)  
+    }) */
+    createWindow()
+})
+
+ipcMain.on("validacion",(e,datos) => {
+
+validarUsuario(db,datos,(mensajeValidaciones)=>{
+
+   if(mensajeValidaciones.length !== 2){
+    windowLogin.webContents.send("mensajes","Error en el usuario y/o contraseña")
+   }else{
+    let windowMain = new BrowserWindow({
+        width: 1260,
+        height: 840,
+        webPreferences: {
+            nodeIntegration: true,
+            preload: path.join(__dirname, 'preload.js')
+        }
+    })
+    windowLogin.close()
+    windowMain.show()
+   }
+   
+})
+
+})
