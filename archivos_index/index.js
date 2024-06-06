@@ -1,22 +1,23 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('login-form');
-    const errorMessage = document.getElementById('error-message');
+document.addEventListener("DOMContentLoaded", function() {
+    const inputs = document.querySelectorAll('.frame-input, .frame-input-4');
 
-    loginForm.addEventListener('submit',(event) => {
-        event.preventDefault();
-        const formData = new FormData(loginForm); 
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            const span = this.parentElement.querySelector('span');
+            if (span) {
+                span.style.display = 'none';
+            }
+            this.parentElement.classList.add('focused');
+        });
 
-        const datos = {
-            usuario: formData.get('username'),
-            password: formData.get('password')
-        };
-
-        window.preload.validarUsuario(datos)
-
+        input.addEventListener('blur', function() {
+            if (this.value === '') {
+                const span = this.parentElement.querySelector('span');
+                if (span) {
+                    span.style.display = 'block';
+                }
+                this.parentElement.classList.remove('focused');
+            }
+        });
     });
-
-    window.preload.mensajesDeValidacion((e,mensajesDeValidacion)=>{
-        //Acomodar los mensajes que están dentro del array en el html
-        errorMessage.textContent = mensajesDeValidacion
-    })
 });
