@@ -1,304 +1,338 @@
 :root {
-    --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
-      "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
-      "Source Han Sans CN", sans-serif;
-  }
-
-  .main-container {
-    overflow: hidden;
-  }
-
-  .main-container,
-  .main-container * {
-    box-sizing: border-box;
-  }
-
-  input,
-  select,
-  textarea,
-  button {
-    outline: 0;
-  }
-  body{
-    display: flex;
-    height: 100vh;
-    width: 100%;
-    border: none;
-    margin: 0;
+  --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
+    "Source Han Sans CN", sans-serif;
 }
-  .main-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    background: linear-gradient(177.2deg, #5b89be, #7163a2);
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  .inicio-sesion {
-    position: relative;
-    width: 351px;
-    height: 66px;
-    margin: 0 0 15px 0;
-    font-family: Manrope, var(--default-font-family);
-    font-size: 48px;
-    font-weight: 500;
-    line-height: 65.568px;
-    text-align: left;
-    text-overflow: initial;
-    white-space: nowrap;
-    z-index: 14;
-  }
-  .inicio {
-    position: relative;
-    color: #ffffff;
-    font-family: Manrope, var(--default-font-family);
-    font-size: 48px;
-    font-weight: 500;
-    line-height: 65.568px;
-    text-align: left;
-    text-transform: capitalize;
-  }
-  .de {
-    position: relative;
-    color: #ffffff;
-    font-family: Manrope, var(--default-font-family);
-    font-size: 48px;
-    font-weight: 500;
-    line-height: 65.568px;
-    text-align: left;
-    text-transform: lowercase;
-  }
-  .sesion {
-    position: relative;
-    color: #ffffff;
-    font-family: Manrope, var(--default-font-family);
-    font-size: 48px;
-    font-weight: 500;
-    line-height: 65.568px;
-    text-align: left;
-    text-transform: capitalize;
-  }
-  .backrow-login {
-    position: relative;
-    width: 420px;
-    height: 381px;
-    box-shadow: inset 1px 5px #21BEFF;
-    background: #d9d9d9;
-    z-index: 1;
-    overflow: visible auto;
-    border-radius: 20px;
-  }
-  .nombre {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: nowrap;
-    gap: 3px;
-    position: relative;
-    width: 293px;
-    height: 81px;
-    margin: 54px 0 0 64.378px;
-    z-index: 2;
-  }
-  .frame {
-    display: flex;
-    align-items: center;
-    align-self: stretch;
-    flex-wrap: nowrap;
-    flex-shrink: 0;
-    gap: 14px;
-    position: relative;
-    min-width: 0;
-    padding: 8px 25px 8px 25px;
-    background: #ffffff;
-    z-index: 3;
-    overflow: hidden;
-    border-radius: 20px;
-  }
-  .frame-input {
-    flex-shrink: 0;
-    position: absolute;
-    width: 293px;
-    height: 43px;
-    top: 0;
-    left: 0;
-    background: transparent;
-    border: none;
-    z-index: 6;
-    outline: none;
-    padding: 0 0 0 28px;
-    font-size: 19px;
-  }
-  .frame-1 {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: 0;
-    gap: 10px;
-    position: relative;
-    z-index: 4;
-  }
-  .ingrese-su-nombre {
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: auto;
-    position: relative;
-    height: 27px;
-    color: rgba(0, 0, 0, 0.5);
-    font-family: Manrope, var(--default-font-family);
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 27px;
-    text-align: left;
-    text-transform: capitalize;
-    white-space: nowrap;
-    z-index: 5;
-  }
-  .nombre-2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: nowrap;
-    gap: 3px;
-    position: relative;
-    width: 293px;
-    height: 81px;
-    margin: 0 0 0 64.378px;
-    z-index: 7;
-  }
-  .frame-3 {
-    display: flex;
-    align-items: center;
-    align-self: stretch;
-    flex-wrap: nowrap;
-    flex-shrink: 0;
-    gap: 1px;
-    position: relative;
-    min-width: 0;
-    padding: 8px 25px 8px 25px;
-    background: #ffffff;
-    z-index: 8;
-    overflow: hidden;
-    border-radius: 20px;
-  }
-  .frame-input-4 {
-    flex-shrink: 0;
-    position: absolute;
-    width: 293px;
-    height: 43px;
-    top: 0;
-    left: 0;
-    background: transparent;
-    border: none;
-    z-index: 11;
-    outline: none;
-    padding: 0 0 0 28px;
-  }
-  .frame-5 {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: 0;
-    gap: 10px;
-    position: relative;
-    z-index: 9;
-  }
-  .ingrese-su-nombre-6 {
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: auto;
-    position: relative;
-    height: 27px;
-    color: rgba(0, 0, 0, 0.5);
-    font-family: Manrope, var(--default-font-family);
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 27px;
-    text-align: left;
-    text-transform: capitalize;
-    white-space: nowrap;
-    z-index: 10;
-  }
-  .button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: nowrap;
-    gap: 10px;
-    position: relative;
-    width: 125.676px;
-    height: 52px;
-    margin: 47.769px 0 0 117.946px;
-    padding: 14px 94px 14px 94px;
-    cursor: pointer;
-    background: #5292ce;
-    border: none;
-    z-index: 12;
-    overflow: hidden;
-    border-radius: 50px;
-  }
-  .frame-input:focus, .frame-input-4:focus {
-    border: none; /* Remove default border on focus */
+
+.main-container {
+  overflow: hidden;
+}
+
+.main-container,
+.main-container * {
+  box-sizing: border-box;
+}
+
+input,
+select,
+textarea,
+button {
+  outline: 0;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  border: none;
+  margin: 0;
+}
+
+.main-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background: linear-gradient(177.2deg, #5b89be, #7163a2);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.inicio-sesion {
+  position: relative;
+  width: 351px;
+  height: 66px;
+  margin: 0 0 15px 0;
+  font-family: Manrope, var(--default-font-family);
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 65.568px;
+  text-align: left;
+  text-overflow: initial;
+  white-space: nowrap;
+  z-index: 14;
+}
+
+.inicio {
+  position: relative;
+  color: #ffffff;
+  font-family: Manrope, var(--default-font-family);
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 65.568px;
+  text-align: left;
+  text-transform: capitalize;
+}
+
+.de {
+  position: relative;
+  color: #ffffff;
+  font-family: Manrope, var(--default-font-family);
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 65.568px;
+  text-align: left;
+  text-transform: lowercase;
+}
+
+.sesion {
+  position: relative;
+  color: #ffffff;
+  font-family: Manrope, var(--default-font-family);
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 65.568px;
+  text-align: left;
+  text-transform: capitalize;
+}
+
+.backrow-login {
+  position: relative;
+  width: 420px;
+  height: 381px;
+  box-shadow: inset 1px 5px #21BEFF;
+  background: #d9d9d9;
+  z-index: 1;
+  overflow: visible auto;
+  border-radius: 20px;
+}
+
+.nombre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 3px;
+  position: relative;
+  width: 293px;
+  /* height: 81px; */
+  margin: 54px 0 0 64.378px;
+  z-index: 2;
+}
+
+.frame {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 14px;
+  position: relative;
+  min-width: 0;
+  padding: 8px 25px 8px 25px;
+  background: #ffffff;
+  z-index: 3;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.frame-input {
+  flex-shrink: 0;
+  position: absolute;
+  width: 293px;
+  height: 43px;
+  top: 0;
+  left: 0;
+  background: transparent;
+  border: none;
+  z-index: 6;
+  outline: none;
+  padding: 0 0 0 28px;
+  font-size: 19px;
+}
+
+.frame-1 {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;
+  gap: 10px;
+  position: relative;
+  z-index: 4;
+}
+
+.ingrese-su-nombre {
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 27px;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Manrope, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 27px;
+  text-align: left;
+  text-transform: capitalize;
+  white-space: nowrap;
+  z-index: 5;
+}
+
+.nombre-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 3px;
+  position: relative;
+  width: 293px;
+  /*  height: 81px; */
+  margin: 0 0 0 64.378px;
+  z-index: 7;
+}
+
+.frame-3 {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 1px;
+  position: relative;
+  min-width: 0;
+  padding: 8px 25px 8px 25px;
+  background: #ffffff;
+  z-index: 8;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.frame-input-4 {
+  flex-shrink: 0;
+  position: absolute;
+  width: 293px;
+  height: 43px;
+  top: 0;
+  left: 0;
+  background: transparent;
+  border: none;
+  z-index: 11;
+  outline: none;
+  padding: 0 0 0 28px;
+}
+
+.frame-5 {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;
+  gap: 10px;
+  position: relative;
+  z-index: 9;
+}
+
+.ingrese-su-nombre-6 {
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 27px;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Manrope, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 27px;
+  text-align: left;
+  text-transform: capitalize;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  position: relative;
+  width: 125.676px;
+  height: 52px;
+  margin: 47.769px 0 0 117.946px;
+  padding: 14px 94px 14px 94px;
+  cursor: pointer;
+  background: #5292ce;
+  border: none;
+  z-index: 12;
+  overflow: hidden;
+  border-radius: 50px;
+}
+
+.frame-input:focus,
+.frame-input-4:focus {
+  border: none;
+  /* Remove default border on focus */
 }
 
 .frame.focused {
-    border: 2px solid black; /* Add custom border when input is focused */
+  border: 2px solid black;
+  /* Add custom border when input is focused */
 }
-  .entrar {
-    flex-shrink: 0;
-    flex-basis: auto;
-    position: relative;
-    height: 27px;
-    color: #ffffff;
-    font-family: Manrope, var(--default-font-family);
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 27px;
-    text-align: left;
-    text-transform: capitalize;
-    white-space: nowrap;
-    z-index: 13;
-  }
-  .frame-7 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: nowrap;
-    gap: 10px;
-    position: relative;
-    width: 88px;
-    margin: 20px 0 0 0;
-    padding: 10px 10px 10px 10px;
-    z-index: 15;
-  }
-  .ver {
-    flex-shrink: 0;
-    flex-basis: auto;
-    position: relative;
-    height: 27px;
-    color: #ffffff;
-    font-family: Manrope, var(--default-font-family);
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 27px;
-    text-align: left;
-    text-transform: capitalize;
-    white-space: nowrap;
-    z-index: 16;
-    margin: 20px 0 0 0;
-  }
-  .ojo_pasword{
-    height: 24px;
-    width: 24px;
-   /*  position: fixed;
+
+.entrar {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 27px;
+  color: #ffffff;
+  font-family: Manrope, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27px;
+  text-align: left;
+  text-transform: capitalize;
+  white-space: nowrap;
+  z-index: 13;
+}
+
+.frame-7 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  position: relative;
+  width: 88px;
+  margin: 20px 0 0 0;
+  padding: 10px 10px 10px 10px;
+  z-index: 15;
+}
+
+.ver {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 27px;
+  color: #ffffff;
+  font-family: Manrope, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27px;
+  text-align: left;
+  text-transform: capitalize;
+  white-space: nowrap;
+  z-index: 16;
+  margin: 20px 0 0 0;
+}
+
+.ojo_pasword {
+  height: 24px;
+  width: 24px;
+  /*  position: fixed;
     right: 44%; */
-  }
+}
+
+.mensaje-error {
+  font-family: Roboto;
+  color: rgb(195, 57, 57);
+  text-align: center;
+  font-weight: 500;
+  height: 35px;
+}
