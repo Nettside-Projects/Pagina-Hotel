@@ -131,7 +131,7 @@ body {
 /* label styling */
 label {
   width: 100%;
-  padding: 0.8em;
+  padding-right: 15px;
   height: 40px;
   display: flex;
   align-items: center;
@@ -159,6 +159,7 @@ label {
 
 .input {
   width: 100%;
+  height: 100%;
   padding-left: 28px;
   background: none;
   border: none;
@@ -367,9 +368,16 @@ label {
     z-index: 16;
     margin: 20px 0 0 0;
   }
-  .ojo_pasword{
+  .ojo_password{
     height: 24px;
     width: 24px;
-   /*  position: fixed;
-    right: 44%; */
+    cursor: pointer;
   }
+
+#openEye {
+  display: none;
+}
+.ojos{
+  display: flex;
+
+}

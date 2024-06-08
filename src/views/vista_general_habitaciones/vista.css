@@ -74,12 +74,20 @@
     background: #d9d9d9;
     color: hsla(0, 0%, 0%, 0.664);
     margin: 0 20px 0 0;
-    height: 80%;
+    height: 75%;
     justify-content: center;
     align-items: center;
-    width: 180px;
+    width: 190px;
+    text-align: center;
     border: none;
     border-radius: 10px;
+  }
+  .buscar_lupa:focus {
+    border-bottom: 2px solid #5b5fc7;
+  }
+  
+  .buscar_lupa:hover {
+    outline: 1px solid lightgrey;
   }
   .todo {
     display: flex;
@@ -104,36 +112,36 @@
     display: flex;
     justify-content: center;
     width: 150px;
-    background: #fff;
+    background: linear-gradient(#fff 61%, #999999 100%);
     height: 100%;
     border-radius: 5px 5px 0 0;
+    border-top: 2px #4D54FF solid;
+    
   }
-   .todo div:nth-child(1){
 
-  } 
   .todo div:nth-child(2){
     margin: 0 5px;
   }
   .todo div:nth-child(3){
     margin: 0 5px 0 0;
   }
-   .todo div:nth-child(4){
-  
-  } 
+
   .rectangle {
     position: relative;
     width: 98%;
     height: 98%;
     margin: 0 0 0 0;
+    display: flex;
+    justify-content: center;
     background: #ffffff;
     overflow: visible auto;
   }
   .flex-row-b {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     position: relative;
-    width: 895px;
+    flex-wrap: wrap;
     height: 161px;
     margin: 24px 0 0 39px;
     z-index: 28;
@@ -239,7 +247,7 @@
     justify-content: flex-start;
     position: absolute;
     height: 27px;
-    top: 77px;
+    top: 95px;
     left: 0;
     color: #ffffff;
     font-family: Manrope, var(--default-font-family);
@@ -257,7 +265,7 @@
     justify-content: flex-start;
     position: absolute;
     height: 27px;
-    top: 77px;
+    top: 95px;
     left: 90px;
     color: #ffffff;
     font-family: Manrope, var(--default-font-family);
@@ -279,25 +287,24 @@
     background-size: cover;
     z-index: 15;
   }
-  .rectangle-5 {
+  .rectangle-5, .rectangle-1{
     flex-shrink: 0;
     position: relative;
-    width: 285px;
-    height: 161px;
-    background: #35c928;
+    width: 300px;
+    height: 180px;
     z-index: 17;
     border-radius: 18px;
+    margin: 0 10px 10px 0;
   }
-  .button-6 {
+  .button-6, .button{
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 285px;
+    width: 100%;
     height: 35px;
     margin: 0 0 0 0;
     cursor: pointer;
-    background: #2e8a26;
     border: none;
     z-index: 23;
     border-radius: 18px 18px 0 0;
@@ -407,3 +414,51 @@
  .home {
      font-size: 25px;
  }
+/*  estados de las habitaciones */
+
+.disponible{
+  background: #35c928;
+}
+.disponible_encabezado{
+  background: #2e8a26;
+}
+.fuera_servicio{
+  background: #808080;
+}
+.fuera_servicio_encabezado{
+  background: #414141;
+}
+.ocupado{
+  background: #FF8A00;
+}
+.ocupado_encabezado{
+  background: #B74D00;
+}
+.limpieza{
+  background: #17b6ac;
+}
+.limpieza_encabezado{
+  background: #0b6660;
+}
+.ocupado_tiempo{
+  background: #ff1414;
+}
+.ocupado_tiempo_encabezado{
+  background: #860000;
+}
+.reserva{
+  background: #6a7dd0;
+}
+.reserva_encabezado{
+  background: #303a6b;
+}
+.reparacion{
+  background: #DBBC18;
+}
+.reparacion_encabezado{
+  background: #907900;
+}
+.pestaña_activa{
+  background: #fff !important; 
+  color: #4D54FF;
+}

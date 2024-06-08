@@ -58,3 +58,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 });
+
+function toggleEye() {
+    const closedEye = document.getElementById('closedEye');
+    const openEye = document.getElementById('openEye');
+
+    if (closedEye.style.display === 'none') {
+        closedEye.style.display = 'block';
+        openEye.style.display = 'none';
+    } else {
+        closedEye.style.display = 'none';
+        openEye.style.display = 'block';
+    }
+}
+

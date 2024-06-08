@@ -38,11 +38,11 @@
       <div class="wrapper">
         <div class="buscador">
           <div class="barra_buscar">Vista Geral
-            <input class="buscar_lupa"></input>
+            <input class="buscar_lupa" name="text" placeholder="Buscar Quarto..." type="search">
           </div>
         </div>
         <div class="todo">
-          <div>Todo</div>
+          <div class="pestaña_activa">Todo</div>
           <div>Primeiro Nivel</div>
           <div>Segundo Nivel</div>
           <div>Terceiro Nivel</div>
@@ -50,8 +50,8 @@
       </div>
       <div class="rectangle">
         <div class="flex-row-b">
-          <div class="rectangle-1">
-            <button class="button">
+          <div class="rectangle-1 disponible">
+            <button class="button disponible_encabezado">
               <span class="text-2">disponível</span>
             </button>
             <div class="flex-row-dbc">
@@ -63,265 +63,254 @@
             </div>
             <div class="arrow"></div>
           </div>
-          <div class="rectangle-5">
-            <button class="button-6">
-              <span class="text-6">disponível</span>
+          <div class="rectangle-1 disponible">
+            <button class="button disponible_encabezado">
+              <span class="text-2">disponível</span>
             </button>
-            <div class="flex-row-ae">
-              <span class="text-7">02</span>
-              <div class="rectangle-7"></div>
-              <div class="rectangle-8"></div>
-              <div class="rectangle-9"></div>
-              <span class="h-a">24h</span><span class="simple-b">Simple</span>
+            <div class="flex-row-dbc">
+              <span class="text-3">02</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Simple</span>
             </div>
-            <div class="arrow-c"></div>
+            <div class="arrow"></div>
           </div>
-          <div class="rectangle-d">
-            <button class="button-e">
-              <span class="text-a">disponível</span>
+          <div class="rectangle-1 disponible">
+            <button class="button disponible_encabezado">
+              <span class="text-2">disponível</span>
             </button>
-            <div class="flex-row-ed">
-              <span class="text-b">03</span>
-              <div class="rectangle-f"></div>
-              <div class="rectangle-10"></div>
-              <div class="rectangle-11"></div>
-              <span class="h-12">24h</span><span class="simple-13">Simple</span>
+            <div class="flex-row-dbc">
+              <span class="text-3">02</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Simple</span>
             </div>
-            <div class="arrow-14"></div>
+            <div class="arrow"></div>
           </div>
-        </div>
-        <div class="flex-row-ff">
-          <div class="rectangle-15">
-            <button class="button-16">
-              <div class="section-3">
-                <span class="fora">Fora </span><span class="de">de </span
-                ><span class="text-10">serviço</span>
-              </div>
+          <div class="rectangle-1 disponible">
+            <button class="button disponible_encabezado">
+              <span class="text-2">disponível</span>
             </button>
-            <div class="flex-row-cc">
-              <span class="span-04">04</span>
-              <div class="rectangle-17"><div class="rectangle-18"></div></div>
+            <div class="flex-row-dbc">
+              <span class="text-3">03</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Simple</span>
             </div>
-            <div class="arrow-19"></div>
+            <div class="arrow"></div>
           </div>
-          <div class="rectangle-1a">
-            <button class="button-rectangle">
-              <span class="span-ocupado">Ocupado</span>
+          <div class="rectangle-1 fuera_servicio">
+            <button class="button fuera_servicio_encabezado">
+              <span class="text-2">Fora de serviço</span>
             </button>
-            <div class="flex-row-ef">
-              <div class="ellipse"></div>
-              <span class="span-05">05</span>
-              <div class="vector"></div>
-              <span class="span-h">9h</span
-              ><span class="span-simple">Simple</span>
+            <div class="flex-row-dbc">
+              <span class="text-3">04</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h"></span><span class="simple"></span>
             </div>
-            <div class="arrow-1b"></div>
+            <div class="arrow"></div>
           </div>
-          <div class="rectangle-1c">
-            <button class="button-rectangle-1d">
-              <span class="span-em-reserva">Em reserva</span>
+          <div class="rectangle-1 ocupado">
+            <button class="button ocupado_encabezado">
+              <span class="text-2">Ocupado</span>
             </button>
-            <div class="flex-row-fa">
-              <span class="span-06">06</span>
-              <div class="group"></div>
-              <span class="span-h-1e">24h</span
-              ><span class="span-esperando">esperando...</span>
+            <div class="flex-row-dbc">
+              <span class="text-3">05</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">9h</span><span class="simple">Simple</span>
             </div>
-            <div class="arrow-1f"></div>
+            <div class="arrow"></div>
           </div>
-        </div>
-        <div class="flex-row-cfd">
-          <div class="rectangle-20">
-            <button class="button-rectangle-21">
-              <span class="span-limpeza">Limpeza</span>
+          <div class="rectangle-1 reserva">
+            <button class="button reserva_encabezado">
+              <span class="text-2">Em Reserva</span>
             </button>
-            <div class="flex-row-d">
-              <span class="span-07">07</span>
-              <div class="rectangle-22"></div>
-              <div class="rectangle-23"></div>
-              <div class="rectangle-24"></div>
-              <div class="rectangle-25"></div>
-              <div class="rectangle-26"></div>
-              <div class="rectangle-27"></div>
-              <div class="rectangle-28"></div>
-              <div class="rectangle-29"></div>
-              <div class="rectangle-2a"></div>
-              <div class="rectangle-2b"></div>
-              <div class="rectangle-2c"></div>
-              <div class="rectangle-2d"></div>
-              <div class="rectangle-2e"></div>
-              <span class="span-h-2f">9h</span
-              ><span class="span-duplo">Duplo</span>
-              <div class="arrow-30"></div>
+            <div class="flex-row-dbc">
+              <span class="text-3">06</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Esperando...</span>
             </div>
+            <div class="arrow"></div>
           </div>
-          <div class="rectangle-31">
-            <button class="button-32">
-              <span class="ocupado-limpeza">Ocupado/Limpeza</span>
+          <div class="rectangle-1 limpieza">
+            <button class="button limpieza_encabezado">
+              <span class="text-2">Limpieza</span>
             </button>
-            <div class="flex-row-c">
-              <span class="span-08">08</span>
-              <div class="rectangle-33"></div>
-              <div class="rectangle-34"></div>
-              <div class="rectangle-35"></div>
-              <div class="rectangle-36"></div>
-              <div class="rectangle-37"></div>
-              <div class="rectangle-38"></div>
-              <div class="rectangle-39"></div>
-              <div class="rectangle-3a"></div>
-              <div class="rectangle-3b"></div>
-              <div class="rectangle-3c"></div>
-              <div class="rectangle-3d"></div>
-              <div class="rectangle-3e"></div>
-              <div class="rectangle-3f"></div>
-              <span class="span-duplo-40">Duplo</span
-              ><span class="span-9h">9h</span>
-              <div class="arrow-41"></div>
+            <div class="flex-row-dbc">
+              <span class="text-3">07</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">9h</span><span class="simple">Duplo</span>
             </div>
+            <div class="arrow"></div>
           </div>
-          <div class="rectangle-42">
-            <button class="button-43">
-              <span class="disponivel">disponível</span>
+          <div class="rectangle-1 limpieza">
+            <button class="button limpieza_encabezado">
+              <span class="text-2">Ocupado/Limpieza</span>
             </button>
-            <div class="flex-row-dc">
-              <span class="span-09">09</span>
-              <div class="rectangle-44"></div>
-              <div class="rectangle-45"></div>
-              <div class="rectangle-46"></div>
-              <span class="span-24h">24h</span
-              ><span class="simple-47">Simple</span>
+            <div class="flex-row-dbc">
+              <span class="text-3">08</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Simple</span>
             </div>
-            <div class="arrow-48"></div>
+            <div class="arrow"></div>
           </div>
-        </div>
-        <div class="flex-row-d-49">
-          <div class="rectangle-4a">
-            <button class="button-4b">
-              <span class="reparacao">Reparação</span>
+          <div class="rectangle-1 disponible">
+            <button class="button disponible_encabezado">
+              <span class="text-2">disponível</span>
             </button>
-            <div class="flex-row-">
-              <div class="rectangle-4c"></div>
-              <span class="span-10">10</span><span class="span-9h-4d">9h</span
-              ><span class="simple-4e">Simple</span>
+            <div class="flex-row-dbc">
+              <span class="text-3">09</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Simple</span>
             </div>
-            <div class="arrow-4f"></div>
+            <div class="arrow"></div>
           </div>
-          <div class="rectangle-50">
-            <button class="button-51">
-              <span class="ocupado">Ocupado</span>
+          <div class="rectangle-1 reparacion">
+            <button class="button reparacion_encabezado">
+              <span class="text-2">Reparação</span>
             </button>
-            <div class="flex-row-ab">
-              <div class="ellipse-52"></div>
-              <span class="number-11">11</span>
-              <div class="vector-53"></div>
-              <span class="time-9h">9h</span><span class="duplo">Duplo</span>
+            <div class="flex-row-dbc">
+              <span class="text-3">10</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">9h</span><span class="simple">Simple</span>
             </div>
-            <div class="arrow-54"></div>
+            <div class="arrow"></div>
           </div>
-          <div class="rectangle-55">
-            <button class="rectangle-56">
-              <span class="em-reserva">Em reserva</span>
+          <div class="rectangle-1 ocupado_tiempo">
+            <button class="button ocupado_tiempo_encabezado">
+              <span class="text-2">Ocupado</span>
             </button>
-            <div class="flex-row">
-              <span class="number-12">12</span>
-              <div class="group-57"></div>
-              <span class="time-24h">24h</span
-              ><span class="esperando">esperando...</span>
+            <div class="flex-row-dbc">
+              <span class="text-3">11</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Simple</span>
             </div>
-            <div class="arrow-58"></div>
+            <div class="arrow"></div>
           </div>
-        </div>
-        <div class="flex-row-fdf">
-          <div class="rectangle-59">
-            <button class="rectangle-5a">
-              <span class="ocupado-5b">Ocupado</span>
+          <div class="rectangle-1 limpieza">
+            <button class="button limpieza_encabezado">
+              <span class="text-2">Ocupado/Limpieza</span>
             </button>
-            <div class="flex-row-db">
-              <div class="ellipse-5c"></div>
-              <span class="number-13">13</span>
-              <div class="vector-5d"></div>
-              <span class="time-9h-5e">9h</span
-              ><span class="simple-5f">Simple</span>
+            <div class="flex-row-dbc">
+              <span class="text-3">12</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Simple</span>
             </div>
-            <div class="arrow-60"></div>
+            <div class="arrow"></div>
           </div>
-          <div class="rectangle-61">
-            <button class="rectangle-62">
-              <span class="ocupado-63">Ocupado</span>
+          <div class="rectangle-1 disponible">
+            <button class="button disponible_encabezado">
+              <span class="text-2">disponível</span>
             </button>
-            <div class="flex-row-d-64">
-              <div class="ellipse-65"></div>
-              <span class="number-14">14</span>
-              <div class="vector-66"></div>
-              <span class="time-9h-67">9h</span
-              ><span class="simple-68">Simple</span>
+            <div class="flex-row-dbc">
+              <span class="text-3">13</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Simple</span>
             </div>
-            <div class="arrow-69"></div>
+            <div class="arrow"></div>
           </div>
-          <div class="rectangle-6a">
-            <button class="rectangle-6b">
-              <span class="ocupado-limpeza-6c">Ocupado/Limpeza</span>
+          <div class="rectangle-1 ocupado">
+            <button class="button ocupado_encabezado">
+              <span class="text-2">Ocupado</span>
             </button>
-            <div class="flex-row-a">
-              <span class="number-15">15</span>
-              <div class="rectangle-6d"></div>
-              <div class="rectangle-6e"></div>
-              <div class="rectangle-6f"></div>
-              <div class="rectangle-70"></div>
-              <div class="rectangle-71"></div>
-              <div class="rectangle-72"></div>
-              <div class="rectangle-73"></div>
-              <div class="rectangle-74"></div>
-              <div class="rectangle-75"></div>
-              <div class="rectangle-76"></div>
-              <div class="rectangle-77"></div>
-              <div class="rectangle-78"></div>
-              <div class="rectangle-79"></div>
-              <span class="duplo-7a">Duplo</span><span class="h-7b">9h</span>
-              <div class="arrow-7c"></div>
+            <div class="flex-row-dbc">
+              <span class="text-3">14</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Simple</span>
             </div>
+            <div class="arrow"></div>
           </div>
-        </div>
-        <div class="flex-row-db-7d">
-          <div class="rectangle-7e">
-            <button class="rectangle-7f">
-              <div class="wrapper-1c">
-                <span class="fora-80">Fora </span><span class="de-81">de </span
-                ><span class="text-40">serviço</span>
-              </div>
+          <div class="rectangle-1 fuera_servicio">
+            <button class="button fuera_servicio_encabezado">
+              <span class="text-2">Fora de serviço</span>
             </button>
-            <div class="flex-row-ad">
-              <span class="number-16">16</span>
-              <div class="rectangle-82"><div class="rectangle-83"></div></div>
+            <div class="flex-row-dbc">
+              <span class="text-3">15</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Simple</span>
             </div>
-            <div class="arrow-84"></div>
+            <div class="arrow"></div>
           </div>
-          <div class="rectangle-85">
-            <button class="rectangle-86">
-              <span class="ocupado-87">Ocupado</span>
+          <div class="rectangle-1 reserva">
+            <button class="button reserva_encabezado">
+              <span class="text-2">Em Reserva</span>
             </button>
-            <div class="flex-row-ee">
-              <div class="ellipse-88"></div>
-              <span class="number-17">17</span>
-              <div class="vector-89"></div>
-              <span class="h-8a">9h</span><span class="simple-8b">Simple</span>
+            <div class="flex-row-dbc">
+              <span class="text-3">16</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Simple</span>
             </div>
-            <div class="arrow-8c"></div>
+            <div class="arrow"></div>
           </div>
-          <div class="rectangle-8d">
-            <button class="rectangle-8e">
-              <span class="em-reserva-8f">Em reserva</span>
+          <div class="rectangle-1 ocupado_tiempo">
+            <button class="button ocupado_tiempo_encabezado">
+              <span class="text-2">Ocupado</span>
             </button>
-            <div class="flex-row-b-90">
-              <span class="number-18">18</span>
-              <div class="group-91"></div>
-              <span class="h-92">24h</span
-              ><span class="esperando-93">esperando...</span>
+            <div class="flex-row-dbc">
+              <span class="text-3">17</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Simple</span>
             </div>
-            <div class="arrow-94"></div>
+            <div class="arrow"></div>
           </div>
-        </div>
-      </div>
+          <div class="rectangle-1 disponible">
+            <button class="button disponible_encabezado">
+              <span class="text-2">disponível</span>
+            </button>
+            <div class="flex-row-dbc">
+              <span class="text-3">18</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Simple</span>
+            </div>
+            <div class="arrow"></div>
+          </div>
+          <div class="rectangle-1 disponible">
+            <button class="button disponible_encabezado">
+              <span class="text-2">disponível</span>
+            </button>
+            <div class="flex-row-dbc">
+              <span class="text-3">19</span>
+              <div class="rectangle-2"></div>
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <span class="h">24h</span><span class="simple">Simple</span>
+            </div>
+            <div class="arrow"></div>
+          </div>
+          
     </div>
     <!-- Generated by Codia AI - https://codia.ai/ -->
   </body>
