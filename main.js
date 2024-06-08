@@ -7,7 +7,7 @@ const db = new sqlite3.Database(
 );
 
 let windowLogin;
-let indexHtml = './src/views/index.html';
+let indexHtml = './src/views/login/index.html';
 // funcion para crear la ventana
 function createWindow() {
     windowLogin = new BrowserWindow({
