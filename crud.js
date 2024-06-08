@@ -3,10 +3,10 @@ const sqlite3 = require("sqlite3")
 
 const db = new sqlite3.Database(path.join(__dirname, "/db", "data.db"))
 
-const usuario = {
+/* const usuario = {
     usuario: "hotelMayluUser",
     password: "htelMayluPassword"
-}
+} */
 
 function validarUsuario(db, usuario, callback) {
     const output = {}
@@ -24,17 +24,12 @@ function validarUsuario(db, usuario, callback) {
         }
         callback(output)
     })
-
-
-
 }
 
-validarUsuario(db,usuario,(lol)=>{
-    console.log(lol)
-})
+/* mostrarHabitaciones(db,callback){
 
+}
+ */
 module.exports = {
-
     validarUsuario: validarUsuario
-
 }
