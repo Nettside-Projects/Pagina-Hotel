@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 
     window.preload.mensajesDeValidacion((e,mensajesDeValidacion)=>{
+        console.log(mensajesDeValidacion)
        if(Object.keys(mensajesDeValidacion).find(mensaje => mensaje == "usuario")){
         document.querySelector(".nome").textContent = mensajesDeValidacion.usuario
        }else{

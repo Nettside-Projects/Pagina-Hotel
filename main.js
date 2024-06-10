@@ -18,7 +18,7 @@ function createWindow() {
             preload: path.join(__dirname, 'preload.js'),
         },
     });
-    windowLogin.setMenu(null);
+    /* windowLogin.setMenu(null); */
     windowLogin.loadFile(indexHtml);
 }
 
@@ -48,6 +48,7 @@ app.whenReady().then(() => {
 });
 
 ipcMain.on('validacion', (e, datos) => {
+    console.log(datos)
     validarUsuario(db, datos, (mensajeValidaciones) => {
         if (Object.keys(mensajeValidaciones).length > 0) {
             windowLogin.webContents.send('mensajes', mensajeValidaciones);
@@ -61,6 +62,7 @@ ipcMain.on('validacion', (e, datos) => {
                 },
             });
             windowLogin.close();
+            windowMain.loadFile('./src/views/vista_general_habitaciones/vistaGeneral.html')
             windowMain.show();
         }
     });
