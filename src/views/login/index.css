@@ -385,9 +385,9 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: red;
   position: absolute;
   left: 23%;
+  color: red;
 }
 .nome{
   top: 25%;
