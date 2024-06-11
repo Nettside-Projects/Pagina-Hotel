@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
-const { validarUsuario } = require('./crud');
+const { validarUsuario,mostrarHabitaciones } = require('./crud');
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data.db'))
 );
@@ -67,6 +67,11 @@ ipcMain.on('validacion', (e, datos) => {
             });
             windowLogin.close();
             windowMain.loadFile(habitacionesHTML);
+            mostrarHabitaciones(db, (err, result) => {
+                windowMain.webContents.on("did-finish-load", () => {
+                    windowMain.webContents.send('envioInfoHabitaciones', result);
+                })
+            })
             windowMain.show();
         }
     });
