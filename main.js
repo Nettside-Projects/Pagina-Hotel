@@ -12,11 +12,12 @@ let windowHabitaciones;
 
 //rutas
 let loginHtml = './src/views/login/index.html';
-let habitacionesHTML = './src/vista_general_habitaciones/vistaGeneral';
+let habitacionesHTML =
+    './src/views/vista_general_habitaciones/vistaGeneral.html';
 
 // funcion para crear la ventana
 function createWindowLogin() {
-    let windowLogin = new BrowserWindow({
+    windowLogin = new BrowserWindow({
         width: 1060,
         height: 920,
         webPreferences: {
@@ -28,26 +29,8 @@ function createWindowLogin() {
     windowLogin.loadFile(loginHtml);
 }
 
-function createWindowHabitaciones() {
-    let roomsWindow = new BrowserWindow({
-        width: 1060,
-        height: 920,
-        webPreferences: {
-            nodeIntegration: true,
-            preload: path.join(__dirname, 'preload.js'),
-        },
-    });
-
-    roomsWindow.loadFile(habitacionesHTML);
-}
-
 app.whenReady().then(() => {
     createWindowLogin();
-});
-
-app.on('login-success', () => {
-    windowLogin.close();
-    createWindowHabitaciones();
 });
 
 /* if (process.env.NODE_ENV !== 'production') {
@@ -83,9 +66,7 @@ ipcMain.on('validacion', (e, datos) => {
                 },
             });
             windowLogin.close();
-            windowMain.loadFile(
-                './src/views/vista_general_habitaciones/vistaGeneral.html'
-            );
+            windowMain.loadFile(habitacionesHTML);
             windowMain.show();
         }
     });
