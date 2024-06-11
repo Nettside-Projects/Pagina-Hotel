@@ -45,14 +45,20 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(mensajesDeValidacion)
        if(Object.keys(mensajesDeValidacion).find(mensaje => mensaje == "usuario")){
         document.querySelector(".nome").textContent = mensajesDeValidacion.usuario
+        setTimeout(function() {
+            errorMensaje.style.display = 'none';
+        }, 5000);
        }else{
-        document.querySelector(".nome").textContent = ""
+        document.querySelector(".nome").textContent = "";
        }
 
        if(Object.keys(mensajesDeValidacion).find(mensaje => mensaje == "password")){
         document.querySelector(".senha").textContent = mensajesDeValidacion.password
+        setTimeout(function() {
+            errorMensaje.style.display = 'none';
+        }, 5000);
        }else{
-        document.querySelector(".senha").textContent = ""
+        document.querySelector(".senha").textContent = "";  
        }
       
     })

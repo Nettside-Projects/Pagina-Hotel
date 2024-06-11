@@ -102,7 +102,7 @@ body {
     gap: 3px;
     position: relative;
     width: 293px;
-    height: 81px;
+    height: 90px;
     margin: 54px 0 0 64.378px;
     z-index: 2;
   }
@@ -380,4 +380,18 @@ label {
 .ojos{
   display: flex;
 
+}
+.mensaje-error{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: red;
+  position: absolute;
+  left: 23%;
+}
+.nome{
+  top: 25%;
+}
+.senha{
+  top: 47%;
 }
