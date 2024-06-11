@@ -1,7 +1,3 @@
-document.getElementById('loginButton').addEventListener('click', () => {
-    app.emit('login-success');
-});
-
 document.addEventListener('DOMContentLoaded', function () {
     const inputs = document.querySelectorAll('.frame-input, .frame-input-4');
     let formulario = document.querySelector('form');
@@ -42,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     window.preload.mensajesDeValidacion((e, mensajesDeValidacion) => {
+        console.log(mensajesDeValidacion);
         if (
             Object.keys(mensajesDeValidacion).find(
                 (mensaje) => mensaje == 'usuario'
@@ -81,11 +78,3 @@ function toggleEye() {
         passwordField.type = 'text';
     }
 }
-
-/* ----------- &copy --------- */
-const fecha = Date.now();
-const hoy = new Date(fecha);
-const year = hoy.getFullYear();
-
-let footer = document.getElementById('year');
-footer.innerHTML = year;
