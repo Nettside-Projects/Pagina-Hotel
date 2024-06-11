@@ -69,13 +69,16 @@ document.addEventListener('DOMContentLoaded', function () {
 function toggleEye() {
     const closedEye = document.getElementById('closedEye');
     const openEye = document.getElementById('openEye');
+    const passwordField = document.getElementById('password');
 
     if (closedEye.style.display === 'none') {
         closedEye.style.display = 'block';
         openEye.style.display = 'none';
+        passwordField.type = 'password';
     } else {
         closedEye.style.display = 'none';
         openEye.style.display = 'block';
+        passwordField.type = 'text';
     }
 }
 
