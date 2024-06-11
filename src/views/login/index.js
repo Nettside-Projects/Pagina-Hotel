@@ -78,3 +78,11 @@ function toggleEye() {
         passwordField.type = 'text';
     }
 }
+
+/* ----------- &copy --------- */
+const fecha = Date.now();
+const hoy = new Date(fecha);
+const year = hoy.getFullYear();
+
+let footer = document.getElementById('year');
+footer.innerHTML = year;
