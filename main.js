@@ -6,11 +6,17 @@ const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data.db'))
 );
 
+//vistas
 let windowLogin;
-let indexHtml = './src/views/login/index.html';
+let windowHabitaciones;
+
+//rutas
+let loginHtml = './src/views/login/index.html';
+let habitacionesHTML = './src/vista_general_habitaciones/vistaGeneral';
+
 // funcion para crear la ventana
-function createWindow() {
-    windowLogin = new BrowserWindow({
+function createWindowLogin() {
+    let windowLogin = new BrowserWindow({
         width: 1060,
         height: 920,
         webPreferences: {
@@ -19,8 +25,30 @@ function createWindow() {
         },
     });
     windowLogin.setMenu(null);
-    windowLogin.loadFile(indexHtml);
+    windowLogin.loadFile(loginHtml);
 }
+
+function createWindowHabitaciones() {
+    let roomsWindow = new BrowserWindow({
+        width: 1060,
+        height: 920,
+        webPreferences: {
+            nodeIntegration: true,
+            preload: path.join(__dirname, 'preload.js'),
+        },
+    });
+
+    roomsWindow.loadFile(habitacionesHTML);
+}
+
+app.whenReady().then(() => {
+    createWindowLogin();
+});
+
+app.on('login-success', () => {
+    windowLogin.close();
+    createWindowHabitaciones();
+});
 
 /* if (process.env.NODE_ENV !== 'production') {
     templateMenuMain.push({
@@ -39,13 +67,6 @@ function createWindow() {
         ]
     })
 } */
-
-app.whenReady().then(() => {
-    /*  ipcMain.on("informacion",(event,i)=>{
-      console.log(i)
-    }) */
-    createWindow();
-});
 
 ipcMain.on('validacion', (e, datos) => {
     validarUsuario(db, datos, (mensajeValidaciones) => {
