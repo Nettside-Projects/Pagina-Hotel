@@ -187,7 +187,7 @@
     position: relative;
     width: 218px;
     height: 104px;
-    margin: 6px 0 0 21px;
+    margin: 10px 0 0 44px;
     z-index: 14;
   }
   .text-3 {
@@ -403,6 +403,11 @@
      align-items: center;
      border-radius: 7px;
      cursor: pointer;
+ }
+ .flex-nav {
+     display: flex;
+     align-items: center;
+     gap: 5px;
  }
  .hotel{
      font-size: 24px;
