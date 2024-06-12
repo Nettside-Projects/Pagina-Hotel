@@ -1,0 +1,213 @@
+.main-container {
+    overflow: hidden;
+  }
+  
+  .main-container,
+  .main-container * {
+    box-sizing: border-box;
+  }
+  body{
+    display: flex;
+    width: 100%;
+    font-family: "Manrope", sans-serif;
+    font-weight: 100;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+
+}
+  
+  input,
+  select,
+  textarea,
+  button {
+    outline: 0;
+  }
+  
+  .main-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    flex-direction: column;
+    background: #d9d9d9;
+  }
+.menu{
+    display: flex;
+    width: 280px;
+    height: 100%;
+    align-items: center;
+    flex-direction: column;
+    background: #4B4B4B;
+}
+.rectangle-18{
+    height: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid white;
+    color: #ffffff;
+ }
+ .rectangle-19{
+     width: 98px;
+     height: 98px;
+     border-radius: 50%;
+     background: white;
+     margin-right: 20px;
+ }
+ .foto-logo{
+     margin: 10px;
+     width: 80%;
+     height: 40px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     border-radius: 7px;
+     cursor: pointer;
+ }
+ .hotel{
+     font-size: 24px;
+     color: #ffffff;
+ }
+ .activo{
+     background: #71D64E;
+ }
+ .home {
+     font-size: 25px;
+ }
+ .buscador{
+    display: flex;
+    height: 50px;
+    width: 100%;
+    justify-content:center ;
+    align-items: center;
+  }
+  .barra_buscar{
+    display: flex;
+    width: 95%;
+    height: 50px;
+    justify-content: space-between;
+    background: #fff;
+    align-items: center;
+    padding-left: 20px;
+    font-size: 25px;
+    font-weight: 900;
+  }
+  .buscar_lupa{
+    display: flex;
+    background: #d9d9d9;
+    color: hsla(0, 0%, 0%, 0.664);
+    margin: 0 20px 0 0;
+    height: 75%;
+    justify-content: center;
+    align-items: center;
+    width: 190px;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+  }
+  .buscar_lupa:focus {
+    border-bottom: 2px solid #5b5fc7;
+  }
+  
+  .buscar_lupa:hover {
+    outline: 1px solid lightgrey;
+  }
+  .informe_cuarto{
+    display: flex;
+    height: 290px;
+    width: 100%;
+    overflow: hidden;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 5px;
+    border-bottom: 2px solid hsla(0, 0%, 0%, 0.658);
+}
+.infomre_encabezado{
+    display: flex;
+    height: 30px;
+    width: 100%;
+    margin-bottom: 10px;
+    align-items: flex-start;
+    padding-left: 20px;
+    font-weight: 500;
+}
+.infomre_encabezado p{
+    border-bottom: 2px solid #0B6660;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    width: 300px;
+    align-items: flex-end;
+}
+.informe_main{
+    display: flex;
+    height: 50%;
+    width: 100%;
+}
+.informe_main div {
+    height: 95px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.informe_main p {
+  height: 25%;
+  margin: 0;
+}
+.info_habitacion{
+    height: 80%;
+    text-transform: capitalize;
+
+}
+.barra_buscar, .informe_cuarto, .datos_cliente {
+    margin-bottom: 10px;
+}
+.datos_cliente{
+  display: flex;
+  height: 400px;
+  width: 100%;
+  background:#ffff;
+}
+.colum{
+  /* flex-direction: column;
+  display: flex; */
+  height: 100%;
+  width: 50%;
+  overflow: hidden;
+  border: 1px solid rgb(189, 35, 35);
+}
+.nombre_cliente, .documento_cliente,
+.telefono_cliente, .email_cliente{
+  display: flex;
+  justify-content: flex-start;
+  height: 60px;
+  width: 400px;
+  margin-left: 15px;
+  margin-bottom: 25px;
+  border: 1px solid black;
+}
+.documento_cliente{
+  flex-direction: row !important;
+}
+.encabezado_nombre{
+  height: 23px;
+  width: 100%;
+  background: #71D64E;
+}
+.colum div{
+  flex-direction: column;
+}
+.colum input{
+  height: 37px;
+  background: #EAE8E8;
+  border: 4px ;
+  width: 365px;
+}

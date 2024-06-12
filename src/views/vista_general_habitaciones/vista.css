@@ -467,3 +467,55 @@
   background: #fff !important; 
   color: #4D54FF;
 }
+
+/* -------  VENTANA MODAL-------- */
+/* Estilos para el botón */
+#openModalButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Estilos para el modal */
+.modal {
+  display: none; /* Oculto por defecto */
+  position: fixed; /* Fijo en la pantalla */
+  z-index: 29; /* Por encima de todo */
+  left: 0;
+  top: 0;
+  align-items: center;
+  width: 100%; /* Ancho completo */
+  height: 100%; /* Alto completo */
+  overflow: auto; /* Habilitar desplazamiento si es necesario */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Color de fondo con opacidad */
+}
+
+/* Estilos para el contenido del modal */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% desde arriba y centrado */
+  padding:0 15px 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #888;
+  width: 40%; /* Ancho del 80% */
+  border-radius: 10px;
+}
+
+/* Estilos para el botón de cierre */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
