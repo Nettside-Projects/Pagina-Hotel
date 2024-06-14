@@ -13,7 +13,7 @@
     font-weight: 100;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 100%;
 
 }
   
@@ -28,7 +28,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    margin: 0 auto;
+    margin-left: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,6 +40,7 @@
     display: flex;
     width: 280px;
     height: 100%;
+    position: fixed;
     align-items: center;
     flex-direction: column;
     background: #4B4B4B;
@@ -120,7 +121,7 @@
   }
   .informe_cuarto{
     display: flex;
-    height: 290px;
+    /* height: 290px; */
     width: 100%;
     overflow: hidden;
     flex-direction: column;
@@ -167,14 +168,16 @@
     text-transform: capitalize;
 
 }
-.barra_buscar, .informe_cuarto, .datos_cliente {
+.barra_buscar, .informe_cuarto {
     margin-bottom: 10px;
 }
 .datos_cliente{
   display: flex;
-  height: 400px;
   width: 100%;
   background:#ffff;
+}
+.rigth{
+  width: 55% !important;
 }
 .colum{
   /* flex-direction: column;
@@ -182,34 +185,50 @@
   height: 100%;
   width: 50%;
   overflow: hidden;
-  border: 1px solid rgb(189, 35, 35);
+  /* border: 1px solid rgb(189, 35, 35); */
 }
 .nombre_cliente, .documento_cliente,
 .telefono_cliente, .email_cliente{
   display: flex;
   justify-content: flex-start;
-  height: 60px;
+  /* height: 60px; */
   width: 400px;
   margin-left: 15px;
   margin-bottom: 25px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 .documento_cliente{
   flex-direction: row !important;
 }
+.conten_barra{
+  display: flex;
+  align-items: center;
+  background: #fff;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+}
+.barra_verde{
+  width: 90%;
+  height: 1px;
+  border-bottom: 2px solid #0B6660;
+}
 .encabezado_nombre{
   height: 23px;
   width: 100%;
-  background: #71D64E;
 }
 .colum div{
   flex-direction: column;
 }
-.colum input{
-  height: 37px;
+.colum .input_xd{
+  height: 27px;
   background: #EAE8E8;
   border: 4px ;
-  width: 365px;
+  width: 189px;
+  border-radius: 5px;
+}
+.completo {
+  width: 390px !important;
 }
 /* -------  VENTANA MODAL-------- */
 /* Estilos para el botón */
@@ -261,4 +280,9 @@
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+.datos_acompañantes{
+  height: 500px;
+  width: 100%;
+  background: #0B6660;
 }
