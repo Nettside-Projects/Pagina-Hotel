@@ -34,34 +34,48 @@ function validarUsuario(db, usuario, callback) {
     );
 }
 
-function mostrarHabitaciones(db,callback){
-    
-    let html = ""
-    db.all('SELECT habitacion.numero,estado.estado,tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado',(err,rows) => {
-        rows.forEach(element => {
-            html += `<div class="rectangle-1 ${element.estado !== 'Fuera de servicio' ? element.estado.toLowerCase() : 'fuera_servicio'}">
-          <button class="button ${element.estado !== 'Fuera de servicio' ? element.estado.toLowerCase() : 'fuera_servicio'}_encabezado">
+function mostrarHabitaciones(db, callback) {
+    let html = '';
+    db.all(
+        'SELECT habitacion.numero,estado.estado,tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado',
+        (err, rows) => {
+            rows.forEach((element) => {
+                html += `<div class="rectangle-1 ${
+                    element.estado !== 'Fuera de servicio'
+                        ? element.estado.toLowerCase()
+                        : 'fuera_servicio'
+                }">
+          <button class="button ${
+              element.estado !== 'Fuera de servicio'
+                  ? element.estado.toLowerCase()
+                  : 'fuera_servicio'
+          }_encabezado">
             <span class="text-2">${element.estado.toLowerCase()}</span>
           </button>
           <div class="flex-row-dbc">
             <span class="text-3">${element.numero}</span>
-            <div class="icon_${element.estado !== 'Fuera de servicio' ? element.estado.toLowerCase() : 'fuera_servicio'}">
-          
+            <div class="icon_${
+                element.estado !== 'Fuera de servicio'
+                    ? element.estado.toLowerCase()
+                    : 'fuera_servicio'
+            }">
             </div>
-            <span class="h"></span><span class="simple">${element.tipo_habitacion}</span>
+            <span class="simple">${element.tipo_habitacion}</span>
           </div>
-          <div class="arrow"></div>
-        </div>`
-        })
-        callback(err,html)
-    })
+          <svg class='arrow' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M360-200v-80h264L160-744l56-56 464 464v-264h80v400H360Z"/>
+            </svg>
+        </div>`;
+            });
+            callback(err, html);
+        }
+    );
 }
 
-mostrarHabitaciones(db,(err,element)=>{
-console.log(element)
-})
+mostrarHabitaciones(db, (err, element) => {
+    console.log(element);
+});
 
 module.exports = {
     validarUsuario: validarUsuario,
-    mostrarHabitaciones: mostrarHabitaciones
+    mostrarHabitaciones: mostrarHabitaciones,
 };

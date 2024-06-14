@@ -115,7 +115,6 @@
     height: 100%;
     border-radius: 5px 5px 0 0;
     border-top: 2px #4D54FF solid;
-    
   }
 
   .todo div:nth-child(2){
@@ -185,8 +184,6 @@
   }
   .flex-row-dbc {
     position: relative;
-    width: 218px;
-    height: 104px;
     margin: 10px 0 0 44px;
     z-index: 14;
   }
@@ -230,6 +227,7 @@
     background-size: cover;
     z-index: 10;
   }
+
   .rectangle-4 {
     position: absolute;
     width: 90px;
@@ -241,22 +239,15 @@
     background-size: cover;
     z-index: 11;
   }
-  .h {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
+  .arrow {
     position: absolute;
-    height: 27px;
-    top: 95px;
-    left: 0;
+    right: 5px;
+    bottom: 5px;
     color: #ffffff;
     font-family: Manrope, var(--default-font-family);
     font-size: 20px;
     font-weight: 400;
     line-height: 27px;
-    text-align: left;
-    text-transform: capitalize;
-    white-space: nowrap;
     z-index: 14;
   }
   .simple {
@@ -276,16 +267,6 @@
     text-transform: capitalize;
     white-space: nowrap;
     z-index: 13;
-  }
-  .arrow {
-    position: relative;
-    width: 13px;
-    height: 13px;
-    margin: -9px 0 0 261px;
-    background: url(./assets/images/a56f0a8a-1b7c-4cad-b1e7-627a477a9400.png)
-      no-repeat center;
-    background-size: cover;
-    z-index: 15;
   }
   .rectangle-5, .rectangle-1{
     flex-shrink: 0;
