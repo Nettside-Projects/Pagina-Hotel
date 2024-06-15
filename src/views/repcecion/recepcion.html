@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="recepcion.css">
 </head>
 <body>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <div style="display: flex; justify-content: flex-end; width: 100%;"><span class="close">&times;</span></div>
+        
+        <img src="../../../recursos/icons8-ojo-64.webp" alt="" srcset="">
+        <div style="margin: 20px 0; font-weight: 800;">¿Limpeza Concluida?</div>
+        <div style="display: flex; width: 100%; justify-content: space-evenly;">
+          <img src="../../../recursos/icons8-ojo-cerrado-50.webp" alt="" srcset="">
+          <img src="../../../recursos/icons8-ojo-cerrado-50.webp" alt="" srcset="">
+        </div>
+    </div>
+</div>
     <div class="menu">
         <div class="line"></div>
         <div class="rectangle-18">
@@ -113,11 +125,29 @@
                   </div>
                   <div class="colum">
                     <div class="infomre_encabezado"><p>Dados de Alojamento </p></div>
+                    <div class="nombre_cliente"><div class="encabezado_nombre">Hora e Data de Entrada</div><div class="input_xd completo conten_horaFecha"><div id="clock" class="clock"></div><div id="date" class="date"></div></div></div>
+                    <div class="nombre_cliente"><div class="encabezado_nombre">Hora e Data de Entrada</div><div class="input_xd completo conten_horaFecha"></div></div>
+                    <div class="documento_cliente">
+                      <div class="colum">
+                        <div class="encabezado_nombre documento">Pago Adelantado</div><div class="input_xd"></div>
+                    </div>
+                    <div class="colum">
+                      <div class="encabezado_nombre documento">Desconto</div><div class="input_xd"></div>
+                    </div>
+                  </div>
+                  <div class="documento_cliente">
+                    <div class="colum">
+                      <div class="encabezado_nombre documento">Custo Extra</div><div class="input_xd"></div>
+                  </div>
+                  <div class="colum">
+                    <div class="encabezado_nombre documento">Valor Diário</div><div class="input_xd"></div>
+                  </div>
+                </div>
                   </div>
                   
       </div>
       <div class="conten_barra"> <div class="barra_verde"> </div></div>
-          <div class="datos_acompañantes" style=" margin-bottom: 74px;">
+          <div class="datos_acompañantes none" style=" margin-bottom: 60px;">
             <div class="datos_cliente">
               <div class="colum rigth">
                 <div class="infomre_encabezado"><p>Dados do Cliente</p></div>
@@ -161,6 +191,10 @@
                 <div class="infomre_encabezado"><p>Dados de Alojamento </p></div>
               </div>
             </div>
+          </div>
+          <div class="conten_barra none"> <div class="barra_verde"> </div></div>
+          <div class="conten_boton">
+            <button class="add_vista">Adicionar Cliente</button>
           </div>
       </div>
           

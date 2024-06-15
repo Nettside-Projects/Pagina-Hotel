@@ -233,6 +233,7 @@
 .encabezado_nombre{
   height: 23px;
   width: 100%;
+  font-weight: 700;
 }
 .colum div{
   flex-direction: column;
@@ -302,4 +303,39 @@
   height: 500px;
   width: 100%;
   background: #0B6660;
+}
+.none{
+  display: none;
+}
+.clock, .date {
+  font-size: 15px;
+  font-weight: 500;
+  padding: 0 20px;
+  color: hsla(0, 0%, 0%, 0.726);
+}
+.conten_horaFecha{
+  flex-direction: row !important;
+  display: flex;
+  align-items: center;
+}
+.conten_boton{
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+.add_vista{
+  background: #35C928;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 220px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
 }
