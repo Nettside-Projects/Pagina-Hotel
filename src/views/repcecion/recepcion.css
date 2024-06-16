@@ -61,7 +61,7 @@
      background: white;
      margin-right: 20px;
  }
- .foto-logo{
+/*  .foto-logo{
      margin: 10px;
      width: 80%;
      height: 40px;
@@ -70,11 +70,26 @@
      align-items: center;
      border-radius: 7px;
      cursor: pointer;
- }
+ } */
+ .foto-logo{
+  margin: 10px;
+  width: 80%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 7px;
+  cursor: pointer;
+}
  .hotel{
      font-size: 24px;
      color: #ffffff;
  }
+ .flex-nav {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
  .activo{
      background: #71D64E;
  }
