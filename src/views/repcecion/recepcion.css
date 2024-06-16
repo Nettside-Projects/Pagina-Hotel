@@ -244,6 +244,7 @@
   border: 4px ;
   width: 189px;
   border-radius: 5px;
+  padding-left: 10px;
 }
 .completo {
   width: 390px !important;
@@ -304,9 +305,9 @@
   width: 100%;
   background: #0B6660;
 }
-.none{
+/* .none{
   display: none;
-}
+} */
 .clock, .date {
   font-size: 15px;
   font-weight: 500;
