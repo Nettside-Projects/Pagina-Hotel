@@ -320,9 +320,7 @@
   width: 100%;
   background: #0B6660;
 }
-/* .none{
-  display: none;
-} */
+
 .clock, .date {
   font-size: 15px;
   font-weight: 500;
@@ -354,4 +352,8 @@
   color: #fff;
   font-size: 20px;
   font-weight: 500;
+}
+.barra_input{
+  width: 80%;
+  height: 100%;
 }

@@ -163,18 +163,23 @@
                   <div class="colum">
                     <div class="infomre_encabezado"><p>Dados de Alojamento </p></div>
                     <div class="nombre_cliente"><div class="encabezado_nombre">Hora e Data de Entrada</div><div class="input_xd completo conten_horaFecha"><div id="clock" class="clock"></div><div id="date" class="date"></div></div></div>
-                    <div class="nombre_cliente"><div class="encabezado_nombre">Hora e Data de Saída</div><div class="input_xd completo conten_horaFecha"></div></div>
+                    <div class="nombre_cliente"><div class="encabezado_nombre">Hora e Data de Saída</div><div class="input_xd completo conten_horaFecha"><input type="datetime-local" id="birthdaytime" name="birthdaytime">
+                      <input type="submit">
+                    </div></div>
                     <div class="documento_cliente">
                       <div class="colum">
-                        <div class="encabezado_nombre documento">Pago Adelantado</div><div class="input_xd"></div>
+                        <div class="encabezado_nombre documento">Pago Adelantado</div><div style="display: flex; align-items: center;justify-content: space-between; flex-direction: row;" class="input_xd"><span>$R</span><input type="text" class="barra_input"></div>
                     </div>
                     <div class="colum">
-                      <div class="encabezado_nombre documento">Desconto</div><div class="input_xd"></div>
+                      <div class="encabezado_nombre documento" style="position: relative;">Desconto
+                        <div style="position: absolute; top: 0; right: 15px;">
+                          <input type="radio"><span>%</span><input type="radio"><span>$R</span></div>
+                        </div><div class="input_xd"></div>
                     </div>
                   </div>
                   <div class="documento_cliente">
                     <div class="colum">
-                      <div class="encabezado_nombre documento">Custo Extra</div><div class="input_xd"></div>
+                      <div class="encabezado_nombre documento">Custo Extra</div><div style="display: flex; align-items: center;justify-content: space-between; flex-direction: row;" class="input_xd"><span>$R</span><input type="text" class="barra_input"></div>
                   </div>
                   <div class="colum">
                     <div class="encabezado_nombre documento">Valor Diário</div><div class="input_xd"></div>
@@ -184,7 +189,7 @@
                   
                 </form>
       <div class="conten_barra"> <div class="barra_verde"> </div></div>
-          <div class="datos_acompañantes none" style=" margin-bottom: 60px;">
+          <!-- <div class="datos_acompañantes" style=" margin-bottom: 60px;" id="cuadro">
             <div class="datos_cliente">
               <div class="colum rigth">
                 <div class="infomre_encabezado"><p>Dados do Cliente</p></div>
@@ -228,8 +233,8 @@
                 <div class="infomre_encabezado"><p>Dados de Alojamento </p></div>
               </div>
             </div>
-          </div>
-          <div class="conten_barra none"> <div class="barra_verde"> </div></div>
+          </div> -->
+          <!-- <div class="conten_barra none"> <div class="barra_verde"> </div></div> -->
           <div class="conten_boton">
             <button class="add_vista">Adicionar Cliente</button>
           </div>
