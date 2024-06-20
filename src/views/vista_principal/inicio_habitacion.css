@@ -93,6 +93,9 @@ body{
     z-index: 37;
     border-radius: 18px;
   }
+  .menu a{
+    text-decoration: none;
+    }
   .rectangle-4 {
     position: relative;
     width: 285px;
@@ -318,7 +321,7 @@ body{
 .flex-row-ed .rectangle-9{
     background: #B74D00;
 }
-.main-container .menu{
+/* .main-container .menu{
     display: flex;
     width: 280px;
     height: 100%;
@@ -361,4 +364,57 @@ body{
 }
 .home {
     font-size: 25px;
+} */
+.menu{
+  display: flex;
+  width: 280px;
+  height: 100%;
+  position: fixed;
+  align-items: center;
+  flex-direction: column;
+  background: #4B4B4B;
+}
+.menu a{
+text-decoration: none;
+}
+.rectangle-18{
+  height: 150px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid white;
+  color: #ffffff;
+}
+.rectangle-19{
+   width: 98px;
+   height: 98px;
+   border-radius: 50%;
+   background: white;
+   margin-right: 20px;
+}
+.foto-logo{
+   margin: 10px;
+   width: 80%;
+   height: 40px;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   border-radius: 7px;
+   cursor: pointer;
+}
+.flex-nav {
+   display: flex;
+   align-items: center;
+   gap: 5px;
+}
+.hotel{
+   font-size: 24px;
+   color: #ffffff;
+}
+.activo{
+   background: #71D64E;
+}
+.home {
+   font-size: 25px;
 }

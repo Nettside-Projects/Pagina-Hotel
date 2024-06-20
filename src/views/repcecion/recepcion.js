@@ -187,6 +187,7 @@ function createDatosAcompanantes() {
     informeEncabezadoAlojamiento.className = 'infomre_encabezado';
     const pAlojamiento = document.createElement('p');
     pAlojamiento.textContent = 'Dados de Alojamento';
+    
     informeEncabezadoAlojamiento.appendChild(pAlojamiento);
     columAlojamiento.appendChild(informeEncabezadoAlojamiento);
 
@@ -196,24 +197,54 @@ function createDatosAcompanantes() {
 
     return datosAcompanantes;
 }
+/* Codigo de Mateus */
 let btnAddCliente = document.querySelector(".add_vista")
 function agregarBtn() {
-   
-   /*  const contenBoton = document.createElement('div');
-            contenBoton.className = 'conten_boton'; */
+    const contenBarra = document.createElement('div');
+    contenBarra.className = 'conten_barra';
+    
+    // Crear el nodo 'barra_verde' y añadirlo a 'conten_barra'
+    const barraVerde = document.createElement('div');
+    barraVerde.className = 'barra_verde';
+    contenBarra.appendChild(barraVerde);
 
-            const addVistaButton = document.createElement('button');
-            addVistaButton.className = 'add_vista';
-            addVistaButton.textContent = 'Adicionar Cliente';
+    const contenBoton = document.createElement('div');
+contenBoton.className = 'conten_boton';
 
-            contenBoton.appendChild(addVistaButton);
-            contenBoton.addEventListener("click",e => {
+// Crear el botón 'Adicionar Cliente' y añadirlo a 'conten_boton'
+const addButton = document.createElement('button');
+addButton.className = 'add_vista';
+addButton.textContent = 'Adicionar Cliente';
+contenBoton.appendChild(addButton);
+
+// Crear el botón 'Suprimir Cliente' y añadirlo a 'conten_boton'
+const deleteButton = document.createElement('button');
+deleteButton.className = 'eliminar_vista';
+deleteButton.textContent = 'Suprimir Cliente';
+contenBoton.appendChild(deleteButton);
+
+/* Agregar eventos al boton de agregar */
+            addButton.addEventListener("click",e => {
                 e.preventDefault()
                 console.log("activado")
                 contenBoton.remove()
+                addButton.remove()
+                main.appendChild(contenBarra)
                 main.appendChild(createDatosAcompanantes())
                 agregarBtn()
             }) 
+
+/* Agregar eventos al boton de eliminar */
+deleteButton.addEventListener("click",e =>{
+    console.log("boton de eliminar precionado")
+    e.preventDefault()
+    document.querySelector(".conten_barra").remove()
+    document.querySelector(".datos_acompañantes").remove()
+
+    if(document.querySelector(".conten_barra") == null){  
+        document.querySelector(".eliminar_vista") .remove()
+    }
+})
     main.appendChild(contenBoton)
 }
 
@@ -222,24 +253,26 @@ function agregarBtn() {
         e.preventDefault()
         console.log("activado")
         btnAddCliente.remove()
+        document.querySelector(".conten_boton").remove()
         main.appendChild(createDatosAcompanantes())
         agregarBtn()
     }) 
 
 
-   
+ 
+/* ______________________________________________________________________________ */
+
 function toggleCuadro() {
-    console.log("sapoo")
     const cuadro = document.getElementById('cuadro');
     cuadro.classList.toggle('none');
 }
-function updateClock() {
+
+function setInitialClock() {
     const now = new Date();
     const hours = now.getHours();
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
     const ampm = hours >= 12 ? 'PM' : 'AM';
-
     const hour12 = hours % 12 || 12; // Converts 0 to 12 for 12-hour format
     const timeString = `${hour12}:${minutes}:${seconds} ${ampm}`;
     document.getElementById('clock').textContent = timeString;
@@ -251,9 +284,8 @@ function updateClock() {
     document.getElementById('date').textContent = dateString;
 }
 
-setInterval(updateClock, 1000);
-updateClock(); // Initial call to display clock immediately
-
+// Call the function once when the page loads
+window.onload = setInitialClock;
 
 // Obtener el modal
 var modal = document.getElementById("myModal");
@@ -280,3 +312,23 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
+document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('click', () => {
+        document.querySelectorAll('input[type="radio"]').forEach(r => {
+            r.checked = false;
+        });
+        radio.checked = true;
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const porcentajeSelect = document.getElementById('porcentajeSelect');
+    const porcentajeSpan = document.getElementById('porcentajeSpan');
+
+    porcentajeSelect.addEventListener('change', function() {
+        const selectedValue = porcentajeSelect.options[porcentajeSelect.selectedIndex].value;
+        if (selectedValue !== "") {
+            porcentajeSpan.textContent = `${selectedValue}%`;
+        }
+    });
+});

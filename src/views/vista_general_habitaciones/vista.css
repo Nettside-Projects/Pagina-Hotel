@@ -354,6 +354,9 @@
     flex-direction: column;
     background: #4B4B4B;
 }
+.menu a{
+  text-decoration: none;
+  }
 .rectangle-18{
     height: 150px;
     width: 100%;
