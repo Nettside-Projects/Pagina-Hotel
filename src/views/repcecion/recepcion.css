@@ -256,7 +256,7 @@ text-decoration: none;
 .colum div{
   flex-direction: column;
 }
-.colum .input_xd{
+.colum .input_xd, .corto{
   height: 27px;
   background: #EAE8E8;
   border: 4px ;
@@ -265,6 +265,11 @@ text-decoration: none;
   padding-left: 10px;
 }
 .completo {
+  height: 27px;
+  background: #EAE8E8;
+  border: 4px ;
+  border-radius: 5px;
+  padding-left: 10px;
   width: 390px !important;
 }
 /* -------  VENTANA MODAL-------- */
@@ -395,4 +400,8 @@ text-decoration: none;
 }
 .none{
   display: none;
+}
+.input_activo{
+  background: #ffff !important;
+  border: 2px solid #000 !important;
 }
