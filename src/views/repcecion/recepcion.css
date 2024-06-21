@@ -393,3 +393,6 @@ text-decoration: none;
   transform: translateY(-50%);
   pointer-events: none;
 }
+.none{
+  display: none;
+}

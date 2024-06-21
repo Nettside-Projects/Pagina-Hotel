@@ -3,7 +3,7 @@ let main = document.querySelector(".main-container")
 
 function createDatosAcompanantes() {
     const datosAcompanantes = document.createElement('div');
-    datosAcompanantes.className = 'datos_acompañantes none';
+    datosAcompanantes.className = 'datos_acompañantes';
     datosAcompanantes.style.marginBottom = '60px';
     datosAcompanantes.id = 'cuadro';
 
@@ -16,7 +16,7 @@ function createDatosAcompanantes() {
     const informeEncabezadoCliente = document.createElement('div');
     informeEncabezadoCliente.className = 'infomre_encabezado';
     const pCliente = document.createElement('p');
-    pCliente.textContent = 'Dados do Cliente';
+    pCliente.textContent = 'Dados do Cliente companheiro';
     informeEncabezadoCliente.appendChild(pCliente);
 
     const nombreCliente = document.createElement('div');
@@ -331,4 +331,27 @@ document.addEventListener('DOMContentLoaded', function() {
             porcentajeSpan.textContent = `${selectedValue}%`;
         }
     });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const radio1 = document.getElementById('radio1');
+    const radio2 = document.getElementById('radio2');
+    const content1 = document.getElementById('content1');
+    const content2 = document.getElementById('content2');
+
+    function toggleContent() {
+        if (radio1.checked) {
+            content1.classList.remove('none');
+            content2.classList.add('none');
+        } else if (radio2.checked) {
+            content1.classList.add('none');
+            content2.classList.remove('none');
+        }
+    }
+
+    // Initial check on page load
+    toggleContent();
+
+    radio1.addEventListener('change', toggleContent);
+    radio2.addEventListener('change', toggleContent);
 });
