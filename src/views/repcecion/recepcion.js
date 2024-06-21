@@ -355,3 +355,17 @@ document.addEventListener('DOMContentLoaded', function() {
     radio1.addEventListener('change', toggleContent);
     radio2.addEventListener('change', toggleContent);
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const divs = document.querySelectorAll('.input_xd');
+
+    divs.forEach(div => {
+        div.addEventListener('click', function() {
+            // Remover la clase 'active' de todos los divs
+            divs.forEach(d => d.classList.remove('input_activo'));
+
+            // Agregar la clase 'active' al div clicado
+            this.classList.add('input_activo');
+        });
+    });
+});
