@@ -16,7 +16,7 @@ function createDatosAcompanantes() {
     const informeEncabezadoCliente = document.createElement('div');
     informeEncabezadoCliente.className = 'infomre_encabezado';
     const pCliente = document.createElement('p');
-    pCliente.textContent = 'Dados do Cliente companheiro';
+    pCliente.textContent = 'Dados do Cliente Companheiro';
     informeEncabezadoCliente.appendChild(pCliente);
 
     const nombreCliente = document.createElement('div');
