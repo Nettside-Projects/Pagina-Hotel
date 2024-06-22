@@ -1,0 +1,55 @@
+.menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 280px;
+    height: 100%;
+    align-items: center;
+    flex-direction: column;
+    background: #4b4b4b;
+}
+.menu a {
+    text-decoration: none;
+}
+.rectangle-18 {
+    height: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid white;
+    color: #ffffff;
+}
+.rectangle-19 {
+    width: 98px;
+    height: 98px;
+    border-radius: 50%;
+    background: white;
+    margin-right: 20px;
+}
+.nav-item {
+    margin: 10px;
+    width: 80%;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.flex-nav {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.hotel {
+    font-size: 24px;
+    color: #ffffff;
+}
+.activo {
+    background: #71d64e;
+}
+.home {
+    font-size: 25px;
+}

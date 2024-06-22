@@ -1,12 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recepção</title>
-    <link rel="stylesheet" href="recepcion.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recepção</title>
+  <link rel="stylesheet" href="recepcion.css">
 </head>
+
 <body>
+  <div class="menu">
+    <div class="line"></div>
+    <div class="rectangle-18">
+      <div class="rectangle-19"></div>
+      <span class="home">HOTEL</span>
+    </div>
+    <div class="foto-logo ">
+      <span class="hotel">Home</span>
+    </div>
+    <div class="foto-logo activo">
+      <span class="hotel">Recepção</span>
+    </div>
+    <div class="foto-logo">
+      <span class="hotel">Saída</span>
+    </div>
+    <div class="foto-logo">
+      <span class="hotel">Freguês</span>
+    </div>
+    <div class="foto-logo">
+      <span class="hotel">Relatório</span>
+    </div>
+    <div class="foto-logo">
+      <span class="hotel">Configuração</span>
+    </div>
+    <a style="color: rgb(74, 236, 9);" href="../vista_general_habitaciones/vistaGeneral.html">btn prueba></a>
+  </div>
+  <div class="main-container">
+    <div class="barra_buscar">Proceso de Hospedagem
+      <button id="openModalButton">Abrir Modal</button>
+      <input class="buscar_lupa" name="text" placeholder="Buscar Quarto..." type="search">
+    </div>
+    <!-- informe del cuarto -->
+    <div class="informe_cuarto">
+      <div class="infomre_encabezado">
+        <p>Informações do Quarto</p>
+      </div>
+      <div class="informe_main">
+        <div>
+          <p>Nome</p>
+          <div class="info_habitacion">03</div>
+        </div>
+        <div>
+          <p>Detalhes</p>
+          <div class="info_habitacion">Quarto individual, TV, Wi-Fi, 1 banheiro
+            maximo 2 pessoas</div>
+        </div>
+        <div>
+          <p>Preço</p>
+          <div class="info_habitacion"><span class="type_moneda">$R</span>100,00</div>
+        </div>
+      </div>
+      <div class="informe_main">
+        <div>
+          <p>Tipo</p>
+          <div class="info_habitacion">Simple</div>
+        </div>
+        <!--  <div>
   <div id="myModal" class="modal">
     <div class="modal-content">
       <div style="display: flex; justify-content: flex-end; width: 100%;"><span class="close">&times;</span></div>
@@ -87,137 +146,314 @@
             <button id="openModalButton">Abrir Modal</button>
             <a href="../vista_general_habitaciones/vistaGeneral.html" class="volver">Voltar</a>
           </div>
-          <!-- informe del cuarto --> 
-          <div class="informe_cuarto">
-            <div class="infomre_encabezado"><p>Informações do Quarto</p></div>
-            <div class="informe_main">
-                <div>
-                    <p>Nome</p>
-                    <div class="info_habitacion">03</div>
-                </div>
-                <div>
-                    <p>Detalhes</p>
-                    <div class="info_habitacion">Quarto individual, TV, Wi-Fi, 1 banheiro
-                      maximo 2 pessoas</div>
-                </div>
-                <div>
-                    <p>Preço</p>
-                    <div class="info_habitacion"><span class="type_moneda">$R</span>100,00</div>
-                </div>
-              </div>
-              <div class="informe_main">
-                <div>
-                    <p>Tipo</p>
-                    <div class="info_habitacion">Simple</div>
-                </div>
-               <!--  <div>
+          <!-- informe del cuarto -->
+        <div class="informe_cuarto">
+          <div class="infomre_encabezado">
+            <p>Informações do Quarto</p>
+          </div>
+          <div class="informe_main">
+            <div>
+              <p>Nome</p>
+              <div class="info_habitacion">03</div>
+            </div>
+            <div>
+              <p>Detalhes</p>
+              <div class="info_habitacion">Quarto individual, TV, Wi-Fi, 1 banheiro
+                maximo 2 pessoas</div>
+            </div>
+            <div>
+              <p>Preço</p>
+              <div class="info_habitacion"><span class="type_moneda">$R</span>100,00</div>
+            </div>
+          </div>
+          <div class="informe_main">
+            <div>
+              <p>Tipo</p>
+              <div class="info_habitacion">Simple</div>
+            </div>
+            <!--  <div>
                     <p>Tarifa</p>
                     <div class="info_habitacion">24 horas</div>
                 </div> -->
-                <div>
-                    <p>Estado</p>
-                    <div class="info_habitacion">Disponível</div>
-                </div>
+            <div>
+              <p>Estado</p>
+              <div class="info_habitacion">Disponível</div>
             </div>
           </div>
-          <!-- datos del cliente -->
-          <div class="datos_cliente" action="">
-                  <div class="colum rigth">
-                    <div class="infomre_encabezado"><p>Dados do Cliente</p></div>
-                    <div class="nombre_cliente"><div class="encabezado_nombre">Nome</div><input class="input_xd completo"></div>
-                    <div class="documento_cliente">
-                      <div class="colum">
-                        <div class="encabezado_nombre documento">N° de Passaporte</div><input class="input_xd">
-                    </div>
-                    <div class="colum">
-                      <div class="encabezado_nombre documento">N° de Documento</div><input class="input_xd">
-                    </div>
-                  </div>
-                  <div class="documento_cliente">
-                    <div class="colum">
-                      <div class="encabezado_nombre documento">Profissão</div><input class="input_xd">
-                  </div>
-                  <div class="colum">
-                    <div class="encabezado_nombre documento">Procedência</div><input class="input_xd">
-                  </div>
-                </div>
-                <div class="documento_cliente">
-                  <div class="colum">
-                    <div class="encabezado_nombre documento">Data de nascimento</div><input class="input_xd">
+        </div>
+        <!-- datos del cliente -->
+        <div class="datos_cliente">
+          <div class="colum rigth">
+            <div class="infomre_encabezado">
+              <p>Dados do Cliente</p>
+            </div>
+            <div class="nombre_cliente">
+              <div class="encabezado_nombre">Nome</div>
+              <div class="input_xd completo"></div>
+            </div>
+            <div class="documento_cliente">
+              <div class="colum">
+                <div class="encabezado_nombre documento">Tipo de Documento</div>
+                <div class="input_xd"></div>
+              </div>
+              <div class="colum">
+                <div class="encabezado_nombre documento">N° de Documento</div>
+                <div class="input_xd"></div>
+              </div>
+            </div>
+            <div class="documento_cliente">
+              <div class="colum">
+                <div class="encabezado_nombre documento">Tipo de Documento</div>
+                <div class="input_xd"></div>
+              </div>
+              <div class="colum">
+                <div class="encabezado_nombre documento">N° de Documento</div>
+                <div class="input_xd"></div>
+              </div>
+            </div>
+            <div class="documento_cliente">
+              <div class="colum">
+                <div class="encabezado_nombre documento">Tipo de Documento</div>
+                <div class="input_xd"></div>
+              </div>
+              <div class="colum">
+                <div class="encabezado_nombre documento">N° de Documento</div>
+                <div class="input_xd"></div>
+              </div>
+            </div>
+            <div class="documento_cliente">
+              <div class="colum">
+                <div class="encabezado_nombre documento">Tipo de Documento</div>
+                <div class="input_xd"></div>
+              </div>
+              <div class="colum">
+                <div class="encabezado_nombre documento">N° de Documento</div>
+                <div class="input_xd"></div>
+              </div>
+            </div>
+            <div class="telefono_cliente">
+              <div class="encabezado_nombre">Telefone</div>
+              <div class="input_xd completo"></div>
+            </div>
+            <div class="email_cliente">
+              <div class="encabezado_nombre">E-mail</div>
+              <div class="input_xd completo"></div>
+            </div>
+          </div>
+          <div class="colum">
+            <div class="infomre_encabezado">
+              <p>Dados de Alojamento </p>
+            </div>
+          </div>
+
+        </div>
+        <div class="conten_barra">
+          <div class="barra_verde"> </div>
+        </div>
+        <div class="datos_acompañantes" style=" margin-bottom: 74px;">
+          <div class="datos_cliente">
+            <div class="colum rigth">
+              <div class="infomre_encabezado">
+                <p>Dados do Cliente</p>
+              </div>
+              <div class="nombre_cliente">
+                <div class="encabezado_nombre">Nome</div>
+                <div class="input_xd completo"></div>
+              </div>
+              <div class="documento_cliente">
+                <div class="colum">
+                  <div class="encabezado_nombre documento">Tipo de Documento</div>
+                  <div class="input_xd"></div>
                 </div>
                 <div class="colum">
-                  <div class="encabezado_nombre documento">Destino</div><input class="input_xd">
+                  <div class="encabezado_nombre documento">N° de Documento</div>
+                  <div class="input_xd"></div>
                 </div>
               </div>
               <div class="documento_cliente">
                 <div class="colum">
-                  <div class="encabezado_nombre documento">Naturalidade</div><input class="input_xd">
+                  <div class="encabezado_nombre documento">Tipo de Documento</div>
+                  <div class="input_xd"></div>
+                </div>
+                <div class="colum">
+                  <div class="encabezado_nombre documento">N° de Documento</div>
+                  <div class="input_xd"></div>
+                </div>
               </div>
-              <div class="colum">
-                <div class="encabezado_nombre documento">Papel da pessoa</div><input class="input_xd">
+              <div class="documento_cliente">
+                <div class="colum">
+                  <div class="encabezado_nombre documento">Tipo de Documento</div>
+                  <div class="input_xd"></div>
+                </div>
+                <div class="colum">
+                  <div class="encabezado_nombre documento">N° de Documento</div>
+                  <div class="input_xd"></div>
+                </div>
+              </div>
+              <div class="documento_cliente">
+                <div class="colum">
+                  <div class="encabezado_nombre documento">Tipo de Documento</div>
+                  <div class="input_xd"></div>
+                </div>
+                <div class="colum">
+                  <div class="encabezado_nombre documento">N° de Documento</div>
+                  <div class="input_xd"></div>
+                </div>
+              </div>
+              <div class="telefono_cliente">
+                <div class="encabezado_nombre">Telefone</div>
+                <div class="input_xd completo"></div>
+              </div>
+              <div class="email_cliente">
+                <div class="encabezado_nombre">E-mail</div>
+                <div class="input_xd completo"></div>
               </div>
             </div>
-                    <div class="telefono_cliente"><div class="encabezado_nombre">Telefone</div><input class="input_xd completo"></div>
-                    <div class="email_cliente"><div class="encabezado_nombre">E-mail</div><input class="input_xd completo"></div>
-                  </div>
-                  <div class="colum">
-                    <div class="infomre_encabezado"><p>Dados de Alojamento </p></div>
-                    <div class="nombre_cliente"><div class="encabezado_nombre">Hora e Data de Entrada</div><div class=" completo conten_horaFecha"><div id="clock" class="clock"></div><div id="date" class="date"></div></div></div>
-                    <div class="nombre_cliente"><div class="encabezado_nombre">Hora e Data de Saída</div><div class=" completo conten_horaFecha"><input type="datetime-local" id="birthdaytime" name="birthdaytime">
-                      <input type="submit">
-                    </div></div>
-                    <div class="documento_cliente">
-                      <div class="colum">
-                        <div class="encabezado_nombre documento">Pago Adelantado</div><div style="display: flex; align-items: center;justify-content: space-between; flex-direction: row;" class="corto"><span>$R</span><input type="text" class="barra_input"></div>
-                    </div>
-                    <div class="colum">
-                      <div class="encabezado_nombre documento" style="position: relative;">Desconto
-                        <div style="position: absolute; top: 0; right: 15px;">
-                          <input type="radio" id="radio1" checked><span>%</span><input type="radio" id="radio2"><span>$R</span></div>
-                        </div><div class="corto descuento" id="content1">
-                           <span id="porcentajeSpan">0%</span>
-                            <select id="porcentajeSelect">
-                                <option value=""disabled selected>%</option>
-                                <option value="0">0%</option>
-                                <option value="10">10%</option>
-                                <option value="20">20%</option>
-                                <option value="30">30%</option>
-                                <option value="40">40%</option>
-                                <option value="50">50%</option>
-                                <option value="60">60%</option>
-                                <option value="70">70%</option>
-                                <option value="80">80%</option>
-                                <option value="90">90%</option>
-                                <option value="100">100%</option>
-                            </select> 
-                        </div>
-                        <div class="corto descuento none" id="content2">
-                        <div style="display: flex; align-items: center;justify-content: space-between; flex-direction: row;" class="input_xd"><span>$R</span><input type="text" class="barra_input"></div>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="documento_cliente">
-                    <div class="colum">
-                      <div class="encabezado_nombre documento">Custo Extra</div><div style="display: flex; align-items: center;justify-content: space-between; flex-direction: row;" class="corto"><span>$R</span><input type="text" class="barra_input"></div>
-                  </div>
-                  <div class="colum">
-                    <div class="encabezado_nombre documento">Pago Adelantado</div><div style="display: flex; align-items: center;justify-content: space-between; flex-direction: row;" class="corto"><span>$R</span><input type="text" class="barra_input"></div>
-                  </div>
-                </div>
-                  </div>
-                  
-                </div>
-      <div class="conten_barra"> <div class="barra_verde"></div></div>
-      <div class="conten_boton">
-        <button class="add_vista">Adicionar Cliente</button>
+            <div class="colum">
+              <div class="infomre_encabezado">
+                <p>Dados de Alojamento </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-         <!--  <div class="conten_boton">
+
+      <script src="recepcion.js"></script>
+      <div>
+        <p>Estado</p>
+        <div class="info_habitacion">Disponível</div>
+      </div>
+    </div>
+  </div>
+  <!-- datos del cliente -->
+  <div class="datos_cliente" action="">
+    <div class="colum rigth">
+      <div class="infomre_encabezado">
+        <p>Dados do Cliente</p>
+      </div>
+      <div class="nombre_cliente">
+        <div class="encabezado_nombre">Nome</div><input class="input_xd completo">
+      </div>
+      <div class="documento_cliente">
+        <div class="colum">
+          <div class="encabezado_nombre documento">N° de Passaporte</div><input class="input_xd">
+        </div>
+        <div class="colum">
+          <div class="encabezado_nombre documento">N° de Documento</div><input class="input_xd">
+        </div>
+      </div>
+      <div class="documento_cliente">
+        <div class="colum">
+          <div class="encabezado_nombre documento">Profissão</div><input class="input_xd">
+        </div>
+        <div class="colum">
+          <div class="encabezado_nombre documento">Procedência</div><input class="input_xd">
+        </div>
+      </div>
+      <div class="documento_cliente">
+        <div class="colum">
+          <div class="encabezado_nombre documento">Data de nascimento</div><input class="input_xd">
+        </div>
+        <div class="colum">
+          <div class="encabezado_nombre documento">Destino</div><input class="input_xd">
+        </div>
+      </div>
+      <div class="documento_cliente">
+        <div class="colum">
+          <div class="encabezado_nombre documento">Naturalidade</div><input class="input_xd">
+        </div>
+        <div class="colum">
+          <div class="encabezado_nombre documento">Papel da pessoa</div><input class="input_xd">
+        </div>
+      </div>
+      <div class="telefono_cliente">
+        <div class="encabezado_nombre">Telefone</div><input class="input_xd completo">
+      </div>
+      <div class="email_cliente">
+        <div class="encabezado_nombre">E-mail</div><input class="input_xd completo">
+      </div>
+    </div>
+    <div class="colum">
+      <div class="infomre_encabezado">
+        <p>Dados de Alojamento </p>
+      </div>
+      <div class="nombre_cliente">
+        <div class="encabezado_nombre">Hora e Data de Entrada</div>
+        <div class=" completo conten_horaFecha">
+          <div id="clock" class="clock"></div>
+          <div id="date" class="date"></div>
+        </div>
+      </div>
+      <div class="nombre_cliente">
+        <div class="encabezado_nombre">Hora e Data de Saída</div>
+        <div class=" completo conten_horaFecha"><input type="datetime-local" id="birthdaytime" name="birthdaytime">
+          <input type="submit">
+        </div>
+      </div>
+      <div class="documento_cliente">
+        <div class="colum">
+          <div class="encabezado_nombre documento">Pago Adelantado</div>
+          <div style="display: flex; align-items: center;justify-content: space-between; flex-direction: row;"
+            class="corto"><span>$R</span><input type="text" class="barra_input"></div>
+        </div>
+        <div class="colum">
+          <div class="encabezado_nombre documento" style="position: relative;">Desconto
+            <div style="position: absolute; top: 0; right: 15px;">
+              <input type="radio" id="radio1" checked><span>%</span><input type="radio" id="radio2"><span>$R</span>
+            </div>
+          </div>
+          <div class="corto descuento" id="content1">
+            <span id="porcentajeSpan">0%</span>
+            <select id="porcentajeSelect">
+              <option value="" disabled selected>%</option>
+              <option value="0">0%</option>
+              <option value="10">10%</option>
+              <option value="20">20%</option>
+              <option value="30">30%</option>
+              <option value="40">40%</option>
+              <option value="50">50%</option>
+              <option value="60">60%</option>
+              <option value="70">70%</option>
+              <option value="80">80%</option>
+              <option value="90">90%</option>
+              <option value="100">100%</option>
+            </select>
+          </div>
+          <div class="corto descuento none" id="content2">
+            <div style="display: flex; align-items: center;justify-content: space-between; flex-direction: row;"
+              class="input_xd"><span>$R</span><input type="text" class="barra_input"></div>
+          </div>
+        </div>
+      </div>
+      <div class="documento_cliente">
+        <div class="colum">
+          <div class="encabezado_nombre documento">Custo Extra</div>
+          <div style="display: flex; align-items: center;justify-content: space-between; flex-direction: row;"
+            class="corto"><span>$R</span><input type="text" class="barra_input"></div>
+        </div>
+        <div class="colum">
+          <div class="encabezado_nombre documento">Pago Adelantado</div>
+          <div style="display: flex; align-items: center;justify-content: space-between; flex-direction: row;"
+            class="corto"><span>$R</span><input type="text" class="barra_input"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="conten_barra">
+    <div class="barra_verde"></div>
+  </div>
+  <div class="conten_boton">
+    <button class="add_vista">Adicionar Cliente</button>
+  </div>
+  <!--  <div class="conten_boton">
             <button class="add_vista">Adicionar Cliente</button>
             <button class="eliminar_vista">Suprimir Cliente</button>
           </div> -->
-          
-        </form>
-          
-      <script src="recepcion.js"></script>
+
+  </form>
+
+  <script src="recepcion.js"></script>
 </body>
+
 </html>
