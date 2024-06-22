@@ -1,5 +1,4 @@
-let main = document.querySelector(".main-container")
-
+let main = document.querySelector('.main-container');
 
 function createDatosAcompanantes() {
     const datosAcompanantes = document.createElement('div');
@@ -16,7 +15,7 @@ function createDatosAcompanantes() {
     const informeEncabezadoCliente = document.createElement('div');
     informeEncabezadoCliente.className = 'infomre_encabezado';
     const pCliente = document.createElement('p');
-    pCliente.textContent = 'Dados do Cliente Companheiro';
+    pCliente.textContent = 'Dados do Cliente companheiro';
     informeEncabezadoCliente.appendChild(pCliente);
 
     const nombreCliente = document.createElement('div');
@@ -187,7 +186,7 @@ function createDatosAcompanantes() {
     informeEncabezadoAlojamiento.className = 'infomre_encabezado';
     const pAlojamiento = document.createElement('p');
     pAlojamiento.textContent = 'Dados de Alojamento';
-    
+
     informeEncabezadoAlojamiento.appendChild(pAlojamiento);
     columAlojamiento.appendChild(informeEncabezadoAlojamiento);
 
@@ -198,68 +197,65 @@ function createDatosAcompanantes() {
     return datosAcompanantes;
 }
 /* Codigo de Mateus */
-let btnAddCliente = document.querySelector(".add_vista")
+let btnAddCliente = document.querySelector('.add_vista');
 function agregarBtn() {
     const contenBarra = document.createElement('div');
     contenBarra.className = 'conten_barra';
-    
+
     // Crear el nodo 'barra_verde' y añadirlo a 'conten_barra'
     const barraVerde = document.createElement('div');
     barraVerde.className = 'barra_verde';
     contenBarra.appendChild(barraVerde);
 
     const contenBoton = document.createElement('div');
-contenBoton.className = 'conten_boton';
+    contenBoton.className = 'conten_boton';
 
-// Crear el botón 'Adicionar Cliente' y añadirlo a 'conten_boton'
-const addButton = document.createElement('button');
-addButton.className = 'add_vista';
-addButton.textContent = 'Adicionar Cliente';
-contenBoton.appendChild(addButton);
+    // Crear el botón 'Adicionar Cliente' y añadirlo a 'conten_boton'
+    const addButton = document.createElement('button');
+    addButton.className = 'add_vista';
+    addButton.textContent = 'Adicionar Cliente';
+    contenBoton.appendChild(addButton);
 
-// Crear el botón 'Suprimir Cliente' y añadirlo a 'conten_boton'
-const deleteButton = document.createElement('button');
-deleteButton.className = 'eliminar_vista';
-deleteButton.textContent = 'Suprimir Cliente';
-contenBoton.appendChild(deleteButton);
+    // Crear el botón 'Suprimir Cliente' y añadirlo a 'conten_boton'
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'eliminar_vista';
+    deleteButton.textContent = 'Suprimir Cliente';
+    contenBoton.appendChild(deleteButton);
 
-/* Agregar eventos al boton de agregar */
-            addButton.addEventListener("click",e => {
-                e.preventDefault()
-                console.log("activado")
-                contenBoton.remove()
-                addButton.remove()
-                main.appendChild(contenBarra)
-                main.appendChild(createDatosAcompanantes())
-                agregarBtn()
-            }) 
+    /* Agregar eventos al boton de agregar */
+    addButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('activado');
+        contenBoton.remove();
+        addButton.remove();
+        main.appendChild(contenBarra);
+        main.appendChild(createDatosAcompanantes());
+        agregarBtn();
+    });
 
-/* Agregar eventos al boton de eliminar */
-deleteButton.addEventListener("click",e =>{
-    console.log("boton de eliminar precionado")
-    e.preventDefault()
-    document.querySelector(".conten_barra").remove()
-    document.querySelector(".datos_acompañantes").remove()
+    /* Agregar eventos al boton de eliminar */
+    deleteButton.addEventListener('click', (e) => {
+        console.log('boton de eliminar precionado');
+        e.preventDefault();
+        document.querySelector('.conten_barra').remove();
+        document.querySelector('.datos_acompañantes').remove();
 
-    if(document.querySelector(".conten_barra") == null){  
-        document.querySelector(".eliminar_vista") .remove()
-    }
-})
-    main.appendChild(contenBoton)
+        if (document.querySelector('.conten_barra') == null) {
+            document.querySelector('.eliminar_vista').remove();
+        }
+    });
+    main.appendChild(contenBoton);
 }
 
+btnAddCliente.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log('activado');
+    btnAddCliente.remove();
+    document.querySelector('.conten_boton').remove();
+    main.appendChild(createDatosAcompanantes());
+    agregarBtn();
+});
 
-    btnAddCliente.addEventListener("click",e => {
-        e.preventDefault()
-        console.log("activado")
-        btnAddCliente.remove()
-        document.querySelector(".conten_boton").remove()
-        main.appendChild(createDatosAcompanantes())
-        agregarBtn()
-    }) 
-
-
- 
 /* ______________________________________________________________________________ */
 
 function toggleCuadro() {
@@ -288,52 +284,53 @@ function setInitialClock() {
 window.onload = setInitialClock;
 
 // Obtener el modal
-var modal = document.getElementById("myModal");
+var modal = document.getElementById('myModal');
 
 // Obtener el botón que abre el modal
-var btn = document.getElementById("openModalButton");
+var btn = document.getElementById('openModalButton');
 
 // Obtener el <span> que cierra el modal
-var span = document.getElementsByClassName("close")[0];
+var span = document.getElementsByClassName('close')[0];
 
 // Cuando el usuario haga clic en el botón, se abre el modal
-btn.onclick = function() {
-    modal.style.display = "flex";
-}
+btn.onclick = function () {
+    modal.style.display = 'flex';
+};
 
 // Cuando el usuario haga clic en <span> (x), se cierra el modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
+span.onclick = function () {
+    modal.style.display = 'none';
+};
 
 // Cuando el usuario haga clic en cualquier lugar fuera del modal, se cierra
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == modal) {
-        modal.style.display = "none";
+        modal.style.display = 'none';
     }
-}
+};
 
-document.querySelectorAll('input[type="radio"]').forEach(radio => {
+document.querySelectorAll('input[type="radio"]').forEach((radio) => {
     radio.addEventListener('click', () => {
-        document.querySelectorAll('input[type="radio"]').forEach(r => {
+        document.querySelectorAll('input[type="radio"]').forEach((r) => {
             r.checked = false;
         });
         radio.checked = true;
     });
 });
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const porcentajeSelect = document.getElementById('porcentajeSelect');
     const porcentajeSpan = document.getElementById('porcentajeSpan');
 
-    porcentajeSelect.addEventListener('change', function() {
-        const selectedValue = porcentajeSelect.options[porcentajeSelect.selectedIndex].value;
-        if (selectedValue !== "") {
+    porcentajeSelect.addEventListener('change', function () {
+        const selectedValue =
+            porcentajeSelect.options[porcentajeSelect.selectedIndex].value;
+        if (selectedValue !== '') {
             porcentajeSpan.textContent = `${selectedValue}%`;
         }
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const radio1 = document.getElementById('radio1');
     const radio2 = document.getElementById('radio2');
     const content1 = document.getElementById('content1');
@@ -356,13 +353,13 @@ document.addEventListener('DOMContentLoaded', function() {
     radio2.addEventListener('change', toggleContent);
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const divs = document.querySelectorAll('.input_xd');
 
-    divs.forEach(div => {
-        div.addEventListener('click', function() {
+    divs.forEach((div) => {
+        div.addEventListener('click', function () {
             // Remover la clase 'active' de todos los divs
-            divs.forEach(d => d.classList.remove('input_activo'));
+            divs.forEach((d) => d.classList.remove('input_activo'));
 
             // Agregar la clase 'active' al div clicado
             this.classList.add('input_activo');

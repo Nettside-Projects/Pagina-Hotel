@@ -19,7 +19,7 @@
     justify-content: center;
     align-items: center;
     border-bottom: 2px solid white;
-    color: #ffffff;
+    color: white;
 }
 .rectangle-19 {
     width: 98px;
@@ -29,7 +29,8 @@
     margin-right: 20px;
 }
 .nav-item {
-    margin: 10px;
+    margin-top: 8px;
+    padding: 2px 18px;
     width: 80%;
     height: 40px;
     display: flex;
@@ -48,7 +49,7 @@
     color: #ffffff;
 }
 .activo {
-    background: #71d64e;
+    background: var(--color-principal);
 }
 .home {
     font-size: 25px;

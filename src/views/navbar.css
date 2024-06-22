@@ -1,0 +1,25 @@
+.wrapper {
+    width: 100%;
+    background: #d9d9d9;
+    z-index: 2;
+    border-radius: 5px 5px 0 0;
+    padding-top: 58.5px;
+}
+.buscador {
+    display: flex;
+    height: 50px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.barra_buscar {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    background: #fff;
+    align-items: center;
+    padding-left: 20px;
+    font-size: 25px;
+    font-weight: 900;
+}
