@@ -13,7 +13,7 @@ let windowHabitaciones;
 //rutas
 let loginHtml = './src/views/login/index.html';
 let habitacionesHTML =
-    './src/views/vista_general_habitaciones/vistaGeneral.html';
+    './src/views/vista_principal/inicio_habitacion.html';
 
 // funcion para crear la ventana
 function createWindowLogin() {
