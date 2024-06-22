@@ -348,12 +348,16 @@ text-decoration: none;
   align-items: center;
   background: #fff;
 }
+.eliminar_vista{
+  cursor: pointer;
+}
 .add_vista{
   background: #35C928;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 220px;
+  cursor: pointer;
   height: 40px;
   border: none;
   border-radius: 5px;
