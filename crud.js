@@ -37,10 +37,10 @@ function validarUsuario(db, usuario, callback) {
 function mostrarHabitaciones(db, callback) {
     let html = '';
     db.all(
-        'SELECT habitacion.numero,estado.estado,tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado',
+        'SELECT habitacion.id_habitacion,habitacion.numero,estado.estado,tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado',
         (err, rows) => {
             rows.forEach((element) => {
-                html += `<div class="rectangle-1 ${
+                html += `<div id_habitacion="${element.id_habitacion}" class="rectangle-1 ${
                     element.estado !== 'Fuera de servicio'
                         ? element.estado.toLowerCase()
                         : 'fuera_servicio'
@@ -71,11 +71,37 @@ function mostrarHabitaciones(db, callback) {
     );
 }
 
-mostrarHabitaciones(db, (err, element) => {
-    console.log(element);
-});
+function infoHabitacion(db,idHabitacion,callback){
+    db.get(`SELECT habitacion.id_habitacion,habitacion.numero, habitacion.descripcion,estado.estado,tipo.tipo_habitacion,nivel.nivel FROM habitacion INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel WHERE habitacion.id_habitacion = ?`,[idHabitacion],(err,row)=>{
+        /* Procede a extraer la información de la habitacion como el estado en la que se encuentra, una descripción general, el numero y el tipo.
+        
+        Esta información se enviará en un formato JSON al frontend
+
+        Pero antes de esto, actualizar la DB con el campo de descripción.
+        */
+       const infoHabitacion = {
+        id_habitacion: row.id_habitacion,
+        numero: row.numero,
+        descripcion: row.descripcion,
+        estado: row.estado,
+        tipo: row.tipo_habitacion,
+        nivel: row.nivel
+
+       }
+
+       callback(infoHabitacion)
+
+    })
+}
+
+
+infoHabitacion(db,1,(infoHabitacion)=>{
+    console.log(infoHabitacion)
+})
 
 module.exports = {
     validarUsuario: validarUsuario,
     mostrarHabitaciones: mostrarHabitaciones,
+    infoHabitacion: infoHabitacion
+    
 };
