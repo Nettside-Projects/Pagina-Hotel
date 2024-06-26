@@ -96,6 +96,17 @@ document.addEventListener('DOMContentLoaded', () => {
         inputDoc3.className = 'input_xd';
         inputDoc3.name = `huesped[${contador}][profesion]`
 
+<<<<<<< HEAD
+    const documentoCliente3 = document.createElement('div');
+    documentoCliente3.className = 'documento_cliente';
+    const colum5 = document.createElement('div');
+    colum5.className = 'colum';
+    const encabezadoNombreDoc5 = document.createElement('div');
+    encabezadoNombreDoc5.className = 'encabezado_nombre documento';
+    encabezadoNombreDoc5.textContent = 'Data de nascimento';
+    const inputDoc5 = document.createElement('input');
+    inputDoc5.className = 'input_xd';
+=======
         colum3.appendChild(encabezadoNombreDoc3);
         colum3.appendChild(inputDoc3);
 
@@ -107,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputDoc4 = document.createElement('input');
         inputDoc4.className = 'input_xd';
         inputDoc4.name = `huesped[${contador}][procedencia]`
+>>>>>>> b0eb13534779d20742a73c074bbe817386eba8a2
 
         colum4.appendChild(encabezadoNombreDoc4);
         colum4.appendChild(inputDoc4);
@@ -447,51 +459,43 @@ document.addEventListener('DOMContentLoaded', () => {
             radio.checked = true;
         });
     });
-    document.addEventListener('DOMContentLoaded', function () {
-        const porcentajeSelect = document.getElementById('porcentajeSelect');
-        const porcentajeSpan = document.getElementById('porcentajeSpan');
+});
 
-        porcentajeSelect.addEventListener('change', function () {
-            const selectedValue = porcentajeSelect.options[porcentajeSelect.selectedIndex].value;
-            if (selectedValue !== "") {
-                porcentajeSpan.textContent = `${selectedValue}%`;
-            }
-        });
-    });
+/* ___________mensaje error_______________ */
+document.addEventListener('DOMContentLoaded', () => {
+    const submitBtn = document.getElementById('submit-btn');
+    const nameInput = document.getElementById('name');
+    const documentInput = document.getElementById('document');
+    const nameError = document.getElementById('name-error');
+    const documentError = document.getElementById('document-error');
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const radio1 = document.getElementById('radio1');
-        const radio2 = document.getElementById('radio2');
-        const content1 = document.getElementById('content1');
-        const content2 = document.getElementById('content2');
+    submitBtn.addEventListener('click', () => {
+        let isValid = true;
 
-        function toggleContent() {
-            if (radio1.checked) {
-                content1.classList.remove('none');
-                content2.classList.add('none');
-            } else if (radio2.checked) {
-                content1.classList.add('none');
-                content2.classList.remove('none');
-            }
+        // Validar el campo de nombre
+        if (nameInput.value.trim() === '') {
+            nameError.textContent = 'El nombre es obligatorio.';
+            nameError.style.display = 'block';
+            isValid = false;
+            setTimeout(() => {
+                nameError.style.display = 'none';
+            }, 5000);
         }
 
-        // Initial check on page load
-        toggleContent();
+        // Validar el campo de número de documento
+        if (documentInput.value.trim() === '') {
+            documentError.textContent = 'El número de documento es obligatorio.';
+            documentError.style.display = 'block';
+            isValid = false;
+            setTimeout(() => {
+                documentError.style.display = 'none';
+            }, 5000);
+        }
 
-        radio1.addEventListener('change', toggleContent);
-        radio2.addEventListener('change', toggleContent);
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const divs = document.querySelectorAll('.input_xd');
-
-        divs.forEach(div => {
-            div.addEventListener('click', function () {
-                // Remover la clase 'active' de todos los divs
-                divs.forEach(d => d.classList.remove('input_activo'));
-
-            // Agregar la clase 'active' al div clicado
-            this.classList.add('input_activo');
-        });
+        // Si el formulario es válido, puedes enviar los datos a la base de datos aquí
+        if (isValid) {
+            // Lógica para enviar los datos a la base de datos
+            console.log('Formulario válido. Enviando datos...');
+        }
     });
 });
