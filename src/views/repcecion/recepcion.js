@@ -96,17 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
         inputDoc3.className = 'input_xd';
         inputDoc3.name = `huesped[${contador}][profesion]`
 
-<<<<<<< HEAD
-    const documentoCliente3 = document.createElement('div');
-    documentoCliente3.className = 'documento_cliente';
-    const colum5 = document.createElement('div');
-    colum5.className = 'colum';
-    const encabezadoNombreDoc5 = document.createElement('div');
-    encabezadoNombreDoc5.className = 'encabezado_nombre documento';
-    encabezadoNombreDoc5.textContent = 'Data de nascimento';
-    const inputDoc5 = document.createElement('input');
-    inputDoc5.className = 'input_xd';
-=======
         colum3.appendChild(encabezadoNombreDoc3);
         colum3.appendChild(inputDoc3);
 
@@ -118,7 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputDoc4 = document.createElement('input');
         inputDoc4.className = 'input_xd';
         inputDoc4.name = `huesped[${contador}][procedencia]`
->>>>>>> b0eb13534779d20742a73c074bbe817386eba8a2
 
         colum4.appendChild(encabezadoNombreDoc4);
         colum4.appendChild(inputDoc4);
