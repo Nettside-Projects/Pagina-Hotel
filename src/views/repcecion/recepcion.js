@@ -95,7 +95,6 @@ function createDatosAcompanantes() {
 
     const documentoCliente3 = document.createElement('div');
     documentoCliente3.className = 'documento_cliente';
-
     const colum5 = document.createElement('div');
     colum5.className = 'colum';
     const encabezadoNombreDoc5 = document.createElement('div');
@@ -364,5 +363,44 @@ document.addEventListener('DOMContentLoaded', function () {
             // Agregar la clase 'active' al div clicado
             this.classList.add('input_activo');
         });
+    });
+});
+
+/* ___________mensaje error_______________ */
+document.addEventListener('DOMContentLoaded', () => {
+    const submitBtn = document.getElementById('submit-btn');
+    const nameInput = document.getElementById('name');
+    const documentInput = document.getElementById('document');
+    const nameError = document.getElementById('name-error');
+    const documentError = document.getElementById('document-error');
+
+    submitBtn.addEventListener('click', () => {
+        let isValid = true;
+
+        // Validar el campo de nombre
+        if (nameInput.value.trim() === '') {
+            nameError.textContent = 'El nombre es obligatorio.';
+            nameError.style.display = 'block';
+            isValid = false;
+            setTimeout(() => {
+                nameError.style.display = 'none';
+            }, 5000);
+        }
+
+        // Validar el campo de número de documento
+        if (documentInput.value.trim() === '') {
+            documentError.textContent = 'El número de documento es obligatorio.';
+            documentError.style.display = 'block';
+            isValid = false;
+            setTimeout(() => {
+                documentError.style.display = 'none';
+            }, 5000);
+        }
+
+        // Si el formulario es válido, puedes enviar los datos a la base de datos aquí
+        if (isValid) {
+            // Lógica para enviar los datos a la base de datos
+            console.log('Formulario válido. Enviando datos...');
+        }
     });
 });
