@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    window.preload.ActivacioninfoHabitacionGeneralSend("txt-activation")
     const cont = document.querySelector('.flex-row-b');
     //objects with hotel states
 
