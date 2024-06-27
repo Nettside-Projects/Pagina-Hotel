@@ -98,12 +98,12 @@
 .flex-row-b {
     display: flex;
     align-items: center;
+    justify-content: center;
     position: relative;
     flex-wrap: wrap;
-    width: 100%;
     height: 161px;
     z-index: 28;
-    margin-inline: 50px;
+    margin-inline: auto;
 }
 .rectangle-1 {
     cursor: pointer;
