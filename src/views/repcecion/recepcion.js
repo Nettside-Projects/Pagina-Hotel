@@ -1,23 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    let btnEnviar = document.querySelector('#enviar')
-
-    let btnValorDiaria = document.querySelector("#valor_diaria")
-
-    let contador = 1;
-    console.log("Hola")
     const info = JSON.parse(localStorage.getItem("informacionDeHabitacion"))
-    console.log(info)
     const contenedorInfoHabitacion = document.querySelectorAll(".info_habitacion")
+
+    let btnEnviar = document.querySelector('#enviar')
+    let btnValorDiaria = document.querySelector("#valor_diaria")
+    let btnAddCliente = document.querySelector(".add_vista")
+    let main = document.querySelector("form")
+    let valorDiaria = 0
+    /* Variable encargada de agregar el indice correspondiente a cada input para su posterior envío dentro de un JSON */
+    let contador = 1;
+
+    /* Mateus -> Agregando informacion de las habitaciones */
     contenedorInfoHabitacion[0].textContent = info.numero
     contenedorInfoHabitacion[1].textContent = info.descripcion
-    /*  [Espacio para colocar el precio total de la estadía]*/
     contenedorInfoHabitacion[3].textContent = info.tipo
     contenedorInfoHabitacion[4].textContent = info.estado
 
 
-    let main = document.querySelector("form")
+    
 
+    /* Función para crear los campos del formulario del acompañante */
     function createDatosAcompanantes(contador) {
         const datosAcompanantes = document.createElement('div');
         datosAcompanantes.className = 'datos_acompañantes';
@@ -227,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return datosAcompanantes;
     }
     /* Codigo de Mateus */
-    let btnAddCliente = document.querySelector(".add_vista")
+   
     function agregarBtn() {
         const contenBarra = document.createElement('div');
         contenBarra.className = 'conten_barra';
@@ -265,8 +268,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         /* Agregar eventos al boton de eliminar */
         deleteButton.addEventListener("click", e => {
-            console.log(main.children[main.children.length - 2])
-            console.log("boton de eliminar precionado")
             e.preventDefault()
             document.querySelectorAll(".conten_barra")[document.querySelectorAll(".conten_barra").length - 1].remove()
             main.children[main.children.length - 2].remove()
@@ -285,11 +286,11 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('activado');
         btnAddCliente.remove();
         document.querySelector('.conten_boton').remove();
-        main.appendChild(createDatosAcompanantes(contador)); /* No toquen la puta madre */
+        main.appendChild(createDatosAcompanantes(contador));
         agregarBtn();
     });
 
-    let valorDiaria = 0
+   
     btnValorDiaria.addEventListener("focusout", (e) => {
         valorDiaria = e.target.value
         calcularPrecioTotal(valorDiaria)
@@ -347,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
+    /* Envío de datos del formualrio */
     btnEnviar.addEventListener('click', e => {
 
         e.preventDefault()
@@ -368,24 +369,16 @@ document.addEventListener('DOMContentLoaded', () => {
             huespedes[indice]["fecha_salida"] = `${document.querySelector("#fecha_salida").value}`
         }
 
-
-
-        // Muestra el objeto en la consola
         let cuentaTotal = calcularPrecioTotal(valorDiaria)
         const infoGeneral = {
             infoHuespedes : huespedes,
             cuentaTotal: cuentaTotal
         }
 
+        /* Proceder hacer la validación de los campos para ejecutar el envío de datos a través de las dos líneas de codigo que siguen de esta */
         window.preload.infoHuespedesSend(infoGeneral)
         window.location.href = "../vista_general_habitaciones/vistaGeneral.html"
-        
-
-
-
     })
-
-
     /* ______________________________________________________________________________ */
 
     function toggleCuadro() {

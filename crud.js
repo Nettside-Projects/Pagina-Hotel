@@ -105,12 +105,6 @@ function mostrarHabitaciones(db, callback) {
 
 function infoHabitacion(db, idHabitacion, callback) {
     db.get(`SELECT habitacion.id_habitacion,habitacion.numero, habitacion.descripcion,estado.estado,tipo.tipo_habitacion,nivel.nivel FROM habitacion INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel WHERE habitacion.id_habitacion = ?`, [idHabitacion], (err, row) => {
-        /* Procede a extraer la información de la habitacion como el estado en la que se encuentra, una descripción general, el numero y el tipo.
-        
-        Esta información se enviará en un formato JSON al frontend
-
-        Pero antes de esto, actualizar la DB con el campo de descripción.
-        */
         const infoHabitacion = {
             id_habitacion: row.id_habitacion,
             numero: row.numero,
@@ -125,10 +119,7 @@ function infoHabitacion(db, idHabitacion, callback) {
 
     })
 }
-data.infoHuespedes.forEach((index,e) => {
-    console.log(index)
-    console.log(e)
-})
+
 function agregarHuespedes(db, data) {
     // Insertar la cuenta en la tabla 'cuentas'
     db.run(`INSERT INTO cuentas (cuenta_total) VALUES (?);`, [data.cuentaTotal], function(err) {
@@ -169,16 +160,12 @@ function agregarHuespedes(db, data) {
             });
         });
     });
-
-
-    cambiarEstadoHabitacion(db,data.infoHuespedes[0].id_habitacion)
-
+    cambiarEstadoHabitacion(db,2,data.infoHuespedes[0].id_habitacion)
 }
 
 
-function cambiarEstadoHabitacion(db,id_habitacion){
-    db.run(`UPDATE habitacion SET fk_id_estado = 2 WHERE id_habitacion = ${id_habitacion}`)
-    
+function cambiarEstadoHabitacion(db,estado,id_habitacion){
+    db.run(`UPDATE habitacion SET fk_id_estado = ${estado} WHERE id_habitacion = ${id_habitacion}`)   
 }
 
 module.exports = {
