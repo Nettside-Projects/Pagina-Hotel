@@ -440,10 +440,21 @@ document.addEventListener('DOMContentLoaded', () => {
             radio.checked = true;
         });
     });
+    document.querySelector("#radio2").addEventListener("click",e=>{
+        document.querySelector("#content1").style.display = "none"
+        document.querySelector("#content2").style.display  = "flex"
+
+    })
+    document.querySelector("#radio1").addEventListener("click",e=>{
+        document.querySelector("#content2").style.display = "none"
+        document.querySelector("#content1").style.display  = "flex"
+
+    })
+   
 });
 
 /* ___________mensaje error_______________ */
-document.addEventListener('DOMContentLoaded', () => {
+/* document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submit-btn');
     const nameInput = document.getElementById('name');
     const documentInput = document.getElementById('document');
@@ -480,3 +491,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+ */
