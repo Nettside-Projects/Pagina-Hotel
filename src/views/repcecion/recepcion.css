@@ -409,3 +409,8 @@ text-decoration: none;
   background: #ffff !important;
   border: 2px solid #000 !important;
 }
+.error-message {
+  color: red;
+  font-size: 14px;
+  display: none;
+}
