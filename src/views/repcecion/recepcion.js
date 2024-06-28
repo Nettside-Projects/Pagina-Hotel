@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let btnValorDiaria = document.querySelector("#valor_diaria")
     let btnAddCliente = document.querySelector(".add_vista")
     let main = document.querySelector("form")
+    let porcentaValue = 1
     let valorDiaria = 0
     /* Variable encargada de agregar el indice correspondiente a cada input para su posterior envío dentro de un JSON */
     let contador = 1;
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         encabezadoNombre.className = 'encabezado_nombre';
         encabezadoNombre.textContent = 'Nome';
         const inputNombre = document.createElement('input');
-        inputNombre.className = 'input_xd completo';
+        inputNombre.className = 'input_xd completo mensaje_name';
         inputNombre.name = `huesped[${contador}][nombre]`
 
         nombreCliente.appendChild(encabezadoNombre);
@@ -307,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const fechaFormateada = `${partesFecha[2]}-${partesFecha[1]}-${partesFecha[0]}`
         var fechaSalida = document.querySelector("#fecha_salida").value.split('T')[0];
 
-        console.log("fecha entrada -> " + fechaFormateada + "|" + "fecha salida -> " + fechaSalida)
+       /*  console.log("fecha entrada -> " + fechaFormateada + "|" + "fecha salida -> " + fechaSalida) */
 
         // Convertimos las fechas a objetos Date de JavaScript
         var entrada = new Date(fechaFormateada);
@@ -315,7 +316,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Calculamos la diferencia en milisegundos entre las dos fechas
         var diferenciaMilisegundos = salida.getTime() - entrada.getTime();
-        console.log(diferenciaMilisegundos)
         if (diferenciaMilisegundos !== 0) {
             // Convertimos la diferencia de milisegundos a días
             var diferenciaDias = diferenciaMilisegundos / (1000 * 60 * 60 * 24);
@@ -329,10 +329,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Calculamos el costo total de la estadía
             var costoTotal = diferenciaDias * valorDiario;
+           if(porcentaValue % 1 === 0 && porcentaValue != 1){
+            costoTotal = costoTotal - porcentaValue
+            console.log("Es entero: "+ porcentaValue)
+           }else{
+            costoTotal = costoTotal * porcentaValue
+            console.log("No es entero: "+ porcentaValue)
+           }
+            
 
-            console.log('El huésped se hospedará por ' + diferenciaDias + ' días.');
+          /*   console.log('El huésped se hospedará por ' + diferenciaDias + ' días.');
             console.log('El costo total de la estadía es: ' + costoTotal);
-            console.log(contenedorInfoHabitacion[2].textContent)
+            console.log(contenedorInfoHabitacion[2].textContent) */
             if (isNaN(costoTotal)) {
                 contenedorInfoHabitacion[2].textContent = '$R0'
                 return 0;
@@ -342,9 +350,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return costoTotal
             }
         } else {
-            console.log(valorDiaria)
-            contenedorInfoHabitacion[2].textContent = `$R${valorDiaria}`
-            return valorDiaria
+            contenedorInfoHabitacion[2].textContent = `$R${valorDiaria - porcentaValue}`
+            return valorDiaria - porcentaValue
         }
     }
 
@@ -376,9 +383,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         /* Proceder hacer la validación de los campos para ejecutar el envío de datos a través de las dos líneas de codigo que siguen de esta */
+       
+        /* ___________mensaje error_______________ */
+
+    const nameInput = document.querySelectorAll('mensaje_name');
+    const documentInput = document.getElementById('document');
+    const nameError = document.getElementById('name-error');
+    const documentError = document.getElementById('document-error');
+
+    btnEnviar.addEventListener('click', () => {
+        let isValid = true;
+        // Validar el campo de nombre
+        if (nameInput.value.trim() === '') {
+            console.log("sapoooo")
+            nameError.textContent = 'El nombre es obligatorio.';
+            nameError.style.display = 'block';
+            isValid = false;
+            setTimeout(() => {
+                nameError.style.display = 'none';
+            }, 5000);
+        }
+
+        // Validar el campo de número de documento
+        if (documentInput.value.trim() === '') {
+            documentError.textContent = 'El número de documento es obligatorio.';
+            documentError.style.display = 'block';
+            isValid = false;
+            setTimeout(() => {
+                documentError.style.display = 'none';
+            }, 5000);
+        }
+
+        // Si el formulario es válido, puedes enviar los datos a la base de datos aquí
+       /*  if (isValid) {
+            // Lógica para enviar los datos a la base de datos
+            console.log('Formulario válido. Enviando datos...');
+        } */
+    });
+
         window.preload.infoHuespedesSend(infoGeneral)
         window.location.href = "../vista_general_habitaciones/vistaGeneral.html"
     })
+
     /* ______________________________________________________________________________ */
 
     function toggleCuadro() {
@@ -432,6 +478,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    /* Codigo para cambiar de input radio y deshabilitar el otro */
     document.querySelectorAll('input[type="radio"]').forEach(radio => {
         radio.addEventListener('click', () => {
             document.querySelectorAll('input[type="radio"]').forEach(r => {
@@ -440,55 +487,42 @@ document.addEventListener('DOMContentLoaded', () => {
             radio.checked = true;
         });
     });
+
+    document.querySelector("#radio1").addEventListener("click",e => {
+        console.log("Usando los porcentajes")
+        porcentaValue = document.querySelector("#porcentajeSelect").value
+        calcularPrecioTotal(valorDiaria)
+    })
+
+    document.querySelector("#radio2").addEventListener("click",e => {
+        console.log("Usando los inputs enteros")
+        porcentaValue =  document.querySelectorAll(".barra_input")[1].value
+        calcularPrecioTotal(valorDiaria)
+    })
+
     document.querySelector("#radio2").addEventListener("click",e=>{
         document.querySelector("#content1").style.display = "none"
         document.querySelector("#content2").style.display  = "flex"
-
+        document.querySelectorAll(".barra_input")[1].addEventListener('keyup',e => {
+            porcentaValue = e.target.value
+            calcularPrecioTotal(valorDiaria)
+        })
     })
+
+    /* Codigo para seleccionar el valor del input tipo select */
+    document.querySelector("#porcentajeSelect").addEventListener('change', (e) => {
+        porcentaValue = e.target.value;
+        document.querySelector("#porcentajeSpan").textContent = `${e.target.value * 100}%`
+        calcularPrecioTotal(valorDiaria)
+        console.log(`Valor seleccionado: ${porcentaValue}`);
+    });
+
     document.querySelector("#radio1").addEventListener("click",e=>{
         document.querySelector("#content2").style.display = "none"
         document.querySelector("#content1").style.display  = "flex"
-
     })
    
 });
 
-/* ___________mensaje error_______________ */
-/* document.addEventListener('DOMContentLoaded', () => {
-    const submitBtn = document.getElementById('submit-btn');
-    const nameInput = document.getElementById('name');
-    const documentInput = document.getElementById('document');
-    const nameError = document.getElementById('name-error');
-    const documentError = document.getElementById('document-error');
 
-    submitBtn.addEventListener('click', () => {
-        let isValid = true;
-
-        // Validar el campo de nombre
-        if (nameInput.value.trim() === '') {
-            nameError.textContent = 'El nombre es obligatorio.';
-            nameError.style.display = 'block';
-            isValid = false;
-            setTimeout(() => {
-                nameError.style.display = 'none';
-            }, 5000);
-        }
-
-        // Validar el campo de número de documento
-        if (documentInput.value.trim() === '') {
-            documentError.textContent = 'El número de documento es obligatorio.';
-            documentError.style.display = 'block';
-            isValid = false;
-            setTimeout(() => {
-                documentError.style.display = 'none';
-            }, 5000);
-        }
-
-        // Si el formulario es válido, puedes enviar los datos a la base de datos aquí
-        if (isValid) {
-            // Lógica para enviar los datos a la base de datos
-            console.log('Formulario válido. Enviando datos...');
-        }
-    });
-});
- */
+ 
