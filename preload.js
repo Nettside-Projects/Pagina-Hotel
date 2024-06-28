@@ -9,5 +9,7 @@ contextBridge.exposeInMainWorld('preload', {
     InfoHabitacionesGeneralOn: (callback) => ipcRenderer.on('informacion-general-habitaciones',(e,html) => callback(e,html)),
     envioIdHabitacion:(idHabitacion) => ipcRenderer.send('envioIdHabitacion',idHabitacion),
     infoHabitacionIndividualOn:(callback) => ipcRenderer.on('informacion-individual-habitacion',(e,info) => callback(e,info)),
-    infoHuespedesSend: (infoHuespedes) => ipcRenderer.send('informacion-huespedes', infoHuespedes)
+    infoHuespedesSend: (infoHuespedes) => ipcRenderer.send('informacion-huespedes', infoHuespedes),
+    buscarHabitacion: (busqueda) => ipcRenderer.send('buscar-habitacion',busqueda),
+    buscadHabitacionOn: (callback) => ipcRenderer.on('informacion-habitacion-buscada',(e,respuesta)=> callback(e,respuesta))
 });
