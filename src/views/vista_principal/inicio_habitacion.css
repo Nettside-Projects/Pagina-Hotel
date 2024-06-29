@@ -1,38 +1,34 @@
 .interfaz-inicio {
     position: relative;
-    width: 100%;
-    height: 100%;
     z-index: 31;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-    justify-content: center;
-    align-content: center;
-    padding: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 50px;
+    margin-top: 50px;
+    padding-inline: 20px;
 }
 .card {
     flex-shrink: 0;
     position: relative;
-    width: 285px;
+    width: 300px;
     height: 161px;
-    background: #de93ea;
     z-index: 37;
     border-radius: 18px;
     margin-inline: auto;
 }
 .card .header {
     position: relative;
-    width: 285px;
+    width: 300px;
     height: 35px;
     margin: 0 0 0 0;
     cursor: pointer;
-    background: #653d6c;
     border: none;
     z-index: 43;
     overflow: visible auto;
     border-radius: 18px 18px 0 0;
+    color:#fff;
 }
-.total-de-quartos {
+.card .header .title {
     position: relative;
     width: 153px;
     height: 27px;
@@ -46,127 +42,49 @@
     white-space: nowrap;
     z-index: 43;
 }
-.total {
-    position: relative;
-    color: #ffffff;
-    font-family: Manrope, var(--default-font-family);
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 27.32px;
-    text-align: left;
-    text-transform: capitalize;
-}
-.de {
-    position: relative;
-    color: #ffffff;
-    font-family: Manrope, var(--default-font-family);
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 27.32px;
-    text-align: left;
-    text-transform: lowercase;
-}
-.quartos {
-    position: relative;
-    color: #ffffff;
-    font-family: Manrope, var(--default-font-family);
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 27.32px;
-    text-align: left;
-    text-transform: capitalize;
-}
 .flex-row-f {
     position: relative;
-    width: 224px;
-    height: 88px;
-    margin: 29px 0 0 28px;
-    z-index: 42;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+    padding: 10px 28px;
+    z-index: 40;
 }
 .xx {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    position: absolute;
     height: 88px;
-    top: 0;
-    left: 129px;
     color: #ffffff;
     font-family: Manjari, var(--default-font-family);
     font-size: 75px;
     font-weight: 700;
     line-height: 87.891px;
-    text-align: left;
     text-transform: capitalize;
     white-space: nowrap;
     z-index: 39;
 }
-.rectangle-5 {
-    position: absolute;
-    width: 63px;
-    height: 20px;
-    top: 4px;
-    left: 14px;
-    background: url(./assets/images/bd121a5a-3bd2-475b-82f7-c944bf0f3806.png)
-        no-repeat center;
-    background-size: cover;
-    z-index: 40;
-}
-.rectangle-6 {
-    position: absolute;
-    width: 89px;
-    height: 18px;
-    top: 26px;
-    left: 1px;
-    background: url(./assets/images/ffdd5ca2-428c-4acd-bd48-d70e54c88f65.png)
-        no-repeat center;
-    background-size: cover;
-    z-index: 41;
-}
-.rectangle-7 {
-    position: absolute;
-    width: 90px;
-    height: 14px;
-    top: 46px;
-    left: 0;
-    background: url(./assets/images/7a64a01a-0198-4d90-9ae4-c4315021fb43.png)
-        no-repeat center;
-    background-size: cover;
-    z-index: 42;
-}
-.quartos-livres {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    position: absolute;
-    height: 27px;
-    top: 4px;
-    left: 66px;
-    color: #ffffff;
-    font-family: Manrope, var(--default-font-family);
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 27px;
-    text-align: left;
-    text-transform: capitalize;
-    white-space: nowrap;
-    z-index: 51;
-}
-.flex-row-ed .rectangle-3 {
-    background: #6a7ddc;
-}
-.flex-row-ed .rectangle-4 {
-    background: #303a6b;
-}
-.flex-row-ed .rectangle-8 {
-    background: #ff8a00;
-}
-.flex-row-ed .rectangle-9 {
-    background: #b74d00;
-}
 
-@media screen and (max-width: 1280px) {
-    .interfaz-inicio {
-        grid-template-columns: repeat(2, 1fr);
-    }
+/* colores */
+.total-de-cuartos {
+    background: #de93ea;
+}
+.total-de-cuartos .header {
+    background: #653d6c;
+}
+.cuartos-libres {
+    background: #35C928;
+}
+.cuartos-libres .header {
+    background: #2E8A26;
+}
+.en-reserva {
+    background: #6A7DDC;
+}
+.en-reserva .header {
+    background: #303A6B;
+}
+.total-ocupados {
+    background: #FF8A00;
+}
+.total-ocupados .header {
+    background: #B74D00;
 }
