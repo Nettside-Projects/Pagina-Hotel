@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    window.preload.ActivacioninfoHabitacionGeneralSend("txt-activation")
+    window.preload.ActivacioninfoHabitacionGeneralSend('txt-activation');
     const cont = document.querySelector('.flex-row-b');
-    const btnBuscar = document.querySelector('.buscar_lupa')
+    const btnBuscar = document.querySelector('.buscar_lupa');
     //objects with hotel states
 
-    //Mateus -> Objecto para declarar las imagenes de los estados
     const estados = {
         disponible:
             '<svg xmlns="http://www.w3.org/2000/svg" height="88px" viewBox="0 -960 960 960" width="88px" fill="#EFEFEF"><path d="M200-200h-40l-26-80H80v-201q0-33 23.5-56t56.5-23v-120q0-33 23.5-56.5T240-760h480q33 0 56.5 23.5T800-680v120q33 0 56.5 23.5T880-480v200h-54l-26 80h-40l-26-80H226l-26 80Zm320-360h200v-120H520v120Zm-280 0h200v-120H240v120Zm-80 200h640v-120H160v120Zm640 0H160h640Z"/></svg>',
@@ -20,20 +19,20 @@ document.addEventListener('DOMContentLoaded', () => {
             '<svg xmlns="http://www.w3.org/2000/svg" height="88px" viewBox="0 -960 960 960" width="88px" fill="#EFEFEF"><path d="M756-120 537-339l84-84 219 219-84 84Zm-552 0-84-84 276-276-68-68-28 28-51-51v82l-28 28-121-121 28-28h82l-50-50 142-142q20-20 43-29t47-9q24 0 47 9t43 29l-92 92 50 50-28 28 68 68 90-90q-4-11-6.5-23t-2.5-24q0-59 40.5-99.5T701-841q15 0 28.5 3t27.5 9l-99 99 72 72 99-99q7 14 9.5 27.5T841-701q0 59-40.5 99.5T701-561q-12 0-24-2t-23-7L204-120Z"/></svg>',
     };
 
-    btnBuscar.addEventListener("keyup", e => {
-        window.preload.buscarHabitacion(e.target.value)
+    btnBuscar.addEventListener('keyup', (e) => {
+        window.preload.buscarHabitacion(e.target.value);
         window.preload.buscadHabitacionOn((e, html) => {
-            if(html === ''){
-                cont.innerHTML = '<h2 class="habitacion-no-encontrada">No se encontró la habitación. Asegurese de que el número de la habitación exista o que haya ingresado un valor correcto (solo se acepta un número y sin espacios)</h2>'; 
-            }else{
-                agregarTarjetasHabitaciones(html)
+            if (html === '') {
+                cont.innerHTML =
+                    '<h2 class="habitacion-no-encontrada">No se encontró la habitación. Asegurese de que el número de la habitación exista o que haya ingresado un valor correcto (solo se acepta un número y sin espacios)</h2>';
+            } else {
+                agregarTarjetasHabitaciones(html);
             }
-           
-        })
-    })
+        });
+    });
 
     window.preload.InfoHabitacionesGeneralOn((e, html) => {
-        agregarTarjetasHabitaciones(html)
+        agregarTarjetasHabitaciones(html);
     });
 
     function agregarTarjetasHabitaciones(html) {
@@ -50,21 +49,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        tarjetasHabitacion.forEach(e => {
+        tarjetasHabitacion.forEach((e) => {
             e.addEventListener('click', () => {
-                if (e.classList.contains("disponible")) {
-                    window.preload.envioIdHabitacion(e.getAttribute("id_habitacion"))
+                if (e.classList.contains('disponible')) {
+                    window.preload.envioIdHabitacion(
+                        e.getAttribute('id_habitacion')
+                    );
                     window.preload.infoHabitacionIndividualOn((e, info) => {
-                        localStorage.setItem("informacionDeHabitacion", JSON.stringify(info))
-                        window.location.href = "../repcecion/recepcion.html"
-                    })
-
+                        localStorage.setItem(
+                            'informacionDeHabitacion',
+                            JSON.stringify(info)
+                        );
+                        window.location.href = '../repcecion/recepcion.html';
+                    });
                 }
-
-            })
-        })
+            });
+        });
     }
-
 });
 // Obtener el modal
 var modal = document.getElementById('myModal');
