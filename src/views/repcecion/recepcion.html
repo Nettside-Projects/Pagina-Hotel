@@ -130,8 +130,8 @@
           <p>Dados do Cliente</p>
         </div>
         <div class="nombre_cliente">
-          <div class="encabezado_nombre">Nome</div><input class="input_xd completo mensaje_name"  name="huesped[0][nombre]">
-          <div id="name-error" class="error-message"></div><br>
+          <div class="encabezado_nombre">Nome <span class="input_requerid">*</span></div><input class="input_xd completo mensaje_name nombre-completo"  name="huesped[0][nombre]">
+          <div id="name-error-nombre" class="name-error-nombre"></div>
         </div>
         <div class="documento_cliente">
           <div class="colum">
@@ -139,8 +139,9 @@
               name="huesped[0][pasaporte]">
           </div>
           <div class="colum">
-            <div class="encabezado_nombre documento">N° de Documento</div><input class="input_xd"
+            <div class="encabezado_nombre documento">N° de Documento <span class="input_requerid">*</span></div><input class="input_xd document-error-documment"
               name="huesped[0][documento]">
+              <div class="error-message-documment"></div>
           </div>
         </div>
         <div class="documento_cliente">

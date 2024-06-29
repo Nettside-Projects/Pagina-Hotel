@@ -409,8 +409,12 @@ text-decoration: none;
   background: #ffff !important;
   border: 2px solid #000 !important;
 }
-.error-message {
+.error-message-documment, .name-error-nombre {
   color: red;
-  font-size: 14px;
-  display: none;
+  font-weight: 600;
+  font-size: 17px;
+  height: 20px;
+}
+.input_requerid{
+  color: red;
 }

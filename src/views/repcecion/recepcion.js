@@ -39,24 +39,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const pCliente = document.createElement('p');
         pCliente.textContent = 'Dados do Cliente companheiro';
         informeEncabezadoCliente.appendChild(pCliente);
-
+        /* --------- */
         const nombreCliente = document.createElement('div');
         nombreCliente.className = 'nombre_cliente';
         const encabezadoNombre = document.createElement('div');
         encabezadoNombre.className = 'encabezado_nombre';
         encabezadoNombre.textContent = 'Nome';
         const inputNombre = document.createElement('input');
-        inputNombre.className = 'input_xd completo mensaje_name';
+        inputNombre.className = 'input_xd completo nombre-completo';
+        const nameErrorDiv = document.createElement('div');
+        nameErrorDiv.id = 'name-error-nombre';
+        nameErrorDiv.className = 'name-error-nombre';
         inputNombre.name = `huesped[${contador}][nombre]`
+         /* --------- */
 
         nombreCliente.appendChild(encabezadoNombre);
         nombreCliente.appendChild(inputNombre);
+        nombreCliente.appendChild(nameErrorDiv)
 
         columRight.appendChild(informeEncabezadoCliente);
         columRight.appendChild(nombreCliente);
 
         const documentoCliente1 = document.createElement('div');
         documentoCliente1.className = 'documento_cliente';
+        
 
         const colum1 = document.createElement('div');
         colum1.className = 'colum';
@@ -66,24 +72,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputDoc1 = document.createElement('input');
         inputDoc1.className = 'input_xd';
         inputDoc1.name = `huesped[${contador}][pasaporte]`
-
         colum1.appendChild(encabezadoNombreDoc1);
         colum1.appendChild(inputDoc1);
+        /*   colum1.appendChild( Colocar la variable donde tiene el elemento html donde ira el mensaje de error ); */
 
         const colum2 = document.createElement('div');
         colum2.className = 'colum';
         const encabezadoNombreDoc2 = document.createElement('div');
         encabezadoNombreDoc2.className = 'encabezado_nombre documento';
+        const span = document.createElement('span');
+        span.className = 'input_requerid';
+        span.textContent = '*';
         encabezadoNombreDoc2.textContent = 'N° de Documento';
         const inputDoc2 = document.createElement('input');
         inputDoc2.className = 'input_xd';
         inputDoc2.name = `huesped[${contador}][documento]`
-
+        const documentErrorDiv = document.createElement('div');
+        documentErrorDiv.id = 'document-error';
+        documentErrorDiv.className = 'error-message';
         colum2.appendChild(encabezadoNombreDoc2);
         colum2.appendChild(inputDoc2);
 
         documentoCliente1.appendChild(colum1);
         documentoCliente1.appendChild(colum2);
+        colum2.appendChild(documentErrorDiv)
 
         columRight.appendChild(documentoCliente1);
 
@@ -357,9 +369,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* Envío de datos del formualrio */
     btnEnviar.addEventListener('click', e => {
-
         e.preventDefault()
-        console.log(main)
+        const nameInput = document.querySelectorAll('.nombre-completo');
+   /*  const documentInput = document.getElementById('document'); */
+    const nameError = document.querySelectorAll('.name-error-nombre');
+   /*  const documentError = document.getElementById('document-error'); */
+
+       
         let formData = new FormData(main)
         const huespedes = [];
 
@@ -386,43 +402,23 @@ document.addEventListener('DOMContentLoaded', () => {
        
         /* ___________mensaje error_______________ */
 
-    const nameInput = document.querySelectorAll('mensaje_name');
-    const documentInput = document.getElementById('document');
-    const nameError = document.getElementById('name-error');
-    const documentError = document.getElementById('document-error');
-
-    btnEnviar.addEventListener('click', () => {
+    
+        console.log(nameInput)
+        nameInput.forEach(e =>{
+            if(e.value == ""){
+                e.nextElementSibling.textContent = "hola"
+                setTimeout(() => {
+                     e.nextElementSibling.textContent  = ""
+                }, 5000);
+            }else{
+                e.nextElementSibling.textContent  = ""
+            }
+        })
         let isValid = true;
-        // Validar el campo de nombre
-        if (nameInput.value.trim() === '') {
-            console.log("sapoooo")
-            nameError.textContent = 'El nombre es obligatorio.';
-            nameError.style.display = 'block';
-            isValid = false;
-            setTimeout(() => {
-                nameError.style.display = 'none';
-            }, 5000);
-        }
+       
 
-        // Validar el campo de número de documento
-        if (documentInput.value.trim() === '') {
-            documentError.textContent = 'El número de documento es obligatorio.';
-            documentError.style.display = 'block';
-            isValid = false;
-            setTimeout(() => {
-                documentError.style.display = 'none';
-            }, 5000);
-        }
-
-        // Si el formulario es válido, puedes enviar los datos a la base de datos aquí
-       /*  if (isValid) {
-            // Lógica para enviar los datos a la base de datos
-            console.log('Formulario válido. Enviando datos...');
-        } */
-    });
-
-        window.preload.infoHuespedesSend(infoGeneral)
-        window.location.href = "../vista_general_habitaciones/vistaGeneral.html"
+        /* window.preload.infoHuespedesSend(infoGeneral)
+        window.location.href = "../vista_general_habitaciones/vistaGeneral.html" */
     })
 
     /* ______________________________________________________________________________ */
