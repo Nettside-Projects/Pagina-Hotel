@@ -70,6 +70,21 @@
   z-index: 47;
 }
 
+.card .dropdown {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #35C928 url('') no-repeat right 10px center;
+  cursor: pointer;
+}
+
+.dropdown:hover {
+  border-color: #339999;
+}
+
 .btn-limpieza {
   width: 100%;
   background-color: #0b6560;
@@ -81,8 +96,9 @@
 }
 
 .custo-alojamento {
+  position: relative;
   background: #E8C1C1;
-  border-radius: 8px;
+  padding-bottom: 60px;
 }
 
 .custo-alojamento h2 {
@@ -94,6 +110,7 @@
 }
 
 table {
+  position: relative;
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
@@ -120,11 +137,14 @@ select {
 }
 
 .btn-pagamento {
+  position: absolute;
+  bottom: 0;
+  right: 0;
   background: #28a745;
   color: #fff;
-  padding: 10px 20px;
+  padding: 10px 60px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  width: 100%;
+  margin: 20px 40px;
 }
