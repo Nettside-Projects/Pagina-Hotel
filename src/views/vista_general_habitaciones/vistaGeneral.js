@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 // Obtener el modal
-var modal = document.getElementById('myModal');
+/* var modal = document.getElementById('myModal');
 
 // Obtener el botón que abre el modal
 var btn = document.getElementById('openModalButton');
@@ -91,3 +91,14 @@ window.onclick = function (event) {
         modal.style.display = 'none';
     }
 };
+ */
+    document.querySelectorAll(".nivel").forEach(e  => {
+        e.addEventListener("click",e => {
+            document.querySelectorAll(".nivel").forEach(e => {
+                e.classList.remove("pestaña_activa")
+            } )
+            e.target.classList.add("pestaña_activa")
+             document.querySelector(".rectangle").innerHTML = ""
+            
+        })
+    })

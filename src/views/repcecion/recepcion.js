@@ -44,6 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
         nombreCliente.className = 'nombre_cliente';
         const encabezadoNombre = document.createElement('div');
         encabezadoNombre.className = 'encabezado_nombre';
+        const spans = document.createElement('span');
+        spans.className = 'input_requerid';
+        spans.textContent ='*';
         encabezadoNombre.textContent = 'Nome';
         const inputNombre = document.createElement('input');
         inputNombre.className = 'input_xd completo nombre-completo';
@@ -56,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nombreCliente.appendChild(encabezadoNombre);
         nombreCliente.appendChild(inputNombre);
         nombreCliente.appendChild(nameErrorDiv)
-
+        encabezadoNombre.appendChild(spans)
         columRight.appendChild(informeEncabezadoCliente);
         columRight.appendChild(nombreCliente);
 
@@ -74,29 +77,31 @@ document.addEventListener('DOMContentLoaded', () => {
         inputDoc1.name = `huesped[${contador}][pasaporte]`
         colum1.appendChild(encabezadoNombreDoc1);
         colum1.appendChild(inputDoc1);
-        /*   colum1.appendChild( Colocar la variable donde tiene el elemento html donde ira el mensaje de error ); */
-
+        /*colum1.appendChild( Colocar la variable donde tiene el elemento html donde ira el mensaje de error);*/
         const colum2 = document.createElement('div');
         colum2.className = 'colum';
         const encabezadoNombreDoc2 = document.createElement('div');
         encabezadoNombreDoc2.className = 'encabezado_nombre documento';
         const span = document.createElement('span');
         span.className = 'input_requerid';
-        span.textContent = '*';
+        span.textContent ='*';
         encabezadoNombreDoc2.textContent = 'N° de Documento';
         const inputDoc2 = document.createElement('input');
-        inputDoc2.className = 'input_xd';
+        inputDoc2.className = 'input_xd document-error-documment';
         inputDoc2.name = `huesped[${contador}][documento]`
         const documentErrorDiv = document.createElement('div');
         documentErrorDiv.id = 'document-error';
-        documentErrorDiv.className = 'error-message';
+        documentErrorDiv.className = 'error-message-documment';
+        const nameErrorDiv_document = document.createElement('div');
+        nameErrorDiv_document.id = 'name-error-nombre';
+        nameErrorDiv_document.className = 'name-error-nombre';
         colum2.appendChild(encabezadoNombreDoc2);
         colum2.appendChild(inputDoc2);
 
         documentoCliente1.appendChild(colum1);
         documentoCliente1.appendChild(colum2);
         colum2.appendChild(documentErrorDiv)
-
+        encabezadoNombreDoc2.appendChild(span)
         columRight.appendChild(documentoCliente1);
 
         // Repeat for the other fields as necessary
@@ -371,9 +376,9 @@ document.addEventListener('DOMContentLoaded', () => {
     btnEnviar.addEventListener('click', e => {
         e.preventDefault()
         const nameInput = document.querySelectorAll('.nombre-completo');
-   /*  const documentInput = document.getElementById('document'); */
-    const nameError = document.querySelectorAll('.name-error-nombre');
-   /*  const documentError = document.getElementById('document-error'); */
+        const documentInput = document.querySelectorAll('.document-error-documment');
+        const nameError = document.querySelectorAll('.error-message-salida'); 
+        const fecha_salida = document.querySelector('#fecha_salida')
 
        
         let formData = new FormData(main)
@@ -403,10 +408,10 @@ document.addEventListener('DOMContentLoaded', () => {
         /* ___________mensaje error_______________ */
 
     
-        console.log(nameInput)
+        
         nameInput.forEach(e =>{
             if(e.value == ""){
-                e.nextElementSibling.textContent = "hola"
+                e.nextElementSibling.textContent = "Por favor llenar el campo"
                 setTimeout(() => {
                      e.nextElementSibling.textContent  = ""
                 }, 5000);
@@ -414,6 +419,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.nextElementSibling.textContent  = ""
             }
         })
+        documentInput.forEach(e =>{
+            if(e.value == ""){
+                e.nextElementSibling.textContent = "Por favor llenar el campo"
+                setTimeout(() => {
+                     e.nextElementSibling.textContent  = ""
+                }, 5000);
+            }else{
+                e.nextElementSibling.textContent  = ""
+            }
+        })
+        console.log(typeof fecha_salida.value)
+            if(fecha_salida.value == ""){
+                fecha_salida.nextElementSibling.textContent = "Por favor llenar el campo"
+                console.log("act" )
+                fecha_salida.parentElement.nextElementSibling.textContent = "Por favor llenar el campo"
+                setTimeout(() => {
+                    fecha_salida.parentElement.nextElementSibling.textContent  = ""
+                }, 5000);
+            }else{
+                fecha_salida.nextElementSibling.textContent  = ""
+            }
         let isValid = true;
        
 

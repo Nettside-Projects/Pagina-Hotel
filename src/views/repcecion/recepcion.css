@@ -324,7 +324,7 @@ text-decoration: none;
   cursor: pointer;
 }
 .datos_acompañantes{
-  height: 500px;
+  height: 540px;
   width: 100%;
   background: #0B6660;
 }
@@ -409,7 +409,7 @@ text-decoration: none;
   background: #ffff !important;
   border: 2px solid #000 !important;
 }
-.error-message-documment, .name-error-nombre {
+.error-message-documment, .name-error-nombre, .error-message-salida {
   color: red;
   font-weight: 600;
   font-size: 17px;
@@ -417,4 +417,18 @@ text-decoration: none;
 }
 .input_requerid{
   color: red;
+}
+#enviar{
+  background: #0B6660;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+}
+#enviar:hover{
+  background: #0d7a73;
+  transform: translateY(-3px);
 }
