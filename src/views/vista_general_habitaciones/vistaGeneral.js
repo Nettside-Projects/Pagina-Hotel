@@ -97,9 +97,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     agregarTarjetasHabitaciones(html);
                 });
             } else if(e.target.classList.contains("primer_nivel")){
-                console.log("1")
+                window.preload.filtrarPorNivelSend("Nivel 1")
+                window.preload.filtrarPorNivelOn((e,html) => {
+                    agregarTarjetasHabitaciones(html);
+                })
             }else if(e.target.classList.contains("segundo_nivel")){
-                console.log("2")
+                window.preload.filtrarPorNivelSend("Nivel 2")
+                window.preload.filtrarPorNivelOn((e,html) => {
+                    agregarTarjetasHabitaciones(html);
+                })
             }
             
             document.querySelector(".flex-row-b").innerHTML = ""

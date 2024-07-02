@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
-const { validarUsuario,mostrarHabitaciones,infoHabitacion,agregarHuespedes,buscarHabitacion } = require('./crud');
+const { validarUsuario,mostrarHabitaciones,infoHabitacion,agregarHuespedes,buscarHabitacion,filtrarPorNivelSend } = require('./crud');
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data.db'))
 );
@@ -98,5 +98,11 @@ agregarHuespedes(db,dato)
 ipcMain.on("buscar-habitacion",(e,respuesta)=>{
     buscarHabitacion(db,respuesta,(html)=>{
         windowMain.webContents.send('informacion-habitacion-buscada',html)
+    })
+})
+
+ipcMain.on("filtrar-habitacion-por-nivel",(e,nivel)=>{
+    filtrarPorNivelSend(db,nivel, (html) => {
+        windowMain.webContents.send('filtrar-habitacion-por-nivel-send',html)
     })
 })
