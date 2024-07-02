@@ -198,13 +198,27 @@ function buscarHabitacion(db, busqueda, callback) {
         });
     }
 }
-buscarHabitacion(db,"",(html) => console.log(html))
+function filtrarPorNivelSend(db, nivel,callback) {
+    db.all(`SELECT habitacion.id_habitacion,habitacion.numero, habitacion.descripcion,estado.estado,tipo.tipo_habitacion,nivel.nivel FROM habitacion INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel WHERE nivel.nivel LIKE ?`, [nivel], (err, row) => {
+        let html = generarTarjetasHabitacionesHTML(row)
+        if (err) {
+            console.error(err);
+            return;
+        }
+        callback(html);
+    })
+}
+
+/* filtroPorNivelSend(db,"Nivel 1", (html)=>{
+    console.log(html)
+}) */
 
 module.exports = {
     validarUsuario: validarUsuario,
     mostrarHabitaciones: mostrarHabitaciones,
     infoHabitacion: infoHabitacion,
     agregarHuespedes: agregarHuespedes,
-    buscarHabitacion: buscarHabitacion
+    buscarHabitacion: buscarHabitacion,
+    filtrarPorNivelSend: filtrarPorNivelSend
 
 };
