@@ -1,25 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const info = JSON.parse(localStorage.getItem('informacionDeHabitacion'));
+    const contenedorInfoHabitacion =
+        document.querySelectorAll('.info_habitacion');
 
-    const info = JSON.parse(localStorage.getItem("informacionDeHabitacion"))
-    const contenedorInfoHabitacion = document.querySelectorAll(".info_habitacion")
-
-    let btnEnviar = document.querySelector('#enviar')
-    let btnValorDiaria = document.querySelector("#valor_diaria")
-    let btnAddCliente = document.querySelector(".add_vista")
-    let main = document.querySelector("form")
-    let porcentaValue = 1
-    let valorDiaria = 0
+    let btnEnviar = document.querySelector('#enviar');
+    let btnValorDiaria = document.querySelector('#valor_diaria');
+    let btnAddCliente = document.querySelector('.add_vista');
+    let main = document.querySelector('form');
+    let porcentaValue = 1;
+    let valorDiaria = 0;
     /* Variable encargada de agregar el indice correspondiente a cada input para su posterior envío dentro de un JSON */
     let contador = 1;
 
     /* Mateus -> Agregando informacion de las habitaciones */
-    contenedorInfoHabitacion[0].textContent = info.numero
-    contenedorInfoHabitacion[1].textContent = info.descripcion
-    contenedorInfoHabitacion[3].textContent = info.tipo
-    contenedorInfoHabitacion[4].textContent = info.estado
-
-
-    
+    contenedorInfoHabitacion[0].textContent = info.numero;
+    contenedorInfoHabitacion[1].textContent = info.descripcion;
+    contenedorInfoHabitacion[3].textContent = info.tipo;
+    contenedorInfoHabitacion[4].textContent = info.estado;
 
     /* Función para crear los campos del formulario del acompañante */
     function createDatosAcompanantes(contador) {
@@ -46,26 +43,25 @@ document.addEventListener('DOMContentLoaded', () => {
         encabezadoNombre.className = 'encabezado_nombre';
         const spans = document.createElement('span');
         spans.className = 'input_requerid';
-        spans.textContent ='*';
+        spans.textContent = '*';
         encabezadoNombre.textContent = 'Nome';
         const inputNombre = document.createElement('input');
         inputNombre.className = 'input_xd completo nombre-completo';
         const nameErrorDiv = document.createElement('div');
         nameErrorDiv.id = 'name-error-nombre';
         nameErrorDiv.className = 'name-error-nombre';
-        inputNombre.name = `huesped[${contador}][nombre]`
-         /* --------- */
+        inputNombre.name = `huesped[${contador}][nombre]`;
+        /* --------- */
 
         nombreCliente.appendChild(encabezadoNombre);
         nombreCliente.appendChild(inputNombre);
-        nombreCliente.appendChild(nameErrorDiv)
-        encabezadoNombre.appendChild(spans)
+        nombreCliente.appendChild(nameErrorDiv);
+        encabezadoNombre.appendChild(spans);
         columRight.appendChild(informeEncabezadoCliente);
         columRight.appendChild(nombreCliente);
 
         const documentoCliente1 = document.createElement('div');
         documentoCliente1.className = 'documento_cliente';
-        
 
         const colum1 = document.createElement('div');
         colum1.className = 'colum';
@@ -74,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         encabezadoNombreDoc1.textContent = 'N° de Passaporte';
         const inputDoc1 = document.createElement('input');
         inputDoc1.className = 'input_xd';
-        inputDoc1.name = `huesped[${contador}][pasaporte]`
+        inputDoc1.name = `huesped[${contador}][pasaporte]`;
         colum1.appendChild(encabezadoNombreDoc1);
         colum1.appendChild(inputDoc1);
         /*colum1.appendChild( Colocar la variable donde tiene el elemento html donde ira el mensaje de error);*/
@@ -84,11 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
         encabezadoNombreDoc2.className = 'encabezado_nombre documento';
         const span = document.createElement('span');
         span.className = 'input_requerid';
-        span.textContent ='*';
+        span.textContent = '*';
         encabezadoNombreDoc2.textContent = 'N° de Documento';
         const inputDoc2 = document.createElement('input');
         inputDoc2.className = 'input_xd document-error-documment';
-        inputDoc2.name = `huesped[${contador}][documento]`
+        inputDoc2.name = `huesped[${contador}][documento]`;
         const documentErrorDiv = document.createElement('div');
         documentErrorDiv.id = 'document-error';
         documentErrorDiv.className = 'error-message-documment';
@@ -100,8 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         documentoCliente1.appendChild(colum1);
         documentoCliente1.appendChild(colum2);
-        colum2.appendChild(documentErrorDiv)
-        encabezadoNombreDoc2.appendChild(span)
+        colum2.appendChild(documentErrorDiv);
+        encabezadoNombreDoc2.appendChild(span);
         columRight.appendChild(documentoCliente1);
 
         // Repeat for the other fields as necessary
@@ -115,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         encabezadoNombreDoc3.textContent = 'Profissão';
         const inputDoc3 = document.createElement('input');
         inputDoc3.className = 'input_xd';
-        inputDoc3.name = `huesped[${contador}][profesion]`
+        inputDoc3.name = `huesped[${contador}][profesion]`;
 
         colum3.appendChild(encabezadoNombreDoc3);
         colum3.appendChild(inputDoc3);
@@ -127,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         encabezadoNombreDoc4.textContent = 'Procedência';
         const inputDoc4 = document.createElement('input');
         inputDoc4.className = 'input_xd';
-        inputDoc4.name = `huesped[${contador}][procedencia]`
+        inputDoc4.name = `huesped[${contador}][procedencia]`;
 
         colum4.appendChild(encabezadoNombreDoc4);
         colum4.appendChild(inputDoc4);
@@ -147,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         encabezadoNombreDoc5.textContent = 'Data de nascimento';
         const inputDoc5 = document.createElement('input');
         inputDoc5.className = 'input_xd';
-        inputDoc5.name = `huesped[${contador}][fecha_nacimiento]`
+        inputDoc5.name = `huesped[${contador}][fecha_nacimiento]`;
 
         colum5.appendChild(encabezadoNombreDoc5);
         colum5.appendChild(inputDoc5);
@@ -159,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         encabezadoNombreDoc6.textContent = 'Destino';
         const inputDoc6 = document.createElement('input');
         inputDoc6.className = 'input_xd';
-        inputDoc6.name = `huesped[${contador}][destino]`
+        inputDoc6.name = `huesped[${contador}][destino]`;
 
         colum6.appendChild(encabezadoNombreDoc6);
         colum6.appendChild(inputDoc6);
@@ -179,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         encabezadoNombreDoc7.textContent = 'Naturalidade';
         const inputDoc7 = document.createElement('input');
         inputDoc7.className = 'input_xd';
-        inputDoc7.name = `huesped[${contador}][naturalidad]`
+        inputDoc7.name = `huesped[${contador}][naturalidad]`;
 
         colum7.appendChild(encabezadoNombreDoc7);
         colum7.appendChild(inputDoc7);
@@ -191,7 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
          encabezadoNombreDoc8.textContent = 'Papel da pessoa';
          const inputDoc8 = document.createElement('input');
          inputDoc8.className = 'input_xd'; */
-
 
         /*  colum8.appendChild(encabezadoNombreDoc8); */
         /*   colum8.appendChild(inputDoc8); */
@@ -208,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
         encabezadoTelefono.textContent = 'Telefone';
         const inputTelefono = document.createElement('input');
         inputTelefono.className = 'input_xd completo';
-        inputTelefono.name = `huesped[${contador}][telefono]`
+        inputTelefono.name = `huesped[${contador}][telefono]`;
 
         telefonoCliente.appendChild(encabezadoTelefono);
         telefonoCliente.appendChild(inputTelefono);
@@ -220,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
         encabezadoEmail.textContent = 'E-mail';
         const inputEmail = document.createElement('input');
         inputEmail.className = 'input_xd completo';
-        inputEmail.name = `huesped[${contador}][email]`
+        inputEmail.name = `huesped[${contador}][email]`;
 
         emailCliente.appendChild(encabezadoEmail);
         emailCliente.appendChild(inputEmail);
@@ -244,11 +239,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         datosAcompanantes.appendChild(datosCliente);
 
-
         return datosAcompanantes;
     }
     /* Codigo de Mateus */
-   
+
     function agregarBtn() {
         const contenBarra = document.createElement('div');
         contenBarra.className = 'conten_barra';
@@ -274,29 +268,33 @@ document.addEventListener('DOMContentLoaded', () => {
         contenBoton.appendChild(deleteButton);
 
         /* Agregar eventos al boton de agregar */
-        addButton.addEventListener("click", e => {
-            e.preventDefault()
-            console.log("activado")
-            contenBoton.remove()
-            addButton.remove()
-            main.appendChild(contenBarra)
-            main.appendChild(createDatosAcompanantes(contador))
-            agregarBtn()
-        })
+        addButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('activado');
+            contenBoton.remove();
+            addButton.remove();
+            main.appendChild(contenBarra);
+            main.appendChild(createDatosAcompanantes(contador));
+            agregarBtn();
+        });
 
         /* Agregar eventos al boton de eliminar */
-        deleteButton.addEventListener("click", e => {
-            e.preventDefault()
-            document.querySelectorAll(".conten_barra")[document.querySelectorAll(".conten_barra").length - 1].remove()
-            main.children[main.children.length - 2].remove()
-            contador -= 1
+        deleteButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            document
+                .querySelectorAll('.conten_barra')
+                [
+                    document.querySelectorAll('.conten_barra').length - 1
+                ].remove();
+            main.children[main.children.length - 2].remove();
+            contador -= 1;
 
-            if (document.querySelector(".conten_barra") == null) {
-                document.querySelector(".eliminar_vista").remove()
+            if (document.querySelector('.conten_barra') == null) {
+                document.querySelector('.eliminar_vista').remove();
             }
-        })
-        main.appendChild(contenBoton)
-        contador += 1
+        });
+        main.appendChild(contenBoton);
+        contador += 1;
     }
 
     btnAddCliente.addEventListener('click', (e) => {
@@ -308,24 +306,27 @@ document.addEventListener('DOMContentLoaded', () => {
         agregarBtn();
     });
 
-   
-    btnValorDiaria.addEventListener("focusout", (e) => {
-        valorDiaria = e.target.value
-        calcularPrecioTotal(valorDiaria)
-    })
+    btnValorDiaria.addEventListener('focusout', (e) => {
+        valorDiaria = e.target.value;
+        calcularPrecioTotal(valorDiaria);
+    });
 
-    document.querySelector("#fecha_salida").addEventListener('focusout', e => {
-        calcularPrecioTotal(valorDiaria)
-    })
+    document
+        .querySelector('#fecha_salida')
+        .addEventListener('focusout', (e) => {
+            calcularPrecioTotal(valorDiaria);
+        });
 
     function calcularPrecioTotal(valorDiaria) {
         // Supongamos que estas son las fechas de entrada y salida en formato YYYY-MM-DD
-        const fechaOriginal = document.querySelector("#date").textContent;
-        const partesFecha = fechaOriginal.split("/");
-        const fechaFormateada = `${partesFecha[2]}-${partesFecha[1]}-${partesFecha[0]}`
-        var fechaSalida = document.querySelector("#fecha_salida").value.split('T')[0];
+        const fechaOriginal = document.querySelector('#date').textContent;
+        const partesFecha = fechaOriginal.split('/');
+        const fechaFormateada = `${partesFecha[2]}-${partesFecha[1]}-${partesFecha[0]}`;
+        var fechaSalida = document
+            .querySelector('#fecha_salida')
+            .value.split('T')[0];
 
-       /*  console.log("fecha entrada -> " + fechaFormateada + "|" + "fecha salida -> " + fechaSalida) */
+        /*  console.log("fecha entrada -> " + fechaFormateada + "|" + "fecha salida -> " + fechaSalida) */
 
         // Convertimos las fechas a objetos Date de JavaScript
         var entrada = new Date(fechaFormateada);
@@ -343,109 +344,115 @@ document.addEventListener('DOMContentLoaded', () => {
             // Supongamos que este es el valor diario de la habitación
             var valorDiario = valorDiaria;
 
-
             // Calculamos el costo total de la estadía
             var costoTotal = diferenciaDias * valorDiario;
-           if(porcentaValue % 1 === 0 && porcentaValue != 1){
-            costoTotal = costoTotal - porcentaValue
-            console.log("Es entero: "+ porcentaValue)
-           }else{
-            costoTotal = costoTotal * porcentaValue
-            console.log("No es entero: "+ porcentaValue)
-           }
-            
+            if (porcentaValue % 1 === 0 && porcentaValue != 1) {
+                costoTotal = costoTotal - porcentaValue;
+                console.log('Es entero: ' + porcentaValue);
+            } else {
+                costoTotal = costoTotal * porcentaValue;
+                console.log('No es entero: ' + porcentaValue);
+            }
 
-          /*   console.log('El huésped se hospedará por ' + diferenciaDias + ' días.');
+            /*   console.log('El huésped se hospedará por ' + diferenciaDias + ' días.');
             console.log('El costo total de la estadía es: ' + costoTotal);
             console.log(contenedorInfoHabitacion[2].textContent) */
             if (isNaN(costoTotal)) {
-                contenedorInfoHabitacion[2].textContent = '$R0'
+                contenedorInfoHabitacion[2].textContent = '$R0';
                 return 0;
             } else {
-                console.log(costoTotal)
-                contenedorInfoHabitacion[2].textContent = `$R${costoTotal}`
-                return costoTotal
+                console.log(costoTotal);
+                contenedorInfoHabitacion[2].textContent = `$R${costoTotal}`;
+                return costoTotal;
             }
         } else {
-            contenedorInfoHabitacion[2].textContent = `$R${valorDiaria - porcentaValue}`
-            return valorDiaria - porcentaValue
+            contenedorInfoHabitacion[2].textContent = `$R${
+                valorDiaria - porcentaValue
+            }`;
+            return valorDiaria - porcentaValue;
         }
     }
 
     /* Envío de datos del formualrio */
-    btnEnviar.addEventListener('click', e => {
-        e.preventDefault()
+    btnEnviar.addEventListener('click', (e) => {
+        e.preventDefault();
         const nameInput = document.querySelectorAll('.nombre-completo');
-        const documentInput = document.querySelectorAll('.document-error-documment');
-        const nameError = document.querySelectorAll('.error-message-salida'); 
-        const fecha_salida = document.querySelector('#fecha_salida')
+        const documentInput = document.querySelectorAll(
+            '.document-error-documment'
+        );
+        const nameError = document.querySelectorAll('.error-message-salida');
+        const fecha_salida = document.querySelector('#fecha_salida');
 
-       
-        let formData = new FormData(main)
+        let formData = new FormData(main);
         const huespedes = [];
 
         // Obtén los valores de los campos con FormData
         for (const [key, value] of formData.entries()) {
-            const [grupo, indice, campo] = key.match(/huesped\[(\d+)\]\[(\w+)\]/);
+            const [grupo, indice, campo] = key.match(
+                /huesped\[(\d+)\]\[(\w+)\]/
+            );
             if (!huespedes[indice]) {
                 huespedes[indice] = {};
             }
             huespedes[indice][campo] = value;
-            huespedes[indice]["estado_pago"] = false
-            huespedes[indice]["id_habitacion"] = info.id_habitacion
-            huespedes[indice]["fecha_entrada"] = `${document.querySelector(".date").textContent} ${document.querySelector(".clock").textContent}`
-            huespedes[indice]["fecha_salida"] = `${document.querySelector("#fecha_salida").value}`
+            huespedes[indice]['estado_pago'] = false;
+            huespedes[indice]['id_habitacion'] = info.id_habitacion;
+            huespedes[indice]['fecha_entrada'] = `${
+                document.querySelector('.date').textContent
+            } ${document.querySelector('.clock').textContent}`;
+            huespedes[indice]['fecha_salida'] = `${
+                document.querySelector('#fecha_salida').value
+            }`;
         }
 
-        let cuentaTotal = calcularPrecioTotal(valorDiaria)
+        let cuentaTotal = calcularPrecioTotal(valorDiaria);
         const infoGeneral = {
-            infoHuespedes : huespedes,
-            cuentaTotal: cuentaTotal
-        }
+            infoHuespedes: huespedes,
+            cuentaTotal: cuentaTotal,
+        };
 
         /* Proceder hacer la validación de los campos para ejecutar el envío de datos a través de las dos líneas de codigo que siguen de esta */
-       
+
         /* ___________mensaje error_______________ */
 
-    
-        
-        nameInput.forEach(e =>{
-            if(e.value == ""){
-                e.nextElementSibling.textContent = "Por favor llenar el campo"
+        nameInput.forEach((e) => {
+            if (e.value == '') {
+                e.nextElementSibling.textContent = 'Por favor llenar el campo';
                 setTimeout(() => {
-                     e.nextElementSibling.textContent  = ""
+                    e.nextElementSibling.textContent = '';
                 }, 5000);
-            }else{
-                e.nextElementSibling.textContent  = ""
+            } else {
+                e.nextElementSibling.textContent = '';
             }
-        })
-        documentInput.forEach(e =>{
-            if(e.value == ""){
-                e.nextElementSibling.textContent = "Por favor llenar el campo"
+        });
+        documentInput.forEach((e) => {
+            if (e.value == '') {
+                e.nextElementSibling.textContent = 'Por favor llenar el campo';
                 setTimeout(() => {
-                     e.nextElementSibling.textContent  = ""
+                    e.nextElementSibling.textContent = '';
                 }, 5000);
-            }else{
-                e.nextElementSibling.textContent  = ""
+            } else {
+                e.nextElementSibling.textContent = '';
             }
-        })
-        console.log(typeof fecha_salida.value)
-            if(fecha_salida.value == ""){
-                fecha_salida.nextElementSibling.textContent = "Por favor llenar el campo"
-                console.log("act" )
-                fecha_salida.parentElement.nextElementSibling.textContent = "Por favor llenar el campo"
-                setTimeout(() => {
-                    fecha_salida.parentElement.nextElementSibling.textContent  = ""
-                }, 5000);
-            }else{
-                fecha_salida.nextElementSibling.textContent  = ""
-            }
+        });
+        console.log(typeof fecha_salida.value);
+        if (fecha_salida.value == '') {
+            fecha_salida.nextElementSibling.textContent =
+                'Por favor llenar el campo';
+            console.log('act');
+            fecha_salida.parentElement.nextElementSibling.textContent =
+                'Por favor llenar el campo';
+            setTimeout(() => {
+                fecha_salida.parentElement.nextElementSibling.textContent = '';
+            }, 5000);
+        } else {
+            fecha_salida.nextElementSibling.textContent = '';
+        }
         let isValid = true;
-       
 
         /* window.preload.infoHuespedesSend(infoGeneral)
         window.location.href = "../vista_general_habitaciones/vistaGeneral.html" */
-    })
+    });
 
     /* ______________________________________________________________________________ */
 
@@ -470,81 +477,78 @@ document.addEventListener('DOMContentLoaded', () => {
         const dateString = `${day}/${month}/${year}`;
         document.getElementById('date').textContent = dateString;
     }
-
     // Call the function once when the page loads
     window.onload = setInitialClock;
 
     // Obtener el modal
-    var modal = document.getElementById("myModal");
-
-    // Obtener el botón que abre el modal
-    var btn = document.getElementById("openModalButton");
-
-    // Obtener el <span> que cierra el modal
-    var span = document.getElementsByClassName("close")[0];
+    var modal = document.getElementById('myModal');
+    var btn = document.querySelector('.enviar');
+    var span = document.getElementsByClassName('close')[0];
 
     // Cuando el usuario haga clic en el botón, se abre el modal
     btn.onclick = function () {
-        modal.style.display = "flex";
-    }
+        modal.style.display = 'flex';
+    };
 
     // Cuando el usuario haga clic en <span> (x), se cierra el modal
     span.onclick = function () {
-        modal.style.display = "none";
-    }
+        modal.style.display = 'none';
+    };
 
     // Cuando el usuario haga clic en cualquier lugar fuera del modal, se cierra
     window.onclick = function (event) {
         if (event.target == modal) {
-            modal.style.display = "none";
+            modal.style.display = 'none';
         }
-    }
+    };
 
     /* Codigo para cambiar de input radio y deshabilitar el otro */
-    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    document.querySelectorAll('input[type="radio"]').forEach((radio) => {
         radio.addEventListener('click', () => {
-            document.querySelectorAll('input[type="radio"]').forEach(r => {
+            document.querySelectorAll('input[type="radio"]').forEach((r) => {
                 r.checked = false;
             });
             radio.checked = true;
         });
     });
 
-    document.querySelector("#radio1").addEventListener("click",e => {
-        console.log("Usando los porcentajes")
-        porcentaValue = document.querySelector("#porcentajeSelect").value
-        calcularPrecioTotal(valorDiaria)
-    })
-
-    document.querySelector("#radio2").addEventListener("click",e => {
-        console.log("Usando los inputs enteros")
-        porcentaValue =  document.querySelectorAll(".barra_input")[1].value
-        calcularPrecioTotal(valorDiaria)
-    })
-
-    document.querySelector("#radio2").addEventListener("click",e=>{
-        document.querySelector("#content1").style.display = "none"
-        document.querySelector("#content2").style.display  = "flex"
-        document.querySelectorAll(".barra_input")[1].addEventListener('keyup',e => {
-            porcentaValue = e.target.value
-            calcularPrecioTotal(valorDiaria)
-        })
-    })
-
-    /* Codigo para seleccionar el valor del input tipo select */
-    document.querySelector("#porcentajeSelect").addEventListener('change', (e) => {
-        porcentaValue = e.target.value;
-        document.querySelector("#porcentajeSpan").textContent = `${e.target.value * 100}%`
-        calcularPrecioTotal(valorDiaria)
-        console.log(`Valor seleccionado: ${porcentaValue}`);
+    document.querySelector('#radio1').addEventListener('click', (e) => {
+        console.log('Usando los porcentajes');
+        porcentaValue = document.querySelector('#porcentajeSelect').value;
+        calcularPrecioTotal(valorDiaria);
     });
 
-    document.querySelector("#radio1").addEventListener("click",e=>{
-        document.querySelector("#content2").style.display = "none"
-        document.querySelector("#content1").style.display  = "flex"
-    })
-   
+    document.querySelector('#radio2').addEventListener('click', (e) => {
+        console.log('Usando los inputs enteros');
+        porcentaValue = document.querySelectorAll('.barra_input')[1].value;
+        calcularPrecioTotal(valorDiaria);
+    });
+
+    document.querySelector('#radio2').addEventListener('click', (e) => {
+        document.querySelector('#content1').style.display = 'none';
+        document.querySelector('#content2').style.display = 'flex';
+        document
+            .querySelectorAll('.barra_input')[1]
+            .addEventListener('keyup', (e) => {
+                porcentaValue = e.target.value;
+                calcularPrecioTotal(valorDiaria);
+            });
+    });
+
+    /* Codigo para seleccionar el valor del input tipo select */
+    document
+        .querySelector('#porcentajeSelect')
+        .addEventListener('change', (e) => {
+            porcentaValue = e.target.value;
+            document.querySelector('#porcentajeSpan').textContent = `${
+                e.target.value * 100
+            }%`;
+            calcularPrecioTotal(valorDiaria);
+            console.log(`Valor seleccionado: ${porcentaValue}`);
+        });
+
+    document.querySelector('#radio1').addEventListener('click', (e) => {
+        document.querySelector('#content2').style.display = 'none';
+        document.querySelector('#content1').style.display = 'flex';
+    });
 });
-
-
- 

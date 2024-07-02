@@ -16,27 +16,6 @@
     font-size: 25px;
     font-weight: 900;
   }
-  /*
-  .buscar_lupa{
-    display: flex;
-    background: #d9d9d9;
-    color: hsla(0, 0%, 0%, 0.664);
-    margin: 0 20px 0 0;
-    height: 75%;
-    justify-content: center;
-    align-items: center;
-    width: 190px;
-    text-align: center;
-    border: none;
-    border-radius: 10px;
-  }
-  .buscar_lupa:focus {
-    border-bottom: 2px solid #5b5fc7;
-  }
-  
-  .buscar_lupa:hover {
-    outline: 1px solid lightgrey;
-  } */
   .volver{
     display: flex;
     justify-content: center;
@@ -172,18 +151,15 @@
   width: 390px !important;
 }
 /* -------  VENTANA MODAL-------- */
-/* Estilos para el botón */
 #openModalButton {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
 }
-
-/* Estilos para el modal */
 .modal {
-  display: none; /* Oculto por defecto */
-  position: fixed; /* Fijo en la pantalla */
-  z-index: 29; /* Por encima de todo */
+  display: none;
+  position: fixed;
+  z-index: 1000;
   left: 0;
   top: 0;
   align-items: center;
@@ -193,8 +169,6 @@
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Color de fondo con opacidad */
 }
-
-/* Estilos para el contenido del modal */
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto; /* 15% desde arriba y centrado */
