@@ -85,6 +85,32 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    document.querySelectorAll(".nivel").forEach(e  => {
+        e.addEventListener("click",e => {
+            document.querySelectorAll(".nivel").forEach(e => {
+                e.classList.remove("pestaña_activa")
+            } )
+            e.target.classList.add("pestaña_activa")
+            if(e.target.classList.contains("todoxd")){
+                window.preload.ActivacioninfoHabitacionGeneralSend('txt-activation');
+                window.preload.InfoHabitacionesGeneralOn((e, html) => {
+                    agregarTarjetasHabitaciones(html);
+                });
+            } else if(e.target.classList.contains("primer_nivel")){
+                window.preload.filtrarPorNivelSend("Nivel 1")
+                window.preload.filtrarPorNivelOn((e,html) => {
+                    agregarTarjetasHabitaciones(html);
+                })
+            }else if(e.target.classList.contains("segundo_nivel")){
+                window.preload.filtrarPorNivelSend("Nivel 2")
+                window.preload.filtrarPorNivelOn((e,html) => {
+                    agregarTarjetasHabitaciones(html);
+                })
+            }
+            
+            document.querySelector(".flex-row-b").innerHTML = ""
+        })
+    })
 });
 
 // Obtener el modal
@@ -113,13 +139,4 @@ window.onclick = function (event) {
     }
 };
  */
-    document.querySelectorAll(".nivel").forEach(e  => {
-        e.addEventListener("click",e => {
-            document.querySelectorAll(".nivel").forEach(e => {
-                e.classList.remove("pestaña_activa")
-            } )
-            e.target.classList.add("pestaña_activa")
-             document.querySelector(".rectangle").innerHTML = ""
-            
-        })
-    })
+   

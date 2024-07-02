@@ -42,6 +42,35 @@ const data = {
     cuentaTotal: 420
 }
 
+function generarTarjetasHabitacionesHTML(info) {
+    let html = ""
+    info.forEach((element) => {
+        html += `<div id_habitacion="${element.id_habitacion}" class="rectangle-1 ${element.estado !== 'Fuera de servicio'
+            ? element.estado.toLowerCase()
+            : 'fuera_servicio'
+            }">
+  <button class="button ${element.estado !== 'Fuera de servicio'
+                ? element.estado.toLowerCase()
+                : 'fuera_servicio'
+            }_encabezado">
+    <span class="text-2">${element.estado.toLowerCase()}</span>
+  </button>
+  <div class="flex-row-dbc">
+    <span class="text-3">${element.numero}</span>
+    <div class="icon_${element.estado !== 'Fuera de servicio'
+                ? element.estado.toLowerCase()
+                : 'fuera_servicio'
+            }">
+    </div>
+    <span class="simple">${element.tipo_habitacion}</span>
+  </div>
+  <svg class='arrow' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M360-200v-80h264L160-744l56-56 464 464v-264h80v400H360Z"/>
+    </svg>
+</div>`;
+    });
+    return html
+}
+
 
 function validarUsuario(db, usuario, callback) {
     const output = {};
@@ -70,34 +99,10 @@ function validarUsuario(db, usuario, callback) {
 }
 
 function mostrarHabitaciones(db, callback) {
-    let html = '';
     db.all(
         'SELECT habitacion.id_habitacion,habitacion.numero,estado.estado,tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado',
         (err, rows) => {
-            rows.forEach((element) => {
-                html += `<div id_habitacion="${element.id_habitacion}" class="rectangle-1 ${element.estado !== 'Fuera de servicio'
-                    ? element.estado.toLowerCase()
-                    : 'fuera_servicio'
-                    }">
-          <button class="button ${element.estado !== 'Fuera de servicio'
-                        ? element.estado.toLowerCase()
-                        : 'fuera_servicio'
-                    }_encabezado">
-            <span class="text-2">${element.estado.toLowerCase()}</span>
-          </button>
-          <div class="flex-row-dbc">
-            <span class="text-3">${element.numero}</span>
-            <div class="icon_${element.estado !== 'Fuera de servicio'
-                        ? element.estado.toLowerCase()
-                        : 'fuera_servicio'
-                    }">
-            </div>
-            <span class="simple">${element.tipo_habitacion}</span>
-          </div>
-          <svg class='arrow' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M360-200v-80h264L160-744l56-56 464 464v-264h80v400H360Z"/>
-            </svg>
-        </div>`;
-            });
+            let html = generarTarjetasHabitacionesHTML(rows)
             callback(err, html);
         }
     );
@@ -171,8 +176,6 @@ function cambiarEstadoHabitacion(db, estado, id_habitacion) {
 
 function buscarHabitacion(db, busqueda, callback) {
     let query = '';
-    let html = '';
-
     if (busqueda) {
         query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado WHERE habitacion.numero LIKE ?';
         db.all(query, [`%${busqueda}%`], (err, rows) => {
@@ -180,30 +183,7 @@ function buscarHabitacion(db, busqueda, callback) {
                 console.error(err);
                 return;
             }
-            rows.forEach((element) => {
-             html +=  `<div id_habitacion="${element.id_habitacion}" class="rectangle-1 ${element.estado !== 'Fuera de servicio'
-                    ? element.estado.toLowerCase()
-                    : 'fuera_servicio'
-                    }">
-          <button class="button ${element.estado !== 'Fuera de servicio'
-                        ? element.estado.toLowerCase()
-                        : 'fuera_servicio'
-                    }_encabezado">
-            <span class="text-2">${element.estado.toLowerCase()}</span>
-          </button>
-          <div class="flex-row-dbc">
-            <span class="text-3">${element.numero}</span>
-            <div class="icon_${element.estado !== 'Fuera de servicio'
-                        ? element.estado.toLowerCase()
-                        : 'fuera_servicio'
-                    }">
-            </div>
-            <span class="simple">${element.tipo_habitacion}</span>
-          </div>
-          <svg class='arrow' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M360-200v-80h264L160-744l56-56 464 464v-264h80v400H360Z"/>
-            </svg>
-        </div>`
-            });
+            let html = generarTarjetasHabitacionesHTML(rows)
             callback(html);
         });
     } else {
@@ -213,41 +193,32 @@ function buscarHabitacion(db, busqueda, callback) {
                 console.error(err);
                 return;
             }
-            rows.forEach((element) => {
-             html +=  `<div id_habitacion="${element.id_habitacion}" class="rectangle-1 ${element.estado !== 'Fuera de servicio'
-                    ? element.estado.toLowerCase()
-                    : 'fuera_servicio'
-                    }">
-          <button class="button ${element.estado !== 'Fuera de servicio'
-                        ? element.estado.toLowerCase()
-                        : 'fuera_servicio'
-                    }_encabezado">
-            <span class="text-2">${element.estado.toLowerCase()}</span>
-          </button>
-          <div class="flex-row-dbc">
-            <span class="text-3">${element.numero}</span>
-            <div class="icon_${element.estado !== 'Fuera de servicio'
-                        ? element.estado.toLowerCase()
-                        : 'fuera_servicio'
-                    }">
-            </div>
-            <span class="simple">${element.tipo_habitacion}</span>
-          </div>
-          <svg class='arrow' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M360-200v-80h264L160-744l56-56 464 464v-264h80v400H360Z"/>
-            </svg>
-        </div>`
-            });
+            let html = generarTarjetasHabitacionesHTML(rows)
             callback(html);
         });
     }
 }
-buscarHabitacion(db,"",(html) => console.log(html))
+function filtrarPorNivelSend(db, nivel,callback) {
+    db.all(`SELECT habitacion.id_habitacion,habitacion.numero, habitacion.descripcion,estado.estado,tipo.tipo_habitacion,nivel.nivel FROM habitacion INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel WHERE nivel.nivel LIKE ?`, [nivel], (err, row) => {
+        let html = generarTarjetasHabitacionesHTML(row)
+        if (err) {
+            console.error(err);
+            return;
+        }
+        callback(html);
+    })
+}
+
+/* filtroPorNivelSend(db,"Nivel 1", (html)=>{
+    console.log(html)
+}) */
 
 module.exports = {
     validarUsuario: validarUsuario,
     mostrarHabitaciones: mostrarHabitaciones,
     infoHabitacion: infoHabitacion,
     agregarHuespedes: agregarHuespedes,
-    buscarHabitacion: buscarHabitacion
+    buscarHabitacion: buscarHabitacion,
+    filtrarPorNivelSend: filtrarPorNivelSend
 
 };
