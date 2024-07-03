@@ -208,6 +208,10 @@ function filtrarPorNivelSend(db, nivel,callback) {
         callback(html);
     })
 }
+/* Seguir con el codigo... */
+function mostrarHabitacionesOcupadas(db,callback) {
+    
+}
 
 /* filtroPorNivelSend(db,"Nivel 1", (html)=>{
     console.log(html)

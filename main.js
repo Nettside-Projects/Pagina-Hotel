@@ -106,3 +106,7 @@ ipcMain.on("filtrar-habitacion-por-nivel",(e,nivel)=>{
         windowMain.webContents.send('filtrar-habitacion-por-nivel-send',html)
     })
 })
+
+ipcMain.on("txt-activation-ocupado",(e,mensaje)=>{
+    console.log(mensaje)
+})

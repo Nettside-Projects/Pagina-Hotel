@@ -13,5 +13,6 @@ contextBridge.exposeInMainWorld('preload', {
     buscarHabitacion: (busqueda) => ipcRenderer.send('buscar-habitacion',busqueda),
     buscadHabitacionOn: (callback) => ipcRenderer.on('informacion-habitacion-buscada',(e,respuesta)=> callback(e,respuesta)),
     filtrarPorNivelSend: (nivel) => ipcRenderer.send('filtrar-habitacion-por-nivel',nivel),
-    filtrarPorNivelOn: (callback) => ipcRenderer.on('filtrar-habitacion-por-nivel-send',(e,respuesta)=> callback(e,respuesta))
+    filtrarPorNivelOn: (callback) => ipcRenderer.on('filtrar-habitacion-por-nivel-send',(e,respuesta)=> callback(e,respuesta)),
+    ActivacionInfoHabitacionOcupadasSend: (mensaje) => ipcRenderer.send('txt-activation-ocupado',mensaje)
 });

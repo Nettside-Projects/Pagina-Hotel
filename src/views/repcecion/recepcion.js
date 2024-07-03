@@ -1,18 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const info = JSON.parse(localStorage.getItem('informacionDeHabitacion'));
-    const contenedorInfoHabitacion =
-        document.querySelectorAll('.info_habitacion');
+   
+    const info = JSON.parse(localStorage.getItem("informacionDeHabitacion"))
+    const contenedorInfoHabitacion = document.querySelectorAll(".info_habitacion")
 
-    let btnEnviar = document.querySelector('#enviar');
-    let btnValorDiaria = document.querySelector('#valor_diaria');
-    let btnAddCliente = document.querySelector('.add_vista');
-    let main = document.querySelector('form');
-    let porcentaValue = 1;
-    let valorDiaria = 0;
+    let btnEnviar = document.querySelector('#enviar')
+    let btnValorDiaria = document.querySelector("#valor_diaria")
+    let btnAddCliente = document.querySelector(".add_vista")
+    let main = document.querySelector("form")
+    let porcentaValue = 1
+    let valorDiaria = 0
     /* Variable encargada de agregar el indice correspondiente a cada input para su posterior envío dentro de un JSON */
     let contador = 1;
 
     /* Mateus -> Agregando informacion de las habitaciones */
+    contenedorInfoHabitacion[0].textContent = info.numero
+    contenedorInfoHabitacion[1].textContent = info.descripcion
+    contenedorInfoHabitacion[3].textContent = info.tipo
+    contenedorInfoHabitacion[4].textContent = info.estado
+
     contenedorInfoHabitacion[0].textContent = info.numero;
     contenedorInfoHabitacion[1].textContent = info.descripcion;
     contenedorInfoHabitacion[3].textContent = info.tipo;
