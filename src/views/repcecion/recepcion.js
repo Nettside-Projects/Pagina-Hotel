@@ -405,10 +405,10 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         /* ___________mensaje error_______________ */
-
         function validateInputs(inputs) {
             let allFilled = true;
             inputs.forEach((e) => {
+                console.log();
                 if (e.value === '') {
                     e.nextElementSibling.textContent =
                         'Por favor llenar el campo';
@@ -424,8 +424,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         validateInputs(nameInput);
         validateInputs(documentInput);
-        if (allFilled == true) {
-        }
 
         console.log(typeof fecha_salida.value);
         if (fecha_salida.value == '') {
@@ -438,14 +436,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 fecha_salida.parentElement.nextElementSibling.textContent = '';
             }, 5000);
         } else {
-            fecha_salida.nextElementSibling.textContent = '';
+            fecha_salida.parentElement.nextElementSibling.textContent = '';
         }
-
-        console.log(valor_diaria.parentElement.nextElementSibling);
         if (valor_diaria.value == '') {
             valor_diaria.parentElement.nextElementSibling.textContent =
                 'Por favor llenar el campo';
-            console.log('act');
             valor_diaria.parentElement.nextElementSibling.textContent =
                 'Por favor llenar el campo';
             setTimeout(() => {
@@ -460,6 +455,26 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Enviando datos...');
         /* window.preload.infoHuespedesSend(infoGeneral)
         window.location.href = "../vista_general_habitaciones/vistaGeneral.html" */
+        // Obtener el modal
+        var modal = document.getElementById('myModal');
+        var span = document.getElementsByClassName('close')[0];
+
+        // Cuando el usuario haga clic en el botón, se abre el modal
+        btnEnviar.addEventListener('click', () => {
+            modal.style.display = 'flex';
+        });
+
+        // Cuando el usuario haga clic en <span> (x), se cierra el modal
+        span.onclick = function () {
+            modal.style.display = 'none';
+        };
+
+        // Cuando el usuario haga clic en cualquier lugar fuera del modal, se cierra
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
     });
 
     /* ________________________________________________________________ */
@@ -486,27 +501,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // Call the function once when the page loads
     window.onload = setInitialClock;
-
-    // Obtener el modal
-    var modal = document.getElementById('myModal');
-    var span = document.getElementsByClassName('close')[0];
-
-    // Cuando el usuario haga clic en el botón, se abre el modal
-    btnEnviar.addEventListener('click', () => {
-        modal.style.display = 'flex';
-    });
-
-    // Cuando el usuario haga clic en <span> (x), se cierra el modal
-    span.onclick = function () {
-        modal.style.display = 'none';
-    };
-
-    // Cuando el usuario haga clic en cualquier lugar fuera del modal, se cierra
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    };
 
     /* Codigo para cambiar de input radio y deshabilitar el otro */
     document.querySelectorAll('input[type="radio"]').forEach((radio) => {
