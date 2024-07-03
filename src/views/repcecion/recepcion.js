@@ -185,19 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
         colum7.appendChild(encabezadoNombreDoc7);
         colum7.appendChild(inputDoc7);
 
-        /*  const colum8 = document.createElement('div');
-         colum8.className = 'colum';
-         const encabezadoNombreDoc8 = document.createElement('div');
-         encabezadoNombreDoc8.className = 'encabezado_nombre documento';
-         encabezadoNombreDoc8.textContent = 'Papel da pessoa';
-         const inputDoc8 = document.createElement('input');
-         inputDoc8.className = 'input_xd'; */
-
-        /*  colum8.appendChild(encabezadoNombreDoc8); */
-        /*   colum8.appendChild(inputDoc8); */
-
         documentoCliente4.appendChild(colum7);
-        /* documentoCliente4.appendChild(colum8); */
+       
 
         columRight.appendChild(documentoCliente4);
 
@@ -387,6 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
         const nameError = document.querySelectorAll('.error-message-salida');
         const fecha_salida = document.querySelector('#fecha_salida');
+        const valor_diaria= document.querySelector("#valor_diaria")
 
         let formData = new FormData(main);
         const huespedes = [];
@@ -440,7 +430,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.nextElementSibling.textContent = '';
             }
         });
-        console.log(typeof fecha_salida.value);
+        valor_diaria
+
+
+        console.log(valor_diaria);
+        if (fecha_salida.value == '') {
+            fecha_salida.nextElementSibling.textContent =
+                'Por favor llenar el campo';
+            console.log('act');
+            fecha_salida.parentElement.nextElementSibling.textContent =
+                'Por favor llenar el campo';
+            setTimeout(() => {
+                fecha_salida.parentElement.nextElementSibling.textContent = '';
+            }, 5000);
+        } else {
+            fecha_salida.nextElementSibling.textContent = '';
+        }
         if (fecha_salida.value == '') {
             fecha_salida.nextElementSibling.textContent =
                 'Por favor llenar el campo';
