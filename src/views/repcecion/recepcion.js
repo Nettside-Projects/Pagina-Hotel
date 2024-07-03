@@ -458,8 +458,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             fecha_salida.nextElementSibling.textContent = '';
         }
-        let isValid = true;
 
+        /* En esta línea de codigo representa el envío de datos
+            Solo se debe ejecutar cuando los campos obligatorios este llenos y que el usuario haya dado en "aceptar" en el modal
+        */
+        console.log("Enviando datos...")
         /* window.preload.infoHuespedesSend(infoGeneral)
         window.location.href = "../vista_general_habitaciones/vistaGeneral.html" */
     });
@@ -492,13 +495,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Obtener el modal
     var modal = document.getElementById('myModal');
-    var btn = document.querySelector('.enviar');
     var span = document.getElementsByClassName('close')[0];
 
     // Cuando el usuario haga clic en el botón, se abre el modal
-    btn.onclick = function () {
+    btnEnviar.addEventListener("click",()=>{
         modal.style.display = 'flex';
-    };
+    })
 
     // Cuando el usuario haga clic en <span> (x), se cierra el modal
     span.onclick = function () {
