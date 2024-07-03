@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
-const { validarUsuario,mostrarHabitaciones,infoHabitacion,agregarHuespedes,buscarHabitacion,filtrarPorNivelSend } = require('./crud');
+const { validarUsuario,mostrarHabitaciones,infoHabitacion,agregarHuespedes,buscarHabitacion,filtrarPorNivelSend, mostrarHabitacionesPorEstado,buscarHabitacionPorEstado } = require('./crud');
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data.db'))
 );
@@ -101,12 +101,20 @@ ipcMain.on("buscar-habitacion",(e,respuesta)=>{
     })
 })
 
-ipcMain.on("filtrar-habitacion-por-nivel",(e,nivel)=>{
-    filtrarPorNivelSend(db,nivel, (html) => {
+ipcMain.on("filtrar-habitacion-por-nivel",(e,info)=>{
+    filtrarPorNivelSend(db,info, (html) => {
         windowMain.webContents.send('filtrar-habitacion-por-nivel-send',html)
     })
 })
 
 ipcMain.on("txt-activation-ocupado",(e,mensaje)=>{
-    console.log(mensaje)
+    mostrarHabitacionesPorEstado(db,"ocupado",(html) => {
+        windowMain.webContents.send('txt-activation-ocupado-send',html)
+    })
+})
+
+ipcMain.on("buscar-habitacion-ocupadas",(e,info) => {
+    buscarHabitacionPorEstado(db,info,(html)=>{
+        windowMain.webContents.send('buscar-habitacion-ocupadas-send',html)
+    })
 })

@@ -198,24 +198,75 @@ function buscarHabitacion(db, busqueda, callback) {
         });
     }
 }
-function filtrarPorNivelSend(db, nivel,callback) {
-    db.all(`SELECT habitacion.id_habitacion,habitacion.numero, habitacion.descripcion,estado.estado,tipo.tipo_habitacion,nivel.nivel FROM habitacion INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel WHERE nivel.nivel LIKE ?`, [nivel], (err, row) => {
-        let html = generarTarjetasHabitacionesHTML(row)
+function filtrarPorNivelSend(db, info, callback) {
+    if(info.estado != ""){
+        db.all(`SELECT habitacion.id_habitacion,habitacion.numero, habitacion.descripcion,estado.estado,tipo.tipo_habitacion,nivel.nivel FROM habitacion INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel WHERE nivel.nivel LIKE ? AND estado.estado LIKE ?`, [info.nivel,info.estado], (err, row) => {
+            let html = generarTarjetasHabitacionesHTML(row)
+            if (err) {
+                console.error(err);
+                return;
+            }
+            callback(html);
+        })
+    }else{
+        db.all(`SELECT habitacion.id_habitacion,habitacion.numero, habitacion.descripcion,estado.estado,tipo.tipo_habitacion,nivel.nivel FROM habitacion INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel WHERE nivel.nivel LIKE ?`, [info.nivel], (err, row) => {
+            let html = generarTarjetasHabitacionesHTML(row)
+            if (err) {
+                console.error(err);
+                return;
+            }
+            callback(html);
+        })
+    }
+   
+}
+
+/* Seguir con el codigo... */
+
+function mostrarHabitacionesPorEstado(db, estado, callback) {
+    db.all(`SELECT habitacion.id_habitacion,habitacion.numero, habitacion.descripcion,estado.estado,tipo.tipo_habitacion,nivel.nivel FROM habitacion INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel WHERE estado.estado LIKE ?`, [estado], (err, row) => {
         if (err) {
             console.error(err);
             return;
         }
-        callback(html);
+        let html = generarTarjetasHabitacionesHTML(row)
+        callback(html)
+
     })
 }
-/* Seguir con el codigo... */
-function mostrarHabitacionesOcupadas(db,callback) {
-    
+
+function buscarHabitacionPorEstado(db, info, callback) {
+    let query = '';
+    if (info.valor) {
+        query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado WHERE habitacion.numero LIKE ? AND estado.estado LIKE ?';
+        db.all(query, [`%${info.valor}%`,info.estado], (err, rows) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            let html = generarTarjetasHabitacionesHTML(rows)
+            callback(html);
+        });
+    } else {
+        query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado WHERE estado.estado LIKE ?'; // Sin filtro si la búsqueda está vacía
+        db.all(query,[info.estado], (err, rows) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            let html = generarTarjetasHabitacionesHTML(rows)
+            callback(html);
+        });
+    }
 }
 
-/* filtroPorNivelSend(db,"Nivel 1", (html)=>{
+const info = {
+    valor: "1",
+    estado: "ocupado"
+}
+buscarHabitacionPorEstado(db,info,(html) => {
     console.log(html)
-}) */
+})
 
 module.exports = {
     validarUsuario: validarUsuario,
@@ -223,6 +274,8 @@ module.exports = {
     infoHabitacion: infoHabitacion,
     agregarHuespedes: agregarHuespedes,
     buscarHabitacion: buscarHabitacion,
-    filtrarPorNivelSend: filtrarPorNivelSend
+    filtrarPorNivelSend: filtrarPorNivelSend,
+    mostrarHabitacionesPorEstado:  mostrarHabitacionesPorEstado,
+    buscarHabitacionPorEstado: buscarHabitacionPorEstado
 
 };
