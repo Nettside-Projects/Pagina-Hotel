@@ -1,22 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
-   
-    const info = JSON.parse(localStorage.getItem("informacionDeHabitacion"))
-    const contenedorInfoHabitacion = document.querySelectorAll(".info_habitacion")
+    const info = JSON.parse(localStorage.getItem('informacionDeHabitacion'));
+    const contenedorInfoHabitacion =
+        document.querySelectorAll('.info_habitacion');
 
-    let btnEnviar = document.querySelector('#enviar')
-    let btnValorDiaria = document.querySelector("#valor_diaria")
-    let btnAddCliente = document.querySelector(".add_vista")
-    let main = document.querySelector("form")
-    let porcentaValue = 1
-    let valorDiaria = 0
+    let btnEnviar = document.querySelector('#enviar');
+    let btnValorDiaria = document.querySelector('#valor_diaria');
+    let btnAddCliente = document.querySelector('.add_vista');
+    let main = document.querySelector('form');
+    let porcentaValue = 1;
+    let valorDiaria = 0;
     /* Variable encargada de agregar el indice correspondiente a cada input para su posterior envío dentro de un JSON */
     let contador = 1;
 
     /* Mateus -> Agregando informacion de las habitaciones */
-    contenedorInfoHabitacion[0].textContent = info.numero
-    contenedorInfoHabitacion[1].textContent = info.descripcion
-    contenedorInfoHabitacion[3].textContent = info.tipo
-    contenedorInfoHabitacion[4].textContent = info.estado
+    contenedorInfoHabitacion[0].textContent = info.numero;
+    contenedorInfoHabitacion[1].textContent = info.descripcion;
+    contenedorInfoHabitacion[3].textContent = info.tipo;
+    contenedorInfoHabitacion[4].textContent = info.estado;
 
     contenedorInfoHabitacion[0].textContent = info.numero;
     contenedorInfoHabitacion[1].textContent = info.descripcion;
@@ -409,37 +409,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('#fecha_salida').value
             }`;
         }
-
         let cuentaTotal = calcularPrecioTotal(valorDiaria);
         const infoGeneral = {
             infoHuespedes: huespedes,
             cuentaTotal: cuentaTotal,
         };
 
-        /* Proceder hacer la validación de los campos para ejecutar el envío de datos a través de las dos líneas de codigo que siguen de esta */
-
         /* ___________mensaje error_______________ */
 
-        nameInput.forEach((e) => {
-            if (e.value == '') {
-                e.nextElementSibling.textContent = 'Por favor llenar el campo';
-                setTimeout(() => {
+        function validateInputs(inputs) {
+            let allFilled = true;
+            inputs.forEach((e) => {
+                if (e.value === '') {
+                    e.nextElementSibling.textContent =
+                        'Por favor llenar el campo';
+                    setTimeout(() => {
+                        e.nextElementSibling.textContent = '';
+                    }, 5000);
+                    allFilled = false;
+                } else {
                     e.nextElementSibling.textContent = '';
-                }, 5000);
-            } else {
-                e.nextElementSibling.textContent = '';
-            }
-        });
-        documentInput.forEach((e) => {
-            if (e.value == '') {
-                e.nextElementSibling.textContent = 'Por favor llenar el campo';
-                setTimeout(() => {
-                    e.nextElementSibling.textContent = '';
-                }, 5000);
-            } else {
-                e.nextElementSibling.textContent = '';
-            }
-        });
+                }
+            });
+            return allFilled;
+        }
+        validateInputs(nameInput);
+        validateInputs(documentInput);
+        if (allFilled == true) {
+        }
+
         console.log(typeof fecha_salida.value);
         if (fecha_salida.value == '') {
             fecha_salida.nextElementSibling.textContent =
@@ -454,16 +452,15 @@ document.addEventListener('DOMContentLoaded', () => {
             fecha_salida.nextElementSibling.textContent = '';
         }
 
-        /* En esta línea de codigo representa el envío de datos
+        /* Esta línea de codigo representa el envío de datos
             Solo se debe ejecutar cuando los campos obligatorios este llenos y que el usuario haya dado en "aceptar" en el modal
         */
-        console.log("Enviando datos...")
+        console.log('Enviando datos...');
         /* window.preload.infoHuespedesSend(infoGeneral)
         window.location.href = "../vista_general_habitaciones/vistaGeneral.html" */
     });
 
-    /* ______________________________________________________________________________ */
-
+    /* ________________________________________________________________ */
     function toggleCuadro() {
         const cuadro = document.getElementById('cuadro');
         cuadro.classList.toggle('none');
@@ -493,9 +490,9 @@ document.addEventListener('DOMContentLoaded', () => {
     var span = document.getElementsByClassName('close')[0];
 
     // Cuando el usuario haga clic en el botón, se abre el modal
-    btnEnviar.addEventListener("click",()=>{
+    btnEnviar.addEventListener('click', () => {
         modal.style.display = 'flex';
-    })
+    });
 
     // Cuando el usuario haga clic en <span> (x), se cierra el modal
     span.onclick = function () {
