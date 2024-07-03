@@ -430,10 +430,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.nextElementSibling.textContent = '';
             }
         });
-        valor_diaria
 
+        
 
-        console.log(valor_diaria);
+        
         if (fecha_salida.value == '') {
             fecha_salida.nextElementSibling.textContent =
                 'Por favor llenar el campo';
@@ -446,19 +446,20 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             fecha_salida.nextElementSibling.textContent = '';
         }
-        if (fecha_salida.value == '') {
-            fecha_salida.nextElementSibling.textContent =
+
+        console.log(valor_diaria.parentElement.nextElementSibling);
+        if (valor_diaria.value == '') {
+            valor_diaria.parentElement.nextElementSibling.textContent =
                 'Por favor llenar el campo';
             console.log('act');
-            fecha_salida.parentElement.nextElementSibling.textContent =
+            valor_diaria.parentElement.nextElementSibling.textContent =
                 'Por favor llenar el campo';
             setTimeout(() => {
-                fecha_salida.parentElement.nextElementSibling.textContent = '';
+                valor_diaria.parentElement.nextElementSibling.textContent = '';
             }, 5000);
         } else {
-            fecha_salida.nextElementSibling.textContent = '';
+            valor_diaria.parentElement.nextElementSibling.textContent = '';
         }
-
         /* En esta línea de codigo representa el envío de datos
             Solo se debe ejecutar cuando los campos obligatorios este llenos y que el usuario haya dado en "aceptar" en el modal
         */
