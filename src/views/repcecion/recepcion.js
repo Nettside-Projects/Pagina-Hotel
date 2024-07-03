@@ -185,19 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         colum7.appendChild(encabezadoNombreDoc7);
         colum7.appendChild(inputDoc7);
 
-        /*  const colum8 = document.createElement('div');
-         colum8.className = 'colum';
-         const encabezadoNombreDoc8 = document.createElement('div');
-         encabezadoNombreDoc8.className = 'encabezado_nombre documento';
-         encabezadoNombreDoc8.textContent = 'Papel da pessoa';
-         const inputDoc8 = document.createElement('input');
-         inputDoc8.className = 'input_xd'; */
-
-        /*  colum8.appendChild(encabezadoNombreDoc8); */
-        /*   colum8.appendChild(inputDoc8); */
-
         documentoCliente4.appendChild(colum7);
-        /* documentoCliente4.appendChild(colum8); */
 
         columRight.appendChild(documentoCliente4);
 
@@ -387,6 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
         const nameError = document.querySelectorAll('.error-message-salida');
         const fecha_salida = document.querySelector('#fecha_salida');
+        const valor_diaria = document.querySelector('#valor_diaria');
 
         let formData = new FormData(main);
         const huespedes = [];
@@ -452,6 +441,19 @@ document.addEventListener('DOMContentLoaded', () => {
             fecha_salida.nextElementSibling.textContent = '';
         }
 
+        console.log(valor_diaria.parentElement.nextElementSibling);
+        if (valor_diaria.value == '') {
+            valor_diaria.parentElement.nextElementSibling.textContent =
+                'Por favor llenar el campo';
+            console.log('act');
+            valor_diaria.parentElement.nextElementSibling.textContent =
+                'Por favor llenar el campo';
+            setTimeout(() => {
+                valor_diaria.parentElement.nextElementSibling.textContent = '';
+            }, 5000);
+        } else {
+            valor_diaria.parentElement.nextElementSibling.textContent = '';
+        }
         /* Esta línea de codigo representa el envío de datos
             Solo se debe ejecutar cuando los campos obligatorios este llenos y que el usuario haya dado en "aceptar" en el modal
         */
