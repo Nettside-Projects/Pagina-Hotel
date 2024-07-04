@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    /* Proximaente agregar los elementos HTML de los niveles de manera dinamica */
     window.preload.ActivacioninfoHabitacionGeneralSend('txt-activation');
     const cont = document.querySelector('.flex-row-b');
     const btnBuscar = document.querySelector('.buscar_lupa');
@@ -20,7 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //habitacion no encontrada
     btnBuscar.addEventListener('keyup', (e) => {
-        window.preload.buscarHabitacion(e.target.value);
+        console.log(document.querySelector(".pestaña_activa").getAttribute("id_nivel"))
+        const info = {
+            valor: e.target.value,
+            nivel: document.querySelector(".pestaña_activa").getAttribute("id_nivel")
+        }
+        window.preload.buscarHabitacion(info);
         window.preload.buscadHabitacionOn((e, html) => {
             if (html === '') {
                 cont.innerHTML =

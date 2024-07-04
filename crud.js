@@ -174,29 +174,56 @@ function cambiarEstadoHabitacion(db, estado, id_habitacion) {
 }
 
 
-function buscarHabitacion(db, busqueda, callback) {
+function buscarHabitacion(db, info, callback) {
     let query = '';
-    if (busqueda) {
-        query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado WHERE habitacion.numero LIKE ?';
-        db.all(query, [`%${busqueda}%`], (err, rows) => {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            let html = generarTarjetasHabitacionesHTML(rows)
-            callback(html);
-        });
-    } else {
-        query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado'; // Sin filtro si la búsqueda está vacía
-        db.all(query, (err, rows) => {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            let html = generarTarjetasHabitacionesHTML(rows)
-            callback(html);
-        });
+    if(info.nivel == "0"){
+        if (info.valor) {
+            query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel WHERE habitacion.numero LIKE ?';
+            db.all(query, [`%${info.valor}%`], (err, rows) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                let html = generarTarjetasHabitacionesHTML(rows)
+                callback(html);
+            });
+        } else {
+            query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel'; // Sin filtro si la búsqueda está vacía
+            db.all(query, (err, rows) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                let html = generarTarjetasHabitacionesHTML(rows)
+                callback(html);
+            });
+        }
+    }else{
+        if (info.valor) {
+            query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel WHERE habitacion.numero LIKE ? AND nivel.id_nivel = ?';
+            db.all(query, [`%${info.valor}%`,info.nivel], (err, rows) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                let html = generarTarjetasHabitacionesHTML(rows)
+                callback(html);
+            });
+        } else {
+            query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel AND nivel.id_nivel = ?'; // Sin filtro si la búsqueda está vacía
+            db.all(query,[info.nivel],(err, rows) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                let html = generarTarjetasHabitacionesHTML(rows)
+                callback(html);
+            });
+        }
     }
+
+    /*  */
+   
 }
 function filtrarPorNivelSend(db, info, callback) {
     if(info.estado != ""){
@@ -237,35 +264,63 @@ function mostrarHabitacionesPorEstado(db, estado, callback) {
 
 function buscarHabitacionPorEstado(db, info, callback) {
     let query = '';
-    if (info.valor) {
-        query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado WHERE habitacion.numero LIKE ? AND estado.estado LIKE ?';
-        db.all(query, [`%${info.valor}%`,info.estado], (err, rows) => {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            let html = generarTarjetasHabitacionesHTML(rows)
-            callback(html);
-        });
-    } else {
-        query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado WHERE estado.estado LIKE ?'; // Sin filtro si la búsqueda está vacía
-        db.all(query,[info.estado], (err, rows) => {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            let html = generarTarjetasHabitacionesHTML(rows)
-            callback(html);
-        });
+    if(info.nivel == "0"){
+        if (info.valor) {
+            query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel WHERE habitacion.numero LIKE ? AND estado.estado LIKE ?';
+            db.all(query, [`%${info.valor}%`,info.estado], (err, rows) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                let html = generarTarjetasHabitacionesHTML(rows)
+                callback(html);
+            });
+        } else {
+            query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel WHERE estado.estado LIKE ?'; // Sin filtro si la búsqueda está vacía
+            db.all(query, [info.estado] ,(err, rows) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                let html = generarTarjetasHabitacionesHTML(rows)
+                callback(html);
+            });
+        }
+    }else{
+        if (info.valor) {
+            query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel WHERE habitacion.numero LIKE ? AND nivel.id_nivel = ? AND estado.estado LIKE ? ';
+            db.all(query, [`%${info.valor}%`,info.nivel,info.estado], (err, rows) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                let html = generarTarjetasHabitacionesHTML(rows)
+                callback(html);
+            });
+        } else {
+            query = 'SELECT habitacion.id_habitacion, habitacion.numero, estado.estado, tipo.tipo_habitacion FROM habitacion INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel AND nivel.id_nivel = ? AND estado.estado LIKE ? '; // Sin filtro si la búsqueda está vacía
+            db.all(query,[info.nivel,info.estado],(err, rows) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                let html = generarTarjetasHabitacionesHTML(rows)
+                callback(html);
+            });
+        }
     }
+
+    /*  */
 }
 
+/*  AND estado.estado LIKE ? */
+
 const info = {
-    valor: "1",
-    estado: "ocupado"
+    valor: "",
+    nivel: "0"
 }
-buscarHabitacionPorEstado(db,info,(html) => {
-    console.log(html)
+buscarHabitacion(db,info,(html) => {
+    console.log("html de la función: " + html)
 })
 
 module.exports = {

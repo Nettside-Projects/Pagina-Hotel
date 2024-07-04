@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     btnBuscar.addEventListener('keyup', (e) => {
         const info = {
             valor: e.target.value,
-            estado: "Ocupado"
+            estado: "Ocupado",
+            nivel: document.querySelector(".pestaña_activa").getAttribute("id_nivel")
         }
         window.preload.buscarHabitacionOcupadasSend(info);
         window.preload.buscarHabitacionOcupadasOn((e, html) => {
