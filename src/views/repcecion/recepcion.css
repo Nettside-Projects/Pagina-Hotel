@@ -150,52 +150,6 @@
   padding-left: 10px;
   width: 390px !important;
 }
-/* -------  VENTANA MODAL-------- */
-#openModalButton {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  align-items: center;
-  width: 100%; /* Ancho completo */
-  height: 100%; /* Alto completo */
-  overflow: auto; /* Habilitar desplazamiento si es necesario */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Color de fondo con opacidad */
-}
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% desde arriba y centrado */
-  padding:0 15px 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border: 1px solid #888;
-  width: 40%; /* Ancho del 80% */
-  border-radius: 10px;
-}
-
-/* Estilos para el botón de cierre */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
 .datos_acompañantes{
   height: 540px;
   width: 100%;
@@ -304,4 +258,66 @@
 #enviar:hover{
   background: #0d7a73;
   transform: translateY(-3px);
+}
+
+
+/* -------  VENTANA MODAL-------- */
+#openModalButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  padding-bottom: 18;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid #888;
+  width: 40%;
+  border-radius: 10px;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content .info-img {
+  width: 110px;
+  height: 110px;
+}
+
+.btn-modal {
+  all: unset;
+}
+
+.icon-img {
+  width: 51px;
+  height: 51px;
 }

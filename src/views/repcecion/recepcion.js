@@ -437,20 +437,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const documentValid = validateInputs(documentInput);
         const fechaValid = validateEspecificInputs(fechaSalida);
         const valorValid = validateEspecificInputs(valor_diaria);
+        const noButton = document.getElementById('noButton');
+        const yesButton = document.getElementById('yesButton');
 
         function openModal() {
             modal.style.display = 'flex';
+            noButton.onclick = closeModal;
+            yesButton.onclick = function () {
+                console.log('Datos enviados.');
+                closeModal();
+            };
         }
         function closeModal() {
             modal.style.display = 'none';
         }
-
-        if (nameValid && documentValid && fechaValid && valorValid) {
-            /* window.preload.infoHuespedesSend(infoGeneral)
-            window.location.href = "../vista_general_habitaciones/vistaGeneral.html" */
-            console.log('Enviando datos...');
-            openModal();
-        }
+        openModal();
 
         span.onclick = closeModal;
         window.onclick = function (event) {

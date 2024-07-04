@@ -14,15 +14,12 @@
     <!--  ____________Ventana modal inicio______________  -->
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <div style="display: flex;
-
-      justify-content: flex-end; width: 100%;"><span class="close">&times;</span></div>
-
-            <img src="../../../recursos/icons8-ojo-64.webp" alt="" srcset="">
-            <div style="margin: 20px 0; font-weight: 800;">¿Limpeza Concluida?</div>
+            <img class="info-img" src="../../../recursos/info.png" alt="">¿adicionar cliente?
             <div style="display: flex; width: 100%; justify-content: space-evenly;">
-                <img src="../../../recursos/icons8-ojo-cerrado-50.webp" alt="" srcset="">
-                <img src="../../../recursos/icons8-ojo-cerrado-50.webp" alt="" srcset="">
+                <button class="btn-modal" id="noButton"><img class="icon-img" src="../../../recursos/remove.png"
+                        alt=""></button>
+                <button class="btn-modal" id="yesButton"><img class="icon-img" src="../../../recursos/check.png"
+                        alt=""></button>
             </div>
         </div>
     </div>
@@ -95,7 +92,6 @@
 
     <form class="main-container" method="post">
         <div class="barra_buscar">Proceso de Hospedagem
-            <button class="openModalButton">Abrir Modal</button>
             <a href="../vista_general_habitaciones/vistaGeneral.html" class="volver">Voltar</a>
         </div>
         <!-- informe del cuarto -->
