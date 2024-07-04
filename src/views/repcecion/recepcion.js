@@ -310,15 +310,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     function calcularPrecioTotal(valorDiaria) {
-        // Supongamos que estas son las fechas de entrada y salida en formato YYYY-MM-DD
+        function formatearFecha(fechaOriginal) {
+            const partesFecha = fechaOriginal.split('/');
+            return `${partesFecha[2]}-${partesFecha[1]}-${partesFecha[0]}`;
+        }
+
         const fechaOriginal = document.querySelector('#date').textContent;
-        const partesFecha = fechaOriginal.split('/');
-        const fechaFormateada = `${partesFecha[2]}-${partesFecha[1]}-${partesFecha[0]}`;
-        var fechaSalida = document
+        const fechaFormateada = formatearFecha(fechaOriginal);
+        const fechaSalida = document
             .querySelector('#fecha_salida')
             .value.split('T')[0];
-
-        /*  console.log("fecha entrada -> " + fechaFormateada + "|" + "fecha salida -> " + fechaSalida) */
 
         // Convertimos las fechas a objetos Date de JavaScript
         var entrada = new Date(fechaFormateada);
@@ -375,8 +376,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const nameError = document.querySelectorAll('.error-message-salida');
         const fechaSalida = document.querySelector('#fecha_salida');
         const valor_diaria = document.querySelector('#valor_diaria');
-        var modal = document.getElementById('myModal');
-        var span = document.getElementsByClassName('close')[0];
+        const modal = document.getElementById('myModal');
+        const span = document.getElementsByClassName('close')[0];
 
         let formData = new FormData(main);
         const huespedes = [];
