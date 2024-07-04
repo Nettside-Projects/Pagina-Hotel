@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
-const { validarUsuario,mostrarHabitaciones,infoHabitacion,agregarHuespedes,buscarHabitacion,filtrarPorNivelSend, mostrarHabitacionesPorEstado,buscarHabitacionPorEstado } = require('./crud');
+const { validarUsuario,infoGeneral,mostrarHabitaciones,infoHabitacion,agregarHuespedes,buscarHabitacion,filtrarPorNivelSend, mostrarHabitacionesPorEstado,buscarHabitacionPorEstado } = require('./crud');
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data.db'))
 );
@@ -75,6 +75,12 @@ ipcMain.on('validacion', (e, datos) => {
         }
     });
 });
+
+ipcMain.on("informacion-general",(e,mensaje)=>{
+    infoGeneral(db,(info)=>{
+        windowMain.webContents.send("informacion-general-recibido",info)
+    })
+})
 
 ipcMain.on("recibiendo-mensaje",(e,dato)=>{
     mostrarHabitaciones(db, (err, result) => {
