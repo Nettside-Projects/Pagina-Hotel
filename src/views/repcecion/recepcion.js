@@ -17,11 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     contenedorInfoHabitacion[3].textContent = info.tipo;
     contenedorInfoHabitacion[4].textContent = info.estado;
 
-    contenedorInfoHabitacion[0].textContent = info.numero;
-    contenedorInfoHabitacion[1].textContent = info.descripcion;
-    contenedorInfoHabitacion[3].textContent = info.tipo;
-    contenedorInfoHabitacion[4].textContent = info.estado;
-
     /* Función para crear los campos del formulario del acompañante */
     function createDatosAcompanantes(contador) {
         const datosAcompanantes = document.createElement('div');
@@ -309,6 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
             calcularPrecioTotal(valorDiaria);
         });
 
+    /* ------------- Calcular ------------- */
     function calcularPrecioTotal(valorDiaria) {
         function formatearFecha(fechaOriginal) {
             const partesFecha = fechaOriginal.split('/');
