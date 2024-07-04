@@ -20,11 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //habitacion no encontrada
     btnBuscar.addEventListener('keyup', (e) => {
-        window.preload.buscarHabitacion(e.target.value);
-        window.preload.buscadHabitacionOn((e, html) => {
+        const info = {
+            valor: e.target.value,
+            estado: "Ocupado"
+        }
+        window.preload.buscarHabitacionOcupadasSend(info);
+        window.preload.buscarHabitacionOcupadasOn((e, html) => {
             if (html === '') {
                 cont.innerHTML =
-                    '<h2 class="habitacion-no-encontrada">No se encontró la habitación. Asegurese de que el número de la habitación exista o que haya ingresado un valor correcto (solo se acepta un número y sin espacios)</h2>';
+                    '<h2 class="habitacion-no-encontrada">No se encontró la habitación ocupada. Asegurese de que el número de la habitación exista o que haya ingresado un valor correcto (solo se acepta un número y sin espacios)</h2>';
             } else {
                 agregarTarjetasHabitaciones(html);
             }
@@ -97,14 +101,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     agregarTarjetasHabitaciones(html);
                 });
             } else if(e.target.classList.contains("primer_nivel")){
-                window.preload.filtrarPorNivelSend("Nivel 1")
+                const infoFiltro = {
+                    nivel : "Nivel 1",
+                    estado: "Ocupado"
+                }
+                window.preload.filtrarPorNivelSend(infoFiltro)
                 window.preload.filtrarPorNivelOn((e,html) => {
                     agregarTarjetasHabitaciones(html);
                 })
             }else if(e.target.classList.contains("segundo_nivel")){
-                window.preload.filtrarPorNivelSend("Nivel 2")
+                const infoFiltro = {
+                    nivel : "Nivel 2",
+                    estado: "Ocupado"
+                }
+                window.preload.filtrarPorNivelSend(infoFiltro)
                 window.preload.filtrarPorNivelOn((e,html) => {
-                    agregarTarjetasHabitaciones(html);
+                    if (html === '') {
+                        cont.innerHTML =
+                            '<h2 class="habitacion-no-encontrada">No se encunetran habitaciones ocupadas dentro de este nível</h2>';
+                    } else {
+                        agregarTarjetasHabitaciones(html);
+                    }
                 })
             }
             
