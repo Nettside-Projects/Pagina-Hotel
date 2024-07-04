@@ -17,11 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     contenedorInfoHabitacion[3].textContent = info.tipo;
     contenedorInfoHabitacion[4].textContent = info.estado;
 
-    contenedorInfoHabitacion[0].textContent = info.numero;
-    contenedorInfoHabitacion[1].textContent = info.descripcion;
-    contenedorInfoHabitacion[3].textContent = info.tipo;
-    contenedorInfoHabitacion[4].textContent = info.estado;
-
     /* Función para crear los campos del formulario del acompañante */
     function createDatosAcompanantes(contador) {
         const datosAcompanantes = document.createElement('div');
@@ -184,7 +179,23 @@ document.addEventListener('DOMContentLoaded', () => {
         colum7.appendChild(encabezadoNombreDoc7);
         colum7.appendChild(inputDoc7);
 
+        const colum8 = document.createElement('div');
+        colum8.className = 'colum';
+        const encabezadoNombreDoc8 = document.createElement('div');
+        encabezadoNombreDoc8.className = 'encabezado_nombre documento';
+        encabezadoNombreDoc8.textContent = 'Nacionalidade';
+        const inputDoc8 = document.createElement('input');
+        inputDoc8.className = 'input_xd';
+        inputDoc8.name = `huesped[${contador}][nacionalidade]`;
+
+        console.log(colum8)
+
+        colum8.appendChild(encabezadoNombreDoc8)
+        colum8.appendChild(inputDoc8);
+        
+
         documentoCliente4.appendChild(colum7);
+        documentoCliente4.appendChild(colum8)
 
         columRight.appendChild(documentoCliente4);
 
@@ -406,7 +417,6 @@ document.addEventListener('DOMContentLoaded', () => {
             infoHuespedes: huespedes,
             cuentaTotal: cuentaTotal,
         };
-
         function validateInputs(inputs) {
             let allFilled = true;
             inputs.forEach((e) => {
