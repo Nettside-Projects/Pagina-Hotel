@@ -320,6 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
             calcularPrecioTotal(valorDiaria);
         });
 
+    /* ------------- Calcular ------------- */
     function calcularPrecioTotal(valorDiaria) {
         function formatearFecha(fechaOriginal) {
             const partesFecha = fechaOriginal.split('/');
