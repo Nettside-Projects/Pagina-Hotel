@@ -305,3 +305,19 @@
   background: #0d7a73;
   transform: translateY(-3px);
 }
+.acompanate{
+  height: 70px;
+  width: 86%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.cliente_acompa{
+  align-items: flex-end !important;
+}
+.btn_aconpahante{
+  height: 40px;
+  width: 150px;
+}
