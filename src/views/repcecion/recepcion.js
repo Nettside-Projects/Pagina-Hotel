@@ -1,22 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
-   
-    const info = JSON.parse(localStorage.getItem("informacionDeHabitacion"))
-    const contenedorInfoHabitacion = document.querySelectorAll(".info_habitacion")
+    const info = JSON.parse(localStorage.getItem('informacionDeHabitacion'));
+    const contenedorInfoHabitacion =
+        document.querySelectorAll('.info_habitacion');
 
-    let btnEnviar = document.querySelector('#enviar')
-    let btnValorDiaria = document.querySelector("#valor_diaria")
-    let btnAddCliente = document.querySelector(".add_vista")
-    let main = document.querySelector("form")
-    let porcentaValue = 1
-    let valorDiaria = 0
+    let btnEnviar = document.querySelector('#enviar');
+    let btnValorDiaria = document.querySelector('#valor_diaria');
+    let btnAddCliente = document.querySelector('.add_vista');
+    let main = document.querySelector('form');
+    let porcentaValue = 1;
+    let valorDiaria = 0;
     /* Variable encargada de agregar el indice correspondiente a cada input para su posterior envío dentro de un JSON */
     let contador = 1;
 
     /* Mateus -> Agregando informacion de las habitaciones */
-    contenedorInfoHabitacion[0].textContent = info.numero
-    contenedorInfoHabitacion[1].textContent = info.descripcion
-    contenedorInfoHabitacion[3].textContent = info.tipo
-    contenedorInfoHabitacion[4].textContent = info.estado
+    contenedorInfoHabitacion[0].textContent = info.numero;
+    contenedorInfoHabitacion[1].textContent = info.descripcion;
+    contenedorInfoHabitacion[3].textContent = info.tipo;
+    contenedorInfoHabitacion[4].textContent = info.estado;
 
     contenedorInfoHabitacion[0].textContent = info.numero;
     contenedorInfoHabitacion[1].textContent = info.descripcion;
@@ -186,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
         colum7.appendChild(inputDoc7);
 
         documentoCliente4.appendChild(colum7);
-       
 
         columRight.appendChild(documentoCliente4);
 
@@ -367,7 +366,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /* Envío de datos del formualrio */
     btnEnviar.addEventListener('click', (e) => {
         e.preventDefault();
         const nameInput = document.querySelectorAll('.nombre-completo');
@@ -375,11 +373,18 @@ document.addEventListener('DOMContentLoaded', () => {
             '.document-error-documment'
         );
         const nameError = document.querySelectorAll('.error-message-salida');
-        const fecha_salida = document.querySelector('#fecha_salida');
-        const valor_diaria= document.querySelector("#valor_diaria")
+        const fechaSalida = document.querySelector('#fecha_salida');
+        const valor_diaria = document.querySelector('#valor_diaria');
+        const modal = document.getElementById('myModal');
+        const span = document.getElementsByClassName('close')[0];
 
         let formData = new FormData(main);
         const huespedes = [];
+        const estadoPago = false;
+        const idHabitacion = info.id_habitacion;
+        const fechaEntrada = `${document.querySelector('.date').textContent} ${
+            document.querySelector('.clock').textContent
+        }`;
 
         // Obtén los valores de los campos con FormData
         for (const [key, value] of formData.entries()) {
@@ -390,42 +395,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 huespedes[indice] = {};
             }
             huespedes[indice][campo] = value;
-            huespedes[indice]['estado_pago'] = false;
-            huespedes[indice]['id_habitacion'] = info.id_habitacion;
-            huespedes[indice]['fecha_entrada'] = `${
-                document.querySelector('.date').textContent
-            } ${document.querySelector('.clock').textContent}`;
-            huespedes[indice]['fecha_salida'] = `${
-                document.querySelector('#fecha_salida').value
-            }`;
+            huespedes[indice]['estado_pago'] = estadoPago;
+            huespedes[indice]['id_habitacion'] = idHabitacion;
+            huespedes[indice]['fecha_entrada'] = fechaEntrada;
+            huespedes[indice]['fecha_salida'] = fechaSalida.value;
         }
-
         let cuentaTotal = calcularPrecioTotal(valorDiaria);
         const infoGeneral = {
             infoHuespedes: huespedes,
             cuentaTotal: cuentaTotal,
         };
-
-        /* Proceder hacer la validación de los campos para ejecutar el envío de datos a través de las dos líneas de codigo que siguen de esta */
-
-        /* ___________mensaje error_______________ */
-
-        nameInput.forEach((e) => {
-            if (e.value == '') {
-                e.nextElementSibling.textContent = 'Por favor llenar el campo';
-                setTimeout(() => {
+        function validateInputs(inputs) {
+            let allFilled = true;
+            inputs.forEach((e) => {
+                console.log();
+                if (e.value === '') {
+                    e.nextElementSibling.textContent =
+                        'Por favor llenar el campo';
+                    setTimeout(() => {
+                        e.nextElementSibling.textContent = '';
+                    }, 5000);
+                    allFilled = false;
+                } else {
                     e.nextElementSibling.textContent = '';
-                }, 5000);
-            } else {
-                e.nextElementSibling.textContent = '';
-            }
-        });
-        documentInput.forEach((e) => {
-            if (e.value == '') {
-                e.nextElementSibling.textContent = 'Por favor llenar el campo';
+                }
+            });
+            return allFilled;
+        }
+        function validateEspecificInputs(input) {
+            if (input.value === '') {
+                input.parentElement.nextElementSibling.textContent =
+                    'Por favor llenar el campo';
                 setTimeout(() => {
-                    e.nextElementSibling.textContent = '';
+                    input.parentElement.nextElementSibling.textContent = '';
                 }, 5000);
+                return false;
             } else {
                 input.parentElement.nextElementSibling.textContent = '';
                 return true;
@@ -435,21 +439,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const documentValid = validateInputs(documentInput);
         const fechaValid = validateEspecificInputs(fechaSalida);
         const valorValid = validateEspecificInputs(valor_diaria);
-        const noButton = document.getElementById('noButton');
-        const yesButton = document.getElementById('yesButton');
 
         function openModal() {
             modal.style.display = 'flex';
-            noButton.onclick = closeModal;
-            yesButton.onclick = function () {
-                console.log('Datos enviados.');
-                closeModal();
-            };
         }
         function closeModal() {
             modal.style.display = 'none';
         }
-        openModal();
+
+        if (nameValid && documentValid && fechaValid && valorValid) {
+            /* window.preload.infoHuespedesSend(infoGeneral)
+            window.location.href = "../vista_general_habitaciones/vistaGeneral.html" */
+            console.log('Enviando datos...');
+            openModal();
+        }
 
         span.onclick = closeModal;
         window.onclick = function (event) {
@@ -488,9 +491,9 @@ document.addEventListener('DOMContentLoaded', () => {
     var span = document.getElementsByClassName('close')[0];
 
     // Cuando el usuario haga clic en el botón, se abre el modal
-    btnEnviar.addEventListener("click",()=>{
+    btnEnviar.addEventListener('click', () => {
         modal.style.display = 'flex';
-    })
+    });
 
     // Cuando el usuario haga clic en <span> (x), se cierra el modal
     span.onclick = function () {
