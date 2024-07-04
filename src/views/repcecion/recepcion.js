@@ -185,8 +185,23 @@ document.addEventListener('DOMContentLoaded', () => {
         colum7.appendChild(encabezadoNombreDoc7);
         colum7.appendChild(inputDoc7);
 
+        const colum8 = document.createElement('div');
+        colum8.className = 'colum';
+        const encabezadoNombreDoc8 = document.createElement('div');
+        encabezadoNombreDoc8.className = 'encabezado_nombre documento';
+        encabezadoNombreDoc8.textContent = 'Nacionalidade';
+        const inputDoc8 = document.createElement('input');
+        inputDoc8.className = 'input_xd';
+        inputDoc8.name = `huesped[${contador}][nacionalidade]`;
+
+        console.log(colum8)
+
+        colum8.appendChild(encabezadoNombreDoc8)
+        colum8.appendChild(inputDoc8);
+        
+
         documentoCliente4.appendChild(colum7);
-       
+        documentoCliente4.appendChild(colum8)
 
         columRight.appendChild(documentoCliente4);
 
@@ -405,24 +420,27 @@ document.addEventListener('DOMContentLoaded', () => {
             infoHuespedes: huespedes,
             cuentaTotal: cuentaTotal,
         };
-
-        /* Proceder hacer la validación de los campos para ejecutar el envío de datos a través de las dos líneas de codigo que siguen de esta */
-
-        /* ___________mensaje error_______________ */
-
-        nameInput.forEach((e) => {
-            if (e.value == '') {
-                e.nextElementSibling.textContent = 'Por favor llenar el campo';
-                setTimeout(() => {
+        function validateInputs(inputs) {
+            let allFilled = true;
+            inputs.forEach((e) => {
+                console.log();
+                if (e.value === '') {
+                    e.nextElementSibling.textContent =
+                        'Por favor llenar el campo';
+                    setTimeout(() => {
+                        e.nextElementSibling.textContent = '';
+                    }, 5000);
+                    allFilled = false;
+                } else {
                     e.nextElementSibling.textContent = '';
-                }, 5000);
-            } else {
-                e.nextElementSibling.textContent = '';
-            }
-        });
-        documentInput.forEach((e) => {
-            if (e.value == '') {
-                e.nextElementSibling.textContent = 'Por favor llenar el campo';
+                }
+            });
+            return allFilled;
+        }
+        function validateEspecificInputs(input) {
+            if (input.value === '') {
+                input.parentElement.nextElementSibling.textContent =
+                    'Por favor llenar el campo';
                 setTimeout(() => {
                     e.nextElementSibling.textContent = '';
                 }, 5000);

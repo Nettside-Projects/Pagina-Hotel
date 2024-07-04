@@ -221,9 +221,6 @@ function buscarHabitacion(db, info, callback) {
             });
         }
     }
-
-    /*  */
-   
 }
 function filtrarPorNivelSend(db, info, callback) {
     if(info.estado != ""){
@@ -247,8 +244,6 @@ function filtrarPorNivelSend(db, info, callback) {
     }
    
 }
-
-/* Seguir con el codigo... */
 
 function mostrarHabitacionesPorEstado(db, estado, callback) {
     db.all(`SELECT habitacion.id_habitacion,habitacion.numero, habitacion.descripcion,estado.estado,tipo.tipo_habitacion,nivel.nivel FROM habitacion INNER JOIN estado ON estado.id_estado = habitacion.fk_id_estado INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo INNER JOIN nivel ON nivel.id_nivel = habitacion.fk_id_nivel WHERE estado.estado LIKE ?`, [estado], (err, row) => {
@@ -309,11 +304,7 @@ function buscarHabitacionPorEstado(db, info, callback) {
             });
         }
     }
-
-    /*  */
 }
-
-/*  AND estado.estado LIKE ? */
 
 const info = {
     valor: "",
