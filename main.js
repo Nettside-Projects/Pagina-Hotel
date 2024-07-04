@@ -95,8 +95,8 @@ ipcMain.on("informacion-huespedes",(e,dato)=>{
 agregarHuespedes(db,dato)
 })
 
-ipcMain.on("buscar-habitacion",(e,respuesta)=>{
-    buscarHabitacion(db,respuesta,(html)=>{
+ipcMain.on("buscar-habitacion",(e,info)=>{
+    buscarHabitacion(db,info,(html)=>{
         windowMain.webContents.send('informacion-habitacion-buscada',html)
     })
 })

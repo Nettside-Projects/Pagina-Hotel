@@ -10,7 +10,7 @@ contextBridge.exposeInMainWorld('preload', {
     envioIdHabitacion:(idHabitacion) => ipcRenderer.send('envioIdHabitacion',idHabitacion),
     infoHabitacionIndividualOn:(callback) => ipcRenderer.on('informacion-individual-habitacion',(e,info) => callback(e,info)),
     infoHuespedesSend: (infoHuespedes) => ipcRenderer.send('informacion-huespedes', infoHuespedes),
-    buscarHabitacion: (busqueda) => ipcRenderer.send('buscar-habitacion',busqueda),
+    buscarHabitacion: (info) => ipcRenderer.send('buscar-habitacion',info),
     buscadHabitacionOn: (callback) => ipcRenderer.on('informacion-habitacion-buscada',(e,respuesta)=> callback(e,respuesta)),
     filtrarPorNivelSend: (nivel) => ipcRenderer.send('filtrar-habitacion-por-nivel',nivel),
     filtrarPorNivelOn: (callback) => ipcRenderer.on('filtrar-habitacion-por-nivel-send',(e,respuesta)=> callback(e,respuesta)),
