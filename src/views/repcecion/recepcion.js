@@ -379,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
         const fechaSalida = document.querySelector('#fecha_salida');
         const valor_diaria = document.querySelector('#valor_diaria');
-        const modal = document.getElementById('myModal');
+
         let formData = new FormData(main);
         const huespedes = [];
         const estadoPago = false;
@@ -387,8 +387,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const fechaEntrada = `${document.querySelector('.date').textContent} ${
             document.querySelector('.clock').textContent
         }`;
-        const noButton = document.getElementById('noButton');
-        const yesButton = document.getElementById('yesButton');
 
         for (const [key, value] of formData.entries()) {
             const [grupo, indice, campo] = key.match(
@@ -442,27 +440,41 @@ document.addEventListener('DOMContentLoaded', () => {
         const fechaValid = validateEspecificInputs(fechaSalida);
         const valorValid = validateEspecificInputs(valor_diaria);
 
-        function openModal() {
-            modal.style.display = 'flex';
-            noButton.onclick = closeModal;
+        /* ---- Modal ---- */
+        const modalConfirmar = document.getElementById('modalConfirmar');
+        const modalClienteAdicionado = document.getElementById(
+            'modalClienteAdicionado'
+        );
+        const noButton = document.getElementById('noButton');
+        const yesButton = document.getElementById('yesButton');
+
+        function openModalConfirmar() {
+            modalConfirmar.style.display = 'flex';
+            noButton.onclick = () => closeModal(modalConfirmar);
             yesButton.onclick = function () {
                 console.log('Datos enviados...');
-                closeModal();
+                closeModal(modalConfirmar);
+                openModalClienteAdicionado();
             };
         }
-        function closeModal() {
+        function openModalClienteAdicionado() {
+            modalClienteAdicionado.style.display = 'flex';
+        }
+        function closeModal(modal) {
             modal.style.display = 'none';
         }
         window.onclick = (event) => {
-            if (event.target === modal) {
-                closeModal();
+            if (event.target === modalConfirmar) {
+                closeModal(modalConfirmar);
+            } else if (event.target === modalClienteAdicionado) {
+                closeModal(modalClienteAdicionado);
             }
         };
 
         if (nameValid && documentValid && fechaValid && valorValid) {
             /* window.preload.infoHuespedesSend(infoGeneral)
             window.location.href = "../vista_general_habitaciones/vistaGeneral.html" */
-            openModal();
+            openModalConfirmar();
         }
     });
 
