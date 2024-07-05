@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Agregando informacion de las habitaciones */
     contenedorInfoHabitacion[0].textContent = info.numero;
     contenedorInfoHabitacion[1].textContent = info.descripcion;
-    contenedorInfoHabitacion[3].textContent = info.tipo;
-    contenedorInfoHabitacion[4].textContent = info.estado;
+    contenedorInfoHabitacion[2].textContent = info.tipo;
+    contenedorInfoHabitacion[3].textContent = info.estado;
 
     /* Función para crear los campos del formulario del acompañante */
     function createDatosAcompanantes(contador) {
@@ -356,15 +356,15 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('El costo total de la estadía es: ' + costoTotal);
             console.log(contenedorInfoHabitacion[2].textContent) */
             if (isNaN(costoTotal)) {
-                contenedorInfoHabitacion[2].textContent = '$R0';
+                document.querySelector(".type_moneda").textContent = '$R0';
                 return 0;
             } else {
                 console.log(costoTotal);
-                contenedorInfoHabitacion[2].textContent = `$R${costoTotal}`;
+                document.querySelector(".type_moneda").textContent = `$R${costoTotal}`;
                 return costoTotal;
             }
         } else {
-            contenedorInfoHabitacion[2].textContent = `$R${
+            document.querySelector(".type_moneda").textContent = `$R${
                 valorDiaria - porcentaValue
             }`;
             return valorDiaria - porcentaValue;

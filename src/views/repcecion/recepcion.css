@@ -33,18 +33,18 @@
   .informe_cuarto{
     display: flex;
     /* height: 290px; */
-    width: 100%;
+    width: 80%;
     overflow: hidden;
     flex-direction: column;
     background: #fff;
-    border-radius: 5px;
+    border-radius: 5px 0 0 5px;
     border-bottom: 2px solid hsla(0, 0%, 0%, 0.658);
 }
 .infomre_encabezado{
     display: flex;
     height: 30px;
-    width: 100%;
-    margin-bottom: 10px;
+    width: 80%;
+    background: #fff;
     align-items: flex-start;
     padding-left: 20px;
     font-weight: 500;
@@ -320,3 +320,46 @@
   width: 51px;
   height: 51px;
 }
+
+
+.loader {
+  transform: translateZ(1px);
+}
+
+.loader:after {
+  content: '$';
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 17px;
+  font-size: 15px;
+  font-weight: bold;
+  background: #FFD700;
+  color: #DAA520;
+  border: 4px double;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, .1);
+  animation: coin-flip 4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+@keyframes coin-flip {
+  0%, 100% {
+    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+  }
+
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  50% {
+    transform: rotateY(1800deg);
+    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+  }
+
+  100% {
+    transform: rotateY(3600deg);
+  }
+}
+      
