@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.preload.ActivacioninfoHabitacionGeneralSend('txt-activation');
     const cont = document.querySelector('.flex-row-b');
     const btnBuscar = document.querySelector('.buscar_lupa');
-
     const estados = {
         disponible:
             '<svg xmlns="http://www.w3.org/2000/svg" height="88px" viewBox="0 -960 960 960" width="88px" fill="#EFEFEF"><path d="M200-200h-40l-26-80H80v-201q0-33 23.5-56t56.5-23v-120q0-33 23.5-56.5T240-760h480q33 0 56.5 23.5T800-680v120q33 0 56.5 23.5T880-480v200h-54l-26 80h-40l-26-80H226l-26 80Zm320-360h200v-120H520v120Zm-280 0h200v-120H240v120Zm-80 200h640v-120H160v120Zm640 0H160h640Z"/></svg>',
@@ -19,13 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
             '<svg xmlns="http://www.w3.org/2000/svg" height="88px" viewBox="0 -960 960 960" width="88px" fill="#EFEFEF"><path d="M756-120 537-339l84-84 219 219-84 84Zm-552 0-84-84 276-276-68-68-28 28-51-51v82l-28 28-121-121 28-28h82l-50-50 142-142q20-20 43-29t47-9q24 0 47 9t43 29l-92 92 50 50-28 28 68 68 90-90q-4-11-6.5-23t-2.5-24q0-59 40.5-99.5T701-841q15 0 28.5 3t27.5 9l-99 99 72 72 99-99q7 14 9.5 27.5T841-701q0 59-40.5 99.5T701-561q-12 0-24-2t-23-7L204-120Z"/></svg>',
     };
 
-    //habitacion no encontrada
+    // habitacion no encontrada
     btnBuscar.addEventListener('keyup', (e) => {
-        console.log(document.querySelector(".pestaña_activa").getAttribute("id_nivel"))
+        console.log(
+            document.querySelector('.pestaña_activa').getAttribute('id_nivel')
+        );
         const info = {
             valor: e.target.value,
-            nivel: document.querySelector(".pestaña_activa").getAttribute("id_nivel")
-        }
+            nivel: document
+                .querySelector('.pestaña_activa')
+                .getAttribute('id_nivel'),
+        };
         window.preload.buscarHabitacion(info);
         window.preload.buscadHabitacionOn((e, html) => {
             if (html === '') {
@@ -45,112 +48,70 @@ document.addEventListener('DOMContentLoaded', () => {
         cont.innerHTML = html;
         const tarjetasHabitacion = document.querySelectorAll('.rectangle-1');
 
-        //Agregando imagen deacuerdo al estado de cada habitación
         tarjetasHabitacion.forEach((e) => {
-            for (const estado in estados) {
-                if (e.classList.contains(estado)) {
-                    e.children[1].children[1].innerHTML = estados[estado];
-                    break;
-                }
+            // icono de acuerdo al estado de cada habitación
+            const estadoClase = Object.keys(estados).find((estado) =>
+                e.classList.contains(estado)
+            );
+            if (estadoClase) {
+                e.children[1].children[1].innerHTML = estados[estadoClase];
             }
-        });
 
-        //--------redirigir al hacer onclick en las tarjetas
-        //disponible
-        tarjetasHabitacion.forEach((e) => {
+            // Redirigir al hacer onclick en las tarjetas
             e.addEventListener('click', () => {
-                if (e.classList.contains('disponible')) {
-                    window.preload.envioIdHabitacion(
-                        e.getAttribute('id_habitacion')
-                    );
-                    window.preload.infoHabitacionIndividualOn((e, info) => {
+                const idHabitacion = e.getAttribute('id_habitacion');
+                if (estadoClase === 'disponible' || estadoClase === 'ocupado') {
+                    window.preload.envioIdHabitacion(idHabitacion);
+                    window.preload.infoHabitacionIndividualOn((_, info) => {
                         localStorage.setItem(
                             'informacionDeHabitacion',
                             JSON.stringify(info)
                         );
-                        window.location.href = '../repcecion/recepcion.html';
-                    });
-                }
-            });
-        });
-        //ocupado
-        tarjetasHabitacion.forEach((e) => {
-            e.addEventListener('click', () => {
-                if (e.classList.contains('ocupado')) {
-                    window.preload.envioIdHabitacion(
-                        e.getAttribute('id_habitacion')
-                    );
-                    window.preload.infoHabitacionIndividualOn((e, info) => {
-                        localStorage.setItem(
-                            'informacionDeHabitacion',
-                            JSON.stringify(info)
-                        );
-                        window.location.href = '../saida/saida_form.html';
+                        const redirectUrl =
+                            estadoClase === 'disponible'
+                                ? '../repcecion/recepcion.html'
+                                : '../saida/saida_form.html';
+                        window.location.href = redirectUrl;
                     });
                 }
             });
         });
     }
-    document.querySelectorAll(".nivel").forEach(e  => {
-        e.addEventListener("click",e => {
-            document.querySelectorAll(".nivel").forEach(e => {
-                e.classList.remove("pestaña_activa")
-            } )
-            e.target.classList.add("pestaña_activa")
-            if(e.target.classList.contains("todoxd")){
-                window.preload.ActivacioninfoHabitacionGeneralSend('txt-activation');
+
+    document.querySelectorAll('.nivel').forEach((e) => {
+        e.addEventListener('click', (e) => {
+            document.querySelectorAll('.nivel').forEach((e) => {
+                e.classList.remove('pestaña_activa');
+            });
+            e.target.classList.add('pestaña_activa');
+            if (e.target.classList.contains('todoxd')) {
+                window.preload.ActivacioninfoHabitacionGeneralSend(
+                    'txt-activation'
+                );
                 window.preload.InfoHabitacionesGeneralOn((e, html) => {
                     agregarTarjetasHabitaciones(html);
                 });
-            } else if(e.target.classList.contains("primer_nivel")){
+            } else if (e.target.classList.contains('primer_nivel')) {
                 const infoFiltro = {
-                    nivel : "Nivel 1",
-                    estado: ""
-                }
-                window.preload.filtrarPorNivelSend(infoFiltro)
-                window.preload.filtrarPorNivelOn((e,html) => {
+                    nivel: 'Nivel 1',
+                    estado: '',
+                };
+                window.preload.filtrarPorNivelSend(infoFiltro);
+                window.preload.filtrarPorNivelOn((e, html) => {
                     agregarTarjetasHabitaciones(html);
-                })
-            }else if(e.target.classList.contains("segundo_nivel")){
+                });
+            } else if (e.target.classList.contains('segundo_nivel')) {
                 const infoFiltro = {
-                    nivel : "Nivel 2",
-                    estado: ""
-                }
-                window.preload.filtrarPorNivelSend(infoFiltro)
-                window.preload.filtrarPorNivelOn((e,html) => {
+                    nivel: 'Nivel 2',
+                    estado: '',
+                };
+                window.preload.filtrarPorNivelSend(infoFiltro);
+                window.preload.filtrarPorNivelOn((e, html) => {
                     agregarTarjetasHabitaciones(html);
-                })
+                });
             }
-            
-            document.querySelector(".flex-row-b").innerHTML = ""
-        })
-    })
+
+            document.querySelector('.flex-row-b').innerHTML = '';
+        });
+    });
 });
-
-// Obtener el modal
-/* var modal = document.getElementById('myModal');
-
-// Obtener el botón que abre el modal
-var btn = document.getElementById('openModalButton');
-
-// Obtener el <span> que cierra el modal
-var span = document.getElementsByClassName('close')[0];
-
-// Cuando el usuario haga clic en el botón, se abre el modal
-btn.onclick = function () {
-    modal.style.display = 'flex';
-};
-
-// Cuando el usuario haga clic en <span> (x), se cierra el modal
-span.onclick = function () {
-    modal.style.display = 'none';
-};
-
-// Cuando el usuario haga clic en cualquier lugar fuera del modal, se cierra
-window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
-};
- */
-   

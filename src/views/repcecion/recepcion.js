@@ -9,15 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let main = document.querySelector('form');
     let porcentaValue = 1;
     let valorDiaria = 0;
-    /* Variable encargada de agregar el indice correspondiente a cada input para su posterior envío dentro de un JSON */
     let contador = 1;
 
     /* Mateus -> Agregando informacion de las habitaciones */
-    contenedorInfoHabitacion[0].textContent = info.numero;
-    contenedorInfoHabitacion[1].textContent = info.descripcion;
-    contenedorInfoHabitacion[3].textContent = info.tipo;
-    contenedorInfoHabitacion[4].textContent = info.estado;
-
     contenedorInfoHabitacion[0].textContent = info.numero;
     contenedorInfoHabitacion[1].textContent = info.descripcion;
     contenedorInfoHabitacion[3].textContent = info.tipo;
@@ -234,8 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return datosAcompanantes;
     }
-    /* Codigo de Mateus */
 
+    /*----- */
     function agregarBtn() {
         const contenBarra = document.createElement('div');
         contenBarra.className = 'conten_barra';
@@ -372,12 +366,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const documentInput = document.querySelectorAll(
             '.document-error-documment'
         );
-        const nameError = document.querySelectorAll('.error-message-salida');
         const fechaSalida = document.querySelector('#fecha_salida');
         const valor_diaria = document.querySelector('#valor_diaria');
         const modal = document.getElementById('myModal');
-        const span = document.getElementsByClassName('close')[0];
-
         let formData = new FormData(main);
         const huespedes = [];
         const estadoPago = false;
@@ -385,8 +376,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const fechaEntrada = `${document.querySelector('.date').textContent} ${
             document.querySelector('.clock').textContent
         }`;
+        const noButton = document.getElementById('noButton');
+        const yesButton = document.getElementById('yesButton');
 
-        // Obtén los valores de los campos con FormData
         for (const [key, value] of formData.entries()) {
             const [grupo, indice, campo] = key.match(
                 /huesped\[(\d+)\]\[(\w+)\]/
@@ -408,7 +400,6 @@ document.addEventListener('DOMContentLoaded', () => {
         function validateInputs(inputs) {
             let allFilled = true;
             inputs.forEach((e) => {
-                console.log();
                 if (e.value === '') {
                     e.nextElementSibling.textContent =
                         'Por favor llenar el campo';
@@ -442,24 +433,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function openModal() {
             modal.style.display = 'flex';
+            noButton.onclick = closeModal;
+            yesButton.onclick = function () {
+                console.log('Datos enviados...');
+                closeModal();
+            };
         }
         function closeModal() {
             modal.style.display = 'none';
         }
+        window.onclick = (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
 
         if (nameValid && documentValid && fechaValid && valorValid) {
             /* window.preload.infoHuespedesSend(infoGeneral)
             window.location.href = "../vista_general_habitaciones/vistaGeneral.html" */
-            console.log('Enviando datos...');
             openModal();
         }
-
-        span.onclick = closeModal;
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                closeModal();
-            }
-        };
     });
 
     function toggleCuadro() {
@@ -485,27 +478,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // Call the function once when the page loads
     window.onload = setInitialClock;
-
-    // Obtener el modal
-    var modal = document.getElementById('myModal');
-    var span = document.getElementsByClassName('close')[0];
-
-    // Cuando el usuario haga clic en el botón, se abre el modal
-    btnEnviar.addEventListener('click', () => {
-        modal.style.display = 'flex';
-    });
-
-    // Cuando el usuario haga clic en <span> (x), se cierra el modal
-    span.onclick = function () {
-        modal.style.display = 'none';
-    };
-
-    // Cuando el usuario haga clic en cualquier lugar fuera del modal, se cierra
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    };
 
     /* Codigo para cambiar de input radio y deshabilitar el otro */
     document.querySelectorAll('input[type="radio"]').forEach((radio) => {
