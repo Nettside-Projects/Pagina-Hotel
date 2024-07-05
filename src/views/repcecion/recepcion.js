@@ -466,8 +466,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 })
 
-                closeModal();
-                console.log('Datos enviados...');
                 closeModal(modalConfirmar);
                 openModalClienteAdicionado();
             };
