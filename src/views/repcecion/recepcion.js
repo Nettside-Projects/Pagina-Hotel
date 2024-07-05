@@ -452,13 +452,18 @@ document.addEventListener('DOMContentLoaded', () => {
             modalConfirmar.style.display = 'flex';
             noButton.onclick = () => closeModal(modalConfirmar);
             yesButton.onclick = function () {
-                console.log('Datos enviados...');
                 closeModal(modalConfirmar);
                 openModalClienteAdicionado();
             };
         }
         function openModalClienteAdicionado() {
             modalClienteAdicionado.style.display = 'flex';
+            setTimeout(() => {
+                closeModal(modalClienteAdicionado);
+                /* window.preload.infoHuespedesSend(infoGeneral); */
+                window.location.href =
+                    '../vista_general_habitaciones/vistaGeneral.html';
+            }, 2000);
         }
         function closeModal(modal) {
             modal.style.display = 'none';
@@ -471,9 +476,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        if (nameValid && documentValid && fechaValid && valorValid) {
-            /* window.preload.infoHuespedesSend(infoGeneral)
-            window.location.href = "../vista_general_habitaciones/vistaGeneral.html" */
+        if (nameValid /* && documentValid && fechaValid && valorValid */) {
             openModalConfirmar();
         }
     });
