@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Agregando informacion de las habitaciones */
     contenedorInfoHabitacion[0].textContent = info.numero;
     contenedorInfoHabitacion[1].textContent = info.descripcion;
-    contenedorInfoHabitacion[3].textContent = info.tipo;
-    contenedorInfoHabitacion[4].textContent = info.estado;
+    contenedorInfoHabitacion[2].textContent = info.tipo;
+    contenedorInfoHabitacion[3].textContent = info.estado;
 
     /* Función para crear los campos del formulario del acompañante */
     function createDatosAcompanantes(contador) {
@@ -356,14 +356,17 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('El costo total de la estadía es: ' + costoTotal);
             console.log(contenedorInfoHabitacion[2].textContent) */
             if (isNaN(costoTotal)) {
-                contenedorInfoHabitacion[2].textContent = '$R0';
+                document.querySelector(".type_moneda").textContent = '$R0';
                 return 0;
             } else {
                 console.log(costoTotal);
-                contenedorInfoHabitacion[2].textContent = `$R${costoTotal}`;
+                document.querySelector(".type_moneda").textContent = `$R${costoTotal}`;
                 return costoTotal;
             }
         } else {
+            document.querySelector(".type_moneda").textContent = `$R${
+                valorDiaria - porcentaValue
+            }`;
             contenedorInfoHabitacion[2].textContent = `$R${valorDiaria - porcentaValue
                 }`;
             return valorDiaria - porcentaValue;
@@ -378,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
         const fechaSalida = document.querySelector('#fecha_salida');
         const valor_diaria = document.querySelector('#valor_diaria');
-        const modal = document.getElementById('myModal');
+
         let formData = new FormData(main);
         const huespedes = [];
         const estadoPago = false;
@@ -440,9 +443,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const fechaValid = validateEspecificInputs(fechaSalida);
         const valorValid = validateEspecificInputs(valor_diaria);
 
-        function openModal() {
-            modal.style.display = 'flex';
-            noButton.onclick = closeModal;
+        /* ---- Modal ---- */
+        const modalConfirmar = document.getElementById('modalConfirmar');
+        const modalClienteAdicionado = document.getElementById(
+            'modalClienteAdicionado'
+        );
+       
+
+        function openModalConfirmar() {
+            modalConfirmar.style.display = 'flex';
+            noButton.onclick = () => closeModal(modalConfirmar);
             yesButton.onclick = function () {
                 window.preload.infoHuespedesSend(infoGeneral)
 
@@ -457,18 +467,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
 
                 closeModal();
+                console.log('Datos enviados...');
+                closeModal(modalConfirmar);
+                openModalClienteAdicionado();
             };
         }
-        function closeModal() {
+        function openModalClienteAdicionado() {
+            modalClienteAdicionado.style.display = 'flex';
+        }
+        function closeModal(modal) {
             modal.style.display = 'none';
         }
         window.onclick = (event) => {
-            if (event.target === modal) {
-                closeModal();
+            if (event.target === modalConfirmar) {
+                closeModal(modalConfirmar);
+            } else if (event.target === modalClienteAdicionado) {
+                closeModal(modalClienteAdicionado);
             }
         };
 
         if (nameValid && documentValid && fechaValid && valorValid) {
+            /* window.preload.infoHuespedesSend(infoGeneral)
+            window.location.href = "../vista_general_habitaciones/vistaGeneral.html" */
+            openModalConfirmar();
             openModal();
         }
     });
