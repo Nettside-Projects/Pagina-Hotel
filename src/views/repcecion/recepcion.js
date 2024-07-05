@@ -185,7 +185,20 @@ document.addEventListener('DOMContentLoaded', () => {
         colum7.appendChild(encabezadoNombreDoc7);
         colum7.appendChild(inputDoc7);
 
+        const colum8 = document.createElement('div');
+        colum8.className = 'colum';
+        const encabezadoNombreDoc8 = document.createElement('div');
+        encabezadoNombreDoc8.className = 'encabezado_nombre documento';
+        encabezadoNombreDoc8.textContent = 'Nacionalidade';
+        const inputDoc8 = document.createElement('input');
+        inputDoc8.className = 'input_xd';
+        inputDoc8.name = `huesped[${contador}][nacionalidad]`;
+
+        colum8.appendChild(encabezadoNombreDoc8);
+        colum8.appendChild(inputDoc8);
+
         documentoCliente4.appendChild(colum7);
+        documentoCliente4.appendChild(colum8);
 
         columRight.appendChild(documentoCliente4);
 
