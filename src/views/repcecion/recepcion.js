@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let valorDiaria = 0;
     let contador = 1;
 
-    /* Mateus -> Agregando informacion de las habitaciones */
+    /* Agregando informacion de las habitaciones */
     contenedorInfoHabitacion[0].textContent = info.numero;
     contenedorInfoHabitacion[1].textContent = info.descripcion;
     contenedorInfoHabitacion[3].textContent = info.tipo;
@@ -242,7 +242,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return datosAcompanantes;
     }
 
-    /*----- */
     function agregarBtn() {
         const contenBarra = document.createElement('div');
         contenBarra.className = 'conten_barra';
@@ -267,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
         deleteButton.textContent = 'Suprimir Cliente';
         contenBoton.appendChild(deleteButton);
 
-        /* Agregar eventos al boton de agregar */
+        // Agregar eventos al boton de agregar
         addButton.addEventListener('click', (e) => {
             e.preventDefault();
             console.log('activado');
@@ -278,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
             agregarBtn();
         });
 
-        /* Agregar eventos al boton de eliminar */
+        // Agregar eventos al boton de eliminar
         deleteButton.addEventListener('click', (e) => {
             e.preventDefault();
             document
@@ -318,7 +317,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     function calcularPrecioTotal(valorDiaria) {
-        // Supongamos que estas son las fechas de entrada y salida en formato YYYY-MM-DD
         const fechaOriginal = document.querySelector('#date').textContent;
         const partesFecha = fechaOriginal.split('/');
         const fechaFormateada = `${partesFecha[2]}-${partesFecha[1]}-${partesFecha[0]}`;
