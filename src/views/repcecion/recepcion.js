@@ -462,12 +462,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     if(err == ""){
                     console.log("ll")
-                    window.location.href = "../vista_general_habitaciones/vistaGeneral.html"
+                    openModalClienteAdicionado();
+                 
                     }
                 })
 
                 closeModal(modalConfirmar);
-                openModalClienteAdicionado();
+                
             };
         }
         function openModalClienteAdicionado() {
@@ -481,6 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeModal(modalConfirmar);
             } else if (event.target === modalClienteAdicionado) {
                 closeModal(modalClienteAdicionado);
+                window.location.href = "../vista_general_habitaciones/vistaGeneral.html"
             }
         };
 
