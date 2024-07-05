@@ -1,7 +1,7 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, webContents,dialog } = require('electron');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
-const { validarUsuario,infoGeneral,mostrarHabitaciones,infoHabitacion,agregarHuespedes,buscarHabitacion,filtrarPorNivelSend, mostrarHabitacionesPorEstado,buscarHabitacionPorEstado } = require('./crud');
+const { validarUsuario,infoGeneral,mostrarHabitaciones,infoHabitacion,agregarHuespedes,cambiarEstadoHabitacion,buscarHabitacion,filtrarPorNivelSend, mostrarHabitacionesPorEstado,buscarHabitacionPorEstado } = require('./crud');
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data.db'))
 );
@@ -98,7 +98,26 @@ ipcMain.on("envioIdHabitacion",(e,dato) =>{
 })
 
 ipcMain.on("informacion-huespedes",(e,dato)=>{
-agregarHuespedes(db,dato)
+agregarHuespedes(db,dato,(err)=>{
+    if(err.code == 'SQLITE_CONSTRAINT'){
+        dialog.showErrorBox('Error', 'Alguno de los números de documentos que se quiere registrar ya está presente en la base de datos');
+        windowMain.webContents.send('notificacion-error-registrar-huesped',err)
+    }else{
+        windowMain.webContents.send('notificacion-error-registrar-huesped',err)
+    }
+/* 
+    if(err == ""){
+        console.log("No hay errores")
+        windowMain.loadFile("./src/views/vista_general_habitaciones/vistaGeneral.html")
+    }
+    if(err.code == 'SQLITE_CONSTRAINT'){
+        dialog.showErrorBox('Error', 'No se puede repetir datos');
+        windowMain.webContents.send('notificacion-error-registrar-huesped',err)
+    } */
+   
+    
+    
+})
 })
 
 ipcMain.on("buscar-habitacion",(e,info)=>{

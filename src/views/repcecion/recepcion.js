@@ -282,9 +282,9 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             document
                 .querySelectorAll('.conten_barra')
-                [
-                    document.querySelectorAll('.conten_barra').length - 1
-                ].remove();
+            [
+                document.querySelectorAll('.conten_barra').length - 1
+            ].remove();
             main.children[main.children.length - 2].remove();
             contador -= 1;
 
@@ -364,9 +364,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return costoTotal;
             }
         } else {
-            contenedorInfoHabitacion[2].textContent = `$R${
-                valorDiaria - porcentaValue
-            }`;
+            contenedorInfoHabitacion[2].textContent = `$R${valorDiaria - porcentaValue
+                }`;
             return valorDiaria - porcentaValue;
         }
     }
@@ -384,9 +383,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const huespedes = [];
         const estadoPago = false;
         const idHabitacion = info.id_habitacion;
-        const fechaEntrada = `${document.querySelector('.date').textContent} ${
-            document.querySelector('.clock').textContent
-        }`;
+        const fechaEntrada = `${document.querySelector('.date').textContent} ${document.querySelector('.clock').textContent
+            }`;
         const noButton = document.getElementById('noButton');
         const yesButton = document.getElementById('yesButton');
 
@@ -446,7 +444,18 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = 'flex';
             noButton.onclick = closeModal;
             yesButton.onclick = function () {
-                console.log('Datos enviados...');
+                window.preload.infoHuespedesSend(infoGeneral)
+
+                window.preload.notificarErrorRegistroHuesped((e, err) => {
+                    if (err) {
+                        console.log("lol")
+                    }
+                    if(err == ""){
+                    console.log("ll")
+                    window.location.href = "../vista_general_habitaciones/vistaGeneral.html"
+                    }
+                })
+
                 closeModal();
             };
         }
@@ -460,8 +469,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         if (nameValid && documentValid && fechaValid && valorValid) {
-            /* window.preload.infoHuespedesSend(infoGeneral)
-            window.location.href = "../vista_general_habitaciones/vistaGeneral.html" */
             openModal();
         }
     });
@@ -528,9 +535,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .querySelector('#porcentajeSelect')
         .addEventListener('change', (e) => {
             porcentaValue = e.target.value;
-            document.querySelector('#porcentajeSpan').textContent = `${
-                e.target.value * 100
-            }%`;
+            document.querySelector('#porcentajeSpan').textContent = `${e.target.value * 100
+                }%`;
             calcularPrecioTotal(valorDiaria);
             console.log(`Valor seleccionado: ${porcentaValue}`);
         });
