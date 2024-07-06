@@ -410,3 +410,9 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+.imagen-encontrada {
+    width: 300px;
+    height: auto;
+    margin-left: 300px;
+}

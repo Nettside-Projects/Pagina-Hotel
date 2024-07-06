@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.preload.buscadHabitacionOn((e, html) => {
             if (html === '') {
                 cont.innerHTML =
-                    '<h2 class="habitacion-no-encontrada">No se encontró la habitación. Asegurese de que el número de la habitación exista o que haya ingresado un valor correcto (solo se acepta un número y sin espacios)</h2>';
+                    '<img src="../../../recursos/136881371_4479cbf4-f649-48f9-b069-9b92325577d0.svg" alt="Descripción del SVG" class="imagen-encontrada"> <h2 class="habitacion-no-encontrada">No se encontró la habitación. Asegurese de que el número de la habitación exista o que haya ingresado un valor correcto (solo se acepta un número y sin espacios)</h2>';
             } else {
                 agregarTarjetasHabitaciones(html);
             }
