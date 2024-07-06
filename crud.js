@@ -2,7 +2,7 @@ const path = require('path');
 const sqlite3 = require('sqlite3');
 
 const db = new sqlite3.Database(path.join(__dirname, '/db', 'data.db'));
-
+/* 
 const data = {
     infoHuespedes: [
         {
@@ -41,7 +41,7 @@ const data = {
     ],
     cuentaTotal: 420
 }
-
+ */
 function generarTarjetasHabitacionesHTML(info) {
     let html = ""
     info.forEach((element) => {
@@ -200,7 +200,7 @@ function infoHabitacion(db, idHabitacion, callback) {
     })
 }
 
-function agregarHuespedes(db, data) {
+function agregarHuespedes(db, data,callback) {
     // Insertar la cuenta en la tabla 'cuentas'
     db.run(`INSERT INTO cuentas (cuenta_total) VALUES (?);`, [data.cuentaTotal], function (err) {
         if (err) {
@@ -235,12 +235,18 @@ function agregarHuespedes(db, data) {
                 ], function (err) {
                     if (err) {
                         console.error("Error al insertar en huesped:", err);
+                        callback(err)
+                        return
+                    }else{
+                        let err = ""
+                        callback(err)
+                        cambiarEstadoHabitacion(db, 2, data.infoHuespedes[0].id_habitacion)
                     }
                 });
             });
         });
     });
-    cambiarEstadoHabitacion(db, 2, data.infoHuespedes[0].id_habitacion)
+    
 }
 
 
@@ -381,14 +387,9 @@ function buscarHabitacionPorEstado(db, info, callback) {
     }
 }
 
-const info = {
-    valor: "",
-    nivel: "0"
-}
-
-infoGeneral(db,(info)=>{
-    console.log(info)
-})
+/* agregarHuespedes(db,data,(err)=>{
+    console.log(err)
+}) */
 
 module.exports = {
     validarUsuario: validarUsuario,
@@ -399,6 +400,7 @@ module.exports = {
     buscarHabitacion: buscarHabitacion,
     filtrarPorNivelSend: filtrarPorNivelSend,
     mostrarHabitacionesPorEstado: mostrarHabitacionesPorEstado,
-    buscarHabitacionPorEstado: buscarHabitacionPorEstado
+    buscarHabitacionPorEstado: buscarHabitacionPorEstado,
+    cambiarEstadoHabitacion:cambiarEstadoHabitacion
 
 };

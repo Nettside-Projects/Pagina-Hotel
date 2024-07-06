@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Agregando informacion de las habitaciones */
     contenedorInfoHabitacion[0].textContent = info.numero;
     contenedorInfoHabitacion[1].textContent = info.descripcion;
-    contenedorInfoHabitacion[3].textContent = info.tipo;
-    contenedorInfoHabitacion[4].textContent = info.estado;
+    contenedorInfoHabitacion[2].textContent = info.tipo;
+    contenedorInfoHabitacion[3].textContent = info.estado;
 
     /* Función para crear los campos del formulario del acompañante */
     function createDatosAcompanantes(contador) {
@@ -356,14 +356,19 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('El costo total de la estadía es: ' + costoTotal);
             console.log(contenedorInfoHabitacion[2].textContent) */
             if (isNaN(costoTotal)) {
-                contenedorInfoHabitacion[2].textContent = '$R0';
+                document.querySelector('.type_moneda').textContent = '$R0';
                 return 0;
             } else {
                 console.log(costoTotal);
-                contenedorInfoHabitacion[2].textContent = `$R${costoTotal}`;
+                document.querySelector(
+                    '.type_moneda'
+                ).textContent = `$R${costoTotal}`;
                 return costoTotal;
             }
         } else {
+            document.querySelector('.type_moneda').textContent = `$R${
+                valorDiaria - porcentaValue
+            }`;
             contenedorInfoHabitacion[2].textContent = `$R${
                 valorDiaria - porcentaValue
             }`;
@@ -387,6 +392,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const fechaEntrada = `${document.querySelector('.date').textContent} ${
             document.querySelector('.clock').textContent
         }`;
+        const noButton = document.getElementById('noButton');
+        const yesButton = document.getElementById('yesButton');
 
         for (const [key, value] of formData.entries()) {
             const [grupo, indice, campo] = key.match(
@@ -445,15 +452,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalClienteAdicionado = document.getElementById(
             'modalClienteAdicionado'
         );
-        const noButton = document.getElementById('noButton');
-        const yesButton = document.getElementById('yesButton');
 
         function openModalConfirmar() {
             modalConfirmar.style.display = 'flex';
             noButton.onclick = () => closeModal(modalConfirmar);
             yesButton.onclick = function () {
+                window.preload.infoHuespedesSend(infoGeneral);
+
+                window.preload.notificarErrorRegistroHuesped((e, err) => {
+                    if (err) {
+                        console.log('lol');
+                    }
+                    if (err == '') {
+                        console.log('ll');
+                        openModalClienteAdicionado();
+                    }
+                });
+
                 closeModal(modalConfirmar);
-                openModalClienteAdicionado();
             };
         }
         function openModalClienteAdicionado() {
@@ -473,11 +489,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeModal(modalConfirmar);
             } else if (event.target === modalClienteAdicionado) {
                 closeModal(modalClienteAdicionado);
+                window.location.href =
+                    '../vista_general_habitaciones/vistaGeneral.html';
             }
         };
 
         if (nameValid /* && documentValid && fechaValid && valorValid */) {
             openModalConfirmar();
+            openModal();
         }
     });
 

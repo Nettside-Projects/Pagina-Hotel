@@ -50,4 +50,6 @@ contextBridge.exposeInMainWorld('preload', {
         ipcRenderer.on('buscar-habitacion-ocupadas-send', (e, html) =>
             callback(e, html)
         ),
+    notificarErrorRegistroHuesped: (callback) =>
+        ipcRenderer.on('notificacion-error-registrar-huesped', (e, err) => callback(e, err))
 });
