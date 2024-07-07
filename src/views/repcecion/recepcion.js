@@ -283,9 +283,9 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             document
                 .querySelectorAll('.conten_barra')
-            [
-                document.querySelectorAll('.conten_barra').length - 1
-            ].remove();
+                [
+                    document.querySelectorAll('.conten_barra').length - 1
+                ].remove();
             main.children[main.children.length - 2].remove();
             contador -= 1;
 
@@ -357,11 +357,13 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('El costo total de la estadía es: ' + costoTotal);
             console.log(contenedorInfoHabitacion[2].textContent) */
             if (isNaN(costoTotal)) {
-                document.querySelector(".type_moneda").textContent = '$R0';
+                document.querySelector('.type_moneda').textContent = '$R0';
                 return 0;
             } else {
                 console.log(costoTotal);
-                document.querySelector(".type_moneda").textContent = `$R${costoTotal}`;
+                document.querySelector(
+                    '.type_moneda'
+                ).textContent = `$R${costoTotal}`;
                 return costoTotal;
             }
         } else {
@@ -386,8 +388,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const huespedes = [];
         const estadoPago = false;
         const idHabitacion = info.id_habitacion;
-        const fechaEntrada = `${document.querySelector('.date').textContent} ${document.querySelector('.clock').textContent
-            }`;
+        const fechaEntrada = `${document.querySelector('.date').textContent} ${
+            document.querySelector('.clock').textContent
+        }`;
         const noButton = document.getElementById('noButton');
         const yesButton = document.getElementById('yesButton');
 
@@ -480,7 +483,6 @@ document.addEventListener('DOMContentLoaded', () => {
             'modalClienteAdicionado'
         );
 
-
         function openModalConfirmar() {
             modalConfirmar.style.display = 'flex';
             noButton.onclick = () => closeModal(modalConfirmar);
@@ -514,6 +516,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         function openModalClienteAdicionado() {
             modalClienteAdicionado.style.display = 'flex';
+            setTimeout(() => {
+                closeModal(modalClienteAdicionado);
+                /* window.preload.infoHuespedesSend(infoGeneral); */
+                window.location.href =
+                    '../vista_general_habitaciones/vistaGeneral.html';
+            }, 2000);
         }
         function closeModal(modal) {
             modal.style.display = 'none';
@@ -523,7 +531,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeModal(modalConfirmar);
             } else if (event.target === modalClienteAdicionado) {
                 closeModal(modalClienteAdicionado);
-                window.location.href = "../vista_general_habitaciones/vistaGeneral.html"
+                window.location.href =
+                    '../vista_general_habitaciones/vistaGeneral.html';
             }
         };
 
@@ -598,8 +607,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .querySelector('#porcentajeSelect')
         .addEventListener('change', (e) => {
             porcentaValue = e.target.value;
-            document.querySelector('#porcentajeSpan').textContent = `${e.target.value * 100
-                }%`;
+            document.querySelector('#porcentajeSpan').textContent = `${
+                e.target.value * 100
+            }%`;
             calcularPrecioTotal(valorDiaria);
             console.log(`Valor seleccionado: ${porcentaValue}`);
         });
