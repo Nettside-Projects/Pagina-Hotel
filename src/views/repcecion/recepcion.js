@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let porcentaValue = 1;
     let valorDiaria = 0;
     let contador = 1;
+    let estadoRegistroHuesped = true
 
     /* Agregando informacion de las habitaciones */
     contenedorInfoHabitacion[0].textContent = info.numero;
@@ -344,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Calculamos el costo total de la estadía
             var costoTotal = diferenciaDias * valorDiario;
-            if (porcentaValue % 1 === 0 && porcentaValue != 1) {
+            if (porcentaValue % 1 === 0 && porcentaValue !== 1) {
                 costoTotal = costoTotal - porcentaValue;
                 console.log('Es entero: ' + porcentaValue);
             } else {
@@ -364,9 +365,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return costoTotal;
             }
         } else {
-            document.querySelector(".type_moneda").textContent = `$R${
-                valorDiaria - porcentaValue
-            }`;
+            document.querySelector(".type_moneda").textContent = `$R${valorDiaria - porcentaValue
+                }`;
             contenedorInfoHabitacion[2].textContent = `$R${valorDiaria - porcentaValue
                 }`;
             return valorDiaria - porcentaValue;
@@ -425,6 +425,37 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             return allFilled;
         }
+        /* Trabajando en una nueva función de validación para los inputs para documentos */
+        function validateInputDocument(inputs) {
+            const validaciones = new Set();
+            let allFilled = true;
+            inputs.forEach((e) => {
+                if (e.value === '') {
+                    e.nextElementSibling.textContent =
+                        'Por favor llenar el campo';
+                    setTimeout(() => {
+                        e.nextElementSibling.textContent = '';
+                    }, 5000);
+                    allFilled = false;
+                } else {
+                    e.nextElementSibling.textContent = '';
+                }
+                if (validaciones.has(e.value)) {
+                    e.nextElementSibling.textContent =
+                        'Número de documento duplicado';
+                    setTimeout(() => {
+                        e.nextElementSibling.textContent = '';
+                    }, 5000);
+                    allFilled = false;
+                } else {
+                    e.nextElementSibling.textContent = '';
+                    validaciones.add(e.value)
+                }
+            });
+            console.log(allFilled)
+            return allFilled;
+        }
+
         function validateEspecificInputs(input) {
             if (input.value === '') {
                 input.parentElement.nextElementSibling.textContent =
@@ -439,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         const nameValid = validateInputs(nameInput);
-        const documentValid = validateInputs(documentInput);
+        const documentValid = validateInputDocument(documentInput);
         const fechaValid = validateEspecificInputs(fechaSalida);
         const valorValid = validateEspecificInputs(valor_diaria);
 
@@ -448,29 +479,39 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalClienteAdicionado = document.getElementById(
             'modalClienteAdicionado'
         );
-       
+
 
         function openModalConfirmar() {
             modalConfirmar.style.display = 'flex';
             noButton.onclick = () => closeModal(modalConfirmar);
-            yesButton.onclick = function () {
-                window.preload.infoHuespedesSend(infoGeneral)
-
-                window.preload.notificarErrorRegistroHuesped((e, err) => {
+            yesButton.addEventListener("click", async (e) => {
+                try {
+                    await window.preload.infoHuespedesSend(infoGeneral);
+                    const err = await new Promise((resolve, reject) => {
+                        window.preload.notificarErrorRegistroHuesped((e, err) => {
+                            if (err) {
+                                console.log("error, estado:");
+                                resolve(err);
+                                window.location.reload() // Resuelve la promesa con el error
+                            } else {
+                                resolve(null); // Resuelve la promesa sin error
+                            }
+                        });
+                    });
+                    console.log(err)
                     if (err) {
-                        console.log("lol")
+                        // Detener la función aquí si hay un error
+                        return;
                     }
-                    if(err == ""){
-                    console.log("ll")
                     openModalClienteAdicionado();
-                 
-                    }
-                })
-
+                } catch (error) {
+                    console.error("Error al enviar información de huéspedes:", error);
+                }
                 closeModal(modalConfirmar);
-                
-            };
+            });
         }
+        
+        
         function openModalClienteAdicionado() {
             modalClienteAdicionado.style.display = 'flex';
         }
@@ -489,8 +530,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (nameValid && documentValid && fechaValid && valorValid) {
             /* window.preload.infoHuespedesSend(infoGeneral)
             window.location.href = "../vista_general_habitaciones/vistaGeneral.html" */
-            openModalConfirmar();
-            openModal();
+            openModalConfirmar()
+            console.log("Accedido:" +estadoRegistroHuesped)
+           
         }
     });
 
