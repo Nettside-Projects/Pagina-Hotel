@@ -431,27 +431,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const validaciones = new Set();
             let allFilled = true;
             inputs.forEach((e) => {
+                console.log("estado de iptu: " + e.nextElementSibling.textContent)
                 if (e.value === '') {
-                    e.nextElementSibling.textContent =
-                        'Por favor llenar el campo';
+                    e.nextElementSibling.textContent = 'Por favor llenar el campo';
                     setTimeout(() => {
                         e.nextElementSibling.textContent = '';
                     }, 5000);
                     allFilled = false;
                 } else {
                     e.nextElementSibling.textContent = '';
-                }
-                if (validaciones.has(e.value)) {
-                    e.nextElementSibling.textContent =
-                        'Número de documento duplicado';
-                    setTimeout(() => {
+                    if (validaciones.has(e.value)) {
+                        e.nextElementSibling.textContent =
+                            'Número de documento duplicado';
+                        setTimeout(() => {
+                            e.nextElementSibling.textContent = '';
+                        }, 5000);
+                        allFilled = false;
+                    } else {
                         e.nextElementSibling.textContent = '';
-                    }, 5000);
-                    allFilled = false;
-                } else {
-                    e.nextElementSibling.textContent = '';
-                    validaciones.add(e.value)
+                        if(e.value.trim() != ""){
+                            validaciones.add(e.value)
+                        }      
+                    }
                 }
+         
             });
             console.log(allFilled)
             return allFilled;
