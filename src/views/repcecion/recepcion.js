@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Calculamos el costo total de la estadía
             var costoTotal = diferenciaDias * valorDiario;
-            if (porcentaValue % 1 === 0 && porcentaValue !== 1) {
+            if (porcentaValue % 1 == 0 && porcentaValue != 1) {
                 costoTotal = costoTotal - porcentaValue;
                 console.log('Es entero: ' + porcentaValue);
             } else {
@@ -367,9 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return costoTotal;
             }
         } else {
-            document.querySelector(".type_moneda").textContent = `$R${valorDiaria - porcentaValue
-                }`;
-            contenedorInfoHabitacion[2].textContent = `$R${valorDiaria - porcentaValue
+            document.querySelector(".type_moneda").textContent = `$R${valorDiaria
                 }`;
             return valorDiaria - porcentaValue;
         }
