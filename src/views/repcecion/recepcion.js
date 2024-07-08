@@ -458,7 +458,6 @@ document.addEventListener('DOMContentLoaded', () => {
             noButton.onclick = () => closeModal(modalConfirmar);
             yesButton.onclick = function () {
                 window.preload.infoHuespedesSend(infoGeneral);
-
                 window.preload.notificarErrorRegistroHuesped((e, err) => {
                     if (err) {
                         console.log('lol');
@@ -494,9 +493,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        if (nameValid /* && documentValid && fechaValid && valorValid */) {
+        if (nameValid && documentValid && fechaValid && valorValid) {
             openModalConfirmar();
-            openModal();
         }
     });
 
