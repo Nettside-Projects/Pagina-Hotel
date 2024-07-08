@@ -367,9 +367,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 return costoTotal;
             }
         } else {
-            document.querySelector(".type_moneda").textContent = `$R${valorDiaria
-                }`;
-            return valorDiaria - porcentaValue;
+                if (porcentaValue % 1 == 0 && porcentaValue != 1) {
+                    valorDiaria = valorDiaria - porcentaValue;
+                    document.querySelector(".type_moneda").textContent = `$R${valorDiaria
+                    }`;
+                    console.log('Es entero (salida mismo día): ' + porcentaValue);
+                } else {
+                    valorDiaria = valorDiaria * porcentaValue;
+                    document.querySelector(".type_moneda").textContent = `$R${valorDiaria
+                    }`;
+                    console.log('No es entero (salida mismo día): ' + porcentaValue);
+                }
+                console.log("Valor de costo de salida del mismo día:"+valorDiaria)
+            return valorDiaria;
         }
     }
 
