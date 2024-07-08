@@ -103,6 +103,7 @@ ipcMain.on('recibiendo-mensaje', (e, dato) => {
     mostrarHabitaciones(db, (err, result) => {
         /* windowMain.webContents.on("did-finish-load", () => { */
         windowMain.webContents.send('informacion-general-habitaciones', result);
+        windowMain.webContents.send('informacion-general-habitaciones', result);
         /* }) */
     });
 });

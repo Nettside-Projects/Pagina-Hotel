@@ -173,7 +173,7 @@ function infoGeneral(db, callback) {
     // ... Repite el mismo patrón para las otras consultas ...
 
     // Ejecuta todas las promesas en paralelo
-    Promise.all([getTotalHabitaciones(), getHabitacionesLibres(), getHabitacionesOcupadas(),getHabitacionesReservadas()])
+    Promise.all([getTotalHabitaciones(), getHabitacionesLibres(), getHabitacionesOcupadas(), getHabitacionesReservadas()])
         .then(() => {
             callback(info); // Llama al callback con el objeto info completo
         })
@@ -200,54 +200,98 @@ function infoHabitacion(db, idHabitacion, callback) {
     })
 }
 
-function agregarHuespedes(db, data,callback) {
-    // Insertar la cuenta en la tabla 'cuentas'
-    db.run(`INSERT INTO cuentas (cuenta_total) VALUES (?);`, [data.cuentaTotal], function (err) {
-        if (err) {
-            console.error("Error al insertar en cuentas:", err);
-            return;
-        }
-
-        // Obtener el id_cuenta recién insertado
-        db.get(`SELECT MAX(id_cuenta) AS max_id FROM cuentas;`, function (err, row) {
+function agregarHuespedes(db, data, callback) {
+    db.serialize(() => {
+        db.run("BEGIN TRANSACTION;", (err) => {
             if (err) {
-                console.error("Error al obtener el id_cuenta:", err);
+                console.error("Error al iniciar la transacción:", err);
+                callback(err);
                 return;
             }
 
-            const idCuenta = row.max_id || 0; // Si no hay registros, asigna 0
+            // Insertar la cuenta en la tabla 'cuentas'
+            db.run(`INSERT INTO cuentas (cuenta_total) VALUES (?);`, [data.cuentaTotal], function (err) {
+                if (err) {
+                    console.error("Error al insertar en cuentas:", err);
+                    db.run("ROLLBACK;", (err) => {
+                        if (err) {
+                            console.error("Error al hacer rollback:", err);
+                        }
+                    });
+                    callback(err);
+                    return;
+                }
 
-            // Insertar registros de huéspedes en la tabla 'huesped'
-            data.infoHuespedes.forEach((e, index) => {
-                db.run(`
-                    INSERT INTO huesped (
-                        numero_documento, nombre_completo, nacionalidad, procedencia,
-                        fecha_entrada, fecha_salida, pasaporte, fecha_nacimiento,
-                        profesion, naturalidade, pago_adelantado, estado_pago,
-                        fk_id_habitacion, fk_id_cuenta, fk_id_rol
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-                `, [
-                    e.documento, e.nombre, e.nacionalidad, e.procedencia,
-                    e.fecha_entrada, e.fecha_salida, e.pasaporte, e.fecha_nacimiento,
-                    e.profesion, e.naturalidad, e.pago_adelantado || "",
-                    e.estado_pago, e.id_habitacion, idCuenta,
-                    index === 0 ? 1 : 2
-                ], function (err) {
+                // Obtener el id_cuenta recién insertado
+                db.get(`SELECT MAX(id_cuenta) AS max_id FROM cuentas;`, function (err, row) {
                     if (err) {
-                        console.error("Error al insertar en huesped:", err);
-                        callback(err)
-                        return
-                    }else{
-                        let err = ""
-                        callback(err)
-                        cambiarEstadoHabitacion(db, 2, data.infoHuespedes[0].id_habitacion)
+                        console.error("Error al obtener el id_cuenta:", err);
+                        db.run("ROLLBACK;", (err) => {
+                            if (err) {
+                                console.error("Error al hacer rollback:", err);
+                            }
+                        });
+                        callback(err);
+                        return;
                     }
+
+                    const idCuenta = row.max_id || 0; // Si no hay registros, asigna 0
+
+                    // Insertar registros de huéspedes en la tabla 'huesped'
+                    const inserts = data.infoHuespedes.map((e, index) => {
+                        return new Promise((resolve, reject) => {
+                            db.run(`
+                                INSERT INTO huesped (
+                                    numero_documento, nombre_completo, nacionalidad, procedencia,
+                                    fecha_entrada, fecha_salida, pasaporte, fecha_nacimiento,
+                                    profesion, naturalidade, pago_adelantado, estado_pago,
+                                    fk_id_habitacion, fk_id_cuenta, fk_id_rol
+                                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                            `, [
+                                e.documento, e.nombre, e.nacionalidad, e.procedencia,
+                                e.fecha_entrada, e.fecha_salida, e.pasaporte, e.fecha_nacimiento,
+                                e.profesion, e.naturalidad, e.pago_adelantado || "",
+                                e.estado_pago, e.id_habitacion, idCuenta,
+                                index === 0 ? 1 : 2
+                            ], function (err) {
+                                if (err) {
+                                    console.error("Error al insertar en huesped:", err);
+                                    reject({ err, nombre: e.nombre, documento: e.documento });
+                                } else {
+                                    resolve();
+                                }
+                            });
+                        });
+                    });
+
+                    Promise.all(inserts)
+                        .then(() => {
+                            db.run("COMMIT;", (err) => {
+                                if (err) {
+                                    console.error("Error al hacer commit:", err);
+                                    callback(err);
+                                    return;
+                                }
+                                console.log("Todos los huéspedes se han insertado correctamente.");
+                                cambiarEstadoHabitacion(db, 2, data.infoHuespedes[0].id_habitacion);
+                                callback(null);
+                            });
+                        })
+                        .catch(({ err, nombre, documento }) => {
+                            db.run("ROLLBACK;", (rollbackErr) => {
+                                if (rollbackErr) {
+                                    console.error("Error al hacer rollback:", rollbackErr);
+                                }
+                                callback(err, nombre, documento);
+                            });
+                        });
                 });
             });
         });
     });
-    
 }
+
+
 
 
 function cambiarEstadoHabitacion(db, estado, id_habitacion) {
@@ -401,6 +445,6 @@ module.exports = {
     filtrarPorNivelSend: filtrarPorNivelSend,
     mostrarHabitacionesPorEstado: mostrarHabitacionesPorEstado,
     buscarHabitacionPorEstado: buscarHabitacionPorEstado,
-    cambiarEstadoHabitacion:cambiarEstadoHabitacion
+    cambiarEstadoHabitacion: cambiarEstadoHabitacion
 
 };
