@@ -501,7 +501,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalClienteAdicionado = document.getElementById(
             'modalClienteAdicionado'
         );
-
         function openModalConfirmar() {
             modalConfirmar.style.display = 'flex';
             noButton.onclick = () => closeModal(modalConfirmar);

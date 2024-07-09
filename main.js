@@ -22,6 +22,7 @@ const {
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data.db'))
 );
+const i18next = require('./src/i18n/i18n.js');
 
 //vistas
 let windowLogin;
@@ -43,6 +44,13 @@ function createWindowLogin() {
     });
     windowLogin.setMenu(null);
     windowLogin.loadFile(loginHtml);
+
+    // Enviar el texto traducido a la ventana
+    windowLogin.webContents.on('did-finish-load', () => {
+        windowLogin.webContents.send('i18n', {
+            'login.start': i18next.t('login.start'),
+        });
+    });
 }
 
 app.whenReady().then(() => {
@@ -66,6 +74,13 @@ app.whenReady().then(() => {
         ]
     })
 } */
+
+ipcMain.on('change-language', (event, lng) => {
+    i18next.changeLanguage(lng, (err, t) => {
+        if (err) return console.error('something went wrong loading', err);
+        sendTranslations();
+    });
+});
 
 ipcMain.on('validacion', (e, datos) => {
     console.log(datos);
