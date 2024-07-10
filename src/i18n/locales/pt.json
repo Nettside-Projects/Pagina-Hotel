@@ -1,16 +1,16 @@
 {
     "login": {
-        "start": "Inicio de seción",
+        "start": "Login",
         "namePlaceholder": "Nome",
         "passwordPlaceholder": "Senha",
         "loginButton": "Entrar",
         "errorMessages": {
-            "user": "Usuario no encontrado",
-            "password": "Contraseña incorrecta"
+            "user": "Usuário não encontrado",
+            "password": "Senha incorreta"
         },
         "footer": {
-            "copy": "&copy; {year} Nettside",
-            "version": "Ver: 1.0"
+            "copy": "&copy; {year} Site",
+            "version": "Versão: 1.0"
         }
     }
 }

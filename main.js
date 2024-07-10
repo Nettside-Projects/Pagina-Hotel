@@ -75,13 +75,6 @@ app.whenReady().then(() => {
     })
 } */
 
-ipcMain.on('change-language', (event, lng) => {
-    i18next.changeLanguage(lng, (err, t) => {
-        if (err) return console.error('something went wrong loading', err);
-        sendTranslations();
-    });
-});
-
 ipcMain.on('validacion', (e, datos) => {
     console.log(datos);
     validarUsuario(db, datos, (mensajeValidaciones) => {
