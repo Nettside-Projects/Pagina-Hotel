@@ -72,6 +72,7 @@ async function emialHuespedRegistrado(datos) {
                 <span>📆 Fecha de salida: ${element.fecha_salida}</span>
                 <span>Pago Adelantado: ${element.pago_adelantado}</span>
                 <span>Cuanta Total: ${element.cuentaTotal}</span>
+                <span>🍑🍑🍑🍑🍑🍆🍆🍆🍆</span>
             </div>`
                 )
                 .join('')}
@@ -82,9 +83,10 @@ async function emialHuespedRegistrado(datos) {
 
     // send mail with defined transport object
     const info = await transporter.sendMail({
-        from: '"hoy es viernes y el cuerpo lo sabe 🙈" <mnunexaraujo@gmail.com>',
+        from: '"Front end developer en Nettside" <mnunexaraujo@gmail.com>',
         to: 'salgadocanga@gmail.com',
-        subject: 'Huespedes Registrados baby 😽🍆🍑',
+        subject:
+            'Tu cuenta ha sido bloqueada. ocampixx@gmail.com tu cuenta ha sido bloqueada, Nettside...',
         html: html,
     });
 
