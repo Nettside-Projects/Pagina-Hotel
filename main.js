@@ -27,7 +27,6 @@ const i18next = require('./src/i18n/i18n.js');
 //vistas
 let windowLogin;
 let windowMain;
-
 //rutas
 let loginHtml = './src/views/login/index.html';
 let habitacionesHTML = './src/views/vista_principal/inicio_habitacion.html';
@@ -47,15 +46,38 @@ function createWindowLogin() {
 
     // Enviar el texto traducido a la ventana
     windowLogin.webContents.on('did-finish-load', () => {
-        windowLogin.webContents.send('i18n', {
-            'login.start': i18next.t('login.start'),
-        });
+        sendTranslations(windowLogin);
     });
 }
 
 app.whenReady().then(() => {
     createWindowLogin();
 });
+
+// Listener para cambiar el idioma
+ipcMain.on('change-language', (event, lng) => {
+    i18next.changeLanguage(lng, () => {
+        sendTranslations(windowLogin);
+    });
+});
+
+// Función para enviar traducciones
+function sendTranslations(window) {
+    window.webContents.send('i18n', {
+        'login.start': i18next.t('login.start'),
+        'login.namePlaceholder': i18next.t('login.namePlaceholder'),
+        'login.passwordPlaceholder': i18next.t('login.passwordPlaceholder'),
+        'login.loginButton': i18next.t('login.loginButton'),
+        'login.errorMessages.user': i18next.t('login.errorMessages.user'),
+        'login.errorMessages.password': i18next.t(
+            'login.errorMessages.password'
+        ),
+        'login.footer.copy': i18next
+            .t('login.footer.copy')
+            .replace('{year}', new Date().getFullYear()),
+        'login.footer.version': i18next.t('login.footer.version'),
+    });
+}
 
 /* if (process.env.NODE_ENV !== 'production') {
     templateMenuMain.push({

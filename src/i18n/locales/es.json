@@ -1,12 +1,12 @@
 {
     "login": {
-        "start": "Inicio de seción",
-        "namePlaceholder": "Nome",
-        "passwordPlaceholder": "Senha",
+        "start": "Inicio de Sesión",
+        "namePlaceholder": "Nombre",
+        "passwordPlaceholder": "Contraseña",
         "loginButton": "Entrar",
         "errorMessages": {
-            "user": "Usuario no encontrado",
-            "password": "Contraseña incorrecta"
+            "user": "Error de usuario",
+            "password": "Error de contraseña"
         },
         "footer": {
             "copy": "&copy; {year} Nettside",
