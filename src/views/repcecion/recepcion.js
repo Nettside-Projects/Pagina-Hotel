@@ -283,9 +283,9 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             document
                 .querySelectorAll('.conten_barra')
-                [
-                    document.querySelectorAll('.conten_barra').length - 1
-                ].remove();
+            [
+                document.querySelectorAll('.conten_barra').length - 1
+            ].remove();
             main.children[main.children.length - 2].remove();
             contador -= 1;
 
@@ -402,9 +402,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const huespedes = [];
         const estadoPago = false;
         const idHabitacion = info.id_habitacion;
-        const fechaEntrada = `${document.querySelector('.date').textContent} ${
-            document.querySelector('.clock').textContent
-        }`;
+        const fechaEntrada = `${document.querySelector('.date').textContent} ${document.querySelector('.clock').textContent
+            }`;
         const noButton = document.getElementById('noButton');
         const yesButton = document.getElementById('yesButton');
 
@@ -425,6 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const infoGeneral = {
             infoHuespedes: huespedes,
             cuentaTotal: cuentaTotal,
+            descuento: porcentaValue
         };
         function validateInputs(inputs) {
             let allFilled = true;
@@ -629,9 +629,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .querySelector('#porcentajeSelect')
         .addEventListener('change', (e) => {
             porcentaValue = e.target.value;
-            document.querySelector('#porcentajeSpan').textContent = `${
-                e.target.value * 100
-            }%`;
+            document.querySelector('#porcentajeSpan').textContent = `${e.target.value * 100
+                }%`;
             calcularPrecioTotal(valorDiaria);
             console.log(`Valor seleccionado: ${porcentaValue}`);
         });

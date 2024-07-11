@@ -18,10 +18,13 @@ const {
     filtrarPorNivelSend,
     mostrarHabitacionesPorEstado,
     buscarHabitacionPorEstado,
+    informacionDeHabitacionYHuespedes
 } = require('./crud');
+const {emialHuespedRegistrado} = require('./sendEmail')
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data.db'))
 );
+
 
 //vistas
 let windowLogin;
@@ -89,6 +92,7 @@ ipcMain.on('validacion', (e, datos) => {
                 })
             }) */
             windowMain.show();
+
         }
     });
 });
@@ -118,17 +122,27 @@ ipcMain.on('envioIdHabitacion', (e, dato) => {
 });
 
 ipcMain.on('informacion-huespedes', (e, dato) => {
-    agregarHuespedes(db, dato, (err) => {
-        if (err.code == 'SQLITE_CONSTRAINT') {
-            dialog.showErrorBox(
-                'Error',
-                'Alguno de los números de documentos que se quiere registrar ya está presente en la base de datos'
-            );
-            windowMain.webContents.send(
-                'notificacion-error-registrar-huesped',
-                err
-            );
-        } else {
+    console.log(dato)
+    agregarHuespedes(db, dato, (err, nombre, documento) => {
+        if (err) {
+            if (err.code == 'SQLITE_CONSTRAINT') {
+                dialog.showErrorBox(
+                    'Error',
+                    `Alguno de los números de documentos que se quiere registrar ya está presente en la base de datos:\n
+                    El huesped que quizo registrar:
+                    Nombre: ${nombre},
+                    Documento: ${documento}
+                    `
+
+                );
+                windowMain.webContents.send(
+                    'notificacion-error-registrar-huesped',
+                    err
+                );
+            }
+        }
+        else {
+            emialHuespedRegistrado(dato).catch((err) => {console.log("ERROR DEL SISTEMA->" + err)})
             windowMain.webContents.send(
                 'notificacion-error-registrar-huesped',
                 err
@@ -169,3 +183,9 @@ ipcMain.on('buscar-habitacion-ocupadas', (e, info) => {
         windowMain.webContents.send('buscar-habitacion-ocupadas-send', html);
     });
 });
+
+ipcMain.on('informacion-habitacion-y-huespedes', (e, id_habitacion) => {
+    informacionDeHabitacionYHuespedes(db, id_habitacion, (info) => {
+        windowMain.webContents.send('informacion-habitacion-y-recibido', info);
+    })
+})

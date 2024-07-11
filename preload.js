@@ -51,5 +51,7 @@ contextBridge.exposeInMainWorld('preload', {
             callback(e, html)
         ),
     notificarErrorRegistroHuesped: (callback) =>
-        ipcRenderer.on('notificacion-error-registrar-huesped', (e, err) => callback(e, err))
+        ipcRenderer.on('notificacion-error-registrar-huesped', (e, err) => callback(e, err)),
+    informacionDeHabitacionYHuespedesSend: (id_habitacion) => ipcRenderer.send('informacion-habitacion-y-huespedes',id_habitacion),
+    informacionDeHabitacionYHuespedesOn: (callback) => ipcRenderer.on("informacion-habitacion-y-recibido",(e,info) => callback(e,info))
 });
