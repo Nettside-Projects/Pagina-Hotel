@@ -1,4 +1,15 @@
 const informacionDeHabitacion = JSON.parse(localStorage.getItem("informacionDeHabitacion"))
+function n(inf) {
+    console.log(informacionDeHabitacion.cuenta_total)
+    if(informacionDeHabitacion.cuenta_total == undefined){
+        console.log("Vacío")
+    }
+   
+} 
+ 
+n(informacionDeHabitacion)
+       
+    
 
 /* Agregando información inicial de la habitación a través del JSON recibido */
 // tipo de habitación
@@ -29,17 +40,22 @@ function agregandoInformacionInicial(infoHabitacion, infoHabitacionYHuespede) {
 }
 
 function formatearFecha(fecha) {
-    const fechaOriginal = new Date(fecha);
-    const dia = String(fechaOriginal.getDate()).padStart(2, '0');
-    const mes = String(fechaOriginal.getMonth() + 1).padStart(2,'0'); // Los meses en JavaScript son base 0 (enero = 0)
-    const anio = fechaOriginal.getFullYear();
-    const horas = fechaOriginal.getHours();
-    const minutos = fechaOriginal.getMinutes();
-    const segundos = fechaOriginal.getSeconds();
-
-    // Formatea la fecha en el formato deseado (hora de 12 horas)
-    const ampm = horas >= 12 ? 'PM' : 'AM';
-    const hora12 = horas % 12 || 12;
-    const fechaFormateada = `${dia}/${mes}/${anio} ${hora12}:${minutos}:${segundos} ${ampm}`;
-    return fechaFormateada;
+    if(fecha != ""){
+        const fechaOriginal = new Date(fecha);
+        const dia = String(fechaOriginal.getDate()).padStart(2, '0');
+        const mes = String(fechaOriginal.getMonth() + 1).padStart(2,'0'); // Los meses en JavaScript son base 0 (enero = 0)
+        const anio = fechaOriginal.getFullYear();
+        const horas = fechaOriginal.getHours();
+        const minutos = fechaOriginal.getMinutes();
+        const segundos = fechaOriginal.getSeconds();
+    
+        // Formatea la fecha en el formato deseado (hora de 12 horas)
+        const ampm = horas >= 12 ? 'PM' : 'AM';
+        const hora12 = horas % 12 || 12;
+        const fechaFormateada = `${dia}/${mes}/${anio} ${hora12}:${minutos}:${segundos} ${ampm}`;
+        return fechaFormateada;
+    }else{
+        return "Sin fecha prevista"
+    }
+   
 }

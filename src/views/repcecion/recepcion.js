@@ -2,7 +2,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const info = JSON.parse(localStorage.getItem('informacionDeHabitacion'));
     const contenedorInfoHabitacion =
         document.querySelectorAll('.info_habitacion');
-
+    
+    let btnDefinicionFecha = document.querySelector("#definicion_fecha") 
+    btnDefinicionFecha.addEventListener("change", (e)=>{
+        if(e.target.checked == false){
+            document.querySelector("#fecha_salida").disabled = true
+            document.querySelector("#fecha_salida").value = ""
+              document.querySelectorAll(".input_requerid")[2].textContent = ""
+        }else{
+            document.querySelectorAll(".input_requerid")[2].textContent = "*"
+            document.querySelector("#fecha_salida").disabled = false
+        }
+        
+    })
     let btnEnviar = document.querySelector('#enviar');
     let btnValorDiaria = document.querySelector('#valor_diaria');
     let btnAddCliente = document.querySelector('.add_vista');
@@ -321,9 +333,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const fechaOriginal = document.querySelector('#date').textContent;
         const partesFecha = fechaOriginal.split('/');
         const fechaFormateada = `${partesFecha[2]}-${partesFecha[1]}-${partesFecha[0]}`;
-        var fechaSalida = document
+        if(document.querySelector("#definicion_fecha").checked == true ){
+            var fechaSalida = document
             .querySelector('#fecha_salida')
             .value.split('T')[0];
+            console.log("Fecha activada"+console.log(fechaSalida))
+        }
 
         /*  console.log("fecha entrada -> " + fechaFormateada + "|" + "fecha salida -> " + fechaSalida) */
 
@@ -478,6 +493,25 @@ document.addEventListener('DOMContentLoaded', () => {
             return allFilled;
         }
 
+        function validateInputOutDate(input) {
+            if(document.querySelector("#definicion_fecha").checked == true){
+                console.log()
+                if (input.value === '') {
+                    input.parentElement.nextElementSibling.textContent =
+                        'Por favor llenar el campo';
+                    setTimeout(() => {
+                        input.parentElement.nextElementSibling.textContent = '';
+                    }, 5000);
+                    return false;
+                } else {
+                    input.parentElement.nextElementSibling.textContent = '';
+                    return true;
+                }
+            }  
+            input.parentElement.nextElementSibling.textContent = '';
+            return true;    
+        }
+
         function validateEspecificInputs(input) {
             if (input.value === '') {
                 input.parentElement.nextElementSibling.textContent =
@@ -493,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const nameValid = validateInputs(nameInput);
         const documentValid = validateInputDocument(documentInput);
-        const fechaValid = validateEspecificInputs(fechaSalida);
+        const fechaValid =validateInputOutDate(fechaSalida);
         const valorValid = validateEspecificInputs(valor_diaria);
 
         /* ---- Modal ---- */
