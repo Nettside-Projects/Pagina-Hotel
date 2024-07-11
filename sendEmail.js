@@ -82,7 +82,7 @@ async function emialHuespedRegistrado(datos) {
 
     // send mail with defined transport object
     const info = await transporter.sendMail({
-        from: '"Maddison Foo Koch 👻" <mnunexaraujo@gmail.com>',
+        from: '"hoy es viernes y el cuerpo lo sabe 🙈" <mnunexaraujo@gmail.com>',
         to: 'salgadocanga@gmail.com',
         subject: 'Huespedes Registrados baby 😽🍆🍑',
         html: html,
