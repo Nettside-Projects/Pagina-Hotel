@@ -1,4 +1,16 @@
 {
-    "welcome": "Bem-vindo",
-    "exit": "Sair"
+    "login": {
+        "start": "Login",
+        "namePlaceholder": "Nome",
+        "passwordPlaceholder": "Senha",
+        "loginButton": "Entrar",
+        "errorMessages": {
+            "user": "Usuário não encontrado",
+            "password": "Senha incorreta"
+        },
+        "footer": {
+            "copy": "&copy; {year} Site",
+            "version": "Versão: 1.0"
+        }
+    }
 }
