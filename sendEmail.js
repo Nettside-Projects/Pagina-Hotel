@@ -1,14 +1,14 @@
 //uulp xfxn nmri ffug
 const nodemailer = require('nodemailer');
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: 'smtp.gmail.com',
     port: 465,
     secure: true, // Use `true` for port 465, `false` for all other ports
     auth: {
-        user: "mnunexaraujo@gmail.com",
-        pass: "uulp xfxn nmri ffug",
+        user: 'mnunexaraujo@gmail.com',
+        pass: 'uulp xfxn nmri ffug',
     },
     tls: {
         rejectUnauthorized: false,
@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 });
 
 async function emialHuespedRegistrado(datos) {
-    let html = "";
+    let html = '';
     datos.infoHuespedes.forEach((element) => {
         html += `Nombre: ${element.nombre}<br>`;
     });
@@ -24,16 +24,14 @@ async function emialHuespedRegistrado(datos) {
     // send mail with defined transport object
     const info = await transporter.sendMail({
         from: '"Maddison Foo Koch 👻" <mnunexaraujo@gmail.com>',
-        to: "mnunexaraujo@gmail.com",
-        subject: "Huespedes Registrados",
+        to: 'mnunexaraujo@gmail.com',
+        subject: 'Huespedes Registrados baby 😽🍆🍑',
         html: html,
     });
 
-    console.log("Message sent: %s", info.messageId);
+    console.log('Message sent: %s', info.messageId);
 }
-
-
 
 module.exports = {
-    emialHuespedRegistrado: emialHuespedRegistrado
-}
+    emialHuespedRegistrado: emialHuespedRegistrado,
+};
