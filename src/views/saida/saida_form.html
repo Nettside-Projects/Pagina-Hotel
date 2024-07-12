@@ -12,6 +12,24 @@
 </head>
 
 <body>
+    <div id="modalConfirmar" class="modal">
+        <div class="modal-content">
+            <img class="info-img" src="../../../recursos/info.png" alt="">¿adicionar cliente?
+            <div style="display: flex; width: 100%; justify-content: space-evenly;">
+                <button class="btn-modal" id="noButton"><img class="icon-img" src="../../../recursos/remove.png"
+                        alt=""></button>
+                <button class="btn-modal" id="yesButton"><img class="icon-img" src="../../../recursos/check.png"
+                        alt=""></button>
+            </div>
+        </div>
+    </div>
+    <div id="modalClienteAdicionado" class="modal">
+        <div class="modal-content">
+            <img class="icon-img-g" src="../../../recursos/check.png" alt="">
+            <span>Cliente Adicionado</span>
+        </div>
+    </div>
+
     <!-- menu -->
     <div class="menu">
         <div class="line"></div>
@@ -122,7 +140,7 @@
                     <span class="card_label">E-Mail:</span><span class="card_input">r$0</span>
                 </div>
                 <div class="card-item">
-                  <!--   <span class="card_label"></span> -->
+                    <!--   <span class="card_label"></span> -->
                     <select class="dropdown">
                         <option value="opcion1">Opción 1</option>
                         <option value="opcion2">Opción 2</option>
