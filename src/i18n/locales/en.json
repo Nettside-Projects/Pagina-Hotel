@@ -1,0 +1,16 @@
+{
+    "login": {
+        "start": "Login",
+        "namePlaceholder": "Name",
+        "passwordPlaceholder": "Password",
+        "loginButton": "Login",
+        "errorMessages": {
+            "user": "User not found",
+            "password": "Incorrect password"
+        },
+        "footer": {
+            "copy": "&copy; {year} Website",
+            "version": "Version: 1.0"
+        }
+    }
+}

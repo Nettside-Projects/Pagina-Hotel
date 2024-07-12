@@ -210,7 +210,7 @@ function agregarHuespedes(db, data, callback) {
             }
 
             // Insertar la cuenta en la tabla 'cuentas'
-            db.run(`INSERT INTO cuentas (cuenta_total) VALUES (?);`, [data.cuentaTotal], function (err) {
+            db.run(`INSERT INTO cuentas (cuenta_total,descuento) VALUES (?,?);`, [data.cuentaTotal, data.descuento], function (err) {
                 if (err) {
                     console.error("Error al insertar en cuentas:", err);
                     db.run("ROLLBACK;", (err) => {
@@ -245,14 +245,14 @@ function agregarHuespedes(db, data, callback) {
                                     numero_documento, nombre_completo, nacionalidad, procedencia,
                                     fecha_entrada, fecha_salida, pasaporte, fecha_nacimiento,
                                     profesion, naturalidade, pago_adelantado, estado_pago,
-                                    fk_id_habitacion, fk_id_cuenta, fk_id_rol
-                                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                                    fk_id_habitacion, fk_id_cuenta, fk_id_rol,email,telefono
+                                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?);
                             `, [
                                 e.documento, e.nombre, e.nacionalidad, e.procedencia,
                                 e.fecha_entrada, e.fecha_salida, e.pasaporte, e.fecha_nacimiento,
                                 e.profesion, e.naturalidad, e.pago_adelantado || "",
                                 e.estado_pago, e.id_habitacion, idCuenta,
-                                index === 0 ? 1 : 2
+                                index === 0 ? 1 : 2, e.email, e.telefono
                             ], function (err) {
                                 if (err) {
                                     console.error("Error al insertar en huesped:", err);
@@ -431,8 +431,43 @@ function buscarHabitacionPorEstado(db, info, callback) {
     }
 }
 
-/* agregarHuespedes(db,data,(err)=>{
-    console.log(err)
+function informacionDeHabitacionYHuespedes(db, id_habitacion, callback) {
+    let data = []
+    db.all(`SELECT huesped.nombre_completo, huesped.numero_documento,huesped.telefono,huesped.email,habitacion.numero,
+tipo.tipo_habitacion,cuentas.cuenta_total,cuentas.descuento,huesped.fecha_entrada,huesped.fecha_salida,huesped.fk_id_rol,rol_huesped.rol 
+FROM habitacion 
+INNER JOIN huesped ON huesped.fk_id_habitacion = habitacion.id_habitacion 
+INNER JOIN cuentas ON cuentas.id_cuenta = huesped.fk_id_cuenta 
+INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo
+INNER JOIN rol_huesped ON huesped.fk_id_rol = rol_huesped.id_rol
+WHERE habitacion.id_habitacion = ?`, [id_habitacion], (err, rows) => {
+        if (err) {
+            callback(err)
+            return
+        }
+        rows.forEach(e => {
+            const habitacionYHuespedes = {
+                nombre_completo: e.nombre_completo,
+                numero_documento: e.numero_documento,
+                telefono: e.telefono,
+                email: e.email,
+                numero: e.numero,
+                tipo_habitacion: e.tipo_habitacion,
+                cuenta_total: e.cuenta_total,
+                descuento: e.descuento,
+                fecha_entrada: e.fecha_entrada,
+                fecha_salida: e.fecha_salida,
+                id_rol: e.fk_id_rol,
+                rol: e.rol
+            }
+            data.push(habitacionYHuespedes) 
+        })
+        callback(data)
+    })
+}
+
+/* informacionDeHabitacionYHuespedes(db,1,(info)=>{
+    console.log(info)
 }) */
 
 module.exports = {
@@ -445,6 +480,7 @@ module.exports = {
     filtrarPorNivelSend: filtrarPorNivelSend,
     mostrarHabitacionesPorEstado: mostrarHabitacionesPorEstado,
     buscarHabitacionPorEstado: buscarHabitacionPorEstado,
-    cambiarEstadoHabitacion: cambiarEstadoHabitacion
+    cambiarEstadoHabitacion: cambiarEstadoHabitacion,
+    informacionDeHabitacionYHuespedes: informacionDeHabitacionYHuespedes
 
 };

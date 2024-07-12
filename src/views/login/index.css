@@ -62,27 +62,6 @@ body {
     font-weight: 500;
     line-height: 65.568px;
     text-align: left;
-    text-transform: capitalize;
-  }
-  .de {
-    position: relative;
-    color: #ffffff;
-    font-family: Manrope, var(--default-font-family);
-    font-size: 48px;
-    font-weight: 500;
-    line-height: 65.568px;
-    text-align: left;
-    text-transform: lowercase;
-  }
-  .sesion {
-    position: relative;
-    color: #ffffff;
-    font-family: Manrope, var(--default-font-family);
-    font-size: 48px;
-    font-weight: 500;
-    line-height: 65.568px;
-    text-align: left;
-    text-transform: capitalize;
   }
   .backrow-login {
     position: relative;

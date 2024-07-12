@@ -18,15 +18,18 @@ const {
     filtrarPorNivelSend,
     mostrarHabitacionesPorEstado,
     buscarHabitacionPorEstado,
+    informacionDeHabitacionYHuespedes
 } = require('./crud');
+const {emialHuespedRegistrado} = require('./sendEmail')
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data.db'))
 );
+const i18next = require('./src/i18n/i18n.js');
+
 
 //vistas
 let windowLogin;
 let windowMain;
-
 //rutas
 let loginHtml = './src/views/login/index.html';
 let habitacionesHTML = './src/views/vista_principal/inicio_habitacion.html';
@@ -43,11 +46,41 @@ function createWindowLogin() {
     });
     windowLogin.setMenu(null);
     windowLogin.loadFile(loginHtml);
+
+    // Enviar el texto traducido a la ventana
+    windowLogin.webContents.on('did-finish-load', () => {
+        sendTranslations(windowLogin);
+    });
 }
 
 app.whenReady().then(() => {
     createWindowLogin();
 });
+
+// Listener para cambiar el idioma
+ipcMain.on('change-language', (event, lng) => {
+    i18next.changeLanguage(lng, () => {
+        sendTranslations(windowLogin);
+    });
+});
+
+// Función para enviar traducciones
+function sendTranslations(window) {
+    window.webContents.send('i18n', {
+        'login.start': i18next.t('login.start'),
+        'login.namePlaceholder': i18next.t('login.namePlaceholder'),
+        'login.passwordPlaceholder': i18next.t('login.passwordPlaceholder'),
+        'login.loginButton': i18next.t('login.loginButton'),
+        'login.errorMessages.user': i18next.t('login.errorMessages.user'),
+        'login.errorMessages.password': i18next.t(
+            'login.errorMessages.password'
+        ),
+        'login.footer.copy': i18next
+            .t('login.footer.copy')
+            .replace('{year}', new Date().getFullYear()),
+        'login.footer.version': i18next.t('login.footer.version'),
+    });
+}
 
 /* if (process.env.NODE_ENV !== 'production') {
     templateMenuMain.push({
@@ -89,6 +122,7 @@ ipcMain.on('validacion', (e, datos) => {
                 })
             }) */
             windowMain.show();
+
         }
     });
 });
@@ -118,17 +152,27 @@ ipcMain.on('envioIdHabitacion', (e, dato) => {
 });
 
 ipcMain.on('informacion-huespedes', (e, dato) => {
-    agregarHuespedes(db, dato, (err) => {
-        if (err.code == 'SQLITE_CONSTRAINT') {
-            dialog.showErrorBox(
-                'Error',
-                'Alguno de los números de documentos que se quiere registrar ya está presente en la base de datos'
-            );
-            windowMain.webContents.send(
-                'notificacion-error-registrar-huesped',
-                err
-            );
-        } else {
+    console.log(dato)
+    agregarHuespedes(db, dato, (err, nombre, documento) => {
+        if (err) {
+            if (err.code == 'SQLITE_CONSTRAINT') {
+                dialog.showErrorBox(
+                    'Error',
+                    `Alguno de los números de documentos que se quiere registrar ya está presente en la base de datos:\n
+                    El huesped que quizo registrar:
+                    Nombre: ${nombre},
+                    Documento: ${documento}
+                    `
+
+                );
+                windowMain.webContents.send(
+                    'notificacion-error-registrar-huesped',
+                    err
+                );
+            }
+        }
+        else {
+            emialHuespedRegistrado(dato).catch((err) => {console.log("ERROR DEL SISTEMA->" + err)})
             windowMain.webContents.send(
                 'notificacion-error-registrar-huesped',
                 err
@@ -169,3 +213,9 @@ ipcMain.on('buscar-habitacion-ocupadas', (e, info) => {
         windowMain.webContents.send('buscar-habitacion-ocupadas-send', html);
     });
 });
+
+ipcMain.on('informacion-habitacion-y-huespedes', (e, id_habitacion) => {
+    informacionDeHabitacionYHuespedes(db, id_habitacion, (info) => {
+        windowMain.webContents.send('informacion-habitacion-y-recibido', info);
+    })
+})
