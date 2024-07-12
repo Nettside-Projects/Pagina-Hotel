@@ -13,3 +13,6 @@ i18next.use(Backend).init({
 });
 
 module.exports = i18next;
+
+
+
