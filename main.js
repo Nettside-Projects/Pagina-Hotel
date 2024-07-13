@@ -19,6 +19,7 @@ const {
     mostrarHabitacionesPorEstado,
     buscarHabitacionPorEstado,
     informacionDeHabitacionYHuespedes,
+    informacionHuespedIndividual,
 } = require('./crud');
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data.db'))

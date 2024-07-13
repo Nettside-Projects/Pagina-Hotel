@@ -439,7 +439,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const infoGeneral = {
             infoHuespedes: huespedes,
             cuentaTotal: cuentaTotal,
-            descuento: porcentaValue,
+            valorDiaria: valorDiaria,
+            descuento: porcentaValue
         };
         function validateInputs(inputs) {
             let allFilled = true;

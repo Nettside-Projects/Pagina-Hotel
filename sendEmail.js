@@ -76,6 +76,9 @@ async function emialHuespedRegistrado(datos) {
 
     // send mail with defined transport object
     const info = await transporter.sendMail({
+        from: '"Mensaje desde el programa" <mnunexaraujo@gmail.com>',
+        to: "mnunexaraujo@gmail.com",
+        subject: "Huespedes Registrados",
         from: '"Front end developer en Nettside" <mnunexaraujo@gmail.com>',
         to: 'salgadocanga@gmail.com',
         subject: 'etc etc etc.',
