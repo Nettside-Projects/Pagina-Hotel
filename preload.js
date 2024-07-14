@@ -1,5 +1,16 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
+let informacionHuespedCallback;
+
+window.addEventListener('DOMContentLoaded', () => {
+    ipcRenderer.on('informacion-huesped-individual-recibido', (e, info) => {
+        if (informacionHuespedCallback) {
+            informacionHuespedCallback(e, info);
+        }
+    });
+});
+
+
 contextBridge.exposeInMainWorld('preload', {
     /* funcionDeEjemplo: (variableInformacion) => ipcRenderer.send("informacion",(variableInformacion)),
     funcionDeEjemploRecibir: (callback) => ipcRenderer.on("recibir",(e,html)=> callback(e,html)), */
@@ -54,6 +65,15 @@ contextBridge.exposeInMainWorld('preload', {
         ipcRenderer.on('notificacion-error-registrar-huesped', (e, err) => callback(e, err)),
     informacionDeHabitacionYHuespedesSend: (id_habitacion) => ipcRenderer.send('informacion-habitacion-y-huespedes',id_habitacion),
     informacionDeHabitacionYHuespedesOn: (callback) => ipcRenderer.on("informacion-habitacion-y-recibido",(e,info) => callback(e,info)),
+    
+    //Envío del numero de documento del huesped seleccionado para la respectiva recuperación de datos
+    informacionHuespedIndividualSend: (numero_documento) => ipcRenderer.send("informacion-huesped-individual",numero_documento),
+    
+    //Recibiendo datos del huesped seleccionado
+    informacionHuespedIndividualOn: (callback) => {
+        informacionHuespedCallback = callback;
+    },
+    
     i18n: {
         onTranslate: (callback) =>
             ipcRenderer.on('i18n', (event, data) => callback(data)),

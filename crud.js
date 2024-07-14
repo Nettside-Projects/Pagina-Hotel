@@ -210,7 +210,7 @@ function agregarHuespedes(db, data, callback) {
             }
 
             // Insertar la cuenta en la tabla 'cuentas'
-            db.run(`INSERT INTO cuentas (cuenta_total,descuento) VALUES (?,?);`, [data.cuentaTotal, data.descuento], function (err) {
+            db.run(`INSERT INTO cuentas (cuenta_total,descuento,valor_diaria) VALUES (?,?,?);`, [data.cuentaTotal, data.descuento,data.valorDiaria], function (err) {
                 if (err) {
                     console.error("Error al insertar en cuentas:", err);
                     db.run("ROLLBACK;", (err) => {
@@ -433,8 +433,8 @@ function buscarHabitacionPorEstado(db, info, callback) {
 
 function informacionDeHabitacionYHuespedes(db, id_habitacion, callback) {
     let data = []
-    db.all(`SELECT huesped.nombre_completo, huesped.numero_documento,huesped.telefono,huesped.email,habitacion.numero,
-tipo.tipo_habitacion,cuentas.cuenta_total,cuentas.descuento,huesped.fecha_entrada,huesped.fecha_salida,huesped.fk_id_rol,rol_huesped.rol 
+    db.all(`SELECT huesped.nombre_completo, huesped.numero_documento,huesped.procedencia,huesped.nacionalidad,habitacion.numero,
+tipo.tipo_habitacion,cuentas.cuenta_total,cuentas.descuento,cuentas.valor_diaria,huesped.fecha_entrada,huesped.fecha_salida,huesped.fk_id_rol,rol_huesped.rol 
 FROM habitacion 
 INNER JOIN huesped ON huesped.fk_id_habitacion = habitacion.id_habitacion 
 INNER JOIN cuentas ON cuentas.id_cuenta = huesped.fk_id_cuenta 
@@ -449,11 +449,12 @@ WHERE habitacion.id_habitacion = ?`, [id_habitacion], (err, rows) => {
             const habitacionYHuespedes = {
                 nombre_completo: e.nombre_completo,
                 numero_documento: e.numero_documento,
-                telefono: e.telefono,
-                email: e.email,
+                procedencia: e.procedencia,
+                nacionalidad: e.nacionalidad,
                 numero: e.numero,
                 tipo_habitacion: e.tipo_habitacion,
                 cuenta_total: e.cuenta_total,
+                valor_diaria:e.valor_diaria,
                 descuento: e.descuento,
                 fecha_entrada: e.fecha_entrada,
                 fecha_salida: e.fecha_salida,
@@ -466,9 +467,38 @@ WHERE habitacion.id_habitacion = ?`, [id_habitacion], (err, rows) => {
     })
 }
 
-/* informacionDeHabitacionYHuespedes(db,1,(info)=>{
-    console.log(info)
-}) */
+function informacionHuespedIndividual(db,numero_documento,callback) {
+    db.get(`SELECT huesped.nombre_completo, huesped.numero_documento,huesped.procedencia,huesped.nacionalidad,habitacion.numero,
+        tipo.tipo_habitacion,cuentas.cuenta_total,cuentas.descuento,cuentas.valor_diaria,huesped.fecha_entrada,huesped.fecha_salida,huesped.fk_id_rol,rol_huesped.rol 
+        FROM habitacion 
+        INNER JOIN huesped ON huesped.fk_id_habitacion = habitacion.id_habitacion 
+        INNER JOIN cuentas ON cuentas.id_cuenta = huesped.fk_id_cuenta 
+        INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo
+        INNER JOIN rol_huesped ON huesped.fk_id_rol = rol_huesped.id_rol
+        WHERE huesped.numero_documento = ?`, [numero_documento], (err, row) => {
+                if (err) {
+                    callback(err)
+                    return
+                }
+                    const data = {
+                        nombre_completo: row.nombre_completo,
+                        numero_documento: row.numero_documento,
+                        procedencia: row.procedencia,
+                        nacionalidad: row.nacionalidad,
+                        numero: row.numero,
+                        tipo_habitacion: row.tipo_habitacion,
+                        cuenta_total:row.cuenta_total,
+                        valor_diaria:row.valor_diaria,
+                        descuento: row.descuento,
+                        fecha_entrada: row.fecha_entrada,
+                        fecha_salida: row.fecha_salida,
+                        id_rol: row.fk_id_rol,
+                        rol: row.rol
+                    }
+                
+                callback(data)
+            })
+}
 
 module.exports = {
     validarUsuario: validarUsuario,
@@ -481,6 +511,7 @@ module.exports = {
     mostrarHabitacionesPorEstado: mostrarHabitacionesPorEstado,
     buscarHabitacionPorEstado: buscarHabitacionPorEstado,
     cambiarEstadoHabitacion: cambiarEstadoHabitacion,
-    informacionDeHabitacionYHuespedes: informacionDeHabitacionYHuespedes
+    informacionDeHabitacionYHuespedes: informacionDeHabitacionYHuespedes,
+    informacionHuespedIndividual: informacionHuespedIndividual
 
 };
