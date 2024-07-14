@@ -33,7 +33,9 @@ function cuentaTotalPresente(inf) {
 /* Agregando información inicial de la habitación a través del JSON recibido */
 // tipo de habitación
 
-window.preload.informacionDeHabitacionYHuespedesSend(informacionDeHabitacion.id_habitacion)
+window.preload.informacionDeHabitacionYHuespedesSend(
+    informacionDeHabitacion.id_habitacion
+);
 window.preload.informacionDeHabitacionYHuespedesOn((e, info) => {
     console.log(info)
    agregandoInformacionInicial(informacionDeHabitacion,info)
@@ -61,24 +63,23 @@ function agregandoInformacionInicial(infoHabitacion, infoHabitacionYHuespede) {
 }
 
 function formatearFecha(fecha) {
-    if(fecha != ""){
+    if (fecha != '') {
         const fechaOriginal = new Date(fecha);
         const dia = String(fechaOriginal.getDate()).padStart(2, '0');
-        const mes = String(fechaOriginal.getMonth() + 1).padStart(2,'0'); // Los meses en JavaScript son base 0 (enero = 0)
+        const mes = String(fechaOriginal.getMonth() + 1).padStart(2, '0'); // Los meses en JavaScript son base 0 (enero = 0)
         const anio = fechaOriginal.getFullYear();
         const horas = fechaOriginal.getHours();
         const minutos = fechaOriginal.getMinutes();
         const segundos = fechaOriginal.getSeconds();
-    
+
         // Formatea la fecha en el formato deseado (hora de 12 horas)
         const ampm = horas >= 12 ? 'PM' : 'AM';
         const hora12 = horas % 12 || 12;
         const fechaFormateada = `${dia}/${mes}/${anio} ${hora12}:${minutos}:${segundos} ${ampm}`;
         return fechaFormateada;
-    }else{
-        return "Sin fecha prevista"
+    } else {
+        return 'Sin fecha prevista';
     }
-   
 }
 
 console.log("Desde el archivo fuente")
