@@ -52,6 +52,10 @@
   border-radius: 0 0 1px 1px;
 }
 
+.card .card-item-right {
+  justify-content: right;
+}
+
 .card .card_label {
   color: #4a4a4a;
   font: 500 13px Manrope, var(--default-font-family);
@@ -71,18 +75,28 @@
 }
 
 .card .dropdown {
-  width: 100%;
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
   padding: 10px;
+  border: solid 1px #2E8A26;
   border-radius: 5px;
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background: #35C928 url('') no-repeat right 10px center;
+  background: #35C928;
   cursor: pointer;
 }
 
+.dropdown::after {
+  content: url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"');
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
 .dropdown:hover {
-  border-color: #339999;
+  background: #2E8A26;
 }
 
 .btn-limpieza {
@@ -98,7 +112,6 @@
 .custo-alojamento {
   position: relative;
   background: #E8C1C1;
-  padding-bottom: 60px;
 }
 
 .custo-alojamento h2 {
@@ -113,7 +126,6 @@ table {
   position: relative;
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
 }
 
 thead th {
@@ -136,17 +148,27 @@ select {
   padding: 5px;
 }
 
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #E8C1C1;
+  padding: 20px 60px;
+}
+
 .btn-pagamento {
-  position: absolute;
   bottom: 0;
   right: 0;
   background: #28a745;
   color: #fff;
-  padding: 10px 60px;
+  padding: 12px 60px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  margin: 20px 40px;
+}
+
+.btn-remover-hospede {
+  background: #FF8A00;
 }
 
 /* -------  VENTANA MODAL-------- */
