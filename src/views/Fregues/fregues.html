@@ -82,15 +82,63 @@
     </div>
 
 
-    <div class="main-container">
+    <div class="main-container" >
         <div class="wrapper">
             <div class="buscador">
-                <div class="barra_buscar">Inicio
+                <div class="barra_buscar">Clientes
                 </div>
             </div>
         </div>
+        <div class="contenedorClientes">
+            <div class="barraClientes">
+                <span>Lista de Clientes</span>
+                <button class="btnPdf">
+                    PDF
+                    <img src="../../../recursos/descarga.webp" alt="">
+                </button>
+            </div>
+            <div class="barraFiltros">
+                <div class="flitrohuespe">
+                    <span>Mostrar</span>
+                    <input type="number" id="numClientes" min="10" value="10" style="font-weight: bold;">
+                    <span>resgistros</span>
+                </div>
+                <div class="filtroAcompanante">
+                    <span>Todos</span>
+                    <img src="../../../recursos/flecha_abajo.webp" alt="">
+                </div>
+                <div class="Buscador">
+                        <input class="buscar_lupa" name="text" placeholder="Buscar Quarto..." type="search">
+                    </div>
+                </div>
+                <div class="contenedorLista" >   
+                    <div class="encabezadoLista">
+                        <div class="number">N°</div>
+                        <div class="nombreCliente">Nome completo</div>
+                        <div class="Ndocumento">N° de Documento</div>
+                        <div class="widthDiv">N° Habitacion</div>
+                        <div class="widthDiv">Papel</div>
+                        <div class="widthDiv">Entrada</div>
+                        <div class="accion">Ação</div>
+                    </div>
+                </div>
+                <div class="contenedorFilas" id="contenedorFilas">  
+                </div>
+                <div class="footer">
+                    <p>Mostrando a lista <span></span> a <span id="clientCountDisplay">10</span> de um total de <span>xxx</span> registro</p>
+                    <div class="contendorBtn">
+                        <button style="color: #4B4B4B; background-color: #d9d9d9;" >Anterior</button>
+                        <button class="vistaActiva">1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>4</button>
+                        <button style="color: #0B6660;">Próximo</button>
+                    </div>
+                </div> 
+        </div>
     </div>
     <script src="vistaGeneral.js"></script>
+    <script src="../Fregues/fregues.js"></script>
 </body>
 
 </html>
