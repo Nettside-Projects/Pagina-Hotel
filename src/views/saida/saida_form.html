@@ -12,6 +12,24 @@
 </head>
 
 <body>
+    <div id="modalConfirmar" class="modal">
+        <div class="modal-content">
+            <img class="info-img" src="../../../recursos/info.png" alt="">¿adicionar cliente?
+            <div style="display: flex; width: 100%; justify-content: space-evenly;">
+                <button class="btn-modal" id="noButton"><img class="icon-img" src="../../../recursos/remove.png"
+                        alt=""></button>
+                <button class="btn-modal" id="yesButton"><img class="icon-img" src="../../../recursos/check.png"
+                        alt=""></button>
+            </div>
+        </div>
+    </div>
+    <div id="modalClienteAdicionado" class="modal">
+        <div class="modal-content">
+            <img class="icon-img-g" src="../../../recursos/check.png" alt="">
+            <span>Cliente Adicionado</span>
+        </div>
+    </div>
+
     <!-- menu -->
     <div class="menu">
         <div class="line"></div>
@@ -116,13 +134,13 @@
                     <span class="card_label">Documento:</span><span class="card_input">C.C. 100100100</span>
                 </div>
                 <div class="card_item">
-                    <span class="card_label">Telefone:</span><span class="card_input">r$100,00</span>
+                    <span class="card_label">Nacionalidad:</span><span class="card_input">r$100,00</span>
                 </div>
                 <div class="card_item">
-                    <span class="card_label">E-Mail:</span><span class="card_input">r$0</span>
+                    <span class="card_label">Procedencia:</span><span class="card_input">r$0</span>
                 </div>
                 <div class="card-item">
-                  <!--   <span class="card_label"></span> -->
+                    <!--   <span class="card_label"></span> -->
                     <select class="dropdown">
                         <option value="opcion1">Opción 1</option>
                         <option value="opcion2">Opción 2</option>
@@ -134,11 +152,11 @@
                 <div class="card">
                     <span class="title">Dados Hospedagem</span>
                     <div class="card_item">
-                        <span class="card_label">Hora e Data Entrada:</span><span class="card_input">00:00
+                        <span class="card_label">Hora e Data Entrada:</span><span class="card_input fecha_entrada">00:00
                             00/00/00</span>
                     </div>
                     <div class="card_item">
-                        <span class="card_label">Hora e Data Saida:</span><span class="card_input">00:00 00/00/00</span>
+                        <span class="card_label">Hora e Data Saida:</span><span class="card_input fecha_salida">00:00 00/00/00</span>
                     </div>
                 </div>
                 <div class="btn-limpieza">fazer limpeza do quarto
@@ -161,7 +179,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>R$ 150,00</td>
+                        <td>R$ <input type="number"></td>
                         <td>
                             <select>
                                 <option>Pix</option>
@@ -172,34 +190,6 @@
                         <td>R$ 0,00</td>
                         <td>R$ 150,00</td>
                         <td>R$ 300,00</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>R$ 100,00</td>
-                        <td>
-                            <select>
-                                <option>Pix</option>
-                                <option>Cartão</option>
-                                <option>Dinheiro</option>
-                            </select>
-                        </td>
-                        <td>R$ 0,00</td>
-                        <td>R$ 50,00</td>
-                        <td>R$ 100,00</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>R$ 50,00</td>
-                        <td>
-                            <select>
-                                <option>Pix</option>
-                                <option>Cartão</option>
-                                <option>Dinheiro</option>
-                            </select>
-                        </td>
-                        <td>R$ 0,00</td>
-                        <td>R$ 0,00</td>
-                        <td>R$ 50,00</td>
                         <td></td>
                     </tr>
                 </tbody>

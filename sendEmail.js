@@ -1,4 +1,3 @@
-//uulp xfxn nmri ffug
 const nodemailer = require('nodemailer');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -67,12 +66,6 @@ async function emialHuespedRegistrado(datos) {
                     (element) => `
             <div class="guest">
                 <span>Nombre: ${element.nombre}</span>
-                <span>Documento: ${element.documento}</span>
-                <span>📆 Fecha de entrada: ${element.fecha_entrada}</span>
-                <span>📆 Fecha de salida: ${element.fecha_salida}</span>
-                <span>Pago Adelantado: ${element.pago_adelantado}</span>
-                <span>Cuanta Total: ${element.cuentaTotal}</span>
-                <span>🍑🍑🍑🍑🍑🍆🍆🍆🍆</span>
             </div>`
                 )
                 .join('')}
@@ -83,10 +76,12 @@ async function emialHuespedRegistrado(datos) {
 
     // send mail with defined transport object
     const info = await transporter.sendMail({
+        from: '"Mensaje desde el programa" <mnunexaraujo@gmail.com>',
+        to: "mnunexaraujo@gmail.com",
+        subject: "Huespedes Registrados",
         from: '"Front end developer en Nettside" <mnunexaraujo@gmail.com>',
         to: 'salgadocanga@gmail.com',
-        subject:
-            'Tu cuenta ha sido bloqueada. ocampixx@gmail.com tu cuenta ha sido bloqueada, Nettside...',
+        subject: 'etc etc etc.',
         html: html,
     });
 
