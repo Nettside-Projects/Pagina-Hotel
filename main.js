@@ -20,6 +20,7 @@ const {
     buscarHabitacionPorEstado,
     informacionDeHabitacionYHuespedes,
     informacionHuespedIndividual,
+    mostrarRegistroDePagos
 } = require('./crud');
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data.db'))
@@ -215,5 +216,17 @@ ipcMain.on('buscar-habitacion-ocupadas', (e, info) => {
 ipcMain.on('informacion-habitacion-y-huespedes', (e, id_habitacion) => {
     informacionDeHabitacionYHuespedes(db, id_habitacion, (info) => {
         windowMain.webContents.send('informacion-habitacion-y-recibido', info);
-    });
-});
+    })
+})
+
+ipcMain.on('informacion-huesped-individual',(e,numero_documento)=>{
+    informacionHuespedIndividual(db,numero_documento,(info)=>{
+        windowMain.webContents.send('informacion-huesped-individual-recibido', info);
+    })
+})
+
+ipcMain.on('mostrar-registro-pagos',(e,numero_documento)=>{
+    mostrarRegistroDePagos(db,numero_documento,(info)=>{
+        windowMain.webContents.send('mostrar-registro-pagos-recibido', info);
+    })
+})
