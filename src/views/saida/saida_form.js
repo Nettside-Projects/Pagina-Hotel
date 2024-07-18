@@ -145,37 +145,8 @@ function mostrarRegistroDePagos(numero_documento, cuenta_total) {
                             <td></td>
                         </tr>`
 
-                        let filas = document.querySelectorAll(".fila_pago")
-                        let saldo_anterior = parseInt(filas[filas.length - 1].children[3].textContent.split(" ")[1] || 0)
-                        document.querySelector(".extra").addEventListener("input", (e) => {
-                            if (e.target.value != "") {
-                                filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0)}`
-                                filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0) - (parseInt(document.querySelector(".registro_pago").value) || 0)}`
-            
-                            } else {
-                                if (document.querySelector(".registro_pago").value != "") {
-                                    filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0) - parseInt(document.querySelector(".registro_pago").value || 0)}`
-                                     filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior}`
-                                } else {
-                                    filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior}`
-                                    filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior}`
-                                }
-            
-                            }
-                        })
-            
-                        document.querySelector(".registro_pago").addEventListener("input", (e) => {
-                            let saldo_anterior2 = parseInt(filas[filas.length - 1].children[4].textContent.split(" ")[1] || 0)
-                            if (e.target.value != "") {
-                                console.log("Input lleno")
-                                filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior2 - parseInt(e.target.value || 0)}`
-                            } else {
-                                console.log("Input vacío")
-                                filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior2}`
-                            }
-            
-                        })
-             
+                agregandoEventosDePagos()
+
             }
         } else {
             document.querySelector("tbody").innerHTML += `<tr class="fila_pago">
@@ -192,34 +163,38 @@ function mostrarRegistroDePagos(numero_documento, cuenta_total) {
                             <td>R$ ${cuenta_total}</td>
                             <td></td>
                         </tr>`
-            let filas = document.querySelectorAll(".fila_pago")
-            let saldo_anterior = parseInt(filas[filas.length - 1].children[3].textContent.split(" ")[1] || 0)
-            document.querySelector(".extra").addEventListener("input", (e) => {
-                if (e.target.value != "") {
-                    filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0)}`
-                    filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0) - (parseInt(document.querySelector(".registro_pago").value) || 0)}`
-                } else {
-                    if (document.querySelector(".registro_pago").value != "") {
-                        filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0) - parseInt(document.querySelector(".registro_pago").value || 0)}`
-                         filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior}`
-                    } else {
-                        filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior}`
-                        filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior}`
-                    }
-
-                }
-            })
-
-            document.querySelector(".registro_pago").addEventListener("input", (e) => {
-                let saldo_anterior2 = parseInt(filas[filas.length - 1].children[4].textContent.split(" ")[1] || 0)
-                if (e.target.value != "") {
-                    filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior2 - parseInt(e.target.value || 0)}`
-                } else {
-                    filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior2}`
-                }
-
-            })
+            agregandoEventosDePagos()
         }
+    })
+}
+
+function agregandoEventosDePagos() {
+    let filas = document.querySelectorAll(".fila_pago")
+    let saldo_anterior = parseInt(filas[filas.length - 1].children[3].textContent.split(" ")[1] || 0)
+    document.querySelector(".extra").addEventListener("input", (e) => {
+        if (e.target.value != "") {
+            filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0)}`
+            filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0) - (parseInt(document.querySelector(".registro_pago").value) || 0)}`
+        } else {
+            if (document.querySelector(".registro_pago").value != "") {
+                filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0) - parseInt(document.querySelector(".registro_pago").value || 0)}`
+                filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior}`
+            } else {
+                filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior}`
+                filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior}`
+            }
+
+        }
+    })
+
+    document.querySelector(".registro_pago").addEventListener("input", (e) => {
+        let saldo_anterior2 = parseInt(filas[filas.length - 1].children[4].textContent.split(" ")[1] || 0)
+        if (e.target.value != "") {
+            filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior2 - parseInt(e.target.value || 0)}`
+        } else {
+            filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior2}`
+        }
+
     })
 }
 
