@@ -1,5 +1,7 @@
-const informacionDeHabitacion = JSON.parse(localStorage.getItem("informacionDeHabitacion"))
-let inputSelect = document.querySelector(".dropdown")
+const informacionDeHabitacion = JSON.parse(
+    localStorage.getItem('informacionDeHabitacion')
+);
+let inputSelect = document.querySelector('.dropdown');
 function cuentaTotalPresente(inf) {
     if (inf.length > 0) {
         if (inf[0].fecha_salida == 0) {
@@ -80,21 +82,35 @@ function enviarDatos() {
 
 
 function agregandoInformacionInicial(infoHabitacion, infoHabitacionYHuespede) {
-    let html = ""
-    let txt_informacion_inicial = document.querySelectorAll(".card_input")
-    txt_informacion_inicial[0].textContent = infoHabitacion.numero // numero de habitación
-    txt_informacion_inicial[1].textContent = infoHabitacion.tipo
-    txt_informacion_inicial[3].textContent = infoHabitacionYHuespede[0].descuento === null ? "sin descuento" : infoHabitacionYHuespede[0].descuento
-    txt_informacion_inicial[4].textContent = infoHabitacionYHuespede[0].nombre_completo
-    txt_informacion_inicial[5].textContent = infoHabitacionYHuespede[0].numero_documento
-    txt_informacion_inicial[6].textContent = infoHabitacionYHuespede[0].nacionalidad === null ? 'sin nacionalidad' : infoHabitacionYHuespede[0].nacionalidad
-    txt_informacion_inicial[7].textContent = infoHabitacionYHuespede[0].procedencia === null ? 'sin procedencia' : infoHabitacionYHuespede[0].procedencia
-    txt_informacion_inicial[8].textContent = infoHabitacionYHuespede[0].fecha_entrada
-    txt_informacion_inicial[9].textContent = formatearFecha(infoHabitacionYHuespede[0].fecha_salida)
-    infoHabitacionYHuespede.forEach(e => {
-        html += `<option value="${e.numero_documento}">${e.nombre_completo}</option>`
-    })
-    document.querySelector(".dropdown").innerHTML = html
+    let html = '';
+    let txt_informacion_inicial = document.querySelectorAll('.card_input');
+    txt_informacion_inicial[0].textContent = infoHabitacion.numero; // numero de habitación
+    txt_informacion_inicial[1].textContent = infoHabitacion.tipo;
+    txt_informacion_inicial[3].textContent =
+        infoHabitacionYHuespede[0].descuento === null
+            ? 'sin descuento'
+            : infoHabitacionYHuespede[0].descuento;
+    txt_informacion_inicial[4].textContent =
+        infoHabitacionYHuespede[0].nombre_completo;
+    txt_informacion_inicial[5].textContent =
+        infoHabitacionYHuespede[0].numero_documento;
+    txt_informacion_inicial[6].textContent =
+        infoHabitacionYHuespede[0].nacionalidad === null
+            ? 'sin nacionalidad'
+            : infoHabitacionYHuespede[0].nacionalidad;
+    txt_informacion_inicial[7].textContent =
+        infoHabitacionYHuespede[0].procedencia === null
+            ? 'sin procedencia'
+            : infoHabitacionYHuespede[0].procedencia;
+    txt_informacion_inicial[8].textContent =
+        infoHabitacionYHuespede[0].fecha_entrada;
+    txt_informacion_inicial[9].textContent = formatearFecha(
+        infoHabitacionYHuespede[0].fecha_salida
+    );
+    infoHabitacionYHuespede.forEach((e) => {
+        html += `<option value="${e.numero_documento}">${e.nombre_completo}</option>`;
+    });
+    document.querySelector('.dropdown').innerHTML = html;
 }
 
 function formatearFecha(fecha) {
@@ -119,9 +135,8 @@ function formatearFecha(fecha) {
 
 //Función para enviar y recuperar datos del huesped seleccionado
 function mostrarInformacionNuevaHuesped() {
-
     inputSelect.addEventListener('change', (e) => {
-        window.preload.informacionHuespedIndividualSend(e.target.value)
+        window.preload.informacionHuespedIndividualSend(e.target.value);
         window.preload.informacionHuespedIndividualOn((e, info) => {
             console.log(info)
             let txt_informacion_inicial = document.querySelectorAll(".card_input")
@@ -149,24 +164,38 @@ function mostrarRegistroDePagos(numero_documento, cuenta_total) {
     window.preload.mostrarRegistroDePagosOn((e, info) => {
         console.log(info)
         if (info.length != 0) {
-            let html = ''
-            info.forEach(element => {
+            let html = '';
+            info.forEach((element) => {
                 html += `<tr class="fila_pago">
-                            <td>R$ <input type="number" disabled value="${element.registro_pago}"></td>
+                            <td>R$ <input type="number" disabled value="${
+                                element.registro_pago
+                            }"></td>
                             <td>
                                 <select disabled>
-                                    <option select>${element.metodo_pago}</option>
+                                    <option select>${
+                                        element.metodo_pago
+                                    }</option>
                                 </select>
                             </td>
-                            <td>R$ <input type="number" disabled value="${element.extra}"></td>
-                            <td>R$ ${element.cuenta_actual - element.registro_pago}</td>
+                            <td>R$ <input type="number" disabled value="${
+                                element.extra
+                            }"></td>
+                            <td>R$ ${
+                                element.cuenta_actual - element.registro_pago
+                            }</td>
                             <td>R$ ${element.cuenta_actual}</td>
                             <td></td>
-                        </tr>`
-            })
-            document.querySelector("tbody").innerHTML = html
-            if (info[info.length - 1].cuenta_actual - info[info.length - 1].registro_pago != 0) {
-                document.querySelector("tbody").innerHTML += `<tr class="fila_pago">
+                        </tr>`;
+            });
+            document.querySelector('tbody').innerHTML = html;
+            if (
+                info[info.length - 1].cuenta_actual -
+                    info[info.length - 1].registro_pago !=
+                0
+            ) {
+                document.querySelector(
+                    'tbody'
+                ).innerHTML += `<tr class="fila_pago">
                             <td>R$ <input type="number" class="registro_pago"></td>
                             <td>
                                 <select>
@@ -176,17 +205,22 @@ function mostrarRegistroDePagos(numero_documento, cuenta_total) {
                                 </select>
                             </td>
                             <td>R$ <input type="number" class="extra"></td>
-                            <td>R$ ${info[info.length - 1].cuenta_actual - info[info.length - 1].registro_pago}</td>
-                            <td>R$ ${info[info.length - 1].cuenta_actual - info[info.length - 1].registro_pago}</td>
+                            <td>R$ ${
+                                info[info.length - 1].cuenta_actual -
+                                info[info.length - 1].registro_pago
+                            }</td>
+                            <td>R$ ${
+                                info[info.length - 1].cuenta_actual -
+                                info[info.length - 1].registro_pago
+                            }</td>
                             <td></td>
                         </tr>`
 
                 agregandoEventosDePagos(cuenta_total)
                 enviarRegistroDePago()
-
             }
         } else {
-            document.querySelector("tbody").innerHTML += `<tr class="fila_pago">
+            document.querySelector('tbody').innerHTML += `<tr class="fila_pago">
                             <td>R$ <input type="number" class="registro_pago"></td>
                             <td>
                                 <select>
@@ -216,26 +250,42 @@ function agregandoEventosDePagos(cuenta_actual) {
             filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0)}`
             filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0) - (parseInt(document.querySelector(".registro_pago").value) || 0)}`
         } else {
-            if (document.querySelector(".registro_pago").value != "") {
-                filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0) - parseInt(document.querySelector(".registro_pago").value || 0)}`
-                filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior}`
+            if (document.querySelector('.registro_pago').value != '') {
+                filas[filas.length - 1].children[3].textContent = `R$ ${
+                    saldo_anterior +
+                    parseInt(e.target.value || 0) -
+                    parseInt(
+                        document.querySelector('.registro_pago').value || 0
+                    )
+                }`;
+                filas[
+                    filas.length - 1
+                ].children[4].textContent = `R$ ${saldo_anterior}`;
             } else {
-                filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior}`
-                filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior}`
+                filas[
+                    filas.length - 1
+                ].children[4].textContent = `R$ ${saldo_anterior}`;
+                filas[
+                    filas.length - 1
+                ].children[3].textContent = `R$ ${saldo_anterior}`;
             }
-
         }
-    })
+    });
 
-    document.querySelector(".registro_pago").addEventListener("input", (e) => {
-        let saldo_anterior2 = parseInt(filas[filas.length - 1].children[4].textContent.split(" ")[1] || 0)
-        if (e.target.value != "") {
-            filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior2 - parseInt(e.target.value || 0)}`
+    document.querySelector('.registro_pago').addEventListener('input', (e) => {
+        let saldo_anterior2 = parseInt(
+            filas[filas.length - 1].children[4].textContent.split(' ')[1] || 0
+        );
+        if (e.target.value != '') {
+            filas[filas.length - 1].children[3].textContent = `R$ ${
+                saldo_anterior2 - parseInt(e.target.value || 0)
+            }`;
         } else {
-            filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior2}`
+            filas[
+                filas.length - 1
+            ].children[3].textContent = `R$ ${saldo_anterior2}`;
         }
-
-    })
+    });
 }
 
 
