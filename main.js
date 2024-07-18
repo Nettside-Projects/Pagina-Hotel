@@ -22,12 +22,11 @@ const {
     informacionHuespedIndividual,
     mostrarRegistroDePagos
 } = require('./crud');
-const {emialHuespedRegistrado} = require('./sendEmail')
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data.db'))
 );
-const i18next = require('./src/i18n/i18n.js');
-
+/* const i18next = require('./src/i18n/i18n.js'); */
+const { emialHuespedRegistrado } = require('./sendEmail');
 
 //vistas
 let windowLogin;
@@ -50,9 +49,9 @@ function createWindowLogin() {
     windowLogin.loadFile(loginHtml);
 
     // Enviar el texto traducido a la ventana
-    windowLogin.webContents.on('did-finish-load', () => {
+    /* windowLogin.webContents.on('did-finish-load', () => {
         sendTranslations(windowLogin);
-    });
+    }); */
 }
 
 app.whenReady().then(() => {
@@ -60,13 +59,12 @@ app.whenReady().then(() => {
 });
 
 // Listener para cambiar el idioma
-ipcMain.on('change-language', (event, lng) => {
+/* ipcMain.on('change-language', (event, lng) => {
     i18next.changeLanguage(lng, () => {
         sendTranslations(windowLogin);
     });
 });
 
-// Función para enviar traducciones
 function sendTranslations(window) {
     window.webContents.send('i18n', {
         'login.start': i18next.t('login.start'),
@@ -82,7 +80,7 @@ function sendTranslations(window) {
             .replace('{year}', new Date().getFullYear()),
         'login.footer.version': i18next.t('login.footer.version'),
     });
-}
+} */
 
 /* if (process.env.NODE_ENV !== 'production') {
     templateMenuMain.push({
@@ -124,7 +122,6 @@ ipcMain.on('validacion', (e, datos) => {
                 })
             }) */
             windowMain.show();
-
         }
     });
 });
@@ -154,7 +151,7 @@ ipcMain.on('envioIdHabitacion', (e, dato) => {
 });
 
 ipcMain.on('informacion-huespedes', (e, dato) => {
-    console.log(dato)
+    console.log(dato);
     agregarHuespedes(db, dato, (err, nombre, documento) => {
         if (err) {
             if (err.code == 'SQLITE_CONSTRAINT') {
@@ -165,16 +162,16 @@ ipcMain.on('informacion-huespedes', (e, dato) => {
                     Nombre: ${nombre},
                     Documento: ${documento}
                     `
-
                 );
                 windowMain.webContents.send(
                     'notificacion-error-registrar-huesped',
                     err
                 );
             }
-        }
-        else {
-            emialHuespedRegistrado(dato).catch((err) => {console.log("ERROR DEL SISTEMA->" + err)})
+        } else {
+            emialHuespedRegistrado(dato).catch((err) => {
+                console.log('ERROR DEL SISTEMA->' + err);
+            });
             windowMain.webContents.send(
                 'notificacion-error-registrar-huesped',
                 err

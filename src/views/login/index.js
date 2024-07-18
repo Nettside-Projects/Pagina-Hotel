@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let formulario = document.querySelector('form');
 
     // Traducir el contenido utilizando i18next
-    window.preload.i18n.onTranslate((translations) => {
+    /* window.preload.i18n.onTranslate((translations) => {
         document.querySelectorAll('[data-i18n]').forEach((element) => {
             const key = element.getAttribute('data-i18n');
             element.innerText = translations[key] || element.innerText;
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const key = element.getAttribute('data-i18n-placeholder');
                 element.placeholder = translations[key] || element.placeholder;
             });
-    });
+    }); */
 
     inputs.forEach((input) => {
         input.addEventListener('focus', function () {
