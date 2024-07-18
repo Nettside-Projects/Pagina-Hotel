@@ -500,6 +500,16 @@ function informacionHuespedIndividual(db,numero_documento,callback) {
             })
 }
 
+function mostrarRegistroDePagos(db,numero_documento,callback) {
+    db.all(`SELECT * FROM registro_pagos WHERE registro_pagos.fk_numero_documento = ?`,[numero_documento], (err,rows)=>{
+        callback(rows)
+    })
+}
+
+mostrarRegistroDePagos(db,'1121197946',(r)=>{
+    console.log(r)
+})
+
 module.exports = {
     validarUsuario: validarUsuario,
     infoGeneral: infoGeneral,
@@ -512,6 +522,7 @@ module.exports = {
     buscarHabitacionPorEstado: buscarHabitacionPorEstado,
     cambiarEstadoHabitacion: cambiarEstadoHabitacion,
     informacionDeHabitacionYHuespedes: informacionDeHabitacionYHuespedes,
-    informacionHuespedIndividual: informacionHuespedIndividual
+    informacionHuespedIndividual: informacionHuespedIndividual,
+    mostrarRegistroDePagos: mostrarRegistroDePagos
 
 };

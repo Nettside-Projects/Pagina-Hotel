@@ -19,7 +19,8 @@ const {
     mostrarHabitacionesPorEstado,
     buscarHabitacionPorEstado,
     informacionDeHabitacionYHuespedes,
-    informacionHuespedIndividual
+    informacionHuespedIndividual,
+    mostrarRegistroDePagos
 } = require('./crud');
 const {emialHuespedRegistrado} = require('./sendEmail')
 const db = new sqlite3.Database(
@@ -224,5 +225,11 @@ ipcMain.on('informacion-habitacion-y-huespedes', (e, id_habitacion) => {
 ipcMain.on('informacion-huesped-individual',(e,numero_documento)=>{
     informacionHuespedIndividual(db,numero_documento,(info)=>{
         windowMain.webContents.send('informacion-huesped-individual-recibido', info);
+    })
+})
+
+ipcMain.on('mostrar-registro-pagos',(e,numero_documento)=>{
+    mostrarRegistroDePagos(db,numero_documento,(info)=>{
+        windowMain.webContents.send('mostrar-registro-pagos-recibido', info);
     })
 })

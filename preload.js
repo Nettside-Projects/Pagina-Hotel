@@ -73,7 +73,11 @@ contextBridge.exposeInMainWorld('preload', {
     informacionHuespedIndividualOn: (callback) => {
         informacionHuespedCallback = callback;
     },
-    
+    mostrarRegistroDePagosSend:(numero_documento)=>{
+        ipcRenderer.send("mostrar-registro-pagos",numero_documento)
+    },
+    mostrarRegistroDePagosOn:(callback) =>
+        ipcRenderer.on("mostrar-registro-pagos-recibido",(e,info)=>callback(e,info)),
     i18n: {
         onTranslate: (callback) =>
             ipcRenderer.on('i18n', (event, data) => callback(data)),
