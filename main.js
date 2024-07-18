@@ -230,3 +230,4 @@ ipcMain.on('mostrar-registro-pagos',(e,numero_documento)=>{
         windowMain.webContents.send('mostrar-registro-pagos-recibido', info);
     })
 })
+

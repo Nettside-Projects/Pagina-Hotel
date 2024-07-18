@@ -1,50 +1,83 @@
 const informacionDeHabitacion = JSON.parse(localStorage.getItem("informacionDeHabitacion"))
 let inputSelect = document.querySelector(".dropdown")
 function cuentaTotalPresente(inf) {
-    if (inf[0].fecha_salida == 0) {
-        let partes_fecha = document.querySelector(".fecha_entrada").textContent.split(" ")[0].replaceAll("/", "-").split("-")
-        const fecha_formateada = `${partes_fecha[2]}-${partes_fecha[1]}-${partes_fecha[0]}`;
-        let entrada = new Date(fecha_formateada);
-        let fecha_actual_obj = new Date();
-        const anioActual = fecha_actual_obj.getFullYear();
-        const diaActual = fecha_actual_obj.getDate();
-        const mesActual = fecha_actual_obj.getMonth() + 1;
-        let fecha_actual = new Date(`${anioActual}-${mesActual}-${diaActual}`)
-        var diferenciaMilisegundos = fecha_actual.getTime() - entrada.getTime();
-        var diferenciaDias = diferenciaMilisegundos / (1000 * 60 * 60 * 24);
+    if (inf.length > 0) {
+        if (inf[0].fecha_salida == 0) {
+            let partes_fecha = document.querySelector(".fecha_entrada").textContent.split(" ")[0].replaceAll("/", "-").split("-")
+            const fecha_formateada = `${partes_fecha[2]}-${partes_fecha[1]}-${partes_fecha[0]}`;
+            let entrada = new Date(fecha_formateada);
+            let fecha_actual_obj = new Date();
+            const anioActual = fecha_actual_obj.getFullYear();
+            const diaActual = fecha_actual_obj.getDate();
+            const mesActual = fecha_actual_obj.getMonth() + 1;
+            let fecha_actual = new Date(`${anioActual}-${mesActual}-${diaActual}`)
+            var diferenciaMilisegundos = fecha_actual.getTime() - entrada.getTime();
+            var diferenciaDias = diferenciaMilisegundos / (1000 * 60 * 60 * 24);
 
-        // Redondeamos el número para obtener un número entero de días
-        diferenciaDias = Math.ceil(diferenciaDias) - 1; // Usamos Math.ceil para incluir el último día
-        console.log(diferenciaDias)
-        // Supongamos que este es el valor diario de la habitación
-        var valorDiario = inf[0].valor_diaria;
+            // Redondeamos el número para obtener un número entero de días
+            diferenciaDias = Math.ceil(diferenciaDias) - 1; // Usamos Math.ceil para incluir el último día
+            console.log(diferenciaDias)
+            // Supongamos que este es el valor diario de la habitación
+            var valorDiario = inf[0].valor_diaria;
 
-        // Calculamos el costo total de la estadía
-        var costoTotal = diferenciaDias * valorDiario;
-        document.querySelectorAll(".card_input")[2].textContent = 'R$' + costoTotal
-        return costoTotal
+            // Calculamos el costo total de la estadía
+            var costoTotal = diferenciaDias * valorDiario;
+            document.querySelectorAll(".card_input")[2].textContent = 'R$' + costoTotal
+            return costoTotal
 
+        } else {
+            document.querySelectorAll(".card_input")[2].textContent = 'R$' + inf[0].cuenta_total
+            return inf[0].cuenta_total
+        }
     } else {
-        document.querySelectorAll(".card_input")[2].textContent = 'R$' + inf[0].cuenta_total
-        return inf[0].cuenta_total
+        if (inf.fecha_salida == 0) {
+            let partes_fecha = document.querySelector(".fecha_entrada").textContent.split(" ")[0].replaceAll("/", "-").split("-")
+            const fecha_formateada = `${partes_fecha[2]}-${partes_fecha[1]}-${partes_fecha[0]}`;
+            let entrada = new Date(fecha_formateada);
+            let fecha_actual_obj = new Date();
+            const anioActual = fecha_actual_obj.getFullYear();
+            const diaActual = fecha_actual_obj.getDate();
+            const mesActual = fecha_actual_obj.getMonth() + 1;
+            let fecha_actual = new Date(`${anioActual}-${mesActual}-${diaActual}`)
+            var diferenciaMilisegundos = fecha_actual.getTime() - entrada.getTime();
+            var diferenciaDias = diferenciaMilisegundos / (1000 * 60 * 60 * 24);
+
+            // Redondeamos el número para obtener un número entero de días
+            diferenciaDias = Math.ceil(diferenciaDias) - 1; // Usamos Math.ceil para incluir el último día
+            console.log(diferenciaDias)
+            // Supongamos que este es el valor diario de la habitación
+            var valorDiario = inf.valor_diaria;
+
+            // Calculamos el costo total de la estadía
+            var costoTotal = diferenciaDias * valorDiario;
+            document.querySelectorAll(".card_input")[2].textContent = 'R$' + costoTotal
+            return costoTotal
+
+        } else {
+            document.querySelectorAll(".card_input")[2].textContent = 'R$' + inf.cuenta_total
+            return inf.cuenta_total
+        }
     }
+
 
 }
 /* Agregando información inicial de la habitación a través del JSON recibido */
 // tipo de habitación
+enviarDatos()
+function enviarDatos() {
+    window.preload.informacionDeHabitacionYHuespedesSend(
+        informacionDeHabitacion.id_habitacion
+    );
+    window.preload.informacionDeHabitacionYHuespedesOn((e, info) => {
+        console.log(info)
+        agregandoInformacionInicial(informacionDeHabitacion, info)
+        mostrarInformacionNuevaHuesped()
+        let cuenta_total = cuentaTotalPresente(info)
+        mostrarRegistroDePagos(document.querySelectorAll(".card_input")[5].textContent, cuenta_total)
+        //Con el valor del costo_total se actualiza el valor del costo total de estadía. Así mismo, se registra el pago que se hizo
+    })
+}
 
-window.preload.informacionDeHabitacionYHuespedesSend(
-    informacionDeHabitacion.id_habitacion
-);
-window.preload.informacionDeHabitacionYHuespedesOn((e, info) => {
-    console.log(info)
-    agregandoInformacionInicial(informacionDeHabitacion, info)
-    mostrarInformacionNuevaHuesped()
-    let cuenta_total = cuentaTotalPresente(info)
-    mostrarRegistroDePagos(info[0].numero_documento, cuenta_total)
-    enviarRegistroDePago(cuenta_total)
-    //Con el valor del costo_total se actualiza el valor del costo total de estadía. Así mismo, se registra el pago que se hizo
-})
 
 function agregandoInformacionInicial(infoHabitacion, infoHabitacionYHuespede) {
     let html = ""
@@ -84,8 +117,6 @@ function formatearFecha(fecha) {
     }
 }
 
-console.log("Desde el archivo fuente")
-
 //Función para enviar y recuperar datos del huesped seleccionado
 function mostrarInformacionNuevaHuesped() {
 
@@ -104,14 +135,19 @@ function mostrarInformacionNuevaHuesped() {
             txt_informacion_inicial[8].textContent = info.fecha_entrada
             txt_informacion_inicial[9].textContent = formatearFecha(info.fecha_salida)
 
+            let cuenta_total = cuentaTotalPresente(info)
+            mostrarRegistroDePagos(document.querySelectorAll(".card_input")[5].textContent, cuenta_total)
         })
 
     })
 }
 
 function mostrarRegistroDePagos(numero_documento, cuenta_total) {
+    console.log(cuenta_total)
+    document.querySelector("tbody").innerHTML = ""
     window.preload.mostrarRegistroDePagosSend(numero_documento)
     window.preload.mostrarRegistroDePagosOn((e, info) => {
+        console.log(info)
         if (info.length != 0) {
             let html = ''
             info.forEach(element => {
@@ -145,7 +181,8 @@ function mostrarRegistroDePagos(numero_documento, cuenta_total) {
                             <td></td>
                         </tr>`
 
-                agregandoEventosDePagos()
+                agregandoEventosDePagos(cuenta_total)
+                enviarRegistroDePago()
 
             }
         } else {
@@ -163,14 +200,17 @@ function mostrarRegistroDePagos(numero_documento, cuenta_total) {
                             <td>R$ ${cuenta_total}</td>
                             <td></td>
                         </tr>`
-            agregandoEventosDePagos()
+            agregandoEventosDePagos(cuenta_total)
+            enviarRegistroDePago()
         }
     })
+
 }
 
-function agregandoEventosDePagos() {
+function agregandoEventosDePagos(cuenta_actual) {
     let filas = document.querySelectorAll(".fila_pago")
-    let saldo_anterior = parseInt(filas[filas.length - 1].children[3].textContent.split(" ")[1] || 0)
+    let saldo_anterior = cuenta_actual
+    /* let saldo_anterior = parseInt(filas[filas.length - 1].children[3].textContent.split(" ")[1] || 0) */
     document.querySelector(".extra").addEventListener("input", (e) => {
         if (e.target.value != "") {
             filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0)}`
@@ -198,9 +238,26 @@ function agregandoEventosDePagos() {
     })
 }
 
-function enviarRegistroDePago(filas, cuenta_total) {
 
 
+function enviarRegistroDePago() {
+    let filas = document.querySelectorAll(".fila_pago")
+    let btnEnviarPago = document.querySelectorAll(".btn-pagamento")[1]
+    btnEnviarPago.addEventListener("click", (e) => {
+        if (filas[filas.length - 1].querySelector(".registro_pago").value != "") {
+           const registroPagoInfo = {
+            pago: filas[filas.length - 1].querySelector(".registro_pago").value,
+            metodo_pago: filas[filas.length - 1].querySelector("select").value,
+            extra: filas[filas.length - 1].querySelector(".extra").value || 0,
+            cuenta_total: filas[filas.length - 1].children[3].textContent
+           }
+           console.log(registroPagoInfo)
+        } else {
+            console.log("Está vacío")
+        }
+    })
+
+    
 }
 
 
