@@ -271,3 +271,41 @@ function agregandoEventosDePagos() {
 }
 
 function enviarRegistroDePago(filas, cuenta_total) {}
+
+/* ---- Modal ---- */
+let btnEnviar = document.querySelector('#enviar');
+const noButton = document.getElementById('noButton');
+const yesButton = document.getElementById('yesButton');
+const modalConfirmar = document.getElementById('modalConfirmar');
+const modalClienteAdicionado = document.getElementById(
+    'modalClienteAdicionado'
+);
+function closeModal(modal) {
+    modal.style.display = 'none';
+}
+function openModalClienteAdicionado() {
+    modalClienteAdicionado.style.display = 'flex';
+    setTimeout(() => {
+        closeModal(modalClienteAdicionado);
+        /* window.preload.infoHuespedesSend(infoGeneral); */
+        window.location.href =
+            '../vista_general_habitaciones/vistaGeneral.html';
+    }, 2000);
+}
+function openModalConfirmar() {
+    modalConfirmar.style.display = 'flex';
+    noButton.onclick = () => closeModal(modalConfirmar);
+    yesButton.onclick = () => openModalClienteAdicionado();
+}
+window.onclick = (event) => {
+    if (event.target === modalConfirmar) {
+        closeModal(modalConfirmar);
+    } else if (event.target === modalClienteAdicionado) {
+        closeModal(modalClienteAdicionado);
+        window.location.href =
+            '../vista_general_habitaciones/vistaGeneral.html';
+    }
+};
+btnEnviar.addEventListener('click', (e) => {
+    openModalConfirmar();
+});

@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    window.preload.ActivacionInfoHabitacionOcupadasSend('txt-activation-ocupadas');
+    window.preload.ActivacionInfoHabitacionOcupadasSend(
+        'txt-activation-ocupadas'
+    );
     const cont = document.querySelector('.flex-row-b');
     const btnBuscar = document.querySelector('.buscar_lupa');
 
@@ -22,9 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
     btnBuscar.addEventListener('keyup', (e) => {
         const info = {
             valor: e.target.value,
-            estado: "Ocupado",
-            nivel: document.querySelector(".pestaña_activa").getAttribute("id_nivel")
-        }
+            estado: 'Ocupado',
+            nivel: document
+                .querySelector('.pestaña_activa')
+                .getAttribute('id_nivel'),
+        };
         window.preload.buscarHabitacionOcupadasSend(info);
         window.preload.buscarHabitacionOcupadasOn((e, html) => {
             if (html === '') {
@@ -90,43 +94,45 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-    document.querySelectorAll(".nivel").forEach(e  => {
-        e.addEventListener("click",e => {
-            document.querySelectorAll(".nivel").forEach(e => {
-                e.classList.remove("pestaña_activa")
-            } )
-            e.target.classList.add("pestaña_activa")
-            if(e.target.classList.contains("todoxd")){
-                window.preload.ActivacionInfoHabitacionOcupadasSend('txt-activation');
+    document.querySelectorAll('.nivel').forEach((e) => {
+        e.addEventListener('click', (e) => {
+            document.querySelectorAll('.nivel').forEach((e) => {
+                e.classList.remove('pestaña_activa');
+            });
+            e.target.classList.add('pestaña_activa');
+            if (e.target.classList.contains('todoxd')) {
+                window.preload.ActivacionInfoHabitacionOcupadasSend(
+                    'txt-activation'
+                );
                 window.preload.InfoHabitacionesOcupadasOn((e, html) => {
                     agregarTarjetasHabitaciones(html);
                 });
-            } else if(e.target.classList.contains("primer_nivel")){
+            } else if (e.target.classList.contains('primer_nivel')) {
                 const infoFiltro = {
-                    nivel : "Nivel 1",
-                    estado: "Ocupado"
-                }
-                window.preload.filtrarPorNivelSend(infoFiltro)
-                window.preload.filtrarPorNivelOn((e,html) => {
+                    nivel: 'Nivel 1',
+                    estado: 'Ocupado',
+                };
+                window.preload.filtrarPorNivelSend(infoFiltro);
+                window.preload.filtrarPorNivelOn((e, html) => {
                     agregarTarjetasHabitaciones(html);
-                })
-            }else if(e.target.classList.contains("segundo_nivel")){
+                });
+            } else if (e.target.classList.contains('segundo_nivel')) {
                 const infoFiltro = {
-                    nivel : "Nivel 2",
-                    estado: "Ocupado"
-                }
-                window.preload.filtrarPorNivelSend(infoFiltro)
-                window.preload.filtrarPorNivelOn((e,html) => {
+                    nivel: 'Nivel 2',
+                    estado: 'Ocupado',
+                };
+                window.preload.filtrarPorNivelSend(infoFiltro);
+                window.preload.filtrarPorNivelOn((e, html) => {
                     if (html === '') {
                         cont.innerHTML =
                             '<h2 class="habitacion-no-encontrada">No se encunetran habitaciones ocupadas dentro de este nível</h2>';
                     } else {
                         agregarTarjetasHabitaciones(html);
                     }
-                })
+                });
             }
-            
-            document.querySelector(".flex-row-b").innerHTML = ""
-        })
-    })
+
+            document.querySelector('.flex-row-b').innerHTML = '';
+        });
+    });
 });

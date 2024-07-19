@@ -171,12 +171,22 @@ select {
   background: #FF8A00;
 }
 
-/* -------  VENTANA MODAL-------- */
-#openModalButton {
-  padding: 10px 20px;
-  font-size: 16px;
+#enviar{
+  background: #0B6660;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
   cursor: pointer;
 }
+#enviar:hover{
+  background: #0d7a73;
+  transform: translateY(-3px);
+}
+
+/* -------  VENTANA MODAL-------- */
 .modal {
   display: none;
   position: fixed;
@@ -187,7 +197,6 @@ select {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.4);
 }
 .modal-content {
@@ -210,23 +219,19 @@ select {
   font-size: 28px;
   font-weight: bold;
 }
-
 .close:hover,
 .close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
-
 .modal-content .info-img {
   width: 110px;
   height: 110px;
 }
-
 .btn-modal {
   all: unset;
 }
-
 .icon-img {
   width: 51px;
   height: 51px;
