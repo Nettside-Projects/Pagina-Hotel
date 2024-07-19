@@ -20,7 +20,8 @@ const {
     buscarHabitacionPorEstado,
     informacionDeHabitacionYHuespedes,
     informacionHuespedIndividual,
-    mostrarRegistroDePagos
+    mostrarRegistroDePagos,
+    registrarPago
 } = require('./crud');
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data.db'))
@@ -219,14 +220,27 @@ ipcMain.on('informacion-habitacion-y-huespedes', (e, id_habitacion) => {
     })
 })
 
-ipcMain.on('informacion-huesped-individual',(e,numero_documento)=>{
-    informacionHuespedIndividual(db,numero_documento,(info)=>{
+ipcMain.on('informacion-huesped-individual', (e, numero_documento) => {
+    informacionHuespedIndividual(db, numero_documento, (info) => {
         windowMain.webContents.send('informacion-huesped-individual-recibido', info);
     })
 })
 
-ipcMain.on('mostrar-registro-pagos',(e,numero_documento)=>{
-    mostrarRegistroDePagos(db,numero_documento,(info)=>{
+ipcMain.on('mostrar-registro-pagos', (e, numero_documento) => {
+    mostrarRegistroDePagos(db, numero_documento, (info) => {
         windowMain.webContents.send('mostrar-registro-pagos-recibido', info);
     })
 })
+
+ipcMain.on('registrar-pago', (e, registrar_pago) => {
+    console.log(registrar_pago)
+    registrarPago(db, registrar_pago, (err) => {
+        if (err) {
+            dialog.showErrorBox(
+                'Error',
+                `${err}`
+            );
+        }
+    })
+})
+
