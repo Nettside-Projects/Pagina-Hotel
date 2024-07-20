@@ -210,7 +210,7 @@ function agregarHuespedes(db, data, callback) {
             }
 
             // Insertar la cuenta en la tabla 'cuentas'
-            db.run(`INSERT INTO cuentas (cuenta_total,descuento,valor_diaria) VALUES (?,?,?);`, [data.cuentaTotal, data.descuento,data.valorDiaria], function (err) {
+            db.run(`INSERT INTO cuentas (cuenta_total,descuento,valor_diaria) VALUES (?,?,?);`, [data.cuentaTotal, data.descuento, data.valorDiaria], function (err) {
                 if (err) {
                     console.error("Error al insertar en cuentas:", err);
                     db.run("ROLLBACK;", (err) => {
@@ -454,20 +454,20 @@ WHERE habitacion.id_habitacion = ?`, [id_habitacion], (err, rows) => {
                 numero: e.numero,
                 tipo_habitacion: e.tipo_habitacion,
                 cuenta_total: e.cuenta_total,
-                valor_diaria:e.valor_diaria,
+                valor_diaria: e.valor_diaria,
                 descuento: e.descuento,
                 fecha_entrada: e.fecha_entrada,
                 fecha_salida: e.fecha_salida,
                 id_rol: e.fk_id_rol,
                 rol: e.rol
             }
-            data.push(habitacionYHuespedes) 
+            data.push(habitacionYHuespedes)
         })
         callback(data)
     })
 }
 
-function informacionHuespedIndividual(db,numero_documento,callback) {
+function informacionHuespedIndividual(db, numero_documento, callback) {
     db.get(`SELECT huesped.nombre_completo, huesped.numero_documento,huesped.procedencia,huesped.nacionalidad,habitacion.numero,
         tipo.tipo_habitacion,cuentas.cuenta_total,cuentas.descuento,cuentas.valor_diaria,huesped.fecha_entrada,huesped.fecha_salida,huesped.fk_id_rol,rol_huesped.rol 
         FROM habitacion 
@@ -476,38 +476,71 @@ function informacionHuespedIndividual(db,numero_documento,callback) {
         INNER JOIN tipo ON tipo.id_tipo = habitacion.fk_id_tipo
         INNER JOIN rol_huesped ON huesped.fk_id_rol = rol_huesped.id_rol
         WHERE huesped.numero_documento = ?`, [numero_documento], (err, row) => {
-                if (err) {
-                    callback(err)
-                    return
-                }
-                    const data = {
-                        nombre_completo: row.nombre_completo,
-                        numero_documento: row.numero_documento,
-                        procedencia: row.procedencia,
-                        nacionalidad: row.nacionalidad,
-                        numero: row.numero,
-                        tipo_habitacion: row.tipo_habitacion,
-                        cuenta_total:row.cuenta_total,
-                        valor_diaria:row.valor_diaria,
-                        descuento: row.descuento,
-                        fecha_entrada: row.fecha_entrada,
-                        fecha_salida: row.fecha_salida,
-                        id_rol: row.fk_id_rol,
-                        rol: row.rol
-                    }
-                
-                callback(data)
-            })
+        if (err) {
+            callback(err)
+            return
+        }
+        const data = {
+            nombre_completo: row.nombre_completo,
+            numero_documento: row.numero_documento,
+            procedencia: row.procedencia,
+            nacionalidad: row.nacionalidad,
+            numero: row.numero,
+            tipo_habitacion: row.tipo_habitacion,
+            cuenta_total: row.cuenta_total,
+            valor_diaria: row.valor_diaria,
+            descuento: row.descuento,
+            fecha_entrada: row.fecha_entrada,
+            fecha_salida: row.fecha_salida,
+            id_rol: row.fk_id_rol,
+            rol: row.rol
+        }
+
+        callback(data)
+    })
 }
 
-function mostrarRegistroDePagos(db,numero_documento,callback) {
-    db.all(`SELECT * FROM registro_pagos WHERE registro_pagos.fk_numero_documento = ?`,[numero_documento], (err,rows)=>{
+function mostrarRegistroDePagos(db, /* numero_documento */id_habitacion, callback) {
+    /*   db.all(`SELECT * FROM registro_pagos WHERE registro_pagos.fk_numero_documento = ?`, [numero_documento], (err, rows) => {
+          callback(rows)
+      }) */
+
+      /* Arreglar el roden en que se muestra los registros (por la fecha) */
+    db.all(` SELECT registro_pagos.* FROM registro_pagos INNER JOIN huesped ON huesped.numero_documento = registro_pagos.fk_numero_documento 
+WHERE huesped.fk_id_habitacion = ? ORDER BY registro_pagos.id_registro_pagos ASC`, [/* numero_documento */ id_habitacion], (err, rows) => {
         callback(rows)
     })
 }
 
-mostrarRegistroDePagos(db,'1121197946',(r)=>{
-    console.log(r)
+function registrarPago(db, data, callback) {
+    db.run(`INSERT INTO registro_pagos (
+        registro_pago,fecha_pago,metodo_pago,fk_numero_documento,cuenta_actual,extra
+        ) VALUES (?, ?, ?, ?, ?, ?);`, [data.pago, data.fecha_pago, data.metodo_pago, data.documento, data.cuenta_total, data.extra],
+        function (err) {
+            if (err) {
+                callback(err)
+                return
+            }
+            db.run(`UPDATE cuentas
+                SET cuenta_total = ?
+                WHERE EXISTS (
+                    SELECT 1
+                    FROM huesped
+                    WHERE huesped.fk_id_cuenta = cuentas.id_cuenta
+                      AND huesped.numero_documento = ?
+                );`, [data.cuenta_total, data.documento], function (err) {
+                if (err) {
+                    callback(err)
+                    return
+                }
+            })
+        })
+
+
+}
+
+mostrarRegistroDePagos(db,6,(row)=>{
+    console.log(row)
 })
 
 module.exports = {
@@ -523,6 +556,7 @@ module.exports = {
     cambiarEstadoHabitacion: cambiarEstadoHabitacion,
     informacionDeHabitacionYHuespedes: informacionDeHabitacionYHuespedes,
     informacionHuespedIndividual: informacionHuespedIndividual,
-    mostrarRegistroDePagos: mostrarRegistroDePagos
+    mostrarRegistroDePagos: mostrarRegistroDePagos,
+    registrarPago: registrarPago
 
 };
