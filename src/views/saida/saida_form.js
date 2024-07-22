@@ -255,9 +255,10 @@ function mostrarRegistroDePagos(
             } else {
                 /* Agregar algún cambio (como sería una sencilla animación) al botón de "Salvar pagamento" en caso de que la cuenta total sea  menor o igual 0*/
 
-                /* Botón ya seleccionado */ let btnConcluirPagamento =
+                /* Botón ya seleccionado */
+                let btnConcluirPagamento =
                     document.querySelectorAll('.btn-pagamento')[1];
-                console.log('Llego a cero');
+                console.log(btnConcluirPagamento);
             }
         } else {
             document.querySelector('tbody').innerHTML += `<tr class="fila_pago">
@@ -410,4 +411,3 @@ function enviarRegistroDePago(numero_documento) {
         }
     });
 }
-f2e56f504981736f50a97c034b3f39c373d8add;

@@ -274,15 +274,19 @@
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
-  padding-bottom: 18;
+  padding-bottom: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   flex-direction: column;
   gap: 15px;
   border: 1px solid #888;
   width: 40%;
   border-radius: 10px;
+  color: #000;
+  font-family: manrope;
+  font-size: 20px;
 }
 .close {
   color: #aaa;
