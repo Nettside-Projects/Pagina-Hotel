@@ -16,7 +16,8 @@ const transporter = nodemailer.createTransport({
 
 async function emialHuespedRegistrado(datos) {
     let html = '';
-    datos.infoHuespedes.forEach((element) => {
+    datos.infoHuespedes.forEach((index, element) => {
+        const num_huespedes = index + 1;
         html += `<html>
     <head>
         <style>
@@ -77,8 +78,8 @@ async function emialHuespedRegistrado(datos) {
     // send mail with defined transport object
     const info = await transporter.sendMail({
         from: '"Mensaje desde el programa" <mnunexaraujo@gmail.com>',
-        to: "mnunexaraujo@gmail.com",
-        subject: "Huespedes Registrados",
+        to: 'mnunexaraujo@gmail.com',
+        subject: num_huespedes + ' nuevos huespedes registrados',
         from: '"Front end developer en Nettside" <mnunexaraujo@gmail.com>',
         to: 'salgadocanga@gmail.com',
         subject: 'etc etc etc.',

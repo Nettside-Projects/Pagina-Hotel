@@ -1,13 +1,18 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 let informacionHuespedCallback;
-
+let mostrarRegistroDePagosCallback;
 window.addEventListener('DOMContentLoaded', () => {
     ipcRenderer.on('informacion-huesped-individual-recibido', (e, info) => {
         if (informacionHuespedCallback) {
             informacionHuespedCallback(e, info);
         }
     });
+    ipcRenderer.on('mostrar-registro-pagos-recibido',(e,info) => {
+        if(mostrarRegistroDePagosCallback){
+            mostrarRegistroDePagosCallback(e, info)
+        }
+    })
 });
 
 
@@ -73,7 +78,15 @@ contextBridge.exposeInMainWorld('preload', {
     informacionHuespedIndividualOn: (callback) => {
         informacionHuespedCallback = callback;
     },
-    
+    mostrarRegistroDePagosSend:(numero_documento)=>{
+        ipcRenderer.send("mostrar-registro-pagos",numero_documento)
+    },
+    mostrarRegistroDePagosOn: (callback) => {
+        mostrarRegistroDePagosCallback = callback;
+    },
+    enviarRegistroDePagoSend:(registro_pago)=>{
+        ipcRenderer.send("registrar-pago",registro_pago)
+    },
     i18n: {
         onTranslate: (callback) =>
             ipcRenderer.on('i18n', (event, data) => callback(data)),

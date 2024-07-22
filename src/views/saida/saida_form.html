@@ -139,8 +139,7 @@
                 <div class="card_item">
                     <span class="card_label">Procedencia:</span><span class="card_input">r$0</span>
                 </div>
-                <div class="card-item">
-                    <!--   <span class="card_label"></span> -->
+                <div class="card_item card-item-right">
                     <select class="dropdown">
                         <option value="opcion1">Opción 1</option>
                         <option value="opcion2">Opción 2</option>
@@ -156,7 +155,8 @@
                             00/00/00</span>
                     </div>
                     <div class="card_item">
-                        <span class="card_label">Hora e Data Saida:</span><span class="card_input fecha_salida">00:00 00/00/00</span>
+                        <span class="card_label">Hora e Data Saida:</span><span class="card_input fecha_salida">00:00
+                            00/00/00</span>
                     </div>
                 </div>
                 <div class="btn-limpieza">fazer limpeza do quarto
@@ -178,7 +178,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                   <!--  <tr class="fila_pago">
                         <td>R$ <input type="number"></td>
                         <td>
                             <select>
@@ -187,14 +187,17 @@
                                 <option>Dinheiro</option>
                             </select>
                         </td>
-                        <td>R$ 0,00</td>
+                        <td>R$ <input type="number"></td>
                         <td>R$ 150,00</td>
                         <td>R$ 300,00</td>
                         <td></td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
-            <button class="btn-pagamento">Concluir o Pagamento</button>
+            <div class="btn-container">
+                <button class="btn-pagamento btn-remover-hospede">Remover Hóspede</button>
+                <button class="btn-pagamento">Salvar pagamento</button>
+            </div>
         </section>
     </div>
     <script src="../saida/saida_form.js"></script>

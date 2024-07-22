@@ -9,9 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#fecha_salida').disabled = true;
             document.querySelector('#fecha_salida').value = '';
             document.querySelectorAll('.input_requerid')[2].textContent = '';
+            document.querySelector(".type_moneda").textContent = "Valor indefinido..."
         } else {
             document.querySelectorAll('.input_requerid')[2].textContent = '*';
             document.querySelector('#fecha_salida').disabled = false;
+            document.querySelector(".type_moneda").textContent = "$R0"
         }
     });
     let btnEnviar = document.querySelector('#enviar');
@@ -336,7 +338,8 @@ document.addEventListener('DOMContentLoaded', () => {
             var fechaSalida = document
                 .querySelector('#fecha_salida')
                 .value.split('T')[0];
-            console.log('Fecha activada' + console.log(fechaSalida));
+        }else{
+              return 0
         }
 
         /*  console.log("fecha entrada -> " + fechaFormateada + "|" + "fecha salida -> " + fechaSalida) */
@@ -440,7 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
             infoHuespedes: huespedes,
             cuentaTotal: cuentaTotal,
             valorDiaria: valorDiaria,
-            descuento: porcentaValue
+            descuento: porcentaValue,
         };
         function validateInputs(inputs) {
             let allFilled = true;
