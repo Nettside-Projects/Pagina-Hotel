@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let btnValorDiaria = document.querySelector('#valor_diaria');
     let btnAddCliente = document.querySelector('.add_vista');
     let main = document.querySelector('form');
-    let porcentaValue = 1;
+    let porcentaValue = 0;
     let valorDiaria = 0;
     let contador = 1;
     let estadoRegistroHuesped = true;
@@ -367,8 +367,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 costoTotal = costoTotal - porcentaValue;
                 console.log('Es entero: ' + porcentaValue);
             } else {
-                costoTotal = costoTotal * porcentaValue;
+                costoTotal -= (costoTotal * porcentaValue);
+                
                 console.log('No es entero: ' + porcentaValue);
+                console.log('Valor con descuento: ' +costoTotal);
             }
 
             /*   console.log('El huésped se hospedará por ' + diferenciaDias + ' días.');
