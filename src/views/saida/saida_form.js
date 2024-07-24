@@ -349,12 +349,7 @@ function closeModal(modal) {
 }
 function openModalClienteAdicionado() {
     modalClienteAdicionado.style.display = 'flex';
-    setTimeout(() => {
-        closeModal(modalClienteAdicionado);
-        /* window.preload.infoHuespedesSend(infoGeneral); */
-        window.location.href =
-            '../vista_general_habitaciones/vistaGeneral.html';
-    }, 2000);
+    closeModal(modalConfirmar);
 }
 function openModalConfirmar() {
     modalConfirmar.style.display = 'flex';
