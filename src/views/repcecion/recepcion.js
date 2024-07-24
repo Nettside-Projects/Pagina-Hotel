@@ -549,7 +549,6 @@ document.addEventListener('DOMContentLoaded', () => {
         function openModalClienteAdicionado() {
             modalClienteAdicionado.style.display = 'flex';
             setTimeout(() => {
-                closeModal(modalClienteAdicionado);
                 /* window.preload.infoHuespedesSend(infoGeneral); */
                 window.location.href =
                     '../vista_general_habitaciones/vistaGeneral.html';

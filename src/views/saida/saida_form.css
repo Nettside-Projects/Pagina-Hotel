@@ -205,20 +205,22 @@ select {
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto;
-  padding: 20px;
-  padding-bottom: 18px;
+  padding: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   flex-direction: column;
-  gap: 15px;
+  gap: 70px;
   border: 1px solid #888;
   width: 40%;
   border-radius: 10px;
   color: #000;
   font-family: manrope;
   font-size: 20px;
+}
+.modal-content.modal-1 {
+  padding-bottom: 18px !important;
 }
 .close {
   color: #aaa;
@@ -591,4 +593,39 @@ select {
     opacity: 1;
     transform: translateY(0);
   }
+}
+.corto {
+  height: 27px;
+  background: #EAE8E8;
+  border: 4px;
+  width: 189px;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+.barra_input {
+  width: 80%;
+  height: 22px !important;
+  border-radius: 0 5px 5px 0;
+  border: 1px solid #111;
+}
+
+.modal-content .flex {
+  display: flex;
+  gap: 35px;
+  margin-inline: auto;
+}
+.modal-content .btn {
+  width: 190px;
+  padding-block: 8px;
+  border: 1px solid #A2A2A2;
+  border-radius: 8px;
+}
+.modal-content .btn-cancelar {
+  background-color: #E0E0E0;
+}
+
+.modal-content .btn-aceitar {
+  background-color: #35C928;
+  border-color: #35C928;
+  color: #fff;
 }

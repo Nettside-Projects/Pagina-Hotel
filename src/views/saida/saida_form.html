@@ -13,12 +13,13 @@
 
 <body>
     <div id="modalConfirmar" class="modal">
-        <div class="modal-content">
-            <img class="info-img" src="../../../recursos/info.png" alt="">No momento de remover hóspede, deve alterar o
-            valor do
-            quarto, lembre-se que o valor anterior permanecerá no
-            registro para levar em consideração.
-            ¿Fazer alteração?
+        <div class="modal-content modal-1">
+            <img class="info-img" src="../../../recursos/info.png" alt="">
+            <span>No momento de remover hóspede, deve alterar o
+                valor do
+                quarto, lembre-se que o valor anterior permanecerá no
+                registro para levar em consideração.
+                ¿Fazer alteração?</span>
             <div style="display: flex; width: 100%; justify-content: space-evenly;">
                 <button class="btn-modal" id="noButton"><img class="icon-img" src="../../../recursos/remove.png"
                         alt=""></button>
@@ -29,8 +30,15 @@
     </div>
     <div id="modalClienteAdicionado" class="modal">
         <div class="modal-content">
-            <img class="icon-img-g" src="../../../recursos/check.png" alt="">
-            <span>Cliente Adicionado</span>
+            <span>Digite Novo Preço.</span>
+            <div style="display: flex; align-items: center;justify-content: space-between; flex-direction: row;"
+                class="corto"><span>$R</span><input type="number" class="barra_input"
+                    name="huesped[0][pago_adelantado]">
+            </div>
+            <div class="flex">
+                <button class="btn btn-cancelar">Remover Hóspede</button>
+                <button class="btn btn-aceitar">Salvar pagamento</button>
+            </div>
         </div>
     </div>
 
@@ -199,8 +207,8 @@
                 </tbody>
             </table>
             <div class="btn-container">
-                <button class="btn-pagamento btn-remover-hospede">Remover Hóspede</button>
-                <button id="enviar" class="btn-pagamento">Salvar pagamento</button>
+                <button id="enviar" class="btn-pagamento btn-remover-hospede">Remover Hóspede</button>
+                <button class="btn-pagamento">Salvar pagamento</button>
             </div>
         </section>
     </div>
