@@ -535,13 +535,25 @@ function registrarPago(db, data, callback) {
                 }
             })
         })
-
-
 }
 
-mostrarRegistroDePagos(db,6,(row)=>{
-    console.log(row)
-})
+function actualizarCostoTotal(db,data,callback) {
+    db.run(`UPDATE cuentas
+        SET cuenta_total = ?
+        WHERE EXISTS (
+            SELECT 1
+            FROM huesped
+            WHERE huesped.fk_id_cuenta = cuentas.id_cuenta
+              AND huesped.numero_documento = ?
+        );`, [data.cuenta_total, data.documento], function (err) {
+        if (err) {
+            callback(err)
+            return
+        }
+    })
+}
+
+
 
 module.exports = {
     validarUsuario: validarUsuario,
@@ -557,6 +569,7 @@ module.exports = {
     informacionDeHabitacionYHuespedes: informacionDeHabitacionYHuespedes,
     informacionHuespedIndividual: informacionHuespedIndividual,
     mostrarRegistroDePagos: mostrarRegistroDePagos,
-    registrarPago: registrarPago
+    registrarPago: registrarPago,
+    actualizarCostoTotal: actualizarCostoTotal
 
 };

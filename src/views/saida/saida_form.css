@@ -66,12 +66,15 @@
 }
 
 .card .card_input {
+  display: flex;
+  gap: 5px;
   color: #0b6560;
   font: 500 13px Manrope, var(--default-font-family);
   line-height: 17.758px;
   text-transform: capitalize;
   white-space: nowrap;
   z-index: 47;
+  align-items: center;
 }
 
 .card .dropdown {

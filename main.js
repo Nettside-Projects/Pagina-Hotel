@@ -21,7 +21,8 @@ const {
     informacionDeHabitacionYHuespedes,
     informacionHuespedIndividual,
     mostrarRegistroDePagos,
-    registrarPago
+    registrarPago,
+    actualizarCostoTotal
 } = require('./crud');
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data.db'))
@@ -236,6 +237,18 @@ ipcMain.on('registrar-pago', (e, registrar_pago) => {
     console.log(registrar_pago)
     registrarPago(db, registrar_pago, (err) => {
         if (err) {
+            dialog.showErrorBox(
+                'Error',
+                `${err}`
+            );
+        }
+    })
+})
+
+ipcMain.on('actualizar-costo-total', (e, data) => {
+    actualizarCostoTotal(db, data, (err) => {
+        if (err) {
+            console.log(err)
             dialog.showErrorBox(
                 'Error',
                 `${err}`
