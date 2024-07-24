@@ -13,8 +13,13 @@
 
 <body>
     <div id="modalConfirmar" class="modal">
-        <div class="modal-content">
-            <img class="info-img" src="../../../recursos/info.png" alt="">¿adicionar cliente?
+        <div class="modal-content modal-1">
+            <img class="info-img" src="../../../recursos/info.png" alt="">
+            <span>No momento de remover hóspede, deve alterar o
+                valor do
+                quarto, lembre-se que o valor anterior permanecerá no
+                registro para levar em consideração.
+                ¿Fazer alteração?</span>
             <div style="display: flex; width: 100%; justify-content: space-evenly;">
                 <button class="btn-modal" id="noButton"><img class="icon-img" src="../../../recursos/remove.png"
                         alt=""></button>
@@ -25,8 +30,15 @@
     </div>
     <div id="modalClienteAdicionado" class="modal">
         <div class="modal-content">
-            <img class="icon-img-g" src="../../../recursos/check.png" alt="">
-            <span>Cliente Adicionado</span>
+            <span>Digite Novo Preço.</span>
+            <div style="display: flex; align-items: center;justify-content: space-between; flex-direction: row;"
+                class="corto"><span>$R</span><input type="number" class="barra_input"
+                    name="huesped[0][pago_adelantado]">
+            </div>
+            <div class="flex">
+                <button class="btn btn-cancelar">Remover Hóspede</button>
+                <button class="btn btn-aceitar">Salvar pagamento</button>
+            </div>
         </div>
     </div>
 
@@ -99,7 +111,7 @@
     </div>
 
     <div class="main-container">
-        <div class="wrapper">
+        <div>
             <div class="buscador">
                 <div class="barra_buscar">Processo de Saida
                 </div>
@@ -112,32 +124,32 @@
                 <div class="card">
                     <span class="title">Quarto</span>
                     <div class="card_item">
-                        <span class="card_label">Nome</span><span class="card_input">05</span>
+                        <span class="card_label">Nome</span><span class="card_input">00</span>
                     </div>
                     <div class="card_item">
-                        <span class="card_label">Simple</span><span class="card_input">tipo</span>
+                        <span class="card_label">Simple</span><span class="card_input"># # # #</span>
                     </div>
                     <div class="card_item">
-                        <span class="card_label">Preço total</span><span class="card_input">r$100,00</span>
+                        <span class="card_label">Preço total</span><span class="card_input"><p id="valor-sin-descuento" style="color: red;">R$0,00</p> --> <p id="valor-con-descuento">R$0,00</p>  <b id="descuento"></b> </span>
                     </div>
                     <div class="card_item">
-                        <span class="card_label">desconto</span><span class="card_input">r$0</span>
+                        <span class="card_label">Valor diaria</span><span class="card_input">R$0</span>
                     </div>
                 </div>
             </div>
             <div class="card">
                 <span class="title">Cliente Responsável</span>
                 <div class="card_item">
-                    <span class="card_label">Nome</span><span class="card_input">Felix Gonzalo Salgado Canga</span>
+                    <span class="card_label">Nome</span><span class="card_input"># # # # # # # # # # # </span>
                 </div>
                 <div class="card_item">
-                    <span class="card_label">Documento:</span><span class="card_input">C.C. 100100100</span>
+                    <span class="card_label">Documento:</span><span class="card_input"># # # # # # # #</span>
                 </div>
                 <div class="card_item">
-                    <span class="card_label">Nacionalidad:</span><span class="card_input">r$100,00</span>
+                    <span class="card_label">Nacionalidad:</span><span class="card_input"># # # #</span>
                 </div>
                 <div class="card_item">
-                    <span class="card_label">Procedencia:</span><span class="card_input">r$0</span>
+                    <span class="card_label">Procedencia:</span><span class="card_input"># # # #</span>
                 </div>
                 <div class="card_item card-item-right">
                     <select class="dropdown">
@@ -178,7 +190,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                   <!--  <tr class="fila_pago">
+                    <!--  <tr class="fila_pago">
                         <td>R$ <input type="number"></td>
                         <td>
                             <select>
@@ -195,7 +207,7 @@
                 </tbody>
             </table>
             <div class="btn-container">
-                <button class="btn-pagamento btn-remover-hospede">Remover Hóspede</button>
+                <button id="enviar" class="btn-pagamento btn-remover-hospede">Remover Hóspede</button>
                 <button class="btn-pagamento">Salvar pagamento</button>
             </div>
         </section>

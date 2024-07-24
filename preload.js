@@ -87,6 +87,9 @@ contextBridge.exposeInMainWorld('preload', {
     enviarRegistroDePagoSend:(registro_pago)=>{
         ipcRenderer.send("registrar-pago",registro_pago)
     },
+    actualizarCostoTotal:(info_actualizacion)=>{
+        ipcRenderer.send("actualizar-costo-total",info_actualizacion)
+    },
     i18n: {
         onTranslate: (callback) =>
             ipcRenderer.on('i18n', (event, data) => callback(data)),

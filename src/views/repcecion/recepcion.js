@@ -9,18 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#fecha_salida').disabled = true;
             document.querySelector('#fecha_salida').value = '';
             document.querySelectorAll('.input_requerid')[2].textContent = '';
-            document.querySelector(".type_moneda").textContent = "Valor indefinido..."
+            document.querySelector('.type_moneda').textContent =
+                'Valor indefinido...';
         } else {
             document.querySelectorAll('.input_requerid')[2].textContent = '*';
             document.querySelector('#fecha_salida').disabled = false;
-            document.querySelector(".type_moneda").textContent = "$R0"
+            document.querySelector('.type_moneda').textContent = '$R0';
         }
     });
     let btnEnviar = document.querySelector('#enviar');
     let btnValorDiaria = document.querySelector('#valor_diaria');
     let btnAddCliente = document.querySelector('.add_vista');
     let main = document.querySelector('form');
-    let porcentaValue = 1;
+    let porcentaValue = 0;
     let valorDiaria = 0;
     let contador = 1;
     let estadoRegistroHuesped = true;
@@ -338,8 +339,8 @@ document.addEventListener('DOMContentLoaded', () => {
             var fechaSalida = document
                 .querySelector('#fecha_salida')
                 .value.split('T')[0];
-        }else{
-              return 0
+        } else {
+            return 0;
         }
 
         /*  console.log("fecha entrada -> " + fechaFormateada + "|" + "fecha salida -> " + fechaSalida) */
@@ -366,8 +367,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 costoTotal = costoTotal - porcentaValue;
                 console.log('Es entero: ' + porcentaValue);
             } else {
-                costoTotal = costoTotal * porcentaValue;
+                costoTotal -= (costoTotal * porcentaValue);
+                
                 console.log('No es entero: ' + porcentaValue);
+                console.log('Valor con descuento: ' +costoTotal);
             }
 
             /*   console.log('El huésped se hospedará por ' + diferenciaDias + ' días.');
@@ -539,6 +542,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalClienteAdicionado = document.getElementById(
             'modalClienteAdicionado'
         );
+
+        function closeModal(modal) {
+            modal.style.display = 'none';
+        }
+        function openModalClienteAdicionado() {
+            modalClienteAdicionado.style.display = 'flex';
+            setTimeout(() => {
+                /* window.preload.infoHuespedesSend(infoGeneral); */
+                window.location.href =
+                    '../vista_general_habitaciones/vistaGeneral.html';
+            }, 2000);
+        }
         function openModalConfirmar() {
             modalConfirmar.style.display = 'flex';
             noButton.onclick = () => closeModal(modalConfirmar);
@@ -572,19 +587,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 closeModal(modalConfirmar);
             });
-        }
-
-        function openModalClienteAdicionado() {
-            modalClienteAdicionado.style.display = 'flex';
-            setTimeout(() => {
-                closeModal(modalClienteAdicionado);
-                /* window.preload.infoHuespedesSend(infoGeneral); */
-                window.location.href =
-                    '../vista_general_habitaciones/vistaGeneral.html';
-            }, 2000);
-        }
-        function closeModal(modal) {
-            modal.style.display = 'none';
         }
         window.onclick = (event) => {
             if (event.target === modalConfirmar) {
