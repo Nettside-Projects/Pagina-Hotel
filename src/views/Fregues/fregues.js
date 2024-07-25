@@ -1,3 +1,4 @@
+
 const clientCountInput = document.getElementById('numClientes');
     const clientCountDisplay = document.getElementById('clientCountDisplay');
 clientCountInput.addEventListener('input', () => {
@@ -32,16 +33,26 @@ function createRows(numClientes) {
         Ndocumento.classList.add('Ndocumento');
         
         const habitacion = document.createElement('div');
+        habitacion.classList.add('widthDiv')
         
         const papel = document.createElement('div');
+        papel.classList.add('widthDiv')
         
         const entrada = document.createElement('div');
+        entrada.classList.add('widthDiv')
+
+        const estado = document.createElement('div');
+            estado.className = 'estado';
+
+        const verde = document.createElement('div');
+            verde.className = 'azul';
         
         const accion = document.createElement('div');
         accion.classList.add('accion');
 
         const contendorbtneditar = document.createElement('div');
         contendorbtneditar.classList.add('contendorbtneditar');
+        contendorbtneditar.classList.add('openModaleditar');
         // Crear el primer img
         const imgCirculadoX = document.createElement('img');
         imgCirculadoX.src ='../../../recursos/editar.webp' ;
@@ -67,6 +78,8 @@ function createRows(numClientes) {
         fila.appendChild(habitacion);
         fila.appendChild(papel);
         fila.appendChild(entrada);
+        entrada.appendChild(estado)
+        estado.appendChild(verde)
         fila.appendChild(accion);
         
         contenedorFilas.appendChild(fila);
@@ -123,7 +136,7 @@ window.onclick = function(event) {
 }
  */
 
-document.querySelector("#select_num").addEventListener("change", function() {
+/* document.querySelector("#select_num").addEventListener("change", function() {
     let select = document.querySelector("#select_num");
     let valor = select.value;
 
@@ -151,4 +164,60 @@ document.querySelector("#select_nombre").addEventListener("click",e=>{
         <option selected>Nome completo</option>`
                                     
                             } 
-                )
+                ) */
+// scripts.js
+document.querySelectorAll('.encabezadoLista div').forEach(header => {
+    header.addEventListener('mouseover', () => {
+        const options = header.querySelector('.sort-options');
+        if (options) {
+            options.style.display = 'block';
+        }
+    });
+
+    header.addEventListener('mouseout', () => {
+        const options = header.querySelector('.sort-options');
+        if (options) {
+            options.style.display = 'none';
+        }
+    });
+
+    header.addEventListener('click', () => {
+        const options = header.querySelector('.sort-options');
+        if (options) {
+            options.style.display = 'block';
+        }
+    });
+});
+
+function sortTable(column, order) {
+    console.log(`Sorting ${column} in ${order} order.`);
+    // Aquí iría el código para ordenar la tabla
+}
+
+  // Obtener el modal
+  var modal = document.getElementById("myModal");
+
+  // Obtener el elemento <span> que cierra el modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // Obtener todos los botones que abren el modal
+  var btns = document.getElementsByClassName("openModaleditar");
+
+  // Añadir evento click a todos los botones
+  for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function() {
+          modal.style.display = "block";
+      });
+  }
+
+  // Cuando el usuario hace clic en <span> (x), cierra el modal
+  span.onclick = function() {
+      modal.style.display = "none";
+  }
+
+  // Cuando el usuario hace clic fuera del modal, cierra el modal
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }

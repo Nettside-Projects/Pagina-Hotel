@@ -60,7 +60,7 @@ function cuentaTotalPresente(inf) {
 
                 var valorDiario = inf[0].valor_diaria /* - (inf[0].valor_diaria * inf[0].descuento) */;
                 var costoTotal = diferenciaDias * valorDiario;
-                console.log("valor del día"+costoTotal)
+                console.log("valor del día" + costoTotal)
                 window.preload.mostrarRegistroDePagosSend(informacionDeHabitacion.id_habitacion);
 
                 window.preload.mostrarRegistroDePagosOn(async (e, info) => {
@@ -71,21 +71,21 @@ function cuentaTotalPresente(inf) {
                         pagosTotales += element.registro_pago;
                     }
                     console.log("Pagos hechos: " + pagosTotales)
-                    if(inf[0].descuento != 0){
+                    if (inf[0].descuento != 0) {
                         if (inf[0].descuento % 1 != 0/*  && inf[0].descuento == 1 */) {
-                       
+
                             costoTotal -= costoTotal * inf[0].descuento
                             costoTotal -= pagosTotales;
                             console.log("descuentos en porcentajes" + costoTotal)
-                        }else{
-                            costoTotal -= costoTotal- inf[0].descuento  < 0 ? 0 : inf[0].descuento
+                        } else {
+                            costoTotal -= costoTotal - inf[0].descuento < 0 ? 0 : inf[0].descuento
                             console.log("descuentos en entero" + costoTotal)
                         }
-                    }else{
+                    } else {
                         costoTotal -= pagosTotales
                     }
-                   
-                    
+
+
 
                     actualizarCostoTotal(inf[0].numero_documento, costoTotal, inf[0].descuento);
                     const informacion = {
@@ -139,12 +139,12 @@ function cuentaTotalPresente(inf) {
                         pagosTotales += element.registro_pago;
                     }
 
-                    
+
                     if (inf.descuento % 1 != 0 && inf.descuento == 1) {
                         costoTotal -= costoTotal * inf.descuento
                         costoTotal -= pagosTotales;
-                    }else{
-                        costoTotal -= costoTotal- inf.descuento  < 0 ? 0 : inf.descuento
+                    } else {
+                        costoTotal -= costoTotal - inf.descuento < 0 ? 0 : inf.descuento
                     }
 
                     actualizarCostoTotal(inf.numero_documento, costoTotal, inf.descuento);
@@ -351,7 +351,68 @@ function mostrarRegistroDePagos(numero_documento, id_habitacion, cuenta_total_y_
             /* Botón ya seleccionado */
             let btnConcluirPagamento =
                 document.querySelectorAll('.btn-pagamento')[1];
-            console.log(btnConcluirPagamento);
+            btnConcluirPagamento.remove()
+            // Creación del contenedor principal
+            // Crear elementos
+            const container = document.createElement('div');
+            container.classList.add('container');
+
+            const leftSide = document.createElement('div');
+            leftSide.classList.add('left-side');
+
+            const card = document.createElement('div');
+            card.classList.add('second-card');
+
+            const cardLine = document.createElement('div');
+            cardLine.classList.add('card-line');
+            card.appendChild(cardLine);
+
+            const buttons = document.createElement('div');
+            buttons.classList.add('buttons');
+            card.appendChild(buttons);
+
+            const post = document.createElement('div');
+            post.classList.add('post');
+
+            const postLine = document.createElement('div');
+            postLine.classList.add('post-line');
+            post.appendChild(postLine);
+
+            const screen = document.createElement('div');
+            screen.classList.add('screen');
+
+            const dollar = document.createElement('div');
+            dollar.classList.add('dollar');
+            dollar.textContent = '$';
+            screen.appendChild(dollar);
+
+            post.appendChild(screen);
+
+            const numbers = document.createElement('div');
+            numbers.classList.add('numbers');
+            post.appendChild(numbers);
+
+            const numbersLine2 = document.createElement('div');
+            numbersLine2.classList.add('numbers-line2');
+            post.appendChild(numbersLine2);
+
+            leftSide.appendChild(card);
+            leftSide.appendChild(post);
+
+            const rightSide = document.createElement('div');
+            rightSide.classList.add('right-side');
+
+            const newElement = document.createElement('div');
+            newElement.classList.add('new');
+            newElement.textContent = 'Pagamento concluido';
+            rightSide.appendChild(newElement);
+
+            container.appendChild(leftSide);
+            container.appendChild(rightSide);
+
+
+
+            document.querySelector(".btn-container").appendChild(container)
         }
     } else {
 
