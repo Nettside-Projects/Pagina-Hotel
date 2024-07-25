@@ -174,21 +174,6 @@ select {
   background: #FF8A00;
 }
 
-#enviar{
-  background: #0B6660;
-  padding: 10px 15px;
-  border-radius: 10px;
-  border: none;
-  color: rgb(255, 255, 255);
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-}
-#enviar:hover{
-  background: #0d7a73;
-  transform: translateY(-3px);
-}
-
 /* -------  VENTANA MODAL-------- */
 .modal {
   display: none;
@@ -608,7 +593,6 @@ select {
   border-radius: 0 5px 5px 0;
   border: 1px solid #111;
 }
-
 .modal-content .flex {
   display: flex;
   gap: 35px;
