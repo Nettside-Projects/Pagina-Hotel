@@ -107,7 +107,6 @@
                 <div>Configuração</div>
             </span>
         </a>
-        <a style="color: rgb(74, 236, 9);" href="../repcecion/recepcion.html">btn prueba</a>
     </div>
 
     <div class="main-container">
@@ -130,7 +129,10 @@
                         <span class="card_label">Simple</span><span class="card_input"># # # #</span>
                     </div>
                     <div class="card_item">
-                        <span class="card_label">Preço total</span><span class="card_input"><p id="valor-sin-descuento" style="color: red;">R$0,00</p> --> <p id="valor-con-descuento">R$0,00</p>  <b id="descuento"></b> </span>
+                        <span class="card_label">Preço total</span><span class="card_input">
+                            <p id="valor-sin-descuento" style="color: red;">R$0,00</p> --> <p id="valor-con-descuento">
+                                R$0,00</p> <b id="descuento"></b>
+                        </span>
                     </div>
                     <div class="card_item">
                         <span class="card_label">Valor diaria</span><span class="card_input">R$0</span>
@@ -151,12 +153,16 @@
                 <div class="card_item">
                     <span class="card_label">Procedencia:</span><span class="card_input"># # # #</span>
                 </div>
-                <div class="card_item card-item-right">
+                <div class="card_item card-item-right custom-select-container">
                     <select class="dropdown">
                         <option value="opcion1">Opción 1</option>
                         <option value="opcion2">Opción 2</option>
                         <option value="opcion3">Opción 3</option>
                     </select>
+                    <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960"
+                        width="28px" fill="#fff">
+                        <path d="M480-360 280-560h400L480-360Z" />
+                    </svg>
                 </div>
             </div>
             <div>
@@ -171,8 +177,8 @@
                             00/00/00</span>
                     </div>
                 </div>
-                <div class="btn-limpieza">fazer limpeza do quarto
-                </div>
+                <button class="btn-limpieza new">fazer limpeza do quarto
+                </button>
             </div>
         </div>
 
@@ -207,8 +213,8 @@
                 </tbody>
             </table>
             <div class="btn-container">
-                <button id="enviar" class="btn-pagamento btn-remover-hospede">Remover Hóspede</button>
-                <button class="btn-pagamento">Salvar pagamento</button>
+                <button id="enviar" class="btn-pagamento btn-remover-hospede new">Remover Hóspede</button>
+                <button class="btn-pagamento new">Salvar pagamento</button>
             </div>
         </section>
     </div>

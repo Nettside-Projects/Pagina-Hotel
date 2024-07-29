@@ -1,7 +1,11 @@
 const informacionDeHabitacion = JSON.parse(localStorage.getItem('informacionDeHabitacion'));
 
+/* Función para validar descuento */
+/* En esta función se utiliza el costo total del huesped más el descuento que se aplicará*/
 function validarDescuento(costo_total, descuento) {
+    /* En caso de tener un descuento*/
     if (descuento !== 0) {
+        /* Sí el descuento se maneja con porcentaje... */
         if (descuento % 1 != 0 || descuento == 1) {
             // Calcular el valor original (antes del descuento)
             const valorOriginal = costo_total / (1 - descuento);
@@ -79,6 +83,7 @@ function cuentaTotalPresente(inf) {
                             console.log("descuentos en porcentajes" + costoTotal)
                         } else {
                             costoTotal -= costoTotal - inf[0].descuento < 0 ? 0 : inf[0].descuento
+                            costoTotal -= pagosTotales
                             console.log("descuentos en entero" + costoTotal)
                         }
                     } else {
