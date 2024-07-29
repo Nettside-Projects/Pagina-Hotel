@@ -101,6 +101,7 @@
     width: 100%;
     height: 40px;
     display: flex;
+    border-bottom: 1px solid #4B4B4B;
 }
 .encabezadoLista div {
     width: 90%;
@@ -115,8 +116,6 @@
 }
 .number {
     width: 45% !important;
-    border-top: 1px solid #4B4B4B;
-    border-right: 1px solid #4B4B4B;
     border-left: 1px solid #4B4B4B;
 }
 .number select{
@@ -131,6 +130,7 @@
  }
  .encabezadoLista img{
     cursor: pointer;
+    width: 17px;
 }
  .contenedorFilas{
     width: 100%;
@@ -138,7 +138,6 @@
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    border-bottom: 1px solid #4B4B4B;
     background: #EAE8E8;
 }
 .filas{
@@ -150,7 +149,7 @@
 .filas div {
     width: 90%;
     height: 100%;
-    border-top: 1px solid #4B4B4B;
+    border-bottom: 1px solid #4B4B4B;
     border-right: 1px solid #4B4B4B;
     display: flex;
     justify-content: center;
@@ -208,43 +207,6 @@
 
 /* modales */
 /* The Modal (background) */
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
-    padding-top: 60px; 
-}
-
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto; 
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; 
-}
-
-/* The Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
 
 .option-btn {
     display: block;
@@ -297,85 +259,88 @@ select {
     height: 13px;
     
 }
-/* /* -------  VENTANA MODAL-------
-#openModalButton {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
+
+
+ .modaldos {
+    display: none;  
+    position: fixed; 
+    z-index: 1; 
     left: 0;
     top: 0;
-    align-items: center;
-    width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-  }
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.5); 
+}
+
+.modal-contentdos {
+    background-color: #fff;
+    margin: 1% auto; 
     padding: 20px;
-    padding-bottom: 18;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 75%;
     flex-direction: column;
-    gap: 15px;
+    width: 60%;
     border: 1px solid #888;
-    width: 40%;
-    border-radius: 10px;
-  }
-  .close {
+    display: flex;
+    align-items: flex-end;
+}
+
+.closedos {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.closedos:hover,
+.closedos:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-  }
-  
-  .modal-content .info-img {
+}
+
+.block{
+display: block !important;
+} 
+
+.info-img{
     width: 110px;
     height: 110px;
-  }
-  
-  .btn-modal {
-    all: unset;
-  }
-  
-  .icon-img {
+}
+.icon-img{
     width: 51px;
     height: 51px;
-  } */
- /* Estilo básico para el modal */
- .modal {
-    display: none; /* Oculto por defecto */
-    position: fixed; /* Fijo en la pantalla */
-    z-index: 1; /* Por encima de otros elementos */
+}
+.btn-modal{
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Habilitar desplazamiento si es necesario */
-    background-color: rgba(0,0,0,0.5); /* Fondo semitransparente */
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
 }
 
 .modal-content {
-    background-color: #fff;
-    margin: 15% auto; /* 15% desde la parte superior y centrado */
+    background-color: #fefefe;
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Ancho del modal */
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.block {
+    display: block;
 }
 
 .close {
@@ -390,4 +355,250 @@ select {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+
+/* editar modal */
+.maineditar{
+    width: 100%;
+    height: 90%;
+    text-align: center;
+    overflow: auto;
+}
+.contentEditar{
+    display: flex;
+    flex-direction: column;
+}
+.datosCliente{
+    display: flex;
+}
+.contentEditar span{
+    font-weight: bold;
+}
+.columLeft{
+    width: 60%;
+}
+.columRigth{
+    width: 40%;
+}
+.colum{
+   
+    height: 55px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.documento{
+
+    display: flex;
+    align-items: flex-start;
+}
+.documento input, .passaporte input,
+.nome input,  .profesion input,
+.telefono input, .procedencia input,
+.destino input, .email input,
+.nacionalidad input, .naturalidad input,
+.nacimiento input{
+    width: 90%;
+    border-radius: 3px;
+    border: 1px solid #B3B3B3;
+    height: 20px;
+}
+.contentFactura{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+} 
+.factura{
+    width: 370px;
+    height: 270px;
+    background-color: #F5F3F3;
+    overflow-y: auto;
+    border: 2px solid #B3B3B3;
+    border-radius: 5px;
+    padding: 10px 0;
+}
+
+  .custo-extra {
+    display: block;
+    position: relative;
+    height: 18px;
+    margin: 0 0 0 28px;
+    color: #4a4a4a;
+    font-family: Manrope, var(--default-font-family);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 17.758px;
+    text-align: left;
+    text-transform: capitalize;
+    white-space: nowrap;
+    z-index: 3;
+  }
+  .preco-restante {
+    position: relative;
+    width: 166px;
+    height: 18px;
+    margin: 8px 0 0 28px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 17.758px;
+    text-align: left;
+    text-overflow: initial;
+    white-space: nowrap;
+    z-index: 4;
+  }
+  .preco-restante-1 {
+    position: relative;
+    color: #4B4B4B;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 17.758px;
+    text-align: left;
+    text-transform: capitalize;
+  }
+  .comma {
+    position: relative;
+    color: #4B4B4B;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 17.758px;
+    text-align: left;
+    text-transform: capitalize;
+  }
+  .caixa {
+    display: block;
+    position: relative;
+    height: 18px;
+    margin: 8px 0 0 28px;
+    color: #4B4B4B;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 17.758px;
+    text-align: left;
+    text-transform: capitalize;
+    white-space: nowrap;
+    z-index: 5;
+  }
+  .total {
+    display: block;
+    position: relative;
+    height: 18px;
+    margin: 21px 0 10px 33px;
+    color: #4B4B4B;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 17.758px;
+    text-align: left;
+    text-transform: capitalize;
+    white-space: nowrap;
+    z-index: 6;
+  }
+.contenbuton{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    height: 70px;
+    align-items: flex-end;
+}
+.contenbuton button{
+    margin-top: 10px;
+    height: 30px;
+    width: 85px;
+    border-radius: 3px;
+}
+.cancelar{
+    background: #E0E0E0;
+    border: 1px solid #A2A2A2;
+    color: #000;
+    cursor: pointer;
+}
+.aceptar{
+    background: #35C928;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border: none !important;
+  }
+.tooltip div {
+    border: none;
+    padding: 1px;
+    
+}
+.tooltip div a{
+  text-decoration: none;
+  color: #5c5c5c;
+}
+.tooltip div a:hover{
+    color: #000000;
+    font-weight: bold;
+  }
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    border: 1px solid black;
+    background: #fefefe;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    display: flex;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+  }
+  
+    .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }  
+
+  /* Estilos iniciales para el modal */
+.modaladvertencia {
+    display: none; /* Ocultar inicialmente */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.5s; /* Animación para aparecer */
+}
+
+.modal-contentadvertencia {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+    animation: slideIn 0.5s; /* Animación para aparecer */
+}
+
+/* Animación para la imagen de check */
+@keyframes pulse {
+    0% {transform: scale(0.95);}
+    
+    
+50% {transform: scale(1.1);}
+    100% {transform: scale(1);}
+}
+
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#checkImage {
+    animation: rotate 1s ease-in-out, pulse 1s ease-in-out ;
 }
