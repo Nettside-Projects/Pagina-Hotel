@@ -1,14 +1,4 @@
 
-const clientCountInput = document.getElementById('numClientes');
-    const clientCountDisplay = document.getElementById('clientCountDisplay');
-clientCountInput.addEventListener('input', () => {
-    const count = clientCountInput.value;
-    clientCountDisplay.textContent = count;
-    renderClients(count);
-    if (i === count) {
-        fila.style.borderBottom = '1px solid #4B4B4B';
-    }
-});
 function createRows(numClientes) {
     const contenedorFilas = document.getElementById('contenedorFilas');
     contenedorFilas.innerHTML = ''; // Limpiar las filas existentes
@@ -52,7 +42,6 @@ function createRows(numClientes) {
 
         const contendorbtneditar = document.createElement('div');
         contendorbtneditar.classList.add('contendorbtneditar');
-        contendorbtneditar.classList.add('openModaleditar');
         // Crear el primer img
         const imgCirculadoX = document.createElement('img');
         imgCirculadoX.src ='../../../recursos/editar.webp' ;
@@ -85,6 +74,110 @@ function createRows(numClientes) {
         contenedorFilas.appendChild(fila);
         filasArray.push(fila); // Agregar la fila al array
     }
+
+// Obtener todos los botones que abren los modales
+var btnsEditar = document.querySelectorAll(".contendorbtneditar");
+var btnsEliminar = document.querySelectorAll(".contendorbtneliminar");
+
+// Obtener el botón "No" y "Sí" dentro del modal de edición
+var noButton = document.getElementById("noButton");
+var yesButton = document.getElementById("yesButton");
+
+// Obtener el botón "No" y "Sí" dentro del modal de eliminación
+var noButtontres = document.getElementById("noButtontres");
+var yesButtontres = document.getElementById("yesButtontres");
+
+// Obtener el botón "No" y "Sí" dentro del modal de confirmación
+var noButtonConfirm = document.getElementById("noButtonConfirm");
+var yesButtonConfirm = document.getElementById("yesButtonConfirm");
+
+// Obtener los elementos <span> que cierran los modales
+var spans = document.querySelectorAll(".closedos, .closeinfo");
+
+// Obtener los modales
+var modalEditarcliente = document.getElementById("modalEditarcliente");
+var modalConfirmar = document.getElementById("modalConfirmar");
+var modalEliminarcliente = document.getElementById("modalELiminarcliente");
+var modalInformacion = document.getElementById("modalInformacion");
+var modalInformacionEliminar = document.getElementById("modalInformacionEliminar");
+
+// Función para mostrar un modal
+function showModal(modal) {
+    modal.classList.add("block");
+}
+
+// Función para ocultar un modal
+function hideModal(modal) {
+    modal.classList.remove("block");
+}
+
+ // Función para mostrar un modal y ocultarlo automáticamente después de 3 segundos
+function showModalWithAutoHide(modal, duration = 3000) {
+    showModal(modal);
+    setTimeout(() => {
+        hideModal(modal);
+    }, duration);
+}
+ 
+// Añadir evento de click a cada botón para abrir el modal de edición
+btnsEditar.forEach(element => {
+    element.addEventListener("click", (e) => {
+        showModal(modalEditarcliente);
+    });
+});
+
+// Añadir evento de click al botón "No" para cerrar el modal de edición
+noButton.addEventListener("click", (e) => {
+    hideModal(modalEditarcliente);
+});
+
+// Añadir evento de click al botón "Sí" para cerrar el modal de edición y abrir el modal de confirmación
+yesButton.addEventListener("click", (e) => {
+    hideModal(modalEditarcliente);
+    showModal(modalConfirmar);
+});
+
+// Añadir evento de click a cada botón para abrir el modal de eliminación
+btnsEliminar.forEach(element => {
+    element.addEventListener("click", (e) => {
+        showModal(modalEliminarcliente);
+    });
+});
+
+// Añadir evento de click al botón "No" para cerrar el modal de eliminación
+noButtontres.addEventListener("click", (e) => {
+    hideModal(modalEliminarcliente);
+});
+
+// Añadir evento de click al botón "Sí" para cerrar el modal de eliminación y abrir el modal de información
+yesButtontres.addEventListener("click", (e) => {
+    hideModal(modalEliminarcliente);
+    showModalWithAutoHide(modalInformacionEliminar);
+});
+
+// Verificar si noButtonConfirm existe antes de añadir el event listener
+if (noButtonConfirm) {
+    noButtonConfirm.addEventListener("click", (e) => {
+        hideModal(modalConfirmar);
+    });
+}
+
+// Verificar si yesButtonConfirm existe antes de añadir el event listener
+if (yesButtonConfirm) {
+    yesButtonConfirm.addEventListener("click", (e) => {
+        hideModal(modalConfirmar);
+        showModalWithAutoHide(modalInformacion);
+    });
+}
+
+// Añadir evento de click a los elementos <span> para cerrar los modales
+spans.forEach(element => {
+    element.addEventListener("click", (e) => {
+        hideModal(element.closest(".modal"));
+    });
+});
+
+
     return filasArray; // Devolver el array con las filas
 }
 
@@ -107,117 +200,3 @@ document.querySelectorAll('.contendorBtn button').forEach(button => {
         });
     }
 });
-/* 
-
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("openModalBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    // }
-}
- */
-
-/* document.querySelector("#select_num").addEventListener("change", function() {
-    let select = document.querySelector("#select_num");
-    let valor = select.value;
-
-    // Re-populate the options while keeping "N°" at the top
-    select.innerHTML = `
-        <option value="default" selected disabled hidden>N°</option>
-        <option value="+">A/Z</option>
-        <option value="-">Z/A</option>
-    `;
-
-    // Set the selected value based on the user's selection
-    if (valor === "+") {
-        select.innerHTML += `<option value="+" selected>A/Z</option>`;
-    } else if (valor === "-") {
-        select.innerHTML += `<option value="-" selected>Z/A</option>`;
-    }
-});
-
-
-
-document.querySelector("#select_nombre").addEventListener("click",e=>{
-    let valor = e.target.value
-        document.querySelector("#select_nombre").innerHTML = `<option value="+" >A/Z</option>
-        <option value="-">Z/A</option>
-        <option selected>Nome completo</option>`
-                                    
-                            } 
-                ) */
-// scripts.js
-document.querySelectorAll('.encabezadoLista div').forEach(header => {
-    header.addEventListener('mouseover', () => {
-        const options = header.querySelector('.sort-options');
-        if (options) {
-            options.style.display = 'block';
-        }
-    });
-
-    header.addEventListener('mouseout', () => {
-        const options = header.querySelector('.sort-options');
-        if (options) {
-            options.style.display = 'none';
-        }
-    });
-
-    header.addEventListener('click', () => {
-        const options = header.querySelector('.sort-options');
-        if (options) {
-            options.style.display = 'block';
-        }
-    });
-});
-
-function sortTable(column, order) {
-    console.log(`Sorting ${column} in ${order} order.`);
-    // Aquí iría el código para ordenar la tabla
-}
-
-  // Obtener el modal
-  var modal = document.getElementById("myModal");
-
-  // Obtener el elemento <span> que cierra el modal
-  var span = document.getElementsByClassName("close")[0];
-
-  // Obtener todos los botones que abren el modal
-  var btns = document.getElementsByClassName("openModaleditar");
-
-  // Añadir evento click a todos los botones
-  for (var i = 0; i < btns.length; i++) {
-      btns[i].addEventListener("click", function() {
-          modal.style.display = "block";
-      });
-  }
-
-  // Cuando el usuario hace clic en <span> (x), cierra el modal
-  span.onclick = function() {
-      modal.style.display = "none";
-  }
-
-  // Cuando el usuario hace clic fuera del modal, cierra el modal
-  window.onclick = function(event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
-      }
-  }
