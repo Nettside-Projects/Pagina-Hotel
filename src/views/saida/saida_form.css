@@ -157,8 +157,6 @@ select {
 }
 
 .btn-pagamento {
-	bottom: 0;
-	right: 0;
 	background: #28a745;
 	color: #fff;
 	padding: 12px 60px;
@@ -167,74 +165,31 @@ select {
 	cursor: pointer;
 }
 
-.btn-remover-hospede {
-	background: #FF8A00;
-}
-
-/* -------  VENTANA MODAL-------- */
-.modal {
-	display: none;
-	position: fixed;
-	z-index: 1000;
-	left: 0;
-	top: 0;
-	align-items: center;
-	width: 100%;
+.btn_agg {
 	height: 100%;
-	overflow: auto;
-	background-color: rgba(0, 0, 0, 0.4);
+	background: #6A7DDC;
+	padding-inline: 20px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	margin-right: 8px;
 }
 
-.modal-content {
-	background-color: #fefefe;
-	margin: 15% auto;
-	padding: 40px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	flex-direction: column;
-	gap: 70px;
-	border: 1px solid #888;
-	width: 40%;
-	border-radius: 10px;
-	color: #000;
-	font-family: manrope;
-	font-size: 20px;
-}
-
-.modal-content.modal-1 {
-	padding-bottom: 18px !important;
-}
-
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-	color: black;
-	text-decoration: none;
+.btn-remover-hospede {
+	height: 100%;
+	background: #FF8A00;
+	padding-inline: 20px;
+	border: none;
+	border-radius: 6px;
 	cursor: pointer;
 }
 
-.modal-content .info-img {
-	width: 110px;
-	height: 110px;
+.icon_person {
+	width: 50px;
+	height: 50px;
 }
 
-.btn-modal {
-	all: unset;
-}
-
-.icon-img {
-	width: 51px;
-	height: 51px;
-}
-
+/* -------  boton animado -------- */
 .container {
 	background-color: #35C928;
 	color: #fff !important;

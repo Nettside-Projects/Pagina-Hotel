@@ -1,4 +1,6 @@
-const informacionDeHabitacion = JSON.parse(localStorage.getItem('informacionDeHabitacion'));
+const informacionDeHabitacion = JSON.parse(
+    localStorage.getItem('informacionDeHabitacion')
+);
 
 /* Función para validar descuento */
 /* En esta función se utiliza el costo total del huesped más el descuento que se aplicará*/
@@ -11,35 +13,45 @@ function validarDescuento(costo_total, descuento) {
             const valorOriginal = costo_total / (1 - descuento);
 
             // Actualizar los elementos del DOM
-            document.querySelector("#valor-sin-descuento").textContent = 'R$' + valorOriginal.toFixed(2); // Aseguramos que tenga dos decimales
-            document.querySelector("#valor-con-descuento").textContent = costo_total.toFixed(2) < 0 ? '(Vueltas) R$' + costo_total.toFixed(2) : 'R$' + costo_total.toFixed(2)  // Valor modificado (con descuento)
-            document.querySelector("#descuento").textContent = '%' + (descuento * 100); // Mostrar el porcentaje de descuento
+            document.querySelector('#valor-sin-descuento').textContent =
+                'R$' + valorOriginal.toFixed(2); // Aseguramos que tenga dos decimales
+            document.querySelector('#valor-con-descuento').textContent =
+                costo_total.toFixed(2) < 0
+                    ? '(Vueltas) R$' + costo_total.toFixed(2)
+                    : 'R$' + costo_total.toFixed(2); // Valor modificado (con descuento)
+            document.querySelector('#descuento').textContent =
+                '%' + descuento * 100; // Mostrar el porcentaje de descuento
         } else {
             // Calcular el valor original (antes del descuento)
             const valorOriginal = costo_total + descuento;
 
             // Actualizar los elementos del DOM
-            document.querySelector("#valor-sin-descuento").textContent = 'R$' + valorOriginal.toFixed(2); // Aseguramos que tenga dos decimales
-            document.querySelector("#valor-con-descuento").textContent = costo_total.toFixed(2) < 0 ? '(Vueltas) R$' + costo_total.toFixed(2) : 'R$' + costo_total.toFixed(2); // Valor modificado (con descuento)
-            document.querySelector("#descuento").textContent = 'R$-' + (descuento); // Mostrar el porcentaje de descuento
+            document.querySelector('#valor-sin-descuento').textContent =
+                'R$' + valorOriginal.toFixed(2); // Aseguramos que tenga dos decimales
+            document.querySelector('#valor-con-descuento').textContent =
+                costo_total.toFixed(2) < 0
+                    ? '(Vueltas) R$' + costo_total.toFixed(2)
+                    : 'R$' + costo_total.toFixed(2); // Valor modificado (con descuento)
+            document.querySelector('#descuento').textContent =
+                'R$-' + descuento; // Mostrar el porcentaje de descuento
         }
-
     } else {
         // Si no hay descuento, muestra el valor total original
-        document.querySelectorAll(".card_input")[2].textContent = costo_total.toFixed(2) < 0 ? '(Vueltas) R$' + costo_total.toFixed(2) : 'R$' + costo_total.toFixed(2);
+        document.querySelectorAll('.card_input')[2].textContent =
+            costo_total.toFixed(2) < 0
+                ? '(Vueltas) R$' + costo_total.toFixed(2)
+                : 'R$' + costo_total.toFixed(2);
     }
 }
 
 function actualizarCostoTotal(numero_documento, costo_total, descuento) {
-
-    validarDescuento(costo_total, descuento)
+    validarDescuento(costo_total, descuento);
     const actualizacion_cuenta_total = {
         documento: numero_documento,
-        cuenta_total: costo_total
+        cuenta_total: costo_total,
     };
     window.preload.actualizarCostoTotal(actualizacion_cuenta_total);
 }
-
 
 console.log(informacionDeHabitacion);
 let inputSelect = document.querySelector('.dropdown');
@@ -48,24 +60,36 @@ function cuentaTotalPresente(inf) {
     return new Promise((resolve, reject) => {
         if (inf.length > 0) {
             if (inf[0].fecha_salida == 0) {
-                let partes_fecha = document.querySelector(".fecha_entrada").textContent.split(" ")[0].replaceAll("/", "-").split("-");
+                let partes_fecha = document
+                    .querySelector('.fecha_entrada')
+                    .textContent.split(' ')[0]
+                    .replaceAll('/', '-')
+                    .split('-');
                 const fecha_formateada = `${partes_fecha[2]}-${partes_fecha[1]}-${partes_fecha[0]}`;
                 let entrada = new Date(fecha_formateada);
                 let fecha_actual_obj = new Date();
                 const anioActual = fecha_actual_obj.getFullYear();
                 const diaActual = fecha_actual_obj.getDate();
                 const mesActual = fecha_actual_obj.getMonth() + 1;
-                let fecha_actual = new Date(`${anioActual}-${mesActual}-${diaActual}`);
-                var diferenciaMilisegundos = fecha_actual.getTime() - entrada.getTime();
-                var diferenciaDias = diferenciaMilisegundos / (1000 * 60 * 60 * 24);
+                let fecha_actual = new Date(
+                    `${anioActual}-${mesActual}-${diaActual}`
+                );
+                var diferenciaMilisegundos =
+                    fecha_actual.getTime() - entrada.getTime();
+                var diferenciaDias =
+                    diferenciaMilisegundos / (1000 * 60 * 60 * 24);
 
                 diferenciaDias = Math.ceil(diferenciaDias) - 1;
                 console.log(diferenciaDias);
 
-                var valorDiario = inf[0].valor_diaria /* - (inf[0].valor_diaria * inf[0].descuento) */;
+                var valorDiario =
+                    inf[0]
+                        .valor_diaria; /* - (inf[0].valor_diaria * inf[0].descuento) */
                 var costoTotal = diferenciaDias * valorDiario;
-                console.log("valor del día" + costoTotal)
-                window.preload.mostrarRegistroDePagosSend(informacionDeHabitacion.id_habitacion);
+                console.log('valor del día' + costoTotal);
+                window.preload.mostrarRegistroDePagosSend(
+                    informacionDeHabitacion.id_habitacion
+                );
 
                 window.preload.mostrarRegistroDePagosOn(async (e, info) => {
                     let pagosTotales = 0;
@@ -74,59 +98,79 @@ function cuentaTotalPresente(inf) {
                     for (let element of info) {
                         pagosTotales += element.registro_pago;
                     }
-                    console.log("Pagos hechos: " + pagosTotales)
+                    console.log('Pagos hechos: ' + pagosTotales);
                     if (inf[0].descuento != 0) {
-                        if (inf[0].descuento % 1 != 0/*  && inf[0].descuento == 1 */) {
-
-                            costoTotal -= costoTotal * inf[0].descuento
+                        if (
+                            inf[0].descuento % 1 !=
+                            0 /*  && inf[0].descuento == 1 */
+                        ) {
+                            costoTotal -= costoTotal * inf[0].descuento;
                             costoTotal -= pagosTotales;
-                            console.log("descuentos en porcentajes" + costoTotal)
+                            console.log(
+                                'descuentos en porcentajes' + costoTotal
+                            );
                         } else {
-                            costoTotal -= costoTotal - inf[0].descuento < 0 ? 0 : inf[0].descuento
-                            costoTotal -= pagosTotales
-                            console.log("descuentos en entero" + costoTotal)
+                            costoTotal -=
+                                costoTotal - inf[0].descuento < 0
+                                    ? 0
+                                    : inf[0].descuento;
+                            costoTotal -= pagosTotales;
+                            console.log('descuentos en entero' + costoTotal);
                         }
                     } else {
-                        costoTotal -= pagosTotales
+                        costoTotal -= pagosTotales;
                     }
 
-
-
-                    actualizarCostoTotal(inf[0].numero_documento, costoTotal, inf[0].descuento);
+                    actualizarCostoTotal(
+                        inf[0].numero_documento,
+                        costoTotal,
+                        inf[0].descuento
+                    );
                     const informacion = {
                         costoTotal: costoTotal,
-                        registro_pago: info
+                        registro_pago: info,
                     };
                     console.log('Returning informacion:', informacion);
                     resolve(informacion);
                 });
-
             } else {
-                validarDescuento(inf[0].cuenta_total, inf[0].descuento)
-                window.preload.mostrarRegistroDePagosSend(informacionDeHabitacion.id_habitacion);
+                validarDescuento(inf[0].cuenta_total, inf[0].descuento);
+                window.preload.mostrarRegistroDePagosSend(
+                    informacionDeHabitacion.id_habitacion
+                );
 
                 window.preload.mostrarRegistroDePagosOn(async (e, info) => {
-
                     const informacion = {
                         costoTotal: inf[0].cuenta_total,
-                        registro_pago: info
+                        registro_pago: info,
                     };
-                    console.log('Returning informacion con cuenta ya definida:', informacion);
+                    console.log(
+                        'Returning informacion con cuenta ya definida:',
+                        informacion
+                    );
                     resolve(informacion);
                 });
             }
         } else {
             if (inf.fecha_salida == 0) {
-                let partes_fecha = document.querySelector(".fecha_entrada").textContent.split(" ")[0].replaceAll("/", "-").split("-");
+                let partes_fecha = document
+                    .querySelector('.fecha_entrada')
+                    .textContent.split(' ')[0]
+                    .replaceAll('/', '-')
+                    .split('-');
                 const fecha_formateada = `${partes_fecha[2]}-${partes_fecha[1]}-${partes_fecha[0]}`;
                 let entrada = new Date(fecha_formateada);
                 let fecha_actual_obj = new Date();
                 const anioActual = fecha_actual_obj.getFullYear();
                 const diaActual = fecha_actual_obj.getDate();
                 const mesActual = fecha_actual_obj.getMonth() + 1;
-                let fecha_actual = new Date(`${anioActual}-${mesActual}-${diaActual}`);
-                var diferenciaMilisegundos = fecha_actual.getTime() - entrada.getTime();
-                var diferenciaDias = diferenciaMilisegundos / (1000 * 60 * 60 * 24);
+                let fecha_actual = new Date(
+                    `${anioActual}-${mesActual}-${diaActual}`
+                );
+                var diferenciaMilisegundos =
+                    fecha_actual.getTime() - entrada.getTime();
+                var diferenciaDias =
+                    diferenciaMilisegundos / (1000 * 60 * 60 * 24);
 
                 diferenciaDias = Math.ceil(diferenciaDias) - 1;
                 console.log(diferenciaDias);
@@ -134,7 +178,9 @@ function cuentaTotalPresente(inf) {
                 var valorDiario = inf.valor_diaria;
                 var costoTotal = diferenciaDias * valorDiario;
 
-                window.preload.mostrarRegistroDePagosSend(informacionDeHabitacion.id_habitacion);
+                window.preload.mostrarRegistroDePagosSend(
+                    informacionDeHabitacion.id_habitacion
+                );
 
                 window.preload.mostrarRegistroDePagosOn(async (e, info) => {
                     let pagosTotales = 0;
@@ -144,34 +190,41 @@ function cuentaTotalPresente(inf) {
                         pagosTotales += element.registro_pago;
                     }
 
-
                     if (inf.descuento % 1 != 0 && inf.descuento == 1) {
-                        costoTotal -= costoTotal * inf.descuento
+                        costoTotal -= costoTotal * inf.descuento;
                         costoTotal -= pagosTotales;
                     } else {
-                        costoTotal -= costoTotal - inf.descuento < 0 ? 0 : inf.descuento
+                        costoTotal -=
+                            costoTotal - inf.descuento < 0 ? 0 : inf.descuento;
                     }
 
-                    actualizarCostoTotal(inf.numero_documento, costoTotal, inf.descuento);
+                    actualizarCostoTotal(
+                        inf.numero_documento,
+                        costoTotal,
+                        inf.descuento
+                    );
                     const informacion = {
                         costoTotal: costoTotal,
-                        registro_pago: info
+                        registro_pago: info,
                     };
                     console.log('Returning informacion:', informacion);
                     resolve(informacion);
                 });
-
             } else {
-                validarDescuento(inf.cuenta_total, inf.descuento)
-                window.preload.mostrarRegistroDePagosSend(informacionDeHabitacion.id_habitacion);
+                validarDescuento(inf.cuenta_total, inf.descuento);
+                window.preload.mostrarRegistroDePagosSend(
+                    informacionDeHabitacion.id_habitacion
+                );
 
                 window.preload.mostrarRegistroDePagosOn(async (e, info) => {
-
                     const informacion = {
                         costoTotal: inf.cuenta_total,
-                        registro_pago: info
+                        registro_pago: info,
                     };
-                    console.log('Returning informacion con cuenta ya definida:', informacion);
+                    console.log(
+                        'Returning informacion con cuenta ya definida:',
+                        informacion
+                    );
                     resolve(informacion);
                 });
             }
@@ -187,23 +240,27 @@ function enviarDatos() {
         informacionDeHabitacion.id_habitacion
     );
     window.preload.informacionDeHabitacionYHuespedesOn((e, info) => {
-        console.log(info)
-        agregandoInformacionInicial(informacionDeHabitacion, info)
-        mostrarInformacionNuevaHuesped()
+        console.log(info);
+        agregandoInformacionInicial(informacionDeHabitacion, info);
+        mostrarInformacionNuevaHuesped();
         /*  const cuenta_total_y_registro_pago = cuentaTotalPresente(info) */
         /*  console.log(cuenta_total_y_registro_pago) */
         //mostrarRegistroDePagos(document.querySelectorAll(".card_input")[5].textContent,informacionDeHabitacion.id_habitacion, cuenta_total_y_registro_pago) /* MODIFICADO TEST */
         //Con el valor del costo_total se actualiza el valor del costo total de estadía. Así mismo, se registra el pago que se hizo
-        cuentaTotalPresente(info).then(cuenta_total_y_registro_pago => {
-            console.log(cuenta_total_y_registro_pago)
-            mostrarRegistroDePagos(document.querySelectorAll(".card_input")[5].textContent, informacionDeHabitacion.id_habitacion, cuenta_total_y_registro_pago)
-        })
+        cuentaTotalPresente(info).then((cuenta_total_y_registro_pago) => {
+            console.log(cuenta_total_y_registro_pago);
+            mostrarRegistroDePagos(
+                document.querySelectorAll('.card_input')[5].textContent,
+                informacionDeHabitacion.id_habitacion,
+                cuenta_total_y_registro_pago
+            );
+        });
         /*    cuentaTotalPresente(info, (cuenta_total_y_registro_pago) => {
                console.log("lololol")
                console.log(cuenta_total_y_registro_pago)
                mostrarRegistroDePagos(document.querySelectorAll(".card_input")[5].textContent, informacionDeHabitacion.id_habitacion, cuenta_total_y_registro_pago) 
            }); */
-    })
+    });
 }
 
 function agregandoInformacionInicial(infoHabitacion, infoHabitacionYHuespede) {
@@ -211,8 +268,8 @@ function agregandoInformacionInicial(infoHabitacion, infoHabitacionYHuespede) {
     let txt_informacion_inicial = document.querySelectorAll('.card_input');
     txt_informacion_inicial[0].textContent = infoHabitacion.numero; // numero de habitación
     txt_informacion_inicial[1].textContent = infoHabitacion.tipo;
-    txt_informacion_inicial[3].textContent = 'R$' +
-        infoHabitacionYHuespede[0].valor_diaria;
+    txt_informacion_inicial[3].textContent =
+        'R$' + infoHabitacionYHuespede[0].valor_diaria;
     txt_informacion_inicial[4].textContent =
         infoHabitacionYHuespede[0].nombre_completo;
     txt_informacion_inicial[5].textContent =
@@ -268,8 +325,7 @@ function mostrarInformacionNuevaHuesped() {
                 informacionDeHabitacion.numero; // numero de habitación
             txt_informacion_inicial[1].textContent =
                 informacionDeHabitacion.tipo;
-            txt_informacion_inicial[3].textContent = 'R$' +
-                info.valor_diaria;
+            txt_informacion_inicial[3].textContent = 'R$' + info.valor_diaria;
             txt_informacion_inicial[4].textContent = info.nombre_completo;
             txt_informacion_inicial[5].textContent = info.numero_documento;
             txt_informacion_inicial[6].textContent =
@@ -286,21 +342,30 @@ function mostrarInformacionNuevaHuesped() {
             );
 
             /*   let cuenta_total = cuentaTotalPresente(info) */
-            cuentaTotalPresente(info).then(cuenta_total_y_registro_pago => {
-                console.log(cuenta_total_y_registro_pago)
-                mostrarRegistroDePagos(document.querySelectorAll(".card_input")[5].textContent, informacionDeHabitacion.id_habitacion, cuenta_total_y_registro_pago)
-            }).catch(e => {
-                console.log(e)
-            }) /* MODIFICADO TEST */
-        })
-
-    })
+            cuentaTotalPresente(info)
+                .then((cuenta_total_y_registro_pago) => {
+                    console.log(cuenta_total_y_registro_pago);
+                    mostrarRegistroDePagos(
+                        document.querySelectorAll('.card_input')[5].textContent,
+                        informacionDeHabitacion.id_habitacion,
+                        cuenta_total_y_registro_pago
+                    );
+                })
+                .catch((e) => {
+                    console.log(e);
+                }); /* MODIFICADO TEST */
+        });
+    });
 }
 
-function mostrarRegistroDePagos(numero_documento, id_habitacion, cuenta_total_y_registro_pago)/* MODIFICADO TEST */ {
-    document.querySelector("tbody").innerHTML = ""
-    const registro_pago = cuenta_total_y_registro_pago.registro_pago
-    let cuenta_total = cuenta_total_y_registro_pago.costoTotal
+function mostrarRegistroDePagos(
+    numero_documento,
+    id_habitacion,
+    cuenta_total_y_registro_pago
+) /* MODIFICADO TEST */ {
+    document.querySelector('tbody').innerHTML = '';
+    const registro_pago = cuenta_total_y_registro_pago.registro_pago;
+    let cuenta_total = cuenta_total_y_registro_pago.costoTotal;
 
     /*  window.preload.mostrarRegistroDePagosSend(id_habitacion) */ /* MODIFICADO TEST */
     /* window.preload.mostrarRegistroDePagosOn((e, info) => { */
@@ -308,29 +373,32 @@ function mostrarRegistroDePagos(numero_documento, id_habitacion, cuenta_total_y_
         let html = '';
         registro_pago.forEach((element) => {
             html += `<tr class="fila_pago">
-                            <td>R$ <input type="number" disabled value="${element.registro_pago
-                }"></td>
+                            <td>R$ <input type="number" disabled value="${
+                                element.registro_pago
+                            }"></td>
                             <td>
                                 <select disabled>
-                                    <option select>${element.metodo_pago
-                }</option>
+                                    <option select>${
+                                        element.metodo_pago
+                                    }</option>
                                 </select>
                             </td>
-                            <td>R$ <input type="number" disabled value="${element.extra
-                }"></td>
-                            <td>R$ ${element.cuenta_actual /* - element.registro_pago */
-                }</td>
-                            <td>R$ ${element.cuenta_actual + element.registro_pago
-                }</td>
+                            <td>R$ <input type="number" disabled value="${
+                                element.extra
+                            }"></td>
+                            <td>R$ ${
+                                element.cuenta_actual /* - element.registro_pago */
+                            }</td>
+                            <td>R$ ${
+                                element.cuenta_actual + element.registro_pago
+                            }</td>
                             <td></td>
                         </tr>`;
         });
 
         document.querySelector('tbody').innerHTML = html;
         if (cuenta_total > 0) {
-            document.querySelector(
-                'tbody'
-            ).innerHTML += `<tr class="fila_pago">
+            document.querySelector('tbody').innerHTML += `<tr class="fila_pago">
                             <td>R$ <input type="number" class="registro_pago"></td>
                             <td>
                                 <select>
@@ -340,11 +408,11 @@ function mostrarRegistroDePagos(numero_documento, id_habitacion, cuenta_total_y_
                                 </select>
                             </td>
                             <td>R$ <input type="number" class="extra"></td>
-                            <td>R$ ${cuenta_total/*  -
+                            <td>R$ ${
+                                cuenta_total /*  -
                     info[info.length - 1].registro_pago */
-                }</td>
-                            <td>R$ ${cuenta_total
-                }</td>
+                            }</td>
+                            <td>R$ ${cuenta_total}</td>
                             <td></td>
                         </tr>`;
 
@@ -356,7 +424,7 @@ function mostrarRegistroDePagos(numero_documento, id_habitacion, cuenta_total_y_
             /* Botón ya seleccionado */
             let btnConcluirPagamento =
                 document.querySelectorAll('.btn-pagamento')[1];
-            btnConcluirPagamento.remove()
+            btnConcluirPagamento.remove();
             // Creación del contenedor principal
             // Crear elementos
             const container = document.createElement('div');
@@ -415,12 +483,9 @@ function mostrarRegistroDePagos(numero_documento, id_habitacion, cuenta_total_y_
             container.appendChild(leftSide);
             container.appendChild(rightSide);
 
-
-
-            document.querySelector(".btn-container").appendChild(container)
+            document.querySelector('.btn-container').appendChild(container);
         }
     } else {
-
         document.querySelector('tbody').innerHTML += `<tr class="fila_pago">
                             <td>R$ <input type="number" class="registro_pago"></td>
                             <td>
@@ -439,7 +504,6 @@ function mostrarRegistroDePagos(numero_documento, id_habitacion, cuenta_total_y_
         enviarRegistroDePago(numero_documento);
     }
     /*    }) */
-
 }
 
 function agregandoEventosDePagos(cuenta_actual) {
@@ -448,20 +512,23 @@ function agregandoEventosDePagos(cuenta_actual) {
     /* let saldo_anterior = parseInt(filas[filas.length - 1].children[3].textContent.split(" ")[1] || 0) */
     document.querySelector('.extra').addEventListener('input', (e) => {
         if (e.target.value != '') {
-            filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0)
-                }`;
-            filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior +
+            filas[filas.length - 1].children[4].textContent = `R$ ${
+                saldo_anterior + parseInt(e.target.value || 0)
+            }`;
+            filas[filas.length - 1].children[3].textContent = `R$ ${
+                saldo_anterior +
                 parseInt(e.target.value || 0) -
                 (parseInt(document.querySelector('.registro_pago').value) || 0)
-                }`;
+            }`;
         } else {
             if (document.querySelector('.registro_pago').value != '') {
-                filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior +
+                filas[filas.length - 1].children[3].textContent = `R$ ${
+                    saldo_anterior +
                     parseInt(e.target.value || 0) -
                     parseInt(
                         document.querySelector('.registro_pago').value || 0
                     )
-                    }`;
+                }`;
                 filas[
                     filas.length - 1
                 ].children[4].textContent = `R$ ${saldo_anterior}`;
@@ -481,8 +548,9 @@ function agregandoEventosDePagos(cuenta_actual) {
             filas[filas.length - 1].children[4].textContent.split(' ')[1] || 0
         );
         if (e.target.value != '') {
-            filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior2 - parseInt(e.target.value || 0)
-                }`;
+            filas[filas.length - 1].children[3].textContent = `R$ ${
+                saldo_anterior2 - parseInt(e.target.value || 0)
+            }`;
         } else {
             filas[
                 filas.length - 1
@@ -492,36 +560,56 @@ function agregandoEventosDePagos(cuenta_actual) {
 }
 
 /* ---- Modal ---- */
-let btnEnviar = document.querySelector('#enviar');
-const noButton = document.getElementById('noButton');
-const yesButton = document.getElementById('yesButton');
-const modalConfirmar = document.getElementById('modalConfirmar');
-const modalClienteAdicionado = document.getElementById(
-    'modalClienteAdicionado'
-);
+let btnAggHospede = document.querySelector('#btn-agg-hospede');
+let btnRemoverHospede = document.querySelector('#btn-remover-hospede');
+
+const modalRemoverHospede = document.getElementById('modalRemoverHospede');
+const noBtnRemoverHospede = document.getElementById('remover-hospede-no');
+const yesBtnRemoverHospede = document.getElementById('remover-hospede-yes');
+
+const modalAggHospede = document.getElementById('modalAggHospede');
+
+const modalDigiteNovoPreco = document.getElementById('modalDigiteNovoPreço');
+const btnCancelar = document.getElementById('btn-cancelar');
+const btnAceitar = document.getElementById('btn-aceitar');
+
+const modalPrecioAlterado = document.getElementById('modalPrecioAlterado');
 function closeModal(modal) {
     modal.style.display = 'none';
 }
-function openModalClienteAdicionado() {
-    modalClienteAdicionado.style.display = 'flex';
-    closeModal(modalConfirmar);
+function openModalPrecioAlterado() {
+    modalPrecioAlterado.style.display = 'flex';
+    closeModal(modalDigiteNovoPreco);
+    setTimeout(() => {
+        /* window.preload.infoHuespedesSend(infoGeneral); */
+        closeModal(modalPrecioAlterado);
+    }, 2000);
 }
-function openModalConfirmar() {
-    modalConfirmar.style.display = 'flex';
-    noButton.onclick = () => closeModal(modalConfirmar);
-    yesButton.onclick = () => openModalClienteAdicionado();
+function openModalDigiteNovoPreco() {
+    modalDigiteNovoPreco.style.display = 'flex';
+    closeModal(modalRemoverHospede);
+    btnCancelar.onclick = () => closeModal(modalDigiteNovoPreco);
+    btnAceitar.onclick = () => openModalPrecioAlterado();
+}
+function openModalRemoverHospede() {
+    modalRemoverHospede.style.display = 'flex';
+    noBtnRemoverHospede.onclick = () => closeModal(modalRemoverHospede);
+    yesBtnRemoverHospede.onclick = () => openModalDigiteNovoPreco();
 }
 window.onclick = (event) => {
-    if (event.target === modalConfirmar) {
-        closeModal(modalConfirmar);
-    } else if (event.target === modalClienteAdicionado) {
-        closeModal(modalClienteAdicionado);
-        window.location.href =
-            '../vista_general_habitaciones/vistaGeneral.html';
+    if (event.target === modalRemoverHospede) {
+        closeModal(modalRemoverHospede);
+    } else if (event.target === modalDigiteNovoPreco) {
+        closeModal(modalDigiteNovoPreco);
+    } else if (event.target === modalPrecioAlterado) {
+        closeModal(modalPrecioAlterado);
     }
 };
-btnEnviar.addEventListener('click', (e) => {
-    openModalConfirmar();
+btnRemoverHospede.addEventListener('click', (e) => {
+    openModalRemoverHospede();
+});
+btnAggHospede.addEventListener('click', (e) => {
+    openModalRemoverHospede();
 });
 
 function enviarRegistroDePago(numero_documento) {
@@ -538,21 +626,27 @@ function enviarRegistroDePago(numero_documento) {
         ) {
             const registroPagoInfo = {
                 documento: numero_documento,
-                pago: parseInt(filas[filas.length - 1].querySelector(".registro_pago").value),
+                pago: parseInt(
+                    filas[filas.length - 1].querySelector('.registro_pago')
+                        .value
+                ),
                 fecha_pago: fecha_actual,
-                metodo_pago: filas[filas.length - 1].querySelector("select").value,
-                extra: filas[filas.length - 1].querySelector(".extra").value || 0,
-                cuenta_total: parseInt(filas[filas.length - 1].children[3].textContent.split(" ")[1])
-            }
-            window.preload.enviarRegistroDePagoSend(registroPagoInfo)
-            location.reload()
+                metodo_pago:
+                    filas[filas.length - 1].querySelector('select').value,
+                extra:
+                    filas[filas.length - 1].querySelector('.extra').value || 0,
+                cuenta_total: parseInt(
+                    filas[filas.length - 1].children[3].textContent.split(
+                        ' '
+                    )[1]
+                ),
+            };
+            window.preload.enviarRegistroDePagoSend(registroPagoInfo);
+            location.reload();
         } else {
             console.log('Está vacío');
         }
     });
 }
 
-function concluirPago() {
-
-}
-
+function concluirPago() {}
