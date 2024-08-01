@@ -22,10 +22,11 @@ const {
     informacionHuespedIndividual,
     mostrarRegistroDePagos,
     registrarPago,
-    actualizarCostoTotal
+    actualizarCostoTotal,
+    guardarEnHistorial
 } = require('./crud');
 const db = new sqlite3.Database(
-    path.join(path.join(__dirname, '/db', 'data.db'))
+    path.join(path.join(__dirname, '/db', 'data2.db'))
 );
 /* const i18next = require('./src/i18n/i18n.js'); */
 const { emialHuespedRegistrado } = require('./sendEmail');
@@ -255,5 +256,9 @@ ipcMain.on('actualizar-costo-total', (e, data) => {
             );
         }
     })
+})
+
+ipcMain.on('guardar-en-historial',(e,data)=>{
+    guardarEnHistorial(db,data)
 })
 
