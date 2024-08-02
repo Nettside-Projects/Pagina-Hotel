@@ -484,6 +484,11 @@ function mostrarRegistroDePagos(
             container.appendChild(rightSide);
 
             document.querySelector('.btn-container').appendChild(container);
+            document
+                .querySelector('.container')
+                .addEventListener('click', (e) => {
+                    openModalExito('Pagamento concluido');
+                });
         }
     } else {
         document.querySelector('tbody').innerHTML += `<tr class="fila_pago">
@@ -560,57 +565,103 @@ function agregandoEventosDePagos(cuenta_actual) {
 }
 
 /* ---- Modal ---- */
-let btnAggHospede = document.querySelector('#btn-agg-hospede');
-let btnRemoverHospede = document.querySelector('#btn-remover-hospede');
+const btnAggHospede = document.querySelector('#btn-agg-hospede');
+const btnRemoverHospede = document.querySelector('#btn-remover-hospede');
 
-const modalRemoverHospede = document.getElementById('modalRemoverHospede');
-const noBtnRemoverHospede = document.getElementById('remover-hospede-no');
-const yesBtnRemoverHospede = document.getElementById('remover-hospede-yes');
-
-const modalAggHospede = document.getElementById('modalAggHospede');
-
-const modalDigiteNovoPreco = document.getElementById('modalDigiteNovoPreço');
-const btnCancelar = document.getElementById('btn-cancelar');
-const btnAceitar = document.getElementById('btn-aceitar');
-
-const modalPrecioAlterado = document.getElementById('modalPrecioAlterado');
 function closeModal(modal) {
     modal.style.display = 'none';
 }
-function openModalPrecioAlterado() {
-    modalPrecioAlterado.style.display = 'flex';
-    closeModal(modalDigiteNovoPreco);
+function displayModal(modal) {
+    modal.style.display = 'flex';
+}
+function openModalExito(message) {
+    const modalExito = document.getElementById('modalExito');
+    const modalExitoMessage = document.getElementById('modalExitoMessage');
+    modalExitoMessage.textContent = message;
+    displayModal(modalExito);
     setTimeout(() => {
         /* window.preload.infoHuespedesSend(infoGeneral); */
-        closeModal(modalPrecioAlterado);
+        closeModal(modalExito);
     }, 2000);
 }
-function openModalDigiteNovoPreco() {
-    modalDigiteNovoPreco.style.display = 'flex';
-    closeModal(modalRemoverHospede);
-    btnCancelar.onclick = () => closeModal(modalDigiteNovoPreco);
-    btnAceitar.onclick = () => openModalPrecioAlterado();
+function openModalDatosCliente() {
+    const modalDatosCliente = document.getElementById('modalDatosCliente');
+    displayModal(modalDatosCliente);
 }
-function openModalRemoverHospede() {
-    modalRemoverHospede.style.display = 'flex';
-    noBtnRemoverHospede.onclick = () => closeModal(modalRemoverHospede);
-    yesBtnRemoverHospede.onclick = () => openModalDigiteNovoPreco();
-}
-window.onclick = (event) => {
-    if (event.target === modalRemoverHospede) {
-        closeModal(modalRemoverHospede);
-    } else if (event.target === modalDigiteNovoPreco) {
-        closeModal(modalDigiteNovoPreco);
-    } else if (event.target === modalPrecioAlterado) {
-        closeModal(modalPrecioAlterado);
+function openModalDigiteNovoPreco(verDatosClientes) {
+    const modalDigiteNovoPreco = document.getElementById(
+        'modalDigiteNovoPreco'
+    );
+    const btnCancelar = document.getElementById('btn-cancelar');
+    const btnAceitar = document.getElementById('btn-aceitar');
+    const input = document.getElementById('input-digite-preco');
+
+    displayModal(modalDigiteNovoPreco);
+    function verificarInput() {
+        if (input.value === '') {
+            console.log('Está vacío');
+            btnAceitar.disabled = true;
+            btnAceitar.style.background = '#167900';
+        } else {
+            console.log('No está vacío');
+            btnAceitar.disabled = false;
+            btnAceitar.style.background = '#35C928';
+        }
     }
-};
+    verificarInput();
+    input.addEventListener('input', verificarInput);
+
+    btnCancelar.onclick = () => closeModal(modalDigiteNovoPreco);
+    btnAceitar.onclick = () => {
+        closeModal(modalDigiteNovoPreco);
+        input.value = '';
+        verificarInput();
+        if (verDatosClientes) {
+            openModalDatosCliente();
+        } else {
+            openModalExito('preço alterado');
+        }
+    };
+}
+function openModalConfirmar(message, verDatosClientes) {
+    const modalConfirmar = document.getElementById('modalConfirmar');
+    const noBtn = document.getElementById('confirmar-no');
+    const yesBtn = document.getElementById('confirmar-yes');
+    const modalConfirmarMessage = document.getElementById(
+        'modalConfimarMessage'
+    );
+    modalConfirmarMessage.textContent = message;
+    displayModal(modalConfirmar);
+    noBtn.onclick = () => closeModal(modalConfirmar);
+    yesBtn.onclick = () => {
+        closeModal(modalConfirmar);
+        if (verDatosClientes) {
+            openModalDigiteNovoPreco('verDatosClientes');
+        } else {
+            openModalDigiteNovoPreco();
+        }
+    };
+}
+
 btnRemoverHospede.addEventListener('click', (e) => {
-    openModalRemoverHospede();
+    openModalConfirmar('remover');
 });
 btnAggHospede.addEventListener('click', (e) => {
-    openModalRemoverHospede();
+    openModalConfirmar('agregar', 'verDatosClientes');
 });
+const modals = [
+    modalConfirmar,
+    modalDigiteNovoPreco,
+    modalExito,
+    modalDatosCliente,
+];
+window.onclick = (event) => {
+    modals.forEach((modal) => {
+        if (event.target === modal) {
+            closeModal(modal);
+        }
+    });
+};
 
 function enviarRegistroDePago(numero_documento) {
     let fecha_actual_obj = new Date();
@@ -648,5 +699,3 @@ function enviarRegistroDePago(numero_documento) {
         }
     });
 }
-
-function concluirPago() {}
