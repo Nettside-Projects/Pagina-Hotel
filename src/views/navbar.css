@@ -17,9 +17,23 @@
     width: 100%;
     height: 100%;
     justify-content: space-between;
-    background: #fff;
     align-items: center;
-    padding-left: 20px;
+    background: #fff;
+    padding-inline: 20px;
     font-size: 25px;
     font-weight: 900;
+}
+
+.barra_buscar .volver {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 91px;
+    height: 31px;
+    background: #0D7972;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 15px;
+    font-weight: 400;
+    font-size: 15px;
 }

@@ -42,8 +42,8 @@
         </div>
     </div>
     <div id="modalDatosCliente" class="modal">
-        <div class="modal-content">
-            <span class="closedos">&times;</span>
+        <div class="modal-content modal-content-datosCliente">
+            <span class="x">&times;</span>
             <div class="maineditar">
                 <span>Editar Dados</span>
                 <div class="contentEditar">
@@ -106,51 +106,12 @@
                     </div>
                     <div style="display: flex;">
                         <div class="salida colum">
-                            <span>Data de Saida:</span>
+                            <span>Data de Entrada:</span>
                             <input type="datetime-local" id="fecha_salida">
                         </div>
-                        <p style="color: red; padding-left: 5px; font-weight: bold;">*observe que se você alterar a data
-                            de saida, o preço total aumentará</p>
-                    </div>
-                    <span>Pagamentos Efetuados</span>
-                    <div class="contentFactura">
-                        <div class="factura">
-                            <span class="custo-extra">pago: $r 150,00</span>
-                            <span class="custo-extra">Forma de Pagamento: Pix</span>
-                            <span class="custo-extra">Custo extra: $r 0,00</span>
-                            <div class="preco-restante">
-                                <span class="preco-restante-1">preço restante: $r </span><span
-                                    class="comma">150,00</span>
-                            </div>
-                            <span class="caixa">Caixa: Romivan</span>
-                            <span class="total">----------------------------total: $r
-                                300,00----------------------------</span> <span class="custo-extra">pago: $r
-                                150,00</span>
-                            <span class="custo-extra">Forma de Pagamento: Pix</span>
-                            <span class="custo-extra">Custo extra: $r 0,00</span>
-                            <div class="preco-restante">
-                                <span class="preco-restante-1">preço restante: $r </span><span
-                                    class="comma">150,00</span>
-                            </div>
-                            <span class="caixa ">Caixa: Romivan</span>
-                            <span class="total">----------------------------total: $r
-                                300,00----------------------------</span>
-                            <span class="custo-extra">pago: $r 150,00</span>
-                            <span class="custo-extra">Forma de Pagamento: Pix</span>
-                            <span class="custo-extra">Custo extra: $r 0,00</span>
-                            <div class="preco-restante">
-                                <span class="preco-restante-1">preço restante: $r </span><span
-                                    class="comma">150,00</span>
-                            </div>
-                            <span class="caixa">Caixa: Romivan</span>
-                            <span class="total">----------------------------total: $r
-                                300,00----------------------------</span>
-                            <span style="margin-top: 20px; font-weight: 500;">PAGAMENTO COMPLETO</span>
-
-                        </div>
-                        <div class="contenbuton">
-                            <button class="cancelar" id="noButtonConfirm">Cancelar</button>
-                            <button class="aceptar" id="yesButtonConfirm">Aceitar</button>
+                        <div class="salida colum">
+                            <span>Data de Saida:</span>
+                            <input type="datetime-local" id="fecha_salida">
                         </div>
                     </div>
                 </div>
@@ -235,6 +196,7 @@
         <div>
             <div class="buscador">
                 <div class="barra_buscar">Processo de Saida
+                    <a class="volver" href="./saida.html">volver</a>
                 </div>
             </div>
         </div>
@@ -318,20 +280,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!--  <tr class="fila_pago">
-                        <td>R$ <input type="number"></td>
-                        <td>
-                            <select>
-                                <option>Pix</option>
-                                <option>Cartão</option>
-                                <option>Dinheiro</option>
-                            </select>
-                        </td>
-                        <td>R$ <input type="number"></td>
-                        <td>R$ 150,00</td>
-                        <td>R$ 300,00</td>
-                        <td></td>
-                    </tr> -->
                 </tbody>
             </table>
             <div class="btn-container">
@@ -354,6 +302,7 @@
         </section>
     </div>
     <script src="../saida/saida_form.js"></script>
+    <script src="../modales.js"></script>
 </body>
 
 </html>

@@ -101,17 +101,12 @@ function createRows(numClientes) {
         'modalInformacionEliminar'
     );
 
-    // Función para mostrar un modal
     function showModal(modal) {
         modal.classList.add('block');
     }
-
-    // Función para ocultar un modal
     function hideModal(modal) {
         modal.classList.remove('block');
     }
-
-    // Función para mostrar un modal y ocultarlo automáticamente después de 3 segundos
     function showModalWithAutoHide(modal, duration = 3000) {
         showModal(modal);
         setTimeout(() => {
@@ -149,7 +144,6 @@ function createRows(numClientes) {
         hideModal(modalEliminarcliente);
     });
 
-    // Añadir evento de click al botón "Sí" para cerrar el modal de eliminación y abrir el modal de información
     yesButtontres.addEventListener('click', (e) => {
         hideModal(modalEliminarcliente);
         showModalWithAutoHide(modalInformacionEliminar);
@@ -176,6 +170,21 @@ function createRows(numClientes) {
             hideModal(element.closest('.modal'));
         });
     });
+
+    const modals = [
+        modalEditarcliente,
+        modalConfirmar,
+        modalEliminarcliente,
+        modalInformacion,
+        modalInformacionEliminar,
+    ];
+    window.onclick = (event) => {
+        modals.forEach((modal) => {
+            if (event.target === modal) {
+                hideModal(modal);
+            }
+        });
+    };
 
     return filasArray; // Devolver el array con las filas
 }
