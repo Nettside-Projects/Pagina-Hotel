@@ -383,7 +383,7 @@ display: block !important;
 }
 .colum{
    
-    height: 55px;
+    height: 65px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -393,6 +393,7 @@ display: block !important;
     display: flex;
     align-items: flex-start;
 }
+
 .documento input, .passaporte input,
 .nome input,  .profesion input,
 .telefono input, .procedencia input,
@@ -597,3 +598,9 @@ display: block !important;
 #checkImage {
     animation: rotate 1s ease-in-out, pulse 1s ease-in-out 1s; /* rotar primero, luego pulsar */
 }
+.name-error-nombre {
+    color: red;
+    font-weight: 600;
+    font-size: 17px;
+    height: 20px;
+  }
