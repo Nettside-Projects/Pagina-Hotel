@@ -1,0 +1,76 @@
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 70px;
+    border: 1px solid #888;
+    width: 40%;
+    border-radius: 10px;
+    color: #000;
+    font-family: manrope;
+    font-size: 20px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content .info-img {
+    width: 110px;
+    height: 110px;
+}
+
+.btn-modal {
+    all: unset;
+}
+
+.icon-img {
+    width: 51px;
+    height: 51px;
+}
+
+/* Animación para la imagen de check */
+@keyframes pulse {
+    0% {transform: scale(0.95);}
+    50% {transform: scale(1.1);}
+    100% {transform: scale(1);}
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.checkImage {
+    width: 170px;
+    height: 170px;
+    animation: rotate 1s ease-in-out, pulse 1s ease-in-out 1s;
+}

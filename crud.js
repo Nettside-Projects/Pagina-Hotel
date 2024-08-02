@@ -1,7 +1,7 @@
 const path = require('path');
 const sqlite3 = require('sqlite3');
 
-const db = new sqlite3.Database(path.join(__dirname, '/db', 'data.db'));
+const db = new sqlite3.Database(path.join(__dirname, '/db', 'data2.db'));
 /* 
 const data = {
     infoHuespedes: [
@@ -243,13 +243,13 @@ function agregarHuespedes(db, data, callback) {
                             db.run(`
                                 INSERT INTO huesped (
                                     numero_documento, nombre_completo, nacionalidad, procedencia,
-                                    fecha_entrada, fecha_salida, pasaporte, fecha_nacimiento,
+                                    fecha_entrada, fecha_salida,fecha_pago, pasaporte, fecha_nacimiento,
                                     profesion, naturalidade, pago_adelantado, estado_pago,
                                     fk_id_habitacion, fk_id_cuenta, fk_id_rol,email,telefono
-                                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?);
+                                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?);
                             `, [
                                 e.documento, e.nombre, e.nacionalidad, e.procedencia,
-                                e.fecha_entrada, e.fecha_salida, e.pasaporte, e.fecha_nacimiento,
+                                e.fecha_entrada, e.fecha_salida,e.fecha_entrada, e.pasaporte, e.fecha_nacimiento,
                                 e.profesion, e.naturalidad, e.pago_adelantado || "",
                                 e.estado_pago, e.id_habitacion, idCuenta,
                                 index === 0 ? 1 : 2, e.email, e.telefono
@@ -553,6 +553,78 @@ function actualizarCostoTotal(db,data,callback) {
     })
 }
 
+function guardarEnHistorial(db,data) {
+    data.informacionDeHuespedes.forEach(element => {
+        console.log("Insertando datos de huesped") // <------ Agregar codigo SQL para insertar datos de cada huesped
+       console.log(element)
+       console.log("Fecha de historial :" + data.fecha_registro_historial)
+       data.registros_pagos.forEach(element2 => {
+        console.log("Insertando registro de pagos a cada huesped") // <------ Agregar codigo SQL para insertar datos de registro de pago
+        console.log(element2)
+       })
+
+    })
+ /*    db.run(`INSERT INTO historial_huesped (
+                                    numero_documento, nombre_completo, nacionalidad, procedencia,
+                                    fecha_entrada, fecha_salida,fecha_historial, pasaporte, fecha_nacimiento,
+                                    profesion,naturalidade,email,telefono,numero_habitacion,descuento_aplicado
+                                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?);
+                           `)
+    console.log("Información para concluir pago:")
+    console.log(data) */
+}
+/* 
+const data = {
+    informacionDeHuespedes: [
+      {
+        nombre_completo: 'Leonel Messi',
+        numero_documento: '1121109201',
+        procedencia: 'Argentina',
+        nacionalidad: 'Argentino',
+        numero: '2',
+        tipo_habitacion: 'Duplo',
+        cuenta_total: 0,
+        valor_diaria: 100,
+        descuento: 20,
+        fecha_entrada: '27/07/2024 3:56:08 PM',
+        fecha_salida: '2024-07-30T15:56',
+        id_rol: 1,
+        rol: 'Responsable'
+      }
+    ],
+    registros_pagos: [
+      {
+        id_registro_pagos: 1,
+        registro_pago: 100,
+        fecha_pago: '1722056400000.0',
+        metodo_pago: 'Pix',
+        cuenta_actual: 230,
+        extra: 50,
+        fk_numero_documento: '1121109201'
+      },
+      {
+        id_registro_pagos: 2,
+        registro_pago: 120,
+        fecha_pago: '1722056400000.0',
+        metodo_pago: 'Pix',
+        cuenta_actual: 110,
+        extra: 0,
+        fk_numero_documento: '1121109201'
+      },
+      {
+        id_registro_pagos: 3,
+        registro_pago: 20,
+        fecha_pago: '1722056400000.0',
+        metodo_pago: 'Pix',
+        cuenta_actual: 90,
+        extra: 0,
+        fk_numero_documento: '1121109201'
+      }
+    ]
+}
+
+guardarEnHistorial(db,data)  */
+
 
 
 module.exports = {
@@ -570,6 +642,7 @@ module.exports = {
     informacionHuespedIndividual: informacionHuespedIndividual,
     mostrarRegistroDePagos: mostrarRegistroDePagos,
     registrarPago: registrarPago,
-    actualizarCostoTotal: actualizarCostoTotal
+    actualizarCostoTotal: actualizarCostoTotal,
+    guardarEnHistorial: guardarEnHistorial
 
 };

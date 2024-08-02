@@ -90,6 +90,9 @@ contextBridge.exposeInMainWorld('preload', {
     actualizarCostoTotal:(info_actualizacion)=>{
         ipcRenderer.send("actualizar-costo-total",info_actualizacion)
     },
+    guardandoEnHistorialSend:(guardarEnHistorial)=>{
+        ipcRenderer.send("guardar-en-historial",guardarEnHistorial)
+    },
     i18n: {
         onTranslate: (callback) =>
             ipcRenderer.on('i18n', (event, data) => callback(data)),
