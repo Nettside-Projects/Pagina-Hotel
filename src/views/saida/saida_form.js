@@ -279,7 +279,7 @@ function mostrarRegistroDePagos(numero_documento, id_habitacion,cuenta_total_y_r
             });
            
             document.querySelector('tbody').innerHTML = html;
-            if (info[info.length - 1].cuenta_actual > 0) {
+            if (cuenta_total > 0) {
                 document.querySelector(
                     'tbody'
                 ).innerHTML += `<tr class="fila_pago">
