@@ -128,7 +128,7 @@ function cuentaTotalPresente(inf) {
 
 /* Agregando información inicial de la habitación a través del JSON recibido */
 // tipo de habitación
-enviarDatos()
+enviarDatos();
 function enviarDatos() {
     window.preload.informacionDeHabitacionYHuespedesSend(
         informacionDeHabitacion.id_habitacion
@@ -152,7 +152,6 @@ function enviarDatos() {
         }); */
     })
 }
-
 
 function agregandoInformacionInicial(infoHabitacion, infoHabitacionYHuespede) {
     let html = '';
@@ -211,17 +210,29 @@ function mostrarInformacionNuevaHuesped() {
     inputSelect.addEventListener('change', (e) => {
         window.preload.informacionHuespedIndividualSend(e.target.value);
         window.preload.informacionHuespedIndividualOn((e, info) => {
-            console.log(info)
-            let txt_informacion_inicial = document.querySelectorAll(".card_input")
-            txt_informacion_inicial[0].textContent = informacionDeHabitacion.numero // numero de habitación
-            txt_informacion_inicial[1].textContent = informacionDeHabitacion.tipo
-            txt_informacion_inicial[3].textContent = info.descuento === null ? "sin descuento" : info.descuento
-            txt_informacion_inicial[4].textContent = info.nombre_completo
-            txt_informacion_inicial[5].textContent = info.numero_documento
-            txt_informacion_inicial[6].textContent = info.nacionalidad === null ? 'sin nacionalidad' : info.nacionalidad
-            txt_informacion_inicial[7].textContent = info.procedencia === null ? 'sin procedencia' : info.procedencia
-            txt_informacion_inicial[8].textContent = info.fecha_entrada
-            txt_informacion_inicial[9].textContent = formatearFecha(info.fecha_salida)
+            console.log(info);
+            let txt_informacion_inicial =
+                document.querySelectorAll('.card_input');
+            txt_informacion_inicial[0].textContent =
+                informacionDeHabitacion.numero; // numero de habitación
+            txt_informacion_inicial[1].textContent =
+                informacionDeHabitacion.tipo;
+            txt_informacion_inicial[3].textContent =
+                info.descuento === null ? 'sin descuento' : info.descuento;
+            txt_informacion_inicial[4].textContent = info.nombre_completo;
+            txt_informacion_inicial[5].textContent = info.numero_documento;
+            txt_informacion_inicial[6].textContent =
+                info.nacionalidad === null
+                    ? 'sin nacionalidad'
+                    : info.nacionalidad;
+            txt_informacion_inicial[7].textContent =
+                info.procedencia === null
+                    ? 'sin procedencia'
+                    : info.procedencia;
+            txt_informacion_inicial[8].textContent = info.fecha_entrada;
+            txt_informacion_inicial[9].textContent = formatearFecha(
+                info.fecha_salida
+            );
 
           /*   let cuenta_total = cuentaTotalPresente(info) */
           cuentaTotalPresente(info).then(cuenta_total_y_registro_pago=>{
@@ -244,30 +255,31 @@ function mostrarRegistroDePagos(numero_documento, id_habitacion,cuenta_total_y_r
             let html = '';
             registro_pago.forEach((element) => {
                 html += `<tr class="fila_pago">
-                            <td>R$ <input type="number" disabled value="${element.registro_pago
-                    }"></td>
+                            <td>R$ <input type="number" disabled value="${
+                                element.registro_pago
+                            }"></td>
                             <td>
                                 <select disabled>
-                                    <option select>${element.metodo_pago
-                    }</option>
+                                    <option select>${
+                                        element.metodo_pago
+                                    }</option>
                                 </select>
                             </td>
-                            <td>R$ <input type="number" disabled value="${element.extra
-                    }"></td>
-                            <td>R$ ${element.cuenta_actual /* - element.registro_pago */
-                    }</td>
-                            <td>R$ ${element.cuenta_actual + element.registro_pago}</td>
+                            <td>R$ <input type="number" disabled value="${
+                                element.extra
+                            }"></td>
+                            <td>R$ ${
+                                element.cuenta_actual /* - element.registro_pago */
+                            }</td>
+                            <td>R$ ${
+                                element.cuenta_actual + element.registro_pago
+                            }</td>
                             <td></td>
                         </tr>`;
             });
            
             document.querySelector('tbody').innerHTML = html;
-            actualizarCostoTotal(numero_documento,cuenta_total)
-            if (
-               cuenta_total >
-                0
-            ) {
-                console.log(cuenta_total)
+            if (info[info.length - 1].cuenta_actual > 0) {
                 document.querySelector(
                     'tbody'
                 ).innerHTML += `<tr class="fila_pago">
@@ -286,15 +298,17 @@ function mostrarRegistroDePagos(numero_documento, id_habitacion,cuenta_total_y_r
                             <td>R$ ${cuenta_total
                     }</td>
                             <td></td>
-                        </tr>`
+                        </tr>`;
 
-                agregandoEventosDePagos(cuenta_total)
-                enviarRegistroDePago(numero_documento)
-            }else{
+                agregandoEventosDePagos(cuenta_total);
+                enviarRegistroDePago(numero_documento);
+            } else {
                 /* Agregar algún cambio (como sería una sencilla animación) al botón de "Salvar pagamento" en caso de que la cuenta total sea  menor o igual 0*/
-                
-                /* Botón ya seleccionado */let btnConcluirPagamento = document.querySelectorAll(".btn-pagamento")[1]
-                console.log("Llego a cero")
+
+                /* Botón ya seleccionado */
+                let btnConcluirPagamento =
+                    document.querySelectorAll('.btn-pagamento')[1];
+                console.log(btnConcluirPagamento);
             }
         } else {
            
@@ -311,30 +325,37 @@ function mostrarRegistroDePagos(numero_documento, id_habitacion,cuenta_total_y_r
                             <td>R$ ${cuenta_total}</td>
                             <td>R$ ${cuenta_total}</td>
                             <td></td>
-                        </tr>`
-            agregandoEventosDePagos(cuenta_total)
-            enviarRegistroDePago(numero_documento)
+                        </tr>`;
+            agregandoEventosDePagos(cuenta_total);
+            enviarRegistroDePago(numero_documento);
         }
  /*    }) */
 
 }
 
 function agregandoEventosDePagos(cuenta_actual) {
-    let filas = document.querySelectorAll(".fila_pago")
-    let saldo_anterior = cuenta_actual
+    let filas = document.querySelectorAll('.fila_pago');
+    let saldo_anterior = cuenta_actual;
     /* let saldo_anterior = parseInt(filas[filas.length - 1].children[3].textContent.split(" ")[1] || 0) */
-    document.querySelector(".extra").addEventListener("input", (e) => {
-        if (e.target.value != "") {
-            filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0)}`
-            filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0) - (parseInt(document.querySelector(".registro_pago").value) || 0)}`
+    document.querySelector('.extra').addEventListener('input', (e) => {
+        if (e.target.value != '') {
+            filas[filas.length - 1].children[4].textContent = `R$ ${
+                saldo_anterior + parseInt(e.target.value || 0)
+            }`;
+            filas[filas.length - 1].children[3].textContent = `R$ ${
+                saldo_anterior +
+                parseInt(e.target.value || 0) -
+                (parseInt(document.querySelector('.registro_pago').value) || 0)
+            }`;
         } else {
             if (document.querySelector('.registro_pago').value != '') {
-                filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior +
+                filas[filas.length - 1].children[3].textContent = `R$ ${
+                    saldo_anterior +
                     parseInt(e.target.value || 0) -
                     parseInt(
                         document.querySelector('.registro_pago').value || 0
                     )
-                    }`;
+                }`;
                 filas[
                     filas.length - 1
                 ].children[4].textContent = `R$ ${saldo_anterior}`;
@@ -354,8 +375,9 @@ function agregandoEventosDePagos(cuenta_actual) {
             filas[filas.length - 1].children[4].textContent.split(' ')[1] || 0
         );
         if (e.target.value != '') {
-            filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior2 - parseInt(e.target.value || 0)
-                }`;
+            filas[filas.length - 1].children[3].textContent = `R$ ${
+                saldo_anterior2 - parseInt(e.target.value || 0)
+            }`;
         } else {
             filas[
                 filas.length - 1
@@ -364,18 +386,58 @@ function agregandoEventosDePagos(cuenta_actual) {
     });
 }
 
+function enviarRegistroDePago(filas, cuenta_total) {}
 
+/* ---- Modal ---- */
+let btnEnviar = document.querySelector('#enviar');
+const noButton = document.getElementById('noButton');
+const yesButton = document.getElementById('yesButton');
+const modalConfirmar = document.getElementById('modalConfirmar');
+const modalClienteAdicionado = document.getElementById(
+    'modalClienteAdicionado'
+);
+function closeModal(modal) {
+    modal.style.display = 'none';
+}
+function openModalClienteAdicionado() {
+    modalClienteAdicionado.style.display = 'flex';
+    setTimeout(() => {
+        closeModal(modalClienteAdicionado);
+        /* window.preload.infoHuespedesSend(infoGeneral); */
+        window.location.href =
+            '../vista_general_habitaciones/vistaGeneral.html';
+    }, 2000);
+}
+function openModalConfirmar() {
+    modalConfirmar.style.display = 'flex';
+    noButton.onclick = () => closeModal(modalConfirmar);
+    yesButton.onclick = () => openModalClienteAdicionado();
+}
+window.onclick = (event) => {
+    if (event.target === modalConfirmar) {
+        closeModal(modalConfirmar);
+    } else if (event.target === modalClienteAdicionado) {
+        closeModal(modalClienteAdicionado);
+        window.location.href =
+            '../vista_general_habitaciones/vistaGeneral.html';
+    }
+};
+btnEnviar.addEventListener('click', (e) => {
+    openModalConfirmar();
+});
 /* El registro de pago le hace falta poder agregar pagos a los huespedes que no tienen previa fecha de salida (cuenta total no definida) */
 function enviarRegistroDePago(numero_documento) {
     let fecha_actual_obj = new Date();
     const anioActual = fecha_actual_obj.getFullYear();
     const diaActual = fecha_actual_obj.getDate();
     const mesActual = fecha_actual_obj.getMonth() + 1;
-    let fecha_actual = new Date(`${anioActual}-${mesActual}-${diaActual}`)
-    let filas = document.querySelectorAll(".fila_pago")
-    let btnEnviarPago = document.querySelectorAll(".btn-pagamento")[1]
-    btnEnviarPago.addEventListener("click", (e) => {
-        if (filas[filas.length - 1].querySelector(".registro_pago").value != "") {
+    let fecha_actual = new Date(`${anioActual}-${mesActual}-${diaActual}`);
+    let filas = document.querySelectorAll('.fila_pago');
+    let btnEnviarPago = document.querySelectorAll('.btn-pagamento')[1];
+    btnEnviarPago.addEventListener('click', (e) => {
+        if (
+            filas[filas.length - 1].querySelector('.registro_pago').value != ''
+        ) {
             const registroPagoInfo = {
                 documento: numero_documento,
                 pago: parseInt(filas[filas.length - 1].querySelector(".registro_pago").value),
@@ -387,9 +449,9 @@ function enviarRegistroDePago(numero_documento) {
             window.preload.enviarRegistroDePagoSend(registroPagoInfo)
             location.reload()
         } else {
-            console.log("Está vacío")
+            console.log('Está vacío');
         }
-    })
+    });
 }
 
 function concluirPago() {

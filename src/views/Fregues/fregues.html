@@ -100,27 +100,94 @@
             <div class="barraFiltros">
                 <div class="flitrohuespe">
                     <span>Mostrar</span>
-                    <input type="number" id="numClientes" min="10" value="10" style="font-weight: bold;">
+                    <input type="number" id="numClientes" min="1" value="10" style="font-weight: bold;">
                     <span>resgistros</span>
                 </div>
                 <div class="filtroAcompanante">
-                    <span>Todos</span>
-                    <img src="../../../recursos/flecha_abajo.webp" alt="">
+                        <select>
+                            <option value="Activos">Activos</option>
+                            <option value="Inactivos">Inactivos</option>
+                            <option value="Todos" selected>Todos</option>
+                        </select>
+                    
+                    <!-- <button id="openModalBtn">Open Modal</button> -->
+  <!--   <div id="myModaltodos" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <button class="option-btn">Activos</button>
+            <button class="option-btn">Inactivos</button>
+        </div>
+    </div> -->
                 </div>
                 <div class="Buscador">
-                        <input class="buscar_lupa" name="text" placeholder="Buscar Quarto..." type="search">
+                        <input class="buscar_lupa" name="text" placeholder="Buscar..." type="search">
                     </div>
                 </div>
-                <div class="contenedorLista" >   
+                <div class="contenedorLista">   
                     <div class="encabezadoLista">
-                        <div class="number">N°</div>
-                        <div class="nombreCliente">Nome completo</div>
+                        <div class="number">
+                            <select id="select_num">
+                                <option value="default" selected disabled hidden>N°</option>
+                                <option value="+">A/Z</option>
+                                <option value="-">Z/A</option>
+                            </select>
+                            <span id="selected_value"></span>
+                            
+                        </div>
+                        <div class="nombreCliente">
+                            <select id="select_nombre">
+                            <option value="+" >A/Z</option>
+                            <option value="-">Z/A</option>
+                            <option selected>Nome completo</option>
+                        </select></div>
                         <div class="Ndocumento">N° de Documento</div>
-                        <div class="widthDiv">N° Habitacion</div>
-                        <div class="widthDiv">Papel</div>
+                        <div class="widthDiv">N° Habitacion<img src="../../../recursos/flecha_abajo.webp" alt=""></div>
                         <div class="widthDiv">Entrada</div>
+                        <div class="widthDiv">Status</div>
                         <div class="accion">Ação</div>
                     </div>
+                </div>
+                <div class="encabezadoLista" style="padding-right: 17px;">
+                    <div class="number"> </div>
+                    <div class="nombreCliente">
+                </div>
+                    <div class="Ndocumento"></div>
+                    <div class="widthDiv"></div>
+                    <div class="widthDiv"></div>
+                    <div class="widthDiv">
+                        <div class="estado">
+                            <div class="amarillo"></div>
+                        </div>
+                </div>
+                    <div class="accion"></div>
+                </div>
+                <div class="encabezadoLista" style="padding-right: 17px;">
+                    <div class="number"> </div>
+                    <div class="nombreCliente">
+                </div>
+                    <div class="Ndocumento"></div>
+                    <div class="widthDiv"></div>
+                    <div class="widthDiv"></div>
+                    <div class="widthDiv">
+                        <div class="estado">
+                            <div class="azul"></div>
+                        </div>
+                    </div>
+                    <div class="accion"></div>
+                </div>
+                <div class="encabezadoLista" style="padding-right: 17px;">
+                    <div class="number"> </div>
+                    <div class="nombreCliente">
+                </div>
+                    <div class="Ndocumento"></div>
+                    <div class="widthDiv"></div>
+                    <div class="widthDiv"></div>
+                    <div class="widthDiv">
+                        <div class="estado">
+                            <div class="verde"></div>
+                        </div>
+                    </div>
+                    <div class="accion"></div>
                 </div>
                 <div class="contenedorFilas" id="contenedorFilas">  
                 </div>
