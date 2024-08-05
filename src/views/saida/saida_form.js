@@ -397,25 +397,30 @@ function mostrarRegistroDePagos(
             suma la "cuenta_total" + "registro_pago"
             */
             html += `<tr class="fila_pago">
-                            <td>R$ <input type="number" disabled value="${
-                                element.registro_pago
-                            }"></td>
-                            <td>
-                                <select disabled>
+                            <td class="currency-input-container">
+                                <span class="currency-symbol">R$</span>
+                                <input class="registro_pago" type="number" disabled value="${
+                                    element.registro_pago
+                                }">
+                            </td>
+                            <td class="currency-input-container">
+                                <select class="tipo_de_pago" disabled>
                                     <option select>${
                                         element.metodo_pago
                                     }</option>
                                 </select>
                             </td>
-                            <td>R$ <input type="number" disabled value="${
-                                element.extra
-                            }"></td>
+                            <td class="currency-input-container">
+                                R$ ${element.extra}
+                            </td>
                             <td>R$ ${
                                 element.cuenta_actual /* - element.registro_pago */
-                            }</td>
+                            }
+                            </td>
                             <td>R$ ${
                                 element.cuenta_actual + element.registro_pago
-                            }</td>
+                            }
+                            </td>
                             <td></td>
                         </tr>`;
         });
@@ -525,17 +530,24 @@ function mostrarRegistroDePagos(
         el primer registro de pago del huesped
         */
         document.querySelector('tbody').innerHTML += `<tr class="fila_pago">
-                            <td>R$ <input type="number" class="registro_pago"></td>
-                            <td>
-                                <select>
+                            <td class="currency-input-container">
+                                <span class="currency-symbol">R$</span>
+                                <input type="number" class="registro_pago">
+                            </td>
+                            <td class="currency-input-container">
+                                <select class="tipo_de_pago">
                                     <option>Pix</option>
                                     <option>Cartão</option>
                                     <option>Dinheiro</option>
                                 </select>
                             </td>
-                            <td>R$ <input type="number" class="extra"></td>
-                            <td>R$ ${cuenta_total}</td>
-                            <td>R$ ${cuenta_total}</td>
+                            <td class="currency-input-container">
+                                <span>R$</span>  <span>${cuenta_total}</span>
+                            </td>
+                            <td class="currency-input-container">
+                                <span>R$</span>  <span>${cuenta_total}</span>
+                            <td class="currency-input-container">
+                                <span>R$</span>  <span>${cuenta_total}</span>
                             <td></td>
                         </tr>`;
         agregandoEventosDePagos(cuenta_total);
@@ -619,7 +631,37 @@ function openModalExito(message) {
 }
 function openModalDatosCliente() {
     const modalDatosCliente = document.getElementById('modalDatosCliente');
+    const noButtonConfirm = document.getElementById('noButtonConfirm');
+    var x = document.querySelectorAll('x');
+    const yesButtonConfirm = document.getElementById('yesButtonConfirm');
+
     displayModal(modalDatosCliente);
+    yesButtonConfirm.addEventListener('click', (e) => {
+        let inputnombre = document.querySelectorAll('.input_obligatorio');
+        let allFilled = true;
+        inputnombre.forEach((e) => {
+            if (e.value === '') {
+                e.nextElementSibling.textContent = 'Por favor llenar el campo';
+                setTimeout(() => {
+                    e.nextElementSibling.textContent = '';
+                }, 5000);
+                allFilled = false;
+            } else {
+                e.nextElementSibling.textContent = '';
+            }
+        });
+        if (allFilled) {
+            closeModal(modalDatosCliente);
+            openModalExito('cliente agregado');
+        }
+    });
+
+    const closeModalbuttons = [noButtonConfirm, x];
+    closeModalbuttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            closeModal(modalDatosCliente);
+        });
+    });
 }
 function openModalDigiteNovoPreco(verDatosClientes) {
     const modalDigiteNovoPreco = document.getElementById(
@@ -632,11 +674,9 @@ function openModalDigiteNovoPreco(verDatosClientes) {
     displayModal(modalDigiteNovoPreco);
     function verificarInput() {
         if (input.value === '') {
-            console.log('Está vacío');
             btnAceitar.disabled = true;
             btnAceitar.style.background = '#167900';
         } else {
-            console.log('No está vacío');
             btnAceitar.disabled = false;
             btnAceitar.style.background = '#35C928';
         }
@@ -644,7 +684,11 @@ function openModalDigiteNovoPreco(verDatosClientes) {
     verificarInput();
     input.addEventListener('input', verificarInput);
 
-    btnCancelar.onclick = () => closeModal(modalDigiteNovoPreco);
+    btnCancelar.onclick = () => {
+        input.value = '';
+        closeModal(modalDigiteNovoPreco);
+    };
+
     btnAceitar.onclick = () => {
         closeModal(modalDigiteNovoPreco);
         input.value = '';

@@ -143,7 +143,6 @@ function createRows(numClientes) {
     noButtontres.addEventListener('click', (e) => {
         hideModal(modalEliminarcliente);
     });
-
     yesButtontres.addEventListener('click', (e) => {
         hideModal(modalEliminarcliente);
         showModalWithAutoHide(modalInformacionEliminar);
@@ -155,78 +154,55 @@ function createRows(numClientes) {
             hideModal(modalConfirmar);
         });
     }
- 
+
     // Verificar si yesButtonConfirm existe antes de añadir el event listener
-
-        yesButtonConfirm.addEventListener('click', (e) => {
-             let inputnombre= document.querySelectorAll(".input_obligatorio")
-            inputnombre.forEach((e) => {
-                if (e.value === '') {
-                    e.nextElementSibling.textContent =
-                        'Por favor llenar el campo';
-                    setTimeout(() => {
-                        e.nextElementSibling.textContent = '';
-                    }, 5000);
-                    allFilled = false;
-                } else {
-                    e.nextElementSibling.textContent = '';
-                    hideModal(modalConfirmar);
-                    showModalWithAutoHide(modalInformacion);
-                }
-            });
-        })
-
-            /*  */
-
-    // __________input vacios__________ 
-
-
-
-// Verificar si yesButtonConfirm existe antes de añadir el event listener
-/*if (yesButtonConfirm) {
     yesButtonConfirm.addEventListener('click', (e) => {
-        
-        if (validateInputs()) {
-            hideModal(modalConfirmar);
-            showModalWithAutoHide(modalInformacion);
-        }
+        let inputnombre = document.querySelectorAll('.input_obligatorio');
+
+        inputnombre.forEach((e) => {
+            if (e.value === '') {
+                e.nextElementSibling.textContent = 'Por favor llenar el campo';
+                setTimeout(() => {
+                    e.nextElementSibling.textContent = '';
+                }, 5000);
+                allFilled = false;
+            } else {
+                e.nextElementSibling.textContent = '';
+                hideModal(modalConfirmar);
+                showModalWithAutoHide(modalInformacion);
+            }
+        });
     });
-}
 
- // Función para validar los inputs
-function validateInputs() {
-    let inputnombre = document.querySelector(".inputnombre");
-    console.log(inputnombre);
-    if (inputnombre.value === '') {
-        inputnombre.parentElement.nextElementSibling.textContent = 'Por favor llenar el campo';
-        setTimeout(() => {
+    function validateInputs() {
+        let inputnombre = document.querySelector('.inputnombre');
+        console.log(inputnombre);
+        if (inputnombre.value === '') {
+            inputnombre.parentElement.nextElementSibling.textContent =
+                'Por favor llenar el campo';
+            setTimeout(() => {
+                inputnombre.parentElement.nextElementSibling.textContent = '';
+            }, 5000);
+            return false;
+        } else {
             inputnombre.parentElement.nextElementSibling.textContent = '';
-        }, 5000);
-        return false;
-    } else {
-        inputnombre.parentElement.nextElementSibling.textContent = '';
-        return true;
+            return true;
+        }
     }
-}
+    // Función para mostrar el modal con auto-hide
+    function showModalWithAutoHide(modal) {
+        showModal(modal);
+        setTimeout(() => {
+            hideModal(modal);
+        }, 3000); // 3000 ms = 3 segundos
+    }
 
-// Función para mostrar el modal con auto-hide
-function showModalWithAutoHide(modal) {
-    showModal(modal);
-    setTimeout(() => {
-        hideModal(modal);
-    }, 3000); // 3000 ms = 3 segundos
-}
-
-// Función para mostrar un modal
-function showModal(modal) {
-    modal.classList.add("block");
-}
-
-// Función para ocultar un modal
-function hideModal(modal) {
-    modal.classList.remove("block");
-}
- */
+    function showModal(modal) {
+        modal.classList.add('block');
+    }
+    function hideModal(modal) {
+        modal.classList.remove('block');
+    }
 
     // Añadir evento de click a los elementos <span> para cerrar los modales
     spans.forEach((element) => {
@@ -275,5 +251,3 @@ document.querySelectorAll('.contendorBtn button').forEach((button) => {
         });
     }
 });
-
-
