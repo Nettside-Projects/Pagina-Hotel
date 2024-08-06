@@ -147,6 +147,7 @@ function createRows(numClientes) {
     // Añadir evento de click al botón "No" para cerrar el modal de eliminación
     noButtontres.addEventListener('click', (e) => {
         hideModal(modalEliminarcliente);
+        
     });
 
     // Añadir evento de click al botón "Sí" para cerrar el modal de eliminación y abrir el modal de información
@@ -159,67 +160,41 @@ function createRows(numClientes) {
     if (noButtonConfirm) {
         noButtonConfirm.addEventListener('click', (e) => {
             hideModal(modalConfirmar);
+            location.reload();
         });
     }
- 
-    // Verificar si yesButtonConfirm existe antes de añadir el event listener
 
-        yesButtonConfirm.addEventListener('click', (e) => {
-             let inputnombre= document.querySelectorAll(".input_obligatorio")
-            inputnombre.forEach((e) => {
-                if (e.value === '') {
-                    e.nextElementSibling.textContent =
-                        'Por favor llenar el campo';
-                    setTimeout(() => {
-                        e.nextElementSibling.textContent = '';
-                    }, 5000);
-                    allFilled = false;
-                } else {
-                    e.nextElementSibling.textContent = '';
-                    hideModal(modalConfirmar);
-                    showModalWithAutoHide(modalInformacion);
-                }
-            });
-        })
-
-            /*  */
-
-    // __________input vacios__________ 
-
-
-
-// Verificar si yesButtonConfirm existe antes de añadir el event listener
-/*if (yesButtonConfirm) {
+        // Verificar si yesButtonConfirm existe antes de añadir el event listener
+if (yesButtonConfirm) {
     yesButtonConfirm.addEventListener('click', (e) => {
-        
-        if (validateInputs()) {
+        let allFilled = true;
+        let inputnombre = document.querySelectorAll(".input_obligatorio");
+
+        inputnombre.forEach((element) => {
+            if (element.value === '') {
+                element.nextElementSibling.textContent = 'Por favor llenar el campo';
+                setTimeout(() => {
+                    element.nextElementSibling.textContent = '';
+                }, 5000);
+                allFilled = false;
+            } else {
+                element.nextElementSibling.textContent = '';
+            }
+        });
+
+        if (allFilled) {
             hideModal(modalConfirmar);
             showModalWithAutoHide(modalInformacion);
         }
     });
 }
 
- // Función para validar los inputs
-function validateInputs() {
-    let inputnombre = document.querySelector(".inputnombre");
-    console.log(inputnombre);
-    if (inputnombre.value === '') {
-        inputnombre.parentElement.nextElementSibling.textContent = 'Por favor llenar el campo';
-        setTimeout(() => {
-            inputnombre.parentElement.nextElementSibling.textContent = '';
-        }, 5000);
-        return false;
-    } else {
-        inputnombre.parentElement.nextElementSibling.textContent = '';
-        return true;
-    }
-}
-
-// Función para mostrar el modal con auto-hide
+// Función para mostrar el modal con auto-hide y recargar la página
 function showModalWithAutoHide(modal) {
     showModal(modal);
     setTimeout(() => {
         hideModal(modal);
+        location.reload(); // Recargar la página después de cerrar el modal
     }, 3000); // 3000 ms = 3 segundos
 }
 
@@ -232,12 +207,14 @@ function showModal(modal) {
 function hideModal(modal) {
     modal.classList.remove("block");
 }
- */
+
+
 
     // Añadir evento de click a los elementos <span> para cerrar los modales
     spans.forEach((element) => {
         element.addEventListener('click', (e) => {
             hideModal(element.closest('.modal'));
+            location.reload();
         });
     });
 

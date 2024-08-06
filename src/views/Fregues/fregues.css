@@ -277,6 +277,7 @@ select {
     margin: 1% auto; 
     padding: 20px;
     height: 75%;
+    border-radius: 7px;
     flex-direction: column;
     width: 60%;
     border: 1px solid #888;
