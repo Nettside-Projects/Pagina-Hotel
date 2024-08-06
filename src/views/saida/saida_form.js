@@ -682,7 +682,7 @@ function concluirPago(informacionDeHuesped, registros_pagos) {
     const anioActual = fecha_actual_obj.getFullYear();
     const diaActual = fecha_actual_obj.getDate();
     const mesActual = fecha_actual_obj.getMonth() + 1;
-    let fecha_actual = new Date(`${anioActual}-${mesActual}-${diaActual}`);
+    let fecha_actual = `${anioActual}-${mesActual}-${diaActual}`;
     let btnConcluirPagamento = document.querySelector("#pagamento-concluido")
     const informacionAguardarEnHistorial = {
         informacionDeHuespedes: informacionDeHuesped,
