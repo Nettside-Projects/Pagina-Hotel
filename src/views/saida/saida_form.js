@@ -239,7 +239,6 @@ function cuentaTotalPresente(inf) {
 }
 
 /* Agregando información inicial de la habitación a través del JSON recibido */
-enviarDatos();
 function enviarDatos() {
     /* Se envía la información del id de la habitación registrada del huesped a través de esta función 
     para recibir información de los huespedes registrados (como lo sería los nombres,nacionalidad, documento,etc..)
@@ -274,6 +273,8 @@ function enviarDatos() {
         });
     });
 }
+enviarDatos();
+
 /* Función para agregar la información del primer huesped al frontend */
 function agregandoInformacionInicial(infoHabitacion, infoHabitacionYHuespede) {
     let html = '';
@@ -521,7 +522,10 @@ function mostrarRegistroDePagos(
             document
                 .querySelector('.container')
                 .addEventListener('click', (e) => {
-                    openModalExito('Pagamento concluido');
+                    openModalConfirmar(
+                        '¿Desea concluir pagamento?',
+                        'modalExito'
+                    );
                 });
         }
     } else {
@@ -612,13 +616,13 @@ function agregandoEventosDePagos(cuenta_actual) {
 /* ---- Modal ---- */
 const btnAggHospede = document.querySelector('#btn-agg-hospede');
 const btnRemoverHospede = document.querySelector('#btn-remover-hospede');
-
-function closeModal(modal) {
+const closeModal = (modal) => {
     modal.style.display = 'none';
-}
-function displayModal(modal) {
+};
+const displayModal = (modal) => {
     modal.style.display = 'flex';
-}
+};
+
 function openModalExito(message) {
     const modalExito = document.getElementById('modalExito');
     const modalExitoMessage = document.getElementById('modalExitoMessage');
@@ -632,12 +636,13 @@ function openModalExito(message) {
 function openModalDatosCliente() {
     const modalDatosCliente = document.getElementById('modalDatosCliente');
     const noButtonConfirm = document.getElementById('noButtonConfirm');
-    var x = document.querySelectorAll('x');
+    const x = document.getElementById('x');
     const yesButtonConfirm = document.getElementById('yesButtonConfirm');
+    let input = document.querySelectorAll('.input');
+    let inputnombre = document.querySelectorAll('.input_obligatorio');
 
     displayModal(modalDatosCliente);
     yesButtonConfirm.addEventListener('click', (e) => {
-        let inputnombre = document.querySelectorAll('.input_obligatorio');
         let allFilled = true;
         inputnombre.forEach((e) => {
             if (e.value === '') {
@@ -659,6 +664,8 @@ function openModalDatosCliente() {
     const closeModalbuttons = [noButtonConfirm, x];
     closeModalbuttons.forEach((button) => {
         button.addEventListener('click', () => {
+            input.value = '';
+            inputnombre.value = '';
             closeModal(modalDatosCliente);
         });
     });
@@ -693,14 +700,14 @@ function openModalDigiteNovoPreco(verDatosClientes) {
         closeModal(modalDigiteNovoPreco);
         input.value = '';
         verificarInput();
-        if (verDatosClientes) {
+        if (verDatosClientes == 'verDatosClientes') {
             openModalDatosCliente();
         } else {
             openModalExito('preço alterado');
         }
     };
 }
-function openModalConfirmar(message, verDatosClientes) {
+function openModalConfirmar(message, sig) {
     const modalConfirmar = document.getElementById('modalConfirmar');
     const noBtn = document.getElementById('confirmar-no');
     const yesBtn = document.getElementById('confirmar-yes');
@@ -712,20 +719,28 @@ function openModalConfirmar(message, verDatosClientes) {
     noBtn.onclick = () => closeModal(modalConfirmar);
     yesBtn.onclick = () => {
         closeModal(modalConfirmar);
-        if (verDatosClientes) {
+        if (sig == 'verDatos') {
             openModalDigiteNovoPreco('verDatosClientes');
+        } else if (sig == 'modalExito') {
+            openModalExito('Pagamento concluido');
         } else {
             openModalDigiteNovoPreco();
         }
     };
 }
 
-btnRemoverHospede.addEventListener('click', (e) => {
-    openModalConfirmar('remover');
-});
-btnAggHospede.addEventListener('click', (e) => {
-    openModalConfirmar('agregar', 'verDatosClientes');
-});
+const agregarEventoBoton = (boton, text, verDatosClientes = null) => {
+    boton.addEventListener('click', () => {
+        openModalConfirmar(
+            'No momento de ' +
+                text +
+                ' hóspede deve alterar o valor do quarto, lembre-se que o valor anterior permanecerá no registro para levar em consideração. ¿Fazer alteração?',
+            verDatosClientes
+        );
+    });
+};
+agregarEventoBoton(btnRemoverHospede, 'remover');
+agregarEventoBoton(btnAggHospede, 'agregar', 'verDatos');
 const modals = [
     modalConfirmar,
     modalDigiteNovoPreco,
