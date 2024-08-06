@@ -34,6 +34,13 @@
     height: 110px;
 }
 
+.modal-content .btn {
+	width: 190px;
+	padding-block: 8px;
+	border: 1px solid #A2A2A2;
+	border-radius: 8px;
+}
+
 .btn-modal {
     all: unset;
 }

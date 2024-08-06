@@ -469,13 +469,6 @@ select {
 	margin-inline: auto;
 }
 
-.modal-content .btn {
-	width: 190px;
-	padding-block: 8px;
-	border: 1px solid #A2A2A2;
-	border-radius: 8px;
-}
-
 .modal-content .btn-cancelar {
 	background-color: #E0E0E0;
 }
@@ -483,6 +476,11 @@ select {
 .modal-content .btn-aceitar {
 	border-color: #35C928;
 	color: #fff;
+}
+
+.aceptar {
+    background: #35C928;
+    color: #fff;
 }
 
 .name-error-nombre {
@@ -504,16 +502,4 @@ select {
     height: 30px;
     width: 85px;
     border-radius: 3px;
-}
-.cancelar{
-    background: #E0E0E0;
-    border: 1px solid #A2A2A2;
-    color: #000;
-    cursor: pointer;
-}
-.aceptar{
-    background: #35C928;
-    border: none;
-    color: #fff;
-    cursor: pointer;
 }

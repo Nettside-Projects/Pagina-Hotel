@@ -398,30 +398,25 @@ function mostrarRegistroDePagos(
             suma la "cuenta_total" + "registro_pago"
             */
             html += `<tr class="fila_pago">
-                            <td class="currency-input-container">
-                                <span class="currency-symbol">R$</span>
-                                <input class="registro_pago" type="number" disabled value="${
-                                    element.registro_pago
-                                }">
-                            </td>
-                            <td class="currency-input-container">
-                                <select class="tipo_de_pago" disabled>
+                            <td>R$ <input type="number" disabled value="${
+                                element.registro_pago
+                            }"></td>
+                            <td>
+                                <select disabled>
                                     <option select>${
                                         element.metodo_pago
                                     }</option>
                                 </select>
                             </td>
-                            <td class="currency-input-container">
-                                R$ ${element.extra}
-                            </td>
+                            <td>R$ <input type="number" disabled value="${
+                                element.extra
+                            }"></td>
                             <td>R$ ${
                                 element.cuenta_actual /* - element.registro_pago */
-                            }
-                            </td>
+                            }</td>
                             <td>R$ ${
                                 element.cuenta_actual + element.registro_pago
-                            }
-                            </td>
+                            }</td>
                             <td></td>
                         </tr>`;
         });
@@ -529,29 +524,22 @@ function mostrarRegistroDePagos(
                 });
         }
     } else {
-        /* 
+        /*
         Si no hay registro de pago almacenada en la db, se procede a habilitar una fila para agregar
         el primer registro de pago del huesped
         */
         document.querySelector('tbody').innerHTML += `<tr class="fila_pago">
-                            <td class="currency-input-container">
-                                <span class="currency-symbol">R$</span>
-                                <input type="number" class="registro_pago">
-                            </td>
-                            <td class="currency-input-container">
-                                <select class="tipo_de_pago">
+                            <td>R$ <input type="number" class="registro_pago"></td>
+                            <td>
+                                <select>
                                     <option>Pix</option>
                                     <option>Cartão</option>
                                     <option>Dinheiro</option>
                                 </select>
                             </td>
-                            <td class="currency-input-container">
-                                <span>R$</span>  <span>${cuenta_total}</span>
-                            </td>
-                            <td class="currency-input-container">
-                                <span>R$</span>  <span>${cuenta_total}</span>
-                            <td class="currency-input-container">
-                                <span>R$</span>  <span>${cuenta_total}</span>
+                            <td>R$ <input type="number" class="extra"></td>
+                            <td>R$ ${cuenta_total}</td>
+                            <td>R$ ${cuenta_total}</td>
                             <td></td>
                         </tr>`;
         agregandoEventosDePagos(cuenta_total);
@@ -614,6 +602,7 @@ function agregandoEventosDePagos(cuenta_actual) {
 }
 
 /* ---- Modal ---- */
+const btnPagamento = document.querySelector('#btn-pagamento');
 const btnAggHospede = document.querySelector('#btn-agg-hospede');
 const btnRemoverHospede = document.querySelector('#btn-remover-hospede');
 const closeModal = (modal) => {
@@ -741,6 +730,22 @@ const agregarEventoBoton = (boton, text, verDatosClientes = null) => {
 };
 agregarEventoBoton(btnRemoverHospede, 'remover');
 agregarEventoBoton(btnAggHospede, 'agregar', 'verDatos');
+btnPagamento.addEventListener('click', (e) => {
+    const input = document.querySelector('.');
+    const rellenarCampo = document.querySelector('.rellenar-campo');
+    console.log('bfuireiu');
+    if (input.value === '') {
+        rellenarCampo.nextElementSibling.textContent =
+            'Por favor llenar el campo';
+        setTimeout(() => {
+            rellenarCampo.nextElementSibling.textContent = '';
+        }, 5000);
+    } else {
+        rellenarCampo.nextElementSibling.textContent = '';
+        closeModal(modalDatosCliente);
+        openModalExito('cliente agregado');
+    }
+});
 const modals = [
     modalConfirmar,
     modalDigiteNovoPreco,
