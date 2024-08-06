@@ -1,7 +1,7 @@
 const path = require('path');
 const sqlite3 = require('sqlite3');
 
-const db = new sqlite3.Database(path.join(__dirname, '/db', 'data2.db'));
+const db = new sqlite3.Database(path.join(__dirname, '/db', 'data6.db'));
 /* 
 const data = {
     infoHuespedes: [
@@ -249,7 +249,7 @@ function agregarHuespedes(db, data, callback) {
                                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?);
                             `, [
                                 e.documento, e.nombre, e.nacionalidad, e.procedencia,
-                                e.fecha_entrada, e.fecha_salida,e.fecha_entrada, e.pasaporte, e.fecha_nacimiento,
+                                e.fecha_entrada, e.fecha_salida, e.fecha_entrada, e.pasaporte, e.fecha_nacimiento,
                                 e.profesion, e.naturalidad, e.pago_adelantado || "",
                                 e.estado_pago, e.id_habitacion, idCuenta,
                                 index === 0 ? 1 : 2, e.email, e.telefono
@@ -433,8 +433,8 @@ function buscarHabitacionPorEstado(db, info, callback) {
 
 function informacionDeHabitacionYHuespedes(db, id_habitacion, callback) {
     let data = []
-    db.all(`SELECT huesped.nombre_completo, huesped.numero_documento,huesped.procedencia,huesped.nacionalidad,habitacion.numero,
-tipo.tipo_habitacion,cuentas.cuenta_total,cuentas.descuento,cuentas.valor_diaria,huesped.fecha_entrada,huesped.fecha_salida,huesped.fk_id_rol,rol_huesped.rol 
+    db.all(`SELECT huesped.nombre_completo, huesped.numero_documento,huesped.procedencia,huesped.nacionalidad,huesped.pasaporte,huesped.fecha_nacimiento,huesped.profesion,huesped.naturalidade,huesped.firma,huesped.email,huesped.telefono,habitacion.id_habitacion,habitacion.numero,
+tipo.tipo_habitacion,cuentas.id_cuenta,cuentas.cuenta_total,cuentas.descuento,cuentas.valor_diaria,huesped.fecha_entrada,huesped.fecha_salida,huesped.fk_id_rol,rol_huesped.rol 
 FROM habitacion 
 INNER JOIN huesped ON huesped.fk_id_habitacion = habitacion.id_habitacion 
 INNER JOIN cuentas ON cuentas.id_cuenta = huesped.fk_id_cuenta 
@@ -451,8 +451,19 @@ WHERE habitacion.id_habitacion = ?`, [id_habitacion], (err, rows) => {
                 numero_documento: e.numero_documento,
                 procedencia: e.procedencia,
                 nacionalidad: e.nacionalidad,
+                procedencia: e.procedencia,
+                nacionalidad: e.nacionalidad,
+                pasaporte: e.pasaporte,
+                fecha_nacimiento: e.fecha_nacimiento,
+                profesion: e.profesion,
+                naturalidade: e.naturalidade,
+                firma: e.firma,
+                email: e.email,
+                telefono: e.telefono,
+                id_habitacion: e.id_habitacion,
                 numero: e.numero,
                 tipo_habitacion: e.tipo_habitacion,
+                id_cuenta: e.id_cuenta,
                 cuenta_total: e.cuenta_total,
                 valor_diaria: e.valor_diaria,
                 descuento: e.descuento,
@@ -505,7 +516,7 @@ function mostrarRegistroDePagos(db, /* numero_documento */id_habitacion, callbac
           callback(rows)
       }) */
 
-      /* Arreglar el roden en que se muestra los registros (por la fecha) */
+    /* Arreglar el roden en que se muestra los registros (por la fecha) */
     db.all(` SELECT registro_pagos.* FROM registro_pagos INNER JOIN huesped ON huesped.numero_documento = registro_pagos.fk_numero_documento 
 WHERE huesped.fk_id_habitacion = ? ORDER BY registro_pagos.id_registro_pagos ASC`, [/* numero_documento */ id_habitacion], (err, rows) => {
         callback(rows)
@@ -537,7 +548,7 @@ function registrarPago(db, data, callback) {
         })
 }
 
-function actualizarCostoTotal(db,data,callback) {
+function actualizarCostoTotal(db, data, callback) {
     db.run(`UPDATE cuentas
         SET cuenta_total = ?
         WHERE EXISTS (
@@ -553,79 +564,173 @@ function actualizarCostoTotal(db,data,callback) {
     })
 }
 
-function guardarEnHistorial(db,data) {
-    data.informacionDeHuespedes.forEach(element => {
-        console.log("Insertando datos de huesped") // <------ Agregar codigo SQL para insertar datos de cada huesped
-       console.log(element)
-       console.log("Fecha de historial :" + data.fecha_registro_historial)
-       data.registros_pagos.forEach(element2 => {
-        console.log("Insertando registro de pagos a cada huesped") // <------ Agregar codigo SQL para insertar datos de registro de pago
-        console.log(element2)
-       })
+function guardarEnHistorial(db, data) {
+    db.serialize(() => {
+        db.run("BEGIN TRANSACTION");
 
-    })
- /*    db.run(`INSERT INTO historial_huesped (
-                                    numero_documento, nombre_completo, nacionalidad, procedencia,
-                                    fecha_entrada, fecha_salida,fecha_historial, pasaporte, fecha_nacimiento,
-                                    profesion,naturalidade,email,telefono,numero_habitacion,descuento_aplicado
-                                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?);
-                           `)
-    console.log("Información para concluir pago:")
-    console.log(data) */
+        data.informacionDeHuespedes.forEach(huesped => {
+            // Eliminar el huésped de la tabla huesped
+            db.run(`DELETE FROM huesped WHERE numero_documento = ?`, [huesped.numero_documento], function (err) {
+                if (err) {
+                    console.error("Error al eliminar huésped:", err);
+                    db.run("ROLLBACK");
+                    return;
+                }
+                
+                db.run(`DELETE FROM registro_pagos WHERE fk_numero_documento = ?`, [huesped.numero_documento], function (err) {
+                    if (err) {
+                        console.error("Error al eliminar huésped:", err);
+                        db.run("ROLLBACK");
+                        return;
+                    }
+
+                    db.run(`DELETE FROM cuentas WHERE id_cuenta = ?`, [huesped.id_cuenta], function (err) {
+                        if (err) {
+                            console.error("Error al eliminar huésped:", err);
+                            db.run("ROLLBACK");
+                            return;
+                        }
+
+// Insertar el huésped en la tabla historial_huesped
+                        db.run(`INSERT INTO historial_huesped (
+                            numero_documento, nombre_completo, nacionalidad, procedencia, fecha_entrada, fecha_salida,
+                            fecha_historial, pasaporte, fecha_nacimiento, profesion, naturalidade, firma, email, telefono,
+                            numero_habitacion, descuento_aplicado
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                            [
+                                huesped.numero_documento, huesped.nombre_completo, huesped.nacionalidad, huesped.procedencia,
+                                huesped.fecha_entrada, huesped.fecha_salida, data.fecha_registro_historial, huesped.pasaporte,
+                                huesped.fecha_nacimiento, huesped.profesion, huesped.naturalidade, huesped.firma, huesped.email,
+                                huesped.telefono, huesped.numero, huesped.descuento
+                            ],
+                            function (err) {
+                                if (err) {
+                                    console.error("Error al insertar el huésped:", err);
+                                    db.run("ROLLBACK");
+                                    return;
+                                }
+
+                                // Obtener el ID del último registro insertado
+                                const idHuesped = this.lastID;
+
+                                // Insertar los registros de pago para el huésped
+                                data.registros_pagos.forEach(pago => {
+                                    db.run(`INSERT INTO historial_registro_pagos (
+                                        historial_registro_pago, fecha_pago, metodo_pago, extra, cuenta_actual, fk_id_registro_historial_huesped
+                                    ) VALUES (?, ?, ?, ?, ?, ?)`,
+                                        [
+                                            pago.registro_pago, pago.fecha_pago, pago.metodo_pago, pago.extra, pago.cuenta_actual, idHuesped
+                                        ],
+                                        function (err) {
+                                            if (err) {
+                                                console.error("Error al insertar el registro de pago:", err);
+                                                db.run("ROLLBACK");
+                                                return;
+                                            }
+
+                                            cambiarEstadoHabitacion(db, 3, data.informacionDeHuespedes[0].id_habitacion);
+                                        }
+                                    );
+                                });
+
+                              
+                            }
+                        );
+
+                    })
+
+                })
+              
+
+            });
+        });
+    });
+    db.run("COMMIT");
 }
+
+
+
+
+//Agregar información a la data4.db
+
+
+
+
+
 /* 
 const data = {
     informacionDeHuespedes: [
-      {
-        nombre_completo: 'Leonel Messi',
-        numero_documento: '1121109201',
-        procedencia: 'Argentina',
-        nacionalidad: 'Argentino',
-        numero: '2',
-        tipo_habitacion: 'Duplo',
-        cuenta_total: 0,
-        valor_diaria: 100,
-        descuento: 20,
-        fecha_entrada: '27/07/2024 3:56:08 PM',
-        fecha_salida: '2024-07-30T15:56',
-        id_rol: 1,
-        rol: 'Responsable'
-      }
+        {
+            nombre_completo: 'Lolita Lolota',
+            numero_documento: '1121192031',
+            procedencia: '',
+            nacionalidad: '',
+            pasaporte: '',
+            fecha_nacimiento: '',
+            profesion: '',
+            naturalidade: '',
+            firma: null,
+            email: '',
+            telefono: '',
+            numero: '3',
+            tipo_habitacion: 'Familiar',
+            cuenta_total: -40,
+            valor_diaria: 140,
+            descuento: 0,
+            fecha_entrada: '27/07/2024 4:02:26 PM',
+            fecha_salida: '2024-07-31T16:02',
+            id_rol: 1,
+            rol: 'Responsable'
+        },
+        {
+            nombre_completo: 'Oscar Lomancho',
+            numero_documento: '1121293012',
+            procedencia: '',
+            nacionalidad: '',
+            pasaporte: '',
+            fecha_nacimiento: '',
+            profesion: '',
+            naturalidade: '',
+            firma: null,
+            email: '',
+            telefono: '',
+            numero: '3',
+            tipo_habitacion: 'Familiar',
+            cuenta_total: -40,
+            valor_diaria: 140,
+            descuento: 0,
+            fecha_entrada: '27/07/2024 4:02:26 PM',
+            fecha_salida: '2024-07-31T16:02',
+            id_rol: 2,
+            rol: 'Acompa├▒ante'
+        }
     ],
     registros_pagos: [
-      {
-        id_registro_pagos: 1,
-        registro_pago: 100,
-        fecha_pago: '1722056400000.0',
-        metodo_pago: 'Pix',
-        cuenta_actual: 230,
-        extra: 50,
-        fk_numero_documento: '1121109201'
-      },
-      {
-        id_registro_pagos: 2,
-        registro_pago: 120,
-        fecha_pago: '1722056400000.0',
-        metodo_pago: 'Pix',
-        cuenta_actual: 110,
-        extra: 0,
-        fk_numero_documento: '1121109201'
-      },
-      {
-        id_registro_pagos: 3,
-        registro_pago: 20,
-        fecha_pago: '1722056400000.0',
-        metodo_pago: 'Pix',
-        cuenta_actual: 90,
-        extra: 0,
-        fk_numero_documento: '1121109201'
-      }
-    ]
+        {
+            id_registro_pagos: 5,
+            registro_pago: 400,
+            fecha_pago: '1722056400000.0',
+            metodo_pago: 'Dinheiro',
+            cuenta_actual: 160,
+            extra: 0,
+            fk_numero_documento: '1121192031'
+        },
+        {
+            id_registro_pagos: 6,
+            registro_pago: 200,
+            fecha_pago: '1722056400000.0',
+            metodo_pago: 'Dinheiro',
+            cuenta_actual: -40,
+            extra: 0,
+            fk_numero_documento: '1121192031'
+        }
+    ],
+    fecha_registro_historial: "2024-7-31"
 }
 
-guardarEnHistorial(db,data)  */
+guardarEnHistorial(db, data)
 
-
+ */
 
 module.exports = {
     validarUsuario: validarUsuario,
