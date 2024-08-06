@@ -16,11 +16,7 @@
     <div id="modalConfirmar" class="modal">
         <div class="modal-content modal-1">
             <img class="info-img" src="../../../recursos/info.png" alt="">
-            <p>No momento de <span id="modalConfimarMessage"></span> hóspede, deve alterar o
-                valor do
-                quarto, lembre-se que o valor anterior permanecerá no
-                registro para levar em consideração.
-                ¿Fazer alteração?</p>
+            <span id="modalConfimarMessage"></span>
             <div style="display: flex; width: 100%; justify-content: space-evenly;">
                 <button class="btn-modal" id="confirmar-no"><img class="icon-img" src="../../../recursos/remove.png"
                         alt=""></button>
@@ -42,8 +38,8 @@
         </div>
     </div>
     <div id="modalDatosCliente" class="modal">
-        <div class="modal-content">
-            <span class="closedos">&times;</span>
+        <div class="modal-content modal-content-datosCliente">
+            <span id="x" class="x">&times;</span>
             <div class="maineditar">
                 <span>Editar Dados</span>
                 <div class="contentEditar">
@@ -51,108 +47,75 @@
                         <div class="columLeft">
                             <div class="nome colum">
                                 <span>Nome <span style="color: red;">*</span>:</span>
-                                <input type="text" style="width: 95%;">
+                                <input type="text" style="width: 95%;" class="input_obligatorio">
+                                <div id="name-error-nombre" class="name-error-nombre"></div>
                             </div>
                             <div style="display: flex;">
                                 <div style="width: 50%;">
                                     <div class="documento colum">
                                         <span>N° de documento <span style="color: red;">*</span> :</span>
-                                        <input type="text" name="" id="">
+                                        <input type="text" name="" id="" class="input_obligatorio">
+                                        <div id="name-error-nombre" class="name-error-nombre"></div>
                                     </div>
                                     <div class="profesion colum">
-                                        <span>Profissão:</span>
+                                        <span class="input">Profissão:</span>
                                         <input type="text" name="" id="">
                                     </div>
                                     <div class="telefono colum">
                                         <span>Telefone:</span>
-                                        <input type="text" name="" id="">
+                                        <input class="input" type="text" name="" id="">
                                     </div>
                                 </div>
                                 <div style="width: 50%;">
                                     <div class="passaporte colum">
                                         <span>N° de passaporte:</span>
-                                        <input type="text" name="" id="">
+                                        <input class="input" type="text" name="" id="">
                                     </div>
                                     <div class="procedencia colum">
                                         <span>Procedência:</span>
-                                        <input type="text" name="" id="">
+                                        <input class="input" type="text" name="" id="">
                                     </div>
                                     <div class="destino colum">
                                         <span>Destino:</span>
-                                        <input type="text" name="" id="">
+                                        <input class="input" type="text" name="" id="">
                                     </div>
                                 </div>
 
                             </div>
                             <div class="email colum">
                                 <span>E-mail:</span>
-                                <input type="text" name="" id="" style="width: 95%;">
+                                <input class="input" type="text" name="" id="" style="width: 95%;">
                             </div>
                         </div>
                         <div class="columRigth">
                             <div class="nacionalidad colum">
                                 <span>Nacionalidade:</span>
-                                <input type="text" name="" id="">
+                                <input class="input" type="text" name="" id="">
                             </div>
                             <div class="naturalidad colum">
                                 <span>Naturalidade:</span>
-                                <input type="text" name="" id="">
+                                <input class="input" type="text" name="" id="">
                             </div>
                             <div class="nacimiento colum">
                                 <span>Data de Nascimento:</span>
-                                <input type="date" id="start-date" name="start-date">
+                                <input class="input" type="date" id="start-date" name="start-date">
                             </div>
                         </div>
                     </div>
                     <div style="display: flex;">
                         <div class="salida colum">
+                            <span>Data de Entrada:</span>
+                            <input class="input" type="datetime-local" id="fecha_salida">
+                        </div>
+                        <div class="salida colum">
                             <span>Data de Saida:</span>
-                            <input type="datetime-local" id="fecha_salida">
-                        </div>
-                        <p style="color: red; padding-left: 5px; font-weight: bold;">*observe que se você alterar a data
-                            de saida, o preço total aumentará</p>
-                    </div>
-                    <span>Pagamentos Efetuados</span>
-                    <div class="contentFactura">
-                        <div class="factura">
-                            <span class="custo-extra">pago: $r 150,00</span>
-                            <span class="custo-extra">Forma de Pagamento: Pix</span>
-                            <span class="custo-extra">Custo extra: $r 0,00</span>
-                            <div class="preco-restante">
-                                <span class="preco-restante-1">preço restante: $r </span><span
-                                    class="comma">150,00</span>
-                            </div>
-                            <span class="caixa">Caixa: Romivan</span>
-                            <span class="total">----------------------------total: $r
-                                300,00----------------------------</span> <span class="custo-extra">pago: $r
-                                150,00</span>
-                            <span class="custo-extra">Forma de Pagamento: Pix</span>
-                            <span class="custo-extra">Custo extra: $r 0,00</span>
-                            <div class="preco-restante">
-                                <span class="preco-restante-1">preço restante: $r </span><span
-                                    class="comma">150,00</span>
-                            </div>
-                            <span class="caixa ">Caixa: Romivan</span>
-                            <span class="total">----------------------------total: $r
-                                300,00----------------------------</span>
-                            <span class="custo-extra">pago: $r 150,00</span>
-                            <span class="custo-extra">Forma de Pagamento: Pix</span>
-                            <span class="custo-extra">Custo extra: $r 0,00</span>
-                            <div class="preco-restante">
-                                <span class="preco-restante-1">preço restante: $r </span><span
-                                    class="comma">150,00</span>
-                            </div>
-                            <span class="caixa">Caixa: Romivan</span>
-                            <span class="total">----------------------------total: $r
-                                300,00----------------------------</span>
-                            <span style="margin-top: 20px; font-weight: 500;">PAGAMENTO COMPLETO</span>
-
-                        </div>
-                        <div class="contenbuton">
-                            <button class="cancelar" id="noButtonConfirm">Cancelar</button>
-                            <button class="aceptar" id="yesButtonConfirm">Aceitar</button>
+                            <input class="input" type="datetime-local" id="fecha_salida">
                         </div>
                     </div>
+                </div>
+                <div class="contenbuton">
+                    <button class="btn btn-cancelar" id="noButtonConfirm">Cancelar</button>
+                    <button class="btn aceptar" id="yesButtonConfirm">Aceitar</button>
                 </div>
             </div>
         </div>
@@ -235,6 +198,7 @@
         <div>
             <div class="buscador">
                 <div class="barra_buscar">Processo de Saida
+                    <a class="volver" href="./saida.html">volver</a>
                 </div>
             </div>
         </div>
@@ -309,29 +273,16 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Pago Cliente</th>
-                        <th>Forma de Pagamento</th>
-                        <th>Custo extra</th>
-                        <th>Preço Restante</th>
-                        <th>Preço Total</th>
-                        <th>Caixa</th>
+                        <th class="titulos-tabla">Pago Cliente</th>
+                        <th class="titulos-tabla">Forma de Pagamento</th>
+                        <th class="titulos-tabla">Custo extra</th>
+                        <th class="titulos-tabla">Preço Restante</th>
+                        <th class="titulos-tabla">Preço Total</th>
+                        <th class="titulos-tabla">Caixa</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!--  <tr class="fila_pago">
-                        <td>R$ <input type="number"></td>
-                        <td>
-                            <select>
-                                <option>Pix</option>
-                                <option>Cartão</option>
-                                <option>Dinheiro</option>
-                            </select>
-                        </td>
-                        <td>R$ <input type="number"></td>
-                        <td>R$ 150,00</td>
-                        <td>R$ 300,00</td>
-                        <td></td>
-                    </tr> -->
+                    <!-- contenido js -->
                 </tbody>
             </table>
             <div class="btn-container">
@@ -349,11 +300,13 @@
                                 d="M640-520v-80h240v80H640Zm-280 40q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T440-640q0-33-23.5-56.5T360-720q-33 0-56.5 23.5T280-640q0 33 23.5 56.5T360-560Zm0-80Zm0 400Z" />
                         </svg></button>
                 </div>
-                <button class="btn-pagamento new">Salvar pagamento</button>
+                <div class="rellenar-campo"></div>
+                <button id="btn-pagamento" class="btn-pagamento new">Salvar pagamento</button>
             </div>
         </section>
     </div>
     <script src="../saida/saida_form.js"></script>
+    <script src="../modales.js"></script>
 </body>
 
 </html>
