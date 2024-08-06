@@ -718,18 +718,15 @@ function openModalConfirmar(message, sig) {
     };
 }
 
-const agregarEventoBoton = (boton, text, verDatosClientes = null) => {
-    boton.addEventListener('click', () => {
-        openModalConfirmar(
-            'No momento de ' +
-                text +
-                ' hóspede deve alterar o valor do quarto, lembre-se que o valor anterior permanecerá no registro para levar em consideração. ¿Fazer alteração?',
-            verDatosClientes
-        );
-    });
+const generarMensaje = (accion) => {
+    return `No momento de ${accion} hóspede deve alterar o valor do quarto, lembre-se que o valor anterior permanecerá no registro para levar em consideração. ¿Fazer alteração?`;
 };
-agregarEventoBoton(btnRemoverHospede, 'remover');
-agregarEventoBoton(btnAggHospede, 'agregar', 'verDatos');
+btnRemoverHospede.addEventListener('click', () => {
+    openModalConfirmar(generarMensaje(remover));
+});
+btnAggHospede.addEventListener('click', () => {
+    openModalConfirmar(generarMensaje(agregar), 'verDatos');
+});
 btnPagamento.addEventListener('click', (e) => {
     const input = document.querySelector('.');
     const rellenarCampo = document.querySelector('.rellenar-campo');
@@ -803,15 +800,13 @@ function concluirPago(informacionDeHuesped, registros_pagos) {
     const diaActual = fecha_actual_obj.getDate();
     const mesActual = fecha_actual_obj.getMonth() + 1;
     let fecha_actual = `${anioActual}-${mesActual}-${diaActual}`;
-    let btnConcluirPagamento = document.querySelector("#pagamento-concluido")
+    let btnConcluirPagamento = document.querySelector('#pagamento-concluido');
     const informacionAguardarEnHistorial = {
         informacionDeHuespedes: informacionDeHuesped,
         registros_pagos: registros_pagos,
-        fecha_registro_historial: fecha_actual
-    }
-    btnConcluirPagamento.addEventListener("click",(e)=>{
-        window.preload.guardandoEnHistorialSend(informacionAguardarEnHistorial)
-    })
-    
+        fecha_registro_historial: fecha_actual,
+    };
+    btnConcluirPagamento.addEventListener('click', (e) => {
+        window.preload.guardandoEnHistorialSend(informacionAguardarEnHistorial);
+    });
 }
-
