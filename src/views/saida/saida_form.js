@@ -722,10 +722,10 @@ const generarMensaje = (accion) => {
     return `No momento de ${accion} hóspede deve alterar o valor do quarto, lembre-se que o valor anterior permanecerá no registro para levar em consideração. ¿Fazer alteração?`;
 };
 btnRemoverHospede.addEventListener('click', () => {
-    openModalConfirmar(generarMensaje(remover));
+    openModalConfirmar(generarMensaje('remover'));
 });
 btnAggHospede.addEventListener('click', () => {
-    openModalConfirmar(generarMensaje(agregar), 'verDatos');
+    openModalConfirmar(generarMensaje('agregar'), 'verDatos');
 });
 btnPagamento.addEventListener('click', (e) => {
     const input = document.querySelector('.');
