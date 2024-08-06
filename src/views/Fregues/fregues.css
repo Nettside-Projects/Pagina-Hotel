@@ -239,21 +239,21 @@ select {
 }
 .amarillo{
     backdrop-filter: blur(7px);
-    box-shadow: 1px 1px 20px 10px #F0FF44;
+    box-shadow: 1px 1px 20px 7px #F0FF44;
     background: #F0FF44;
     border: none !important;
     height: 13px;
 }
 .azul{
     backdrop-filter: blur(7px);
-    box-shadow: 1px 1px 20px 10px #4478FF;
+    box-shadow: 1px 1px 20px 7px #4478FF;
     background: #4478FF;
     border: none !important;
     height: 13px;
 }
 .verde{
     backdrop-filter: blur(7px);
-    box-shadow: 1px 1px 20px 10px #43FF3F;
+    box-shadow: 1px 1px 20px 7px #43FF3F;
     background: #43FF3F;
     border: none !important;
     height: 13px;
@@ -383,7 +383,7 @@ display: block !important;
 }
 .colum{
    
-    height: 55px;
+    height: 65px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -393,6 +393,7 @@ display: block !important;
     display: flex;
     align-items: flex-start;
 }
+
 .documento input, .passaporte input,
 .nome input,  .profesion input,
 .telefono input, .procedencia input,
@@ -570,7 +571,6 @@ display: block !important;
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
-    animation: fadeIn 0.5s; /* Animación para aparecer */
 }
 
 .modal-contentadvertencia {
@@ -597,4 +597,10 @@ display: block !important;
 
 #checkImage {
     animation: rotate 1s ease-in-out, pulse 1s ease-in-out 1s; /* rotar primero, luego pulsar */
+}
+.name-error-nombre {
+    color: red;
+    font-weight: 600;
+    font-size: 17px;
+    height: 20px;
 }

@@ -7,6 +7,7 @@
     <title>Recepção</title>
     <link rel="stylesheet" href="../index.css">
     <link rel="stylesheet" href="../sidebar.css">
+    <link rel="stylesheet" href="../navbar.css">
     <link rel="stylesheet" href="../modales.css">
     <link rel="stylesheet" href="recepcion.css">
 </head>
@@ -25,7 +26,7 @@
     </div>
     <div id="modalClienteAdicionado" class="modal">
         <div class="modal-content">
-            <img class="icon-img-g" src="../../../recursos/check.png" alt="">
+            <img class="checkImage" src=" ../../../recursos/check.png" alt="">
             <span>Cliente Adicionado</span>
         </div>
     </div>
@@ -97,8 +98,12 @@
     </div>
 
     <form class="main-container" method="post">
-        <div class="barra_buscar">Proceso de Hospedagem
-            <a href="../vista_general_habitaciones/vistaGeneral.html" class="volver">Voltar</a>
+        <div>
+            <div class="buscador">
+                <div class="barra_buscar">Inicio
+                    <a class="volver" href="../vista_general_habitaciones/vistaGeneral.html">volver</a>
+                </div>
+            </div>
         </div>
         <!-- informe del cuarto -->
         <div style="display: flex;">
@@ -278,8 +283,7 @@
             <button class="add_vista">Adicionar Cliente</button>
         </div>
     </form>
-    <script src="recepcion.js">
-    </script>
+    <script src="recepcion.js"></script>
     <script src="../../i18n/i18n.js"></script>
 </body>
 

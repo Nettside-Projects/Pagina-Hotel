@@ -10,168 +10,172 @@
     <link rel="stylesheet" href="../index.css">
     <link rel="stylesheet" href="../sidebar.css">
     <link rel="stylesheet" href="../navbar.css">
+    <link rel="stylesheet" href="../modales.css">
     <link rel="stylesheet" href="./fregues.css" />
 </head>
 
 <body>
     <!-- modal para mostrar datos editados -->
-<div id="modalInformacion" class="modaladvertencia">
-    <div class="modal-contentadvertencia ">
-        <img src="../../../recursos/check.png" alt="" srcset="" style="width: 170px;" id="checkImage">
-        <p style="font-weight: bold;">Dados editados</p>
+    <div id="modalInformacion" class="modaladvertencia">
+        <div class="modal-contentadvertencia ">
+            <img src="../../../recursos/check.png" alt="" srcset="" style="width: 170px;" id="checkImage">
+            <p style="font-weight: bold;">Dados editados</p>
+        </div>
     </div>
-</div>
 
-  <!--   modal de advertencia para editar datos del cliente -->
+    <!--   modal de advertencia para editar datos del cliente -->
     <div id="modalEditarcliente" class="modal">
         <div class="modal-content modal-1">
             <img class="info-img" src="../../../recursos/info.png" alt="">
             <span style="margin: 25px; font-weight: 900;">¿Editar Dados?</span>
             <div style="display: flex; width: 100%; justify-content: space-evenly;">
-                <button class="btn-modal" id="noButton"><img class="icon-img" src="../../../recursos/remove.png" alt=""></button>
-                <button class="btn-modal" id="yesButton"><img class="icon-img" src="../../../recursos/check.png" alt=""></button>
+                <button class="btn-modal" id="noButton"><img class="icon-img" src="../../../recursos/remove.png"
+                        alt=""></button>
+                <button class="btn-modal" id="yesButton"><img class="icon-img" src="../../../recursos/check.png"
+                        alt=""></button>
             </div>
         </div>
     </div>
-  <!-- El Modal editar datos del cliente-->
- <div id="modalConfirmar" class="modal">
-    <div class="modal-contentdos">
-        <span class="closedos">&times;</span>
-        <div class="maineditar">
-            <span>Editar Dados</span>
-            <div class="contentEditar">
-                <div class="datosCliente">
-                    <div class="columLeft">
-                        <div class="nome colum">
-                            <span>Nome <span style="color: red;">*</span>:</span>
-                            <input type="text" style="width: 95%;">
-                        </div>
-                        <div style="display: flex;">
-                            <div style="width: 50%;">
-                                <div class="documento colum">
-                                    <span>N° de documento <span style="color: red;">*</span> :</span>
-                                    <input type="text" name="" id="">
-                                </div>
-                                <div class="profesion colum">
-                                    <span>Profissão:</span>
-                                    <input type="text" name="" id="">
-                                </div>
-                                <div class="telefono colum">
-                                    <span>Telefone:</span>
-                                    <input type="text" name="" id="">
-                                </div>
+    <!-- El Modal editar datos del cliente-->
+    <div id="modalConfirmar" class="modal">
+        <div class="modal-contentdos">
+            <span class="closedos">&times;</span>
+            <div class="maineditar">
+                <span>Editar Dados</span>
+                <div class="contentEditar">
+                    <div class="datosCliente">
+                        <div class="columLeft">
+                            <div class="nome colum">
+                                <span>Nome <span style="color: red;">*</span>:</span>
+                                <input type="text" style="width: 95%;" class="input_obligatorio">
+                                <div id="name-error-nombre" class="name-error-nombre"></div>
                             </div>
-                            <div style="width: 50%;">
-                                <div class="passaporte colum">
-                                    <span>N° de passaporte:</span>
-                                    <input type="text" name="" id="">
+                            <div style="display: flex;">
+                                <div style="width: 50%;">
+                                    <div class="documento colum">
+                                        <span>N° de documento <span style="color: red;">*</span> :</span>
+                                        <input type="text" name="" id="" class="input_obligatorio">
+                                        <div id="name-error-nombre" class="name-error-nombre"></div>
+                                    </div>
+                                    <div class="profesion colum">
+                                        <span>Profissão:</span>
+                                        <input type="text" name="" id="">
+                                    </div>
+                                    <div class="telefono colum">
+                                        <span>Telefone:</span>
+                                        <input type="text" name="" id="">
+                                    </div>
                                 </div>
-                                <div class="procedencia colum">
-                                    <span>Procedência:</span>
-                                    <input type="text" name="" id="">
+                                <div style="width: 50%;">
+                                    <div class="passaporte colum">
+                                        <span>N° de passaporte:</span>
+                                        <input type="text" name="" id="">
+                                    </div>
+                                    <div class="procedencia colum">
+                                        <span>Procedência:</span>
+                                        <input type="text" name="" id="">
+                                    </div>
+                                    <div class="destino colum">
+                                        <span>Destino:</span>
+                                        <input type="text" name="" id="">
+                                    </div>
                                 </div>
-                                <div class="destino colum">
-                                    <span>Destino:</span>
-                                    <input type="text" name="" id="">
-                                </div>
+
                             </div>
-                           
+                            <div class="email colum">
+                                <span>E-mail:</span>
+                                <input type="text" name="" id="" style="width: 95%;">
+                            </div>
                         </div>
-                        <div class="email colum">
-                            <span>E-mail:</span>
-                            <input type="text" name="" id="" style="width: 95%;">
+                        <div class="columRigth">
+                            <div class="nacionalidad colum">
+                                <span>Nacionalidade:</span>
+                                <input type="text" name="" id="">
+                            </div>
+                            <div class="naturalidad colum">
+                                <span>Naturalidade:</span>
+                                <input type="text" name="" id="">
+                            </div>
+                            <div class="nacimiento colum">
+                                <span>Data de Nascimento:</span>
+                                <input type="date" id="start-date" name="start-date">
+                            </div>
                         </div>
                     </div>
-                    <div class="columRigth">
-                        <div class="nacionalidad colum">
-                            <span>Nacionalidade:</span>
-                            <input type="text" name="" id="">
+                    <div style="display: flex;">
+                        <div class="salida colum">
+                            <span>Data de Saida:</span>
+                            <input type="datetime-local" id="fecha_salida">
                         </div>
-                        <div class="naturalidad colum">
-                            <span>Naturalidade:</span>
-                            <input type="text" name="" id="">
-                        </div>
-                        <div class="nacimiento colum">
-                            <span>Data de Nascimento:</span>
-                            <input type="date" id="start-date" name="start-date">
-                        </div>
+                        <p style="color: red; padding-left: 5px; font-weight: bold;">*observe que se você alterar a data
+                            de saida, o preço total aumentará</p>
                     </div>
-                </div>
-                <div style="display: flex;">
-                    <div class="salida colum">
-                        <span>Data de Saida:</span>
-                        <input type="datetime-local" id="fecha_salida">
-                    </div>
-                    <p style="color: red; padding-left: 5px; font-weight: bold;">*observe que se você alterar a data de saida, o preço total aumentará</p>
-                </div>
-                <span>Pagamentos Efetuados</span>
-                <div class="contentFactura">
-                    <div class="factura">
-                        <span class="custo-extra">pago: $r 150,00</span>
-                            <span class="custo-extra">Forma de Pagamento: Pix</span>
-                            <span class="custo-extra">Custo extra: $r 0,00</span>
-                            <div class="preco-restante">
-                              <span class="preco-restante-1">preço restante: $r </span
-                              ><span class="comma">150,00</span>
-                            </div>
-                            <span class="caixa">Caixa: Romivan</span>
-                            <span class="total"
-                              >----------------------------total: $r
-                              300,00----------------------------</span
-                            > <span class="custo-extra">pago: $r 150,00</span>
-                            <span class="custo-extra">Forma de Pagamento: Pix</span>
-                            <span class="custo-extra">Custo extra: $r 0,00</span>
-                            <div class="preco-restante">
-                              <span class="preco-restante-1">preço restante: $r </span
-                              ><span class="comma">150,00</span>
-                            </div>
-                            <span class="caixa ">Caixa: Romivan</span>
-                            <span class="total"
-                            >----------------------------total: $r
-                            300,00----------------------------</span>
+                    <span>Pagamentos Efetuados</span>
+                    <div class="contentFactura">
+                        <div class="factura">
                             <span class="custo-extra">pago: $r 150,00</span>
                             <span class="custo-extra">Forma de Pagamento: Pix</span>
                             <span class="custo-extra">Custo extra: $r 0,00</span>
                             <div class="preco-restante">
-                              <span class="preco-restante-1">preço restante: $r </span
-                              ><span class="comma">150,00</span>
+                                <span class="preco-restante-1">preço restante: $r </span><span
+                                    class="comma">150,00</span>
                             </div>
                             <span class="caixa">Caixa: Romivan</span>
-                          <span class="total"
-                            >----------------------------total: $r
-                            300,00----------------------------</span>
+                            <span class="total">----------------------------total: $r
+                                300,00----------------------------</span> <span class="custo-extra">pago: $r
+                                150,00</span>
+                            <span class="custo-extra">Forma de Pagamento: Pix</span>
+                            <span class="custo-extra">Custo extra: $r 0,00</span>
+                            <div class="preco-restante">
+                                <span class="preco-restante-1">preço restante: $r </span><span
+                                    class="comma">150,00</span>
+                            </div>
+                            <span class="caixa ">Caixa: Romivan</span>
+                            <span class="total">----------------------------total: $r
+                                300,00----------------------------</span>
+                            <span class="custo-extra">pago: $r 150,00</span>
+                            <span class="custo-extra">Forma de Pagamento: Pix</span>
+                            <span class="custo-extra">Custo extra: $r 0,00</span>
+                            <div class="preco-restante">
+                                <span class="preco-restante-1">preço restante: $r </span><span
+                                    class="comma">150,00</span>
+                            </div>
+                            <span class="caixa">Caixa: Romivan</span>
+                            <span class="total">----------------------------total: $r
+                                300,00----------------------------</span>
                             <span style="margin-top: 20px; font-weight: 500;">PAGAMENTO COMPLETO</span>
-                           
+
+                        </div>
+                        <div class="contenbuton">
+                            <button class="cancelar" id="noButtonConfirm">Cancelar</button>
+                            <button class="aceptar" id="yesButtonConfirm">Aceitar</button>
+                        </div>
                     </div>
-                    <div class="contenbuton">
-                        <button class="cancelar" id="noButtonConfirm">Cancelar</button>
-                        <button class="aceptar" id="yesButtonConfirm">Aceitar</button>
-                    </div>
-                </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-   <!--  modal para eliminar a un cliente -->
-   <div id="modalELiminarcliente" class="modal">
-    <div class="modal-content modal-1">
-        <img class="info-img" src="../../../recursos/info.png" alt="">
-        <span style="margin: 25px; font-weight: 900;">¿Excluir Cliente?</span>
-        <div style="display: flex; width: 100%; justify-content: space-evenly;">
-            <button class="btn-modal" id="noButtontres"><img class="icon-img" src="../../../recursos/remove.png" alt=""></button>
-            <button class="btn-modal" id="yesButtontres"><img class="icon-img" src="../../../recursos/check.png" alt=""></button>
+    <!--  modal para eliminar a un cliente -->
+    <div id="modalELiminarcliente" class="modal">
+        <div class="modal-content modal-1">
+            <img class="info-img" src="../../../recursos/info.png" alt="">
+            <span style="margin: 25px; font-weight: 900;">¿Excluir Cliente?</span>
+            <div style="display: flex; width: 100%; justify-content: space-evenly;">
+                <button class="btn-modal" id="noButtontres"><img class="icon-img" src="../../../recursos/remove.png"
+                        alt=""></button>
+                <button class="btn-modal" id="yesButtontres"><img class="icon-img" src="../../../recursos/check.png"
+                        alt=""></button>
+            </div>
         </div>
     </div>
-</div>
-<!-- modal de información después de eliminación -->
-<div id="modalInformacionEliminar" class="modaladvertencia">
-    <div class="modal-contentadvertencia">
-        <img src="../../../recursos/check.png" alt="" srcset="" style="width: 170px;" id="checkImage">
-        <p style="font-weight: bold;">Cliente excluido</p>
+    <!-- modal de información después de eliminación -->
+    <div id="modalInformacionEliminar" class="modaladvertencia">
+        <div class="modal-contentadvertencia">
+            <img src="../../../recursos/check.png" alt="" srcset="" style="width: 170px;" id="checkImage">
+            <p style="font-weight: bold;">Cliente excluido</p>
+        </div>
     </div>
-</div>
+
     <!-- menu -->
     <div class="menu">
         <div class="line"></div>
@@ -239,8 +243,7 @@
         </a>
     </div>
 
-
-    <div class="main-container" >
+    <div class="main-container">
         <div class="wrapper">
             <div class="buscador">
                 <div class="barra_buscar">Clientes
@@ -262,63 +265,67 @@
                     <span>resgistros</span>
                 </div>
                 <div class="filtroAcompanante">
-                        <select>
-                            <option value="Activos">Activos</option>
-                            <option value="Inactivos">Inactivos</option>
-                            <option value="Todos" selected>Todos</option>
-                        </select>
+                    <select>
+                        <option value="Activos">Activos</option>
+                        <option value="Inactivos">Inactivos</option>
+                        <option value="Todos" selected>Todos</option>
+                    </select>
                 </div>
                 <div class="Buscador">
-                        <input class="buscar_lupa" name="text" placeholder="Buscar..." type="search">
-                    </div>
+                    <input class="buscar_lupa" name="text" placeholder="Buscar..." type="search">
                 </div>
-                <div class="contenedorLista">   
-                    <div class="encabezadoLista">
-                        <div class="number">
-                            <div class="tooltip">N°<img src="../../../recursos/flecha_abajo.webp" alt="">
-                                <span class="tooltiptext">
-                                    <div><a href="#">A/Z</a></div>
-                                    <div style="border-left: 1px solid black !important;"><a href="#">Z/A</a></div>
-                                </span>
-                              </div>
-                        </div>
-                        <div class="nombreCliente">
-                            <div class="tooltip">Nome completo<img src="../../../recursos/flecha_abajo.webp" alt="">
-                                <span class="tooltiptext">
-                                    <div><a href="#">A/Z</a></div>
-                                    <div style="border-left: 1px solid black !important;"><a href="#">Z/A</a></div>
-                                </span>
-                              </div>
-                        </div>
-                        <div class="Ndocumento">N° de Documento</div>
-                        <div class="widthDiv"><div class="tooltip">N° Habitacion<img src="../../../recursos/flecha_abajo.webp" alt="">
+            </div>
+            <div class="contenedorLista">
+                <div class="encabezadoLista">
+                    <div class="number">
+                        <div class="tooltip">N°<img src="../../../recursos/flecha_abajo.webp" alt="">
                             <span class="tooltiptext">
                                 <div><a href="#">A/Z</a></div>
                                 <div style="border-left: 1px solid black !important;"><a href="#">Z/A</a></div>
                             </span>
-                          </div></div>
-                        <div class="widthDiv">Entrada</div>
-                        <div class="widthDiv">Status</div>
-                        <div class="accion">Ação</div>
+                        </div>
                     </div>
-                </div>
-                <div class="contenedorFilas" id="contenedorFilas">  
-                </div>
-                <div class="footer">
-                    <p>Mostrando a lista <span></span> a <span id="clientCountDisplay">10</span> de um total de <span>xxx</span> registro</p>
-                    <div class="contendorBtn">
-                        <button style="color: #4B4B4B; background-color: #d9d9d9;" >Anterior</button>
-                        <button class="vistaActiva">1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button style="color: #0B6660;">Próximo</button>
+                    <div class="nombreCliente">
+                        <div class="tooltip">Nome completo<img src="../../../recursos/flecha_abajo.webp" alt="">
+                            <span class="tooltiptext">
+                                <div><a href="#">A/Z</a></div>
+                                <div style="border-left: 1px solid black !important;"><a href="#">Z/A</a></div>
+                            </span>
+                        </div>
                     </div>
-                </div> 
+                    <div class="Ndocumento">N° de Documento</div>
+                    <div class="widthDiv">
+                        <div class="tooltip">N° Habitacion<img src="../../../recursos/flecha_abajo.webp" alt="">
+                            <span class="tooltiptext">
+                                <div><a href="#">A/Z</a></div>
+                                <div style="border-left: 1px solid black !important;"><a href="#">Z/A</a></div>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="widthDiv">Entrada</div>
+                    <div class="widthDiv">Status</div>
+                    <div class="accion">Ação</div>
+                </div>
+            </div>
+            <div class="contenedorFilas" id="contenedorFilas">
+            </div>
+            <div class="footer">
+                <p>Mostrando a lista <span></span> a <span id="clientCountDisplay">10</span> de um total de
+                    <span>xxx</span> registro
+                </p>
+                <div class="contendorBtn">
+                    <button style="color: #4B4B4B; background-color: #d9d9d9;">Anterior</button>
+                    <button class="vistaActiva">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>4</button>
+                    <button style="color: #0B6660;">Próximo</button>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="../vista_general_habitaciones/vistaGeneral.js"></script>
     <script src="../Fregues/fregues.js"></script>
+    <script src="../modales.js"></script>
 </body>
 
 </html>

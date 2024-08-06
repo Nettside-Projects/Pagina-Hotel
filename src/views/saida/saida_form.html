@@ -13,45 +13,23 @@
 </head>
 
 <body>
-    <div id="modalRemoverHospede" class="modal">
+    <div id="modalConfirmar" class="modal">
         <div class="modal-content modal-1">
             <img class="info-img" src="../../../recursos/info.png" alt="">
-            <span>No momento de remover hóspede, deve alterar o
-                valor do
-                quarto, lembre-se que o valor anterior permanecerá no
-                registro para levar em consideração.
-                ¿Fazer alteração?</span>
+            <span id="modalConfimarMessage"></span>
             <div style="display: flex; width: 100%; justify-content: space-evenly;">
-                <button class="btn-modal" id="remover-hospede-no"><img class="icon-img"
-                        src="../../../recursos/remove.png" alt=""></button>
-                <button class="btn-modal" id="remover-hospede-yes"><img class="icon-img"
-                        src="../../../recursos/check.png" alt=""></button>
+                <button class="btn-modal" id="confirmar-no"><img class="icon-img" src="../../../recursos/remove.png"
+                        alt=""></button>
+                <button class="btn-modal" id="confirmar-yes"><img class="icon-img" src="../../../recursos/check.png"
+                        alt=""></button>
             </div>
         </div>
     </div>
-    <div id="modalAggHospede" class="modal">
-        <div class="modal-content modal-1">
-            <img class="info-img" src="../../../recursos/info.png" alt="">
-            <span>No momento de remover hóspede, deve alterar o
-                valor do
-                quarto, lembre-se que o valor anterior permanecerá no
-                registro para levar em consideração.
-                ¿Fazer alteração?</span>
-            <div style="display: flex; width: 100%; justify-content: space-evenly;">
-                <button class="btn-modal" id="remover-hospede-no"><img class="icon-img"
-                        src="../../../recursos/remove.png" alt=""></button>
-                <button class="btn-modal" id="remover-hospede-yes"><img class="icon-img"
-                        src="../../../recursos/check.png" alt=""></button>
-            </div>
-        </div>
-    </div>
-
-    <div id="modalDigiteNovoPreço" class="modal">
+    <div id="modalDigiteNovoPreco" class="modal">
         <div class="modal-content">
             <span>Digite Novo Preço.</span>
             <div style="display: flex; align-items: center;justify-content: space-between; flex-direction: row;"
-                class="corto"><span>$R</span><input type="number" class="barra_input"
-                    name="huesped[0][pago_adelantado]">
+                class="corto"><span>$R</span><input id="input-digite-preco" type="number" class="barra_input" name="">
             </div>
             <div class="flex">
                 <button id="btn-cancelar" class="btn btn-cancelar">Cancelar</button>
@@ -59,10 +37,93 @@
             </div>
         </div>
     </div>
-    <div id="modalPrecioAlterado" class="modal">
+    <div id="modalDatosCliente" class="modal">
+        <div class="modal-content modal-content-datosCliente">
+            <span id="x" class="x">&times;</span>
+            <div class="maineditar">
+                <span>Editar Dados</span>
+                <div class="contentEditar">
+                    <div class="datosCliente">
+                        <div class="columLeft">
+                            <div class="nome colum">
+                                <span>Nome <span style="color: red;">*</span>:</span>
+                                <input type="text" style="width: 95%;" class="input_obligatorio">
+                                <div id="name-error-nombre" class="name-error-nombre"></div>
+                            </div>
+                            <div style="display: flex;">
+                                <div style="width: 50%;">
+                                    <div class="documento colum">
+                                        <span>N° de documento <span style="color: red;">*</span> :</span>
+                                        <input type="text" name="" id="" class="input_obligatorio">
+                                        <div id="name-error-nombre" class="name-error-nombre"></div>
+                                    </div>
+                                    <div class="profesion colum">
+                                        <span class="input">Profissão:</span>
+                                        <input type="text" name="" id="">
+                                    </div>
+                                    <div class="telefono colum">
+                                        <span>Telefone:</span>
+                                        <input class="input" type="text" name="" id="">
+                                    </div>
+                                </div>
+                                <div style="width: 50%;">
+                                    <div class="passaporte colum">
+                                        <span>N° de passaporte:</span>
+                                        <input class="input" type="text" name="" id="">
+                                    </div>
+                                    <div class="procedencia colum">
+                                        <span>Procedência:</span>
+                                        <input class="input" type="text" name="" id="">
+                                    </div>
+                                    <div class="destino colum">
+                                        <span>Destino:</span>
+                                        <input class="input" type="text" name="" id="">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="email colum">
+                                <span>E-mail:</span>
+                                <input class="input" type="text" name="" id="" style="width: 95%;">
+                            </div>
+                        </div>
+                        <div class="columRigth">
+                            <div class="nacionalidad colum">
+                                <span>Nacionalidade:</span>
+                                <input class="input" type="text" name="" id="">
+                            </div>
+                            <div class="naturalidad colum">
+                                <span>Naturalidade:</span>
+                                <input class="input" type="text" name="" id="">
+                            </div>
+                            <div class="nacimiento colum">
+                                <span>Data de Nascimento:</span>
+                                <input class="input" type="date" id="start-date" name="start-date">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex;">
+                        <div class="salida colum">
+                            <span>Data de Entrada:</span>
+                            <input class="input" type="datetime-local" id="fecha_salida">
+                        </div>
+                        <div class="salida colum">
+                            <span>Data de Saida:</span>
+                            <input class="input" type="datetime-local" id="fecha_salida">
+                        </div>
+                    </div>
+                </div>
+                <div class="contenbuton">
+                    <button class="cancelar" id="noButtonConfirm">Cancelar</button>
+                    <button class="aceptar" id="yesButtonConfirm">Aceitar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modalExito" class="modal">
         <div class="modal-content">
-            <img class="icon-img-g" src="../../../recursos/check.png" alt="">
-            <span>preço alterado.</span>
+            <img class="checkImage" src="../../../recursos/check.png" alt="">
+            <span id="modalExitoMessage"></span>
         </div>
     </div>
 
@@ -137,6 +198,7 @@
         <div>
             <div class="buscador">
                 <div class="barra_buscar">Processo de Saida
+                    <a class="volver" href="./saida.html">volver</a>
                 </div>
             </div>
         </div>
@@ -211,29 +273,15 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Pago Cliente</th>
-                        <th>Forma de Pagamento</th>
-                        <th>Custo extra</th>
-                        <th>Preço Restante</th>
-                        <th>Preço Total</th>
-                        <th>Caixa</th>
+                        <th class="titulos-tabla">Pago Cliente</th>
+                        <th class="titulos-tabla">Forma de Pagamento</th>
+                        <th class="titulos-tabla">Custo extra</th>
+                        <th class="titulos-tabla">Preço Restante</th>
+                        <th class="titulos-tabla">Preço Total</th>
+                        <th class="titulos-tabla">Caixa</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!--  <tr class="fila_pago">
-                        <td>R$ <input type="number"></td>
-                        <td>
-                            <select>
-                                <option>Pix</option>
-                                <option>Cartão</option>
-                                <option>Dinheiro</option>
-                            </select>
-                        </td>
-                        <td>R$ <input type="number"></td>
-                        <td>R$ 150,00</td>
-                        <td>R$ 300,00</td>
-                        <td></td>
-                    </tr> -->
                 </tbody>
             </table>
             <div class="btn-container">
@@ -256,6 +304,7 @@
         </section>
     </div>
     <script src="../saida/saida_form.js"></script>
+    <script src="../modales.js"></script>
 </body>
 
 </html>
