@@ -101,12 +101,17 @@ function createRows(numClientes) {
         'modalInformacionEliminar'
     );
 
+    // Función para mostrar un modal
     function showModal(modal) {
         modal.classList.add('block');
     }
+
+    // Función para ocultar un modal
     function hideModal(modal) {
         modal.classList.remove('block');
     }
+
+    // Función para mostrar un modal y ocultarlo automáticamente después de 3 segundos
     function showModalWithAutoHide(modal, duration = 3000) {
         showModal(modal);
         setTimeout(() => {
@@ -144,6 +149,8 @@ function createRows(numClientes) {
         hideModal(modalEliminarcliente);
         
     });
+
+    // Añadir evento de click al botón "Sí" para cerrar el modal de eliminación y abrir el modal de información
     yesButtontres.addEventListener('click', (e) => {
         hideModal(modalEliminarcliente);
         showModalWithAutoHide(modalInformacionEliminar);
@@ -157,7 +164,6 @@ function createRows(numClientes) {
         });
     }
 
-<<<<<<< HEAD
         // Verificar si yesButtonConfirm existe antes de añadir el event listener
 if (yesButtonConfirm) {
     yesButtonConfirm.addEventListener('click', (e) => {
@@ -180,28 +186,9 @@ if (yesButtonConfirm) {
             hideModal(modalConfirmar);
             showModalWithAutoHide(modalInformacion);
         }
-=======
-    // Verificar si yesButtonConfirm existe antes de añadir el event listener
-    yesButtonConfirm.addEventListener('click', (e) => {
-        let inputnombre = document.querySelectorAll('.input_obligatorio');
-
-        inputnombre.forEach((e) => {
-            if (e.value === '') {
-                e.nextElementSibling.textContent = 'Por favor llenar el campo';
-                setTimeout(() => {
-                    e.nextElementSibling.textContent = '';
-                }, 5000);
-                allFilled = false;
-            } else {
-                e.nextElementSibling.textContent = '';
-                hideModal(modalConfirmar);
-                showModalWithAutoHide(modalInformacion);
-            }
-        });
->>>>>>> dc49261f577b316a2934eb4664d22efd364f4e58
     });
+}
 
-<<<<<<< HEAD
 // Función para mostrar el modal con auto-hide y recargar la página
 function showModalWithAutoHide(modal) {
     showModal(modal);
@@ -222,37 +209,6 @@ function hideModal(modal) {
 }
 
 
-=======
-    function validateInputs() {
-        let inputnombre = document.querySelector('.inputnombre');
-        console.log(inputnombre);
-        if (inputnombre.value === '') {
-            inputnombre.parentElement.nextElementSibling.textContent =
-                'Por favor llenar el campo';
-            setTimeout(() => {
-                inputnombre.parentElement.nextElementSibling.textContent = '';
-            }, 5000);
-            return false;
-        } else {
-            inputnombre.parentElement.nextElementSibling.textContent = '';
-            return true;
-        }
-    }
-    // Función para mostrar el modal con auto-hide
-    function showModalWithAutoHide(modal) {
-        showModal(modal);
-        setTimeout(() => {
-            hideModal(modal);
-        }, 3000); // 3000 ms = 3 segundos
-    }
-
-    function showModal(modal) {
-        modal.classList.add('block');
-    }
-    function hideModal(modal) {
-        modal.classList.remove('block');
-    }
->>>>>>> dc49261f577b316a2934eb4664d22efd364f4e58
 
     // Añadir evento de click a los elementos <span> para cerrar los modales
     spans.forEach((element) => {
@@ -261,21 +217,6 @@ function hideModal(modal) {
             location.reload();
         });
     });
-
-    const modals = [
-        modalEditarcliente,
-        modalConfirmar,
-        modalEliminarcliente,
-        modalInformacion,
-        modalInformacionEliminar,
-    ];
-    window.onclick = (event) => {
-        modals.forEach((modal) => {
-            if (event.target === modal) {
-                hideModal(modal);
-            }
-        });
-    };
 
     return filasArray; // Devolver el array con las filas
 }
@@ -302,3 +243,5 @@ document.querySelectorAll('.contendorBtn button').forEach((button) => {
         });
     }
 });
+
+
