@@ -240,7 +240,7 @@ function cuentaTotalPresente(inf) {
 
 /* Agregando información inicial de la habitación a través del JSON recibido */
 function enviarDatos() {
-    /* Se envía la información del id de la habitación registrada del huesped a través de esta función 
+    /* Se envía la información del id de la habitación registrada del huesped a través de esta función
     para recibir información de los huespedes registrados (como lo sería los nombres,nacionalidad, documento,etc..)
     */
     window.preload.informacionDeHabitacionYHuespedesSend(
@@ -420,8 +420,6 @@ function mostrarRegistroDePagos(
                             <td></td>
                         </tr>`;
         });
-
-        //Se agrega las filas
         document.querySelector('tbody').innerHTML = html;
 
         //Si la cuenta total es mayor a 0, asignará una fila lista para ingresar el valor a pagar y así efectuar el pago
@@ -514,14 +512,9 @@ function mostrarRegistroDePagos(
             container.appendChild(rightSide);
 
             document.querySelector('.btn-container').appendChild(container);
-            document
-                .querySelector('.container')
-                .addEventListener('click', (e) => {
-                    openModalConfirmar(
-                        '¿Desea concluir pagamento?',
-                        'modalExito'
-                    );
-                });
+            container.addEventListener('click', (e) => {
+                openModalConfirmar('¿Desea concluir pagamento?', 'modalExito');
+            });
         }
     } else {
         /*
@@ -620,6 +613,8 @@ function openModalExito(message) {
     setTimeout(() => {
         /* window.preload.infoHuespedesSend(infoGeneral); */
         closeModal(modalExito);
+        window.location.href =
+            '../vista_general_habitaciones/vistaGeneral.html';
     }, 2000);
 }
 function openModalDatosCliente() {
@@ -647,6 +642,7 @@ function openModalDatosCliente() {
         if (allFilled) {
             closeModal(modalDatosCliente);
             openModalExito('cliente agregado');
+            //logica al rrellenar los datos
         }
     });
 
@@ -711,6 +707,17 @@ function openModalConfirmar(message, sig) {
         if (sig == 'verDatos') {
             openModalDigiteNovoPreco('verDatosClientes');
         } else if (sig == 'modalExito') {
+            cuentaTotalPresente(informacionDeHuesped)
+                .then((cuenta_total_y_registro_pago) => {
+                    console.log(cuenta_total_y_registro_pago);
+                    concluirPago(
+                        informacionDeHuesped,
+                        cuenta_total_y_registro_pago.registro_pago
+                    );
+                })
+                .catch((e) => {
+                    console.log(e);
+                }); /* MODIFICADO TEST */
             openModalExito('Pagamento concluido');
         } else {
             openModalDigiteNovoPreco();
@@ -718,18 +725,15 @@ function openModalConfirmar(message, sig) {
     };
 }
 
-const agregarEventoBoton = (boton, text, verDatosClientes = null) => {
-    boton.addEventListener('click', () => {
-        openModalConfirmar(
-            'No momento de ' +
-                text +
-                ' hóspede deve alterar o valor do quarto, lembre-se que o valor anterior permanecerá no registro para levar em consideração. ¿Fazer alteração?',
-            verDatosClientes
-        );
-    });
+const generarMensaje = (accion) => {
+    return `No momento de ${accion} hóspede deve alterar o valor do quarto, lembre-se que o valor anterior permanecerá no registro para levar em consideração. ¿Fazer alteração?`;
 };
-agregarEventoBoton(btnRemoverHospede, 'remover');
-agregarEventoBoton(btnAggHospede, 'agregar', 'verDatos');
+btnRemoverHospede.addEventListener('click', () => {
+    openModalConfirmar(generarMensaje('remover'));
+});
+btnAggHospede.addEventListener('click', () => {
+    openModalConfirmar(generarMensaje('agregar'), 'verDatos');
+});
 btnPagamento.addEventListener('click', (e) => {
     const input = document.querySelector('.');
     const rellenarCampo = document.querySelector('.rellenar-campo');
@@ -798,20 +802,18 @@ function enviarRegistroDePago(numero_documento) {
 }
 
 function concluirPago(informacionDeHuesped, registros_pagos) {
+    console.log('Guardando en historial...');
     let fecha_actual_obj = new Date();
     const anioActual = fecha_actual_obj.getFullYear();
     const diaActual = fecha_actual_obj.getDate();
     const mesActual = fecha_actual_obj.getMonth() + 1;
     let fecha_actual = `${anioActual}-${mesActual}-${diaActual}`;
-    let btnConcluirPagamento = document.querySelector("#pagamento-concluido")
+    let btnConcluirPagamento = document.querySelector('#pagamento-concluido');
     const informacionAguardarEnHistorial = {
         informacionDeHuespedes: informacionDeHuesped,
         registros_pagos: registros_pagos,
-        fecha_registro_historial: fecha_actual
-    }
-    btnConcluirPagamento.addEventListener("click",(e)=>{
-        window.preload.guardandoEnHistorialSend(informacionAguardarEnHistorial)
-    })
-    
-}
+        fecha_registro_historial: fecha_actual,
+    };
 
+    window.preload.guardandoEnHistorialSend(informacionAguardarEnHistorial);
+}
