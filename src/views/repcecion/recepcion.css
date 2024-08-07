@@ -260,3 +260,8 @@
     transform: rotateY(3600deg);
   }
 }
+.documento input{
+  width: auto !important;
+  border: none !important;
+  height: auto !important;
+}

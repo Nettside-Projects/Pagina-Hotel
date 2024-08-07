@@ -640,6 +640,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    
+
     document.querySelector('#radio1').addEventListener('click', (e) => {
         console.log('Usando los porcentajes');
         porcentaValue = document.querySelector('#porcentajeSelect').value;
@@ -663,7 +665,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 
-    /* Codigo para seleccionar el valor del input tipo select */
+ /* Codigo para seleccionar el valor del input tipo select */
     document
         .querySelector('#porcentajeSelect')
         .addEventListener('change', (e) => {
