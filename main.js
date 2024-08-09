@@ -29,7 +29,9 @@ const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data6.db'))
 );
 /* const i18next = require('./src/i18n/i18n.js'); */
-const { emialHuespedRegistrado } = require('./sendEmail');
+const { emialHuespedRegistrado,
+        emialPagoCompletado
+} = require('./sendEmail');
 
 //vistas
 let windowLogin;
@@ -258,7 +260,16 @@ ipcMain.on('actualizar-costo-total', (e, data) => {
     })
 })
 
-ipcMain.on('guardar-en-historial',(e,data)=>{
-    guardarEnHistorial(db,data)
-})
+ipcMain.on('guardar-en-historial', (e, data) => {
+    console.log("Guardando en historial...");
+    guardarEnHistorial(db, data, (err) => {
+        if (err) {
+            console.log(err);
+            dialog.showErrorBox('Error', `${err}`);
+        } else {
+            console.log("Enviando email...");
+            emialPagoCompletado(data);
+        }
+    });
+});
 

@@ -1,5 +1,6 @@
 const path = require('path');
 const sqlite3 = require('sqlite3');
+const { promisify } = require('util');
 
 const db = new sqlite3.Database(path.join(__dirname, '/db', 'data6.db'));
 /* 
@@ -564,7 +565,69 @@ function actualizarCostoTotal(db, data, callback) {
     })
 }
 
-function guardarEnHistorial(db, data) {
+
+function ejecutarQuery(db, sql, params = []) {
+    return new Promise((resolve, reject) => {
+        db.run(sql, params, function (err) {
+            if (err) {
+                return reject(err);
+            }
+            resolve(this);
+        });
+    });
+}
+
+async function guardarEnHistorial(db, data, callback) {
+    try {
+        await promisify(db.serialize).bind(db)();
+        await ejecutarQuery(db, "BEGIN TRANSACTION");
+
+        for (const huesped of data.informacionDeHuespedes) {
+            await ejecutarQuery(db, `DELETE FROM huesped WHERE numero_documento = ?`, [huesped.numero_documento]);
+            await ejecutarQuery(db, `DELETE FROM registro_pagos WHERE fk_numero_documento = ?`, [huesped.numero_documento]);
+            await ejecutarQuery(db, `DELETE FROM cuentas WHERE id_cuenta = ?`, [huesped.id_cuenta]);
+
+            await ejecutarQuery(db, `INSERT INTO historial_huesped (
+                numero_documento, nombre_completo, nacionalidad, procedencia, fecha_entrada, fecha_salida,
+                fecha_historial, pasaporte, fecha_nacimiento, profesion, naturalidade, firma, email, telefono,
+                numero_habitacion, descuento_aplicado
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                [
+                    huesped.numero_documento, huesped.nombre_completo, huesped.nacionalidad, huesped.procedencia,
+                    huesped.fecha_entrada, huesped.fecha_salida, data.fecha_registro_historial, huesped.pasaporte,
+                    huesped.fecha_nacimiento, huesped.profesion, huesped.naturalidade, huesped.firma, huesped.email,
+                    huesped.telefono, huesped.numero, huesped.descuento
+                ]
+            );
+
+            const { lastID } = await ejecutarQuery(db, `SELECT last_insert_rowid() AS lastID`);
+            for (const pago of data.registros_pagos) {
+                await ejecutarQuery(db, `INSERT INTO historial_registro_pagos (
+                    historial_registro_pago, fecha_pago, metodo_pago, extra, cuenta_actual, fk_id_registro_historial_huesped
+                ) VALUES (?, ?, ?, ?, ?, ?)`,
+                    [
+                        pago.registro_pago, pago.fecha_pago, pago.metodo_pago, pago.extra, pago.cuenta_actual, lastID
+                    ]
+                );
+            }
+        }
+
+        await ejecutarQuery(db, "COMMIT");
+        callback(null);
+    } catch (err) {
+        console.error("Error en transacción:", err);
+        try {
+            await ejecutarQuery(db, "ROLLBACK");
+        } catch (rollbackErr) {
+            console.error("Error en rollback:", rollbackErr);
+        }
+        callback(err);
+    }
+
+    cambiarEstadoHabitacion(db,3,data.informacionDeHuespedes[0].id_habitacion)
+}
+
+/* function guardarEnHistorial(db, data,callback) {
     db.serialize(() => {
         db.run("BEGIN TRANSACTION");
 
@@ -574,6 +637,7 @@ function guardarEnHistorial(db, data) {
                 if (err) {
                     console.error("Error al eliminar huésped:", err);
                     db.run("ROLLBACK");
+                    callback(err)
                     return;
                 }
                 
@@ -581,6 +645,7 @@ function guardarEnHistorial(db, data) {
                     if (err) {
                         console.error("Error al eliminar huésped:", err);
                         db.run("ROLLBACK");
+                        callback(err)
                         return;
                     }
 
@@ -588,6 +653,7 @@ function guardarEnHistorial(db, data) {
                         if (err) {
                             console.error("Error al eliminar huésped:", err);
                             db.run("ROLLBACK");
+                            callback(err)
                             return;
                         }
 
@@ -607,6 +673,7 @@ function guardarEnHistorial(db, data) {
                                 if (err) {
                                     console.error("Error al insertar el huésped:", err);
                                     db.run("ROLLBACK");
+                                    callback(err)
                                     return;
                                 }
 
@@ -625,6 +692,7 @@ function guardarEnHistorial(db, data) {
                                             if (err) {
                                                 console.error("Error al insertar el registro de pago:", err);
                                                 db.run("ROLLBACK");
+                                                callback(err)
                                                 return;
                                             }
 
@@ -644,9 +712,10 @@ function guardarEnHistorial(db, data) {
 
             });
         });
+        db.run("COMMIT");
     });
-    db.run("COMMIT");
-}
+  
+} */
 
 
 
