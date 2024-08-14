@@ -272,6 +272,10 @@ function enviarDatos() {
             );
         });
     });
+
+
+    limpiezaDeHabitacion( informacionDeHabitacion.id_habitacion)
+
 }
 enviarDatos();
 
@@ -816,4 +820,15 @@ function concluirPago(informacionDeHuesped, registros_pagos) {
     };
 
     window.preload.guardandoEnHistorialSend(informacionAguardarEnHistorial);
+}
+
+function limpiezaDeHabitacion(id_habitacion){
+    let btnLimpiezaDeHabitacion = document.querySelector(".btn-limpieza")
+    console.log("Boton de limpieza: " + btnLimpiezaDeHabitacion)
+    console.log("Id de habitacion: " + id_habitacion)
+    btnLimpiezaDeHabitacion.addEventListener("click",e => {
+        window.preload.cambiarEstadoHabitacionALimpiezaOcupado(id_habitacion)
+        window.location.href =
+            '../vista_general_habitaciones/vistaGeneral.html';
+    })
 }
