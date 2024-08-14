@@ -89,6 +89,24 @@ async function emialHuespedRegistrado(datos) {
     console.log('Message sent: %s', info.messageId);
 }
 
+function emialPagoCompletado(datos) {
+   let html = ""
+
+    // send mail with defined transport object
+  /*   const info = await transporter.sendMail({
+        from: '"Mensaje desde el programa" <mnunexaraujo@gmail.com>',
+        to: 'mnunexaraujo@gmail.com',
+        subject: num_huespedes + 'pago completado de huespedes',
+        from: '"Front end developer en Nettside" <mnunexaraujo@gmail.com>',
+        to: 'salgadocanga@gmail.com',
+        subject: 'etc etc etc.',
+        html: html,
+    }); */
+
+    console.log('Información de huespedes pagados', datos);
+}
+
 module.exports = {
     emialHuespedRegistrado: emialHuespedRegistrado,
+    emialPagoCompletado: emialPagoCompletado
 };
