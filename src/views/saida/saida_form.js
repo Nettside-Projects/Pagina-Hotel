@@ -4,6 +4,9 @@ const modalimpieza = document.getElementById('modalimpieza');
 const modalterminarlimpieza = document.getElementById('modalterminarlimpieza');
 const noButton = document.getElementById('noButton');
 const yesButton = document.getElementById('yesButton');
+const limpiezaterminado= document.getElementById('limpiezaterminado');
+const hacerlimpieza= document.getElementById('hacerlimpieza');
+
 
 // Función para abrir un modal
 function abrirModal(modal) {
@@ -28,13 +31,19 @@ noButton.addEventListener('click', () => {
 // Event listener para el botón "Yes", cierra el primer modal y abre el segundo
 yesButton.addEventListener('click', () => {
     cerrarModal(modalimpieza);
+    hacerlimpieza.style.display= "none"
+    limpiezaterminado.style.display= "flex"
+});
+limpiezaterminado.addEventListener('click', () => {
+    hacerlimpieza.style.display= "flex"
+    limpiezaterminado.style.display= "none"
     abrirModal(modalterminarlimpieza);
 
     // Después de 3 segundos, cerrar el segundo modal
     setTimeout(() => {
         cerrarModal(modalterminarlimpieza);
-    }, 3000);
-});
+    }, 3000); 
+})
 
 // Event listener para cerrar el modal si se hace clic fuera del contenido del modal
 window.addEventListener('click', (event) => {

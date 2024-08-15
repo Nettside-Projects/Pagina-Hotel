@@ -28,9 +28,9 @@
             <span style="margin: 25px; font-weight: 900;">Fazer limpeza do quarto</span>
             <div style="display: flex; width: 100%; justify-content: space-evenly;">
                 <button class="btn-modal" id="noButton"><img class="icon-img" src="../../../recursos/remove.png"
-                        alt=""></button>
+                        alt="" style="cursor: pointer;"></button>
                 <button class="btn-modal" id="yesButton"><img class="icon-img" src="../../../recursos/check.png"
-                        alt=""></button>
+                        alt=""style="cursor: pointer;"></button>
             </div>
         </div>
     </div>
@@ -40,9 +40,9 @@
             <span id="modalConfimarMessage"></span>
             <div style="display: flex; width: 100%; justify-content: space-evenly;">
                 <button class="btn-modal" id="confirmar-no"><img class="icon-img" src="../../../recursos/remove.png"
-                        alt=""></button>
+                        alt=""style="cursor: pointer;"></button>
                 <button class="btn-modal" id="confirmar-yes"><img class="icon-img" src="../../../recursos/check.png"
-                        alt=""></button>
+                        alt=""style="cursor: pointer;"></button>
             </div>
         </div>
     </div>
@@ -53,8 +53,8 @@
                 class="corto"><span>$R</span><input id="input-digite-preco" type="number" class="barra_input" name="">
             </div>
             <div class="flex">
-                <button id="btn-cancelar" class="btn btn-cancelar">Cancelar</button>
-                <button id="btn-aceitar" class="btn btn-aceitar">Aceitar</button>
+                <button id="btn-cancelar" class="btn btn-cancelar"style="cursor: pointer;">Cancelar</button>
+                <button id="btn-aceitar" class="btn btn-aceitar"style="cursor: pointer;">Aceitar</button>
             </div>
         </div>
     </div>
@@ -284,7 +284,11 @@
                             00/00/00</span>
                     </div>
                 </div>
-                <button class="btn-limpieza new">fazer limpeza do quarto
+                <button class="btn-limpieza new" id="hacerlimpieza" style="cursor: pointer;  border-bottom: 2px solid #05C4B8;justify-content: center;">
+                    <span >fazer limpeza do quarto</span>
+                </button>
+                <button class="btn-limpieza new" id="limpiezaterminado" style="cursor: pointer;background-color: #860000; border-bottom: 2px solid #FF0000; display: none; justify-content: center;">
+                    <span>Terminar a limpeza</span>
                 </button>
             </div>
         </div>
