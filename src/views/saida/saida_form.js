@@ -1,3 +1,49 @@
+
+// Selección de elementos del DOM
+const modalimpieza = document.getElementById('modalimpieza');
+const modalterminarlimpieza = document.getElementById('modalterminarlimpieza');
+const noButton = document.getElementById('noButton');
+const yesButton = document.getElementById('yesButton');
+
+// Función para abrir un modal
+function abrirModal(modal) {
+    modal.style.display = 'block';
+}
+
+// Función para cerrar un modal
+function cerrarModal(modal) {
+    modal.style.display = 'none';
+}
+
+// Event listener para abrir el primer modal al hacer clic en el botón (ajusta el selector según tu botón)
+document.querySelector(".btn-limpieza").addEventListener('click', () => {
+    abrirModal(modalimpieza);
+});
+
+// Event listener para el botón "No", cierra el primer modal
+noButton.addEventListener('click', () => {
+    cerrarModal(modalimpieza);
+});
+
+// Event listener para el botón "Yes", cierra el primer modal y abre el segundo
+yesButton.addEventListener('click', () => {
+    cerrarModal(modalimpieza);
+    abrirModal(modalterminarlimpieza);
+
+    // Después de 3 segundos, cerrar el segundo modal
+    setTimeout(() => {
+        cerrarModal(modalterminarlimpieza);
+    }, 3000);
+});
+
+// Event listener para cerrar el modal si se hace clic fuera del contenido del modal
+window.addEventListener('click', (event) => {
+    if (event.target == modalimpieza) {
+        cerrarModal(modalimpieza);
+    }
+});
+
+
 const informacionDeHabitacion = JSON.parse(
     localStorage.getItem('informacionDeHabitacion')
 );
@@ -817,3 +863,5 @@ function concluirPago(informacionDeHuesped, registros_pagos) {
 
     window.preload.guardandoEnHistorialSend(informacionAguardarEnHistorial);
 }
+
+

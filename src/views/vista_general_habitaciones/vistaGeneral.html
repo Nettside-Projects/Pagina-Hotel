@@ -8,12 +8,23 @@
     <link rel="stylesheet" href="../index.css">
     <link rel="stylesheet" href="../sidebar.css">
     <link rel="stylesheet" href="vista.css" />
+    <link rel="stylesheet" href="../modales.css">
 </head>
 
 <body>
-    <div id="modalConfirmar" class="modal">
-        <div class="modal-content">
-            <img class="info-img" src="../../../recursos/info.png" alt="">¿Limpieza comcluida?
+    <!-- modal de terminar limpieza -->
+    <div id="modalterminarlimpieza" class="modal">
+        <div class="modal-contentadvertencia ">
+            <img src="../../../recursos/check.png" alt="" srcset="" style="width: 170px;" id="checkImage">
+            <p style="font-weight: bold;">Limpeza Concluida</p>
+        </div>
+    </div>
+
+    <!--   modal de advertencia para editar datos del cliente -->
+    <div id="modalimpieza" class="modal">
+        <div class="modal-content modal-1">
+            <img class="info-img" src="../../../recursos/info.png" alt="">
+            <span style="margin: 25px; font-weight: 900;">Fazer limpeza do quarto</span>
             <div style="display: flex; width: 100%; justify-content: space-evenly;">
                 <button class="btn-modal" id="noButton"><img class="icon-img" src="../../../recursos/remove.png"
                         alt=""></button>
@@ -22,7 +33,6 @@
             </div>
         </div>
     </div>
-
     <!-- menu -->
     <div class="menu">
         <div class="rectangle-18">

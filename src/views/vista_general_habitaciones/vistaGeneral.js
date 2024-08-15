@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reparacion:
             '<svg xmlns="http://www.w3.org/2000/svg" height="88px" viewBox="0 -960 960 960" width="88px" fill="#EFEFEF"><path d="M756-120 537-339l84-84 219 219-84 84Zm-552 0-84-84 276-276-68-68-28 28-51-51v82l-28 28-121-121 28-28h82l-50-50 142-142q20-20 43-29t47-9q24 0 47 9t43 29l-92 92 50 50-28 28 68 68 90-90q-4-11-6.5-23t-2.5-24q0-59 40.5-99.5T701-841q15 0 28.5 3t27.5 9l-99 99 72 72 99-99q7 14 9.5 27.5T841-701q0 59-40.5 99.5T701-561q-12 0-24-2t-23-7L204-120Z"/></svg>',
     };
+    
 
     // habitacion no encontrada
     btnBuscar.addEventListener('keyup', (e) => {
@@ -42,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.preload.InfoHabitacionesGeneralOn((e, html) => {
         agregarTarjetasHabitaciones(html);
+        
     });
 
     function agregarTarjetasHabitaciones(html) {
@@ -76,7 +78,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-    }
+        const modalimpieza = document.getElementById('modalimpieza');
+        const modalterminarlimpieza = document.getElementById('modalterminarlimpieza');
+        const noButton = document.getElementById('noButton');
+        const yesButton = document.getElementById('yesButton'); 
+        
+
+        let habitacionlimpieza = document.querySelectorAll(".limpieza")
+        function abrirModal(modal) {
+            modal.style.display = 'block';
+        }
+        
+        // Función para cerrar un modal
+        function cerrarModal(modal) {
+            modal.style.display = 'none';
+        }
+
+        habitacionlimpieza.forEach((e) => {
+            console.log(e)
+         e.addEventListener('click', (e) => { 
+            abrirModal(modalimpieza);
+            });
+        }); 
+        // Event listener para el botón "No", cierra el primer modal
+        noButton.addEventListener('click', () => {
+        cerrarModal(modalimpieza);
+});
+
+    // Event listener para el botón "Yes", cierra el primer modal y abre el segundo
+    yesButton.addEventListener('click', () => {
+        cerrarModal(modalimpieza);
+        abrirModal(modalterminarlimpieza);
+
+        // Después de 3 segundos, cerrar el segundo modal
+        setTimeout(() => {
+            cerrarModal(modalterminarlimpieza);
+        }, 3000);
+    });
+}
 
     document.querySelectorAll('.nivel').forEach((e) => {
         e.addEventListener('click', (e) => {
@@ -114,4 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.flex-row-b').innerHTML = '';
         });
     });
+   
+
 });
