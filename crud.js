@@ -43,25 +43,34 @@ const data = {
     cuentaTotal: 420
 }
  */
+
+function devolviendoEstadoEspeciales(estado) {
+    let clase_adaptada_css
+    switch (estado) {
+        case 'Fuera de Servicio':
+            clase_adaptada_css = "fuera_servicio"
+            break;
+        case 'limpieza-ocupado':
+            clase_adaptada_css = "limpieza"
+            break
+        default:
+            clase_adaptada_css = estado.toLowerCase()
+            break;
+    }
+
+    return clase_adaptada_css
+}
+
 function generarTarjetasHabitacionesHTML(info) {
     let html = ""
     info.forEach((element) => {
-        html += `<div id_habitacion="${element.id_habitacion}" class="rectangle-1 ${element.estado !== 'Fuera de servicio'
-            ? element.estado.toLowerCase()
-            : 'fuera_servicio'
-            }">
-  <button class="button ${element.estado !== 'Fuera de servicio'
-                ? element.estado.toLowerCase()
-                : 'fuera_servicio'
-            }_encabezado">
+        html += `<div id_habitacion="${element.id_habitacion}" class="rectangle-1 ${devolviendoEstadoEspeciales(element.estado)}">
+  <button class="button ${devolviendoEstadoEspeciales(element.estado)}_encabezado">
     <span class="text-2">${element.estado.toLowerCase()}</span>
   </button>
   <div class="flex-row-dbc">
     <span class="text-3">${element.numero}</span>
-    <div class="icon_${element.estado !== 'Fuera de servicio'
-                ? element.estado.toLowerCase()
-                : 'fuera_servicio'
-            }">
+    <div class="icon_${devolviendoEstadoEspeciales(element.estado)}">
     </div>
     <span class="simple">${element.tipo_habitacion}</span>
   </div>

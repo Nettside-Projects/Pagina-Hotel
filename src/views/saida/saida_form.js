@@ -327,6 +327,10 @@ function enviarDatos() {
             );
         });
     });
+
+
+    limpiezaDeHabitacion( informacionDeHabitacion.id_habitacion)
+
 }
 enviarDatos();
 

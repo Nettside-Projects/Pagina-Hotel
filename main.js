@@ -273,3 +273,7 @@ ipcMain.on('guardar-en-historial', (e, data) => {
     });
 });
 
+ipcMain.on('habiatcion-limpieza-ocupado',(e,id_habitacion)=>{
+    cambiarEstadoHabitacion(db,4,id_habitacion)
+})
+

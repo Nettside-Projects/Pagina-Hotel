@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const tarjetasHabitacion = document.querySelectorAll('.rectangle-1');
 
         tarjetasHabitacion.forEach((e) => {
+            console.log("Tarjetas de cada habitacion: ",e.children[0].children[0].textContent)
             // icono de acuerdo al estado de cada habitación
             const estadoClase = Object.keys(estados).find((estado) =>
                 e.classList.contains(estado)
@@ -62,7 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Redirigir al hacer onclick en las tarjetas
             e.addEventListener('click', () => {
                 const idHabitacion = e.getAttribute('id_habitacion');
-                if (estadoClase === 'disponible' || estadoClase === 'ocupado') {
+
+                //Comprobando si hay habitaciones disponibles, ocupadas o limpieza-ocupado para así efectuar sus respectivas funciones
+                if (estadoClase === 'disponible' || estadoClase === 'ocupado' || e.children[0].children[0].textContent === 'limpieza-ocupado') {
                     window.preload.envioIdHabitacion(idHabitacion);
                     window.preload.infoHabitacionIndividualOn((_, info) => {
                         localStorage.setItem(
