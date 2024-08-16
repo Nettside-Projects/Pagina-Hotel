@@ -877,4 +877,11 @@ function concluirPago(informacionDeHuesped, registros_pagos) {
     window.preload.guardandoEnHistorialSend(informacionAguardarEnHistorial);
 }
 
+function limpiezaDeHabitacion(id_habitacion) {
+    let btnCambiarEstadoHabitacionALimpiezaOcupado = document.querySelector("#hacerlimpieza")
+    btnCambiarEstadoHabitacionALimpiezaOcupado.addEventListener("click",e => {
+        window.preload.cambiarEstadoHabitacionALimpiezaOcupado(id_habitacion)
+    })
+}
+
 
