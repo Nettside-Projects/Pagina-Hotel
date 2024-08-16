@@ -49,9 +49,51 @@ document.addEventListener('DOMContentLoaded', () => {
     function agregarTarjetasHabitaciones(html) {
         cont.innerHTML = html;
         const tarjetasHabitacion = document.querySelectorAll('.rectangle-1');
+        const modalimpieza = document.getElementById('modalimpieza');
+        const modalterminarlimpieza = document.getElementById('modalterminarlimpieza');
+        const noButton = document.getElementById('noButton');
+        const yesButton = document.getElementById('yesButton'); 
+        
+     /*_____________________________INICIO     funciones de los modales de limpieza____________________ */       
+        function abrirModal(modal) {
+            modal.style.display = 'block';
+        }
+        
+        // Función para cerrar un modal
+        function cerrarModal(modal) {
+            modal.style.display = 'none';
+        }
+        // Event listener para el botón "No", cierra el primer modal
+        noButton.addEventListener('click', () => {
+        cerrarModal(modalimpieza);
+});
+
+    // ----si el usuario acepta terminar la limpieza se cierra el modal de pregunta para luego abrir el modal de completado-------
+
+    yesButton.addEventListener('click', () => {
+        //modal de para preguntar al usuario si desea terminar la limpieza 
+        cerrarModal(modalimpieza);
+        //modal de completado
+        abrirModal(modalterminarlimpieza);
+
+        // Después de 3 segundos, cerrar el modal de completado
+        setTimeout(() => {
+            cerrarModal(modalterminarlimpieza);
+        }, 3000);
+    });
+    /*_____________________________FIN     funciones de los modales de limpieza____________________ */
+
 
         tarjetasHabitacion.forEach((e) => {
             console.log("Tarjetas de cada habitacion: ",e.children[0].children[0].textContent)
+
+           /*  Agrego este cotigo para el texto que tiene las habitaciones para que solo se actie el modal si es de limpieza */
+            if ( e.children[0].children[0].textContent === 'limpieza') {
+                e.addEventListener('click', (e) => { 
+                    abrirModal(modalimpieza);
+                    });
+            }
+
             // icono de acuerdo al estado de cada habitación
             const estadoClase = Object.keys(estados).find((estado) =>
                 e.classList.contains(estado)
@@ -81,43 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-        const modalimpieza = document.getElementById('modalimpieza');
-        const modalterminarlimpieza = document.getElementById('modalterminarlimpieza');
-        const noButton = document.getElementById('noButton');
-        const yesButton = document.getElementById('yesButton'); 
-        
-
-        let habitacionlimpieza = document.querySelectorAll(".limpieza")
-        function abrirModal(modal) {
-            modal.style.display = 'block';
-        }
-        
-        // Función para cerrar un modal
-        function cerrarModal(modal) {
-            modal.style.display = 'none';
-        }
-
-        habitacionlimpieza.forEach((e) => {
-            console.log(e)
-         e.addEventListener('click', (e) => { 
-            abrirModal(modalimpieza);
-            });
-        }); 
-        // Event listener para el botón "No", cierra el primer modal
-        noButton.addEventListener('click', () => {
-        cerrarModal(modalimpieza);
-});
-
-    // Event listener para el botón "Yes", cierra el primer modal y abre el segundo
-    yesButton.addEventListener('click', () => {
-        cerrarModal(modalimpieza);
-        abrirModal(modalterminarlimpieza);
-
-        // Después de 3 segundos, cerrar el segundo modal
-        setTimeout(() => {
-            cerrarModal(modalterminarlimpieza);
-        }, 3000);
-    });
 }
 
     document.querySelectorAll('.nivel').forEach((e) => {
