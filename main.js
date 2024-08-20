@@ -273,7 +273,14 @@ ipcMain.on('guardar-en-historial', (e, data) => {
     });
 });
 
-ipcMain.on('habiatcion-limpieza-ocupado',(e,id_habitacion)=>{
-    cambiarEstadoHabitacion(db,4,id_habitacion)
+ipcMain.on('cambiar-estado-habitacion',(e,info)=>{
+if(info.estado == 2){
+    cambiarEstadoHabitacion(db,2,info.id_habitacion)
+}else if(info.estado == 4){
+    cambiarEstadoHabitacion(db,4,info.id_habitacion)
+}else{
+    cambiarEstadoHabitacion(db,1,info.id_habitacion)
+}
+    
 })
 

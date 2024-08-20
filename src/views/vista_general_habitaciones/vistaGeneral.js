@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reparacion:
             '<svg xmlns="http://www.w3.org/2000/svg" height="88px" viewBox="0 -960 960 960" width="88px" fill="#EFEFEF"><path d="M756-120 537-339l84-84 219 219-84 84Zm-552 0-84-84 276-276-68-68-28 28-51-51v82l-28 28-121-121 28-28h82l-50-50 142-142q20-20 43-29t47-9q24 0 47 9t43 29l-92 92 50 50-28 28 68 68 90-90q-4-11-6.5-23t-2.5-24q0-59 40.5-99.5T701-841q15 0 28.5 3t27.5 9l-99 99 72 72 99-99q7 14 9.5 27.5T841-701q0 59-40.5 99.5T701-561q-12 0-24-2t-23-7L204-120Z"/></svg>',
     };
-    
+
 
     // habitacion no encontrada
     btnBuscar.addEventListener('keyup', (e) => {
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.preload.InfoHabitacionesGeneralOn((e, html) => {
         agregarTarjetasHabitaciones(html);
-        
+
     });
 
     function agregarTarjetasHabitaciones(html) {
@@ -52,46 +52,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalimpieza = document.getElementById('modalimpieza');
         const modalterminarlimpieza = document.getElementById('modalterminarlimpieza');
         const noButton = document.getElementById('noButton');
-        const yesButton = document.getElementById('yesButton'); 
-        
-     /*_____________________________INICIO     funciones de los modales de limpieza____________________ */       
+        const yesButton = document.getElementById('yesButton');
+
+       
         function abrirModal(modal) {
             modal.style.display = 'block';
         }
-        
+
         // Función para cerrar un modal
         function cerrarModal(modal) {
             modal.style.display = 'none';
         }
         // Event listener para el botón "No", cierra el primer modal
         noButton.addEventListener('click', () => {
-        cerrarModal(modalimpieza);
-});
-
-    // ----si el usuario acepta terminar la limpieza se cierra el modal de pregunta para luego abrir el modal de completado-------
-
-    yesButton.addEventListener('click', () => {
-        //modal de para preguntar al usuario si desea terminar la limpieza 
-        cerrarModal(modalimpieza);
-        //modal de completado
-        abrirModal(modalterminarlimpieza);
-
-        // Después de 3 segundos, cerrar el modal de completado
-        setTimeout(() => {
-            cerrarModal(modalterminarlimpieza);
-        }, 3000);
-    });
-    /*_____________________________FIN     funciones de los modales de limpieza____________________ */
-
+            cerrarModal(modalimpieza);
+        });
 
         tarjetasHabitacion.forEach((e) => {
-            console.log("Tarjetas de cada habitacion: ",e.children[0].children[0].textContent)
+            console.log("Tarjetas de cada habitacion: ", e.children[0].children[0].textContent)
 
-           /*  Agrego este cotigo para el texto que tiene las habitaciones para que solo se actie el modal si es de limpieza */
-            if ( e.children[0].children[0].textContent === 'limpieza') {
-                e.addEventListener('click', (e) => { 
+            /*  Agrego este cotigo para el texto que tiene las habitaciones para que solo se actie el modal si es de limpieza */
+            if (e.children[0].children[0].textContent === 'limpieza') {
+                e.addEventListener('click', (e) => {
                     abrirModal(modalimpieza);
-                    });
+                });
             }
 
             // icono de acuerdo al estado de cada habitación
@@ -121,9 +105,33 @@ document.addEventListener('DOMContentLoaded', () => {
                         window.location.href = redirectUrl;
                     });
                 }
+
+                 /*_____________________________INICIO     funciones de los modales de limpieza____________________ */
+        
+
+        // ----si el usuario acepta terminar la limpieza se cierra el modal de pregunta para luego abrir el modal de completado-------
+
+        yesButton.addEventListener('click', () => {
+            //modal de para preguntar al usuario si desea terminar la limpieza 
+            cerrarModal(modalimpieza);
+            //modal de completado
+            abrirModal(modalterminarlimpieza);
+            let info = {
+                id_habitacion: idHabitacion,
+                estado: 1
+            }
+            window.preload.cambiarEstado(info)
+            // Después de 3 segundos, cerrar el modal de completado
+            setTimeout(() => {
+                cerrarModal(modalterminarlimpieza);
+                location.reload()
+            }, 3000);
+        });
+        /*_____________________________FIN     funciones de los modales de limpieza____________________ */
+
             });
         });
-}
+    }
 
     document.querySelectorAll('.nivel').forEach((e) => {
         e.addEventListener('click', (e) => {
@@ -161,6 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.flex-row-b').innerHTML = '';
         });
     });
-   
+
 
 });

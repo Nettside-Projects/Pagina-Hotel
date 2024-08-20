@@ -93,8 +93,8 @@ contextBridge.exposeInMainWorld('preload', {
     guardandoEnHistorialSend:(guardarEnHistorial)=>{
         ipcRenderer.send("guardar-en-historial",guardarEnHistorial)
     },
-    cambiarEstadoHabitacionALimpiezaOcupado: (id_habitacion) =>{
-        ipcRenderer.send("habiatcion-limpieza-ocupado",id_habitacion)
+    cambiarEstado: (info) =>{
+        ipcRenderer.send("cambiar-estado-habitacion",info)
     },
     i18n: {
         onTranslate: (callback) =>

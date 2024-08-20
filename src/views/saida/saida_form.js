@@ -1,12 +1,22 @@
-
 // Selección de elementos del DOM
 const modalimpieza = document.getElementById('modalimpieza');
 const modalterminarlimpieza = document.getElementById('modalterminarlimpieza');
 const noButton = document.getElementById('noButton');
 const yesButton = document.getElementById('yesButton');
-const limpiezaterminado= document.getElementById('limpiezaterminado');
-const hacerlimpieza= document.getElementById('hacerlimpieza');
+const limpiezaterminado = document.getElementById('limpiezaterminado');
+const hacerlimpieza = document.getElementById('hacerlimpieza');
 
+const informacionDeHabitacion = JSON.parse(
+    localStorage.getItem('informacionDeHabitacion')
+);
+let informacionDeHuesped;
+if (informacionDeHabitacion.estado != "limpieza-ocupado") {
+    hacerlimpieza.style.display = "flex"
+    limpiezaterminado.style.display = "none"
+} else {
+    hacerlimpieza.style.display = "none"
+    limpiezaterminado.style.display = "flex"
+}
 
 // Función para abrir un modal
 function abrirModal(modal) {
@@ -29,20 +39,23 @@ noButton.addEventListener('click', () => {
 });
 
 // Event listener para el botón "Yes", cierra el primer modal y abre el segundo
-yesButton.addEventListener('click', () => {
+yesButton.addEventListener('click', (e) => {
     cerrarModal(modalimpieza);
-    hacerlimpieza.style.display= "none"
-    limpiezaterminado.style.display= "flex"
+    hacerlimpieza.style.display = "none"
+    limpiezaterminado.style.display = "flex"
+    cambioDeEstadoDeHabitacion(informacionDeHabitacion.id_habitacion,4)
+    
 });
 limpiezaterminado.addEventListener('click', () => {
-    hacerlimpieza.style.display= "flex"
-    limpiezaterminado.style.display= "none"
+    hacerlimpieza.style.display = "flex"
+    limpiezaterminado.style.display = "none"
     abrirModal(modalterminarlimpieza);
+    cambioDeEstadoDeHabitacion(informacionDeHabitacion.id_habitacion,2)
 
     // Después de 3 segundos, cerrar el segundo modal
     setTimeout(() => {
         cerrarModal(modalterminarlimpieza);
-    }, 3000); 
+    }, 3000);
 })
 
 // Event listener para cerrar el modal si se hace clic fuera del contenido del modal
@@ -53,10 +66,8 @@ window.addEventListener('click', (event) => {
 });
 
 
-const informacionDeHabitacion = JSON.parse(
-    localStorage.getItem('informacionDeHabitacion')
-);
-let informacionDeHuesped;
+
+
 /* Función para validar descuento */
 /* En esta función se utiliza el costo total del huesped más el descuento que se aplicará*/
 function validarDescuento(costo_total, descuento) {
@@ -328,9 +339,6 @@ function enviarDatos() {
         });
     });
 
-
-    limpiezaDeHabitacion( informacionDeHabitacion.id_habitacion)
-
 }
 enviarDatos();
 
@@ -457,25 +465,20 @@ function mostrarRegistroDePagos(
             suma la "cuenta_total" + "registro_pago"
             */
             html += `<tr class="fila_pago">
-                            <td>R$ <input type="number" disabled value="${
-                                element.registro_pago
-                            }"></td>
+                            <td>R$ <input type="number" disabled value="${element.registro_pago
+                }"></td>
                             <td>
                                 <select disabled>
-                                    <option select>${
-                                        element.metodo_pago
-                                    }</option>
+                                    <option select>${element.metodo_pago
+                }</option>
                                 </select>
                             </td>
-                            <td>R$ <input type="number" disabled value="${
-                                element.extra
-                            }"></td>
-                            <td>R$ ${
-                                element.cuenta_actual /* - element.registro_pago */
-                            }</td>
-                            <td>R$ ${
-                                element.cuenta_actual + element.registro_pago
-                            }</td>
+                            <td>R$ <input type="number" disabled value="${element.extra
+                }"></td>
+                            <td>R$ ${element.cuenta_actual /* - element.registro_pago */
+                }</td>
+                            <td>R$ ${element.cuenta_actual + element.registro_pago
+                }</td>
                             <td></td>
                         </tr>`;
         });
@@ -493,10 +496,9 @@ function mostrarRegistroDePagos(
                                 </select>
                             </td>
                             <td>R$ <input type="number" class="extra"></td>
-                            <td>R$ ${
-                                cuenta_total /*  -
+                            <td>R$ ${cuenta_total /*  -
                     info[info.length - 1].registro_pago */
-                            }</td>
+                }</td>
                             <td>R$ ${cuenta_total}</td>
                             <td></td>
                         </tr>`;
@@ -606,23 +608,20 @@ function agregandoEventosDePagos(cuenta_actual) {
     /* let saldo_anterior = parseInt(filas[filas.length - 1].children[3].textContent.split(" ")[1] || 0) */
     document.querySelector('.extra').addEventListener('input', (e) => {
         if (e.target.value != '') {
-            filas[filas.length - 1].children[4].textContent = `R$ ${
-                saldo_anterior + parseInt(e.target.value || 0)
-            }`;
-            filas[filas.length - 1].children[3].textContent = `R$ ${
-                saldo_anterior +
+            filas[filas.length - 1].children[4].textContent = `R$ ${saldo_anterior + parseInt(e.target.value || 0)
+                }`;
+            filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior +
                 parseInt(e.target.value || 0) -
                 (parseInt(document.querySelector('.registro_pago').value) || 0)
-            }`;
+                }`;
         } else {
             if (document.querySelector('.registro_pago').value != '') {
-                filas[filas.length - 1].children[3].textContent = `R$ ${
-                    saldo_anterior +
+                filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior +
                     parseInt(e.target.value || 0) -
                     parseInt(
                         document.querySelector('.registro_pago').value || 0
                     )
-                }`;
+                    }`;
                 filas[
                     filas.length - 1
                 ].children[4].textContent = `R$ ${saldo_anterior}`;
@@ -642,9 +641,8 @@ function agregandoEventosDePagos(cuenta_actual) {
             filas[filas.length - 1].children[4].textContent.split(' ')[1] || 0
         );
         if (e.target.value != '') {
-            filas[filas.length - 1].children[3].textContent = `R$ ${
-                saldo_anterior2 - parseInt(e.target.value || 0)
-            }`;
+            filas[filas.length - 1].children[3].textContent = `R$ ${saldo_anterior2 - parseInt(e.target.value || 0)
+                }`;
         } else {
             filas[
                 filas.length - 1
@@ -877,11 +875,15 @@ function concluirPago(informacionDeHuesped, registros_pagos) {
     window.preload.guardandoEnHistorialSend(informacionAguardarEnHistorial);
 }
 
-function limpiezaDeHabitacion(id_habitacion) {
-    let btnCambiarEstadoHabitacionALimpiezaOcupado = document.querySelector("#hacerlimpieza")
-    btnCambiarEstadoHabitacionALimpiezaOcupado.addEventListener("click",e => {
-        window.preload.cambiarEstadoHabitacionALimpiezaOcupado(id_habitacion)
-    })
-}
+function cambioDeEstadoDeHabitacion(id_habitacion,estado) {
+    let info = {
+        id_habitacion: id_habitacion,
+        estado: estado
+    }
+    
+     window.preload.cambiarEstado(info)
+    }
+
+
 
 
