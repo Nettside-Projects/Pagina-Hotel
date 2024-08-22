@@ -96,6 +96,10 @@ contextBridge.exposeInMainWorld('preload', {
     cambiarEstado: (info) =>{
         ipcRenderer.send("cambiar-estado-habitacion",info)
     },
+    nivelesSend:(respuesta)=>{
+        ipcRenderer.send("pedir-niveles",respuesta)
+    },
+    nivelesOn: (callback) => ipcRenderer.on("recibir-niveles",(e,info) => callback(e,info)),
     i18n: {
         onTranslate: (callback) =>
             ipcRenderer.on('i18n', (event, data) => callback(data)),
