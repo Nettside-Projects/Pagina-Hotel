@@ -281,6 +281,5 @@ if(info.estado == 2){
 }else{
     cambiarEstadoHabitacion(db,1,info.id_habitacion)
 }
-    
 })
 

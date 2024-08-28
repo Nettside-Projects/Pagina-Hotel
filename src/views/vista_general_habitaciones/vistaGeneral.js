@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const noButton = document.getElementById('noButton');
         const yesButton = document.getElementById('yesButton');
 
-       
+
         function abrirModal(modal) {
             modal.style.display = 'block';
         }
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                  /*_____________________________INICIO     funciones de los modales de limpieza____________________ */
-        
+
 
         // ----si el usuario acepta terminar la limpieza se cierra el modal de pregunta para luego abrir el modal de completado-------
 
