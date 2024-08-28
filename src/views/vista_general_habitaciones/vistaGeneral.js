@@ -18,6 +18,26 @@ document.addEventListener('DOMContentLoaded', () => {
             '<svg xmlns="http://www.w3.org/2000/svg" height="88px" viewBox="0 -960 960 960" width="88px" fill="#EFEFEF"><path d="M756-120 537-339l84-84 219 219-84 84Zm-552 0-84-84 276-276-68-68-28 28-51-51v82l-28 28-121-121 28-28h82l-50-50 142-142q20-20 43-29t47-9q24 0 47 9t43 29l-92 92 50 50-28 28 68 68 90-90q-4-11-6.5-23t-2.5-24q0-59 40.5-99.5T701-841q15 0 28.5 3t27.5 9l-99 99 72 72 99-99q7 14 9.5 27.5T841-701q0 59-40.5 99.5T701-561q-12 0-24-2t-23-7L204-120Z"/></svg>',
     };
 
+    window.preload.nivelesSend('pedir-niveles')
+    window.preload.nivelesOn((e, niveles) => {
+        let contentNiveles = document.querySelector(".todo")
+        niveles.forEach(element => {
+            agregandoEventosParaMostrarTodo()
+            const anchorElement = document.createElement('a');
+            console.log(element)
+            // Establecer los atributos del elemento
+            anchorElement.className = `nivel nivel_${element.id_nivel}`; // Asignar las clases
+            anchorElement.setAttribute('id_nivel', element.id_nivel);     // Asignar el atributo id_nivel
+
+            // Establecer el contenido del elemento
+            anchorElement.textContent = element.nivel;
+
+            // Ahora puedes añadir el elemento al DOM, por ejemplo a un contenedor con id 'container'
+            contentNiveles.appendChild(anchorElement);
+
+            agregandoEventosDeNiveles(element.nivel, anchorElement)
+        })
+    })
 
     // habitacion no encontrada
     btnBuscar.addEventListener('keyup', (e) => {
@@ -106,69 +126,74 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
 
-                 /*_____________________________INICIO     funciones de los modales de limpieza____________________ */
+                /*_____________________________INICIO     funciones de los modales de limpieza____________________ */
 
 
-        // ----si el usuario acepta terminar la limpieza se cierra el modal de pregunta para luego abrir el modal de completado-------
+                // ----si el usuario acepta terminar la limpieza se cierra el modal de pregunta para luego abrir el modal de completado-------
 
-        yesButton.addEventListener('click', () => {
-            //modal de para preguntar al usuario si desea terminar la limpieza 
-            cerrarModal(modalimpieza);
-            //modal de completado
-            abrirModal(modalterminarlimpieza);
-            let info = {
-                id_habitacion: idHabitacion,
-                estado: 1
-            }
-            window.preload.cambiarEstado(info)
-            // Después de 3 segundos, cerrar el modal de completado
-            setTimeout(() => {
-                cerrarModal(modalterminarlimpieza);
-                location.reload()
-            }, 3000);
-        });
-        /*_____________________________FIN     funciones de los modales de limpieza____________________ */
+                yesButton.addEventListener('click', () => {
+                    //modal de para preguntar al usuario si desea terminar la limpieza 
+                    cerrarModal(modalimpieza);
+                    //modal de completado
+                    abrirModal(modalterminarlimpieza);
+                    let info = {
+                        id_habitacion: idHabitacion,
+                        estado: 1
+                    }
+                    window.preload.cambiarEstado(info)
+                    // Después de 3 segundos, cerrar el modal de completado
+                    setTimeout(() => {
+                        cerrarModal(modalterminarlimpieza);
+                        location.reload()
+                    }, 3000);
+                });
+                /*_____________________________FIN     funciones de los modales de limpieza____________________ */
 
             });
         });
     }
 
-    document.querySelectorAll('.nivel').forEach((e) => {
-        e.addEventListener('click', (e) => {
+    function agregandoEventosParaMostrarTodo() {
+        document.querySelector(".todoxd").addEventListener("click", (e) => {
             document.querySelectorAll('.nivel').forEach((e) => {
                 e.classList.remove('pestaña_activa');
             });
             e.target.classList.add('pestaña_activa');
-            if (e.target.classList.contains('todoxd')) {
-                window.preload.ActivacioninfoHabitacionGeneralSend(
-                    'txt-activation'
-                );
+            window.preload.ActivacioninfoHabitacionGeneralSend(
+                'txt-activation'
+            );
+            if(html != ""){
                 window.preload.InfoHabitacionesGeneralOn((e, html) => {
                     agregarTarjetasHabitaciones(html);
                 });
-            } else if (e.target.classList.contains('primer_nivel')) {
-                const infoFiltro = {
-                    nivel: 'Nivel 1',
-                    estado: '',
-                };
-                window.preload.filtrarPorNivelSend(infoFiltro);
-                window.preload.filtrarPorNivelOn((e, html) => {
-                    agregarTarjetasHabitaciones(html);
-                });
-            } else if (e.target.classList.contains('segundo_nivel')) {
-                const infoFiltro = {
-                    nivel: 'Nivel 2',
-                    estado: '',
-                };
-                window.preload.filtrarPorNivelSend(infoFiltro);
-                window.preload.filtrarPorNivelOn((e, html) => {
-                    agregarTarjetasHabitaciones(html);
-                });
+            }else{
+                document.querySelector('.flex-row-b').innerHTML = "<h2>No hay habitaciones en este nivel</h2>" 
             }
+        })
+    }
+    /* Convertir este codigo más flexible (en temas de busqueda por niveles) */
+    function agregandoEventosDeNiveles(nivel, nivelHtml) {
+        nivelHtml.addEventListener('click', (e) => {
+            document.querySelectorAll('.nivel').forEach((e) => {
+                e.classList.remove('pestaña_activa');
+            });
+            e.target.classList.add('pestaña_activa');
+            const infoFiltro = {
+                nivel: nivel,
+                estado: '',
+            };
+            window.preload.filtrarPorNivelSend(infoFiltro);
+            window.preload.filtrarPorNivelOn((e, html) => {
+                if(html != ""){
+                    agregarTarjetasHabitaciones(html);
+                }else{
+                    document.querySelector('.flex-row-b').innerHTML = "<h2>No hay habitaciones en este nivel</h2>" 
+                }
+            });
 
-            document.querySelector('.flex-row-b').innerHTML = '';
         });
-    });
+    }
+
 
 
 });

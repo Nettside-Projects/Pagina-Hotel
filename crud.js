@@ -633,7 +633,7 @@ async function guardarEnHistorial(db, data, callback) {
         callback(err);
     }
 
-    cambiarEstadoHabitacion(db,3,data.informacionDeHuespedes[0].id_habitacion)
+    cambiarEstadoHabitacion(db, 3, data.informacionDeHuespedes[0].id_habitacion)
 }
 
 /* function guardarEnHistorial(db, data,callback) {
@@ -810,6 +810,13 @@ guardarEnHistorial(db, data)
 
  */
 
+function niveles(db,callback) {
+    db.all('SELECT * FROM nivel', (err,row) => {
+        callback(row)
+    })
+}
+
+
 module.exports = {
     validarUsuario: validarUsuario,
     infoGeneral: infoGeneral,
@@ -826,6 +833,7 @@ module.exports = {
     mostrarRegistroDePagos: mostrarRegistroDePagos,
     registrarPago: registrarPago,
     actualizarCostoTotal: actualizarCostoTotal,
-    guardarEnHistorial: guardarEnHistorial
+    guardarEnHistorial: guardarEnHistorial,
+    niveles: niveles
 
 };

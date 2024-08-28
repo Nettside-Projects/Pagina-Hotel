@@ -23,14 +23,15 @@ const {
     mostrarRegistroDePagos,
     registrarPago,
     actualizarCostoTotal,
-    guardarEnHistorial
+    guardarEnHistorial,
+    niveles
 } = require('./crud');
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data6.db'))
 );
 /* const i18next = require('./src/i18n/i18n.js'); */
 const { emialHuespedRegistrado,
-        emialPagoCompletado
+    emialPagoCompletado
 } = require('./sendEmail');
 
 //vistas
@@ -138,12 +139,20 @@ ipcMain.on('informacion-general', (e, mensaje) => {
 });
 
 ipcMain.on('recibiendo-mensaje', (e, dato) => {
-    mostrarHabitaciones(db, (err, result) => {
-        /* windowMain.webContents.on("did-finish-load", () => { */
-        windowMain.webContents.send('informacion-general-habitaciones', result);
-        windowMain.webContents.send('informacion-general-habitaciones', result);
-        /* }) */
-    });
+    if (dato == "txt-activation") {
+
+        mostrarHabitaciones(db, (err, result) => {
+            /* windowMain.webContents.on("did-finish-load", () => { */
+            windowMain.webContents.send('informacion-general-habitaciones', result);
+
+            /* }) */
+        });
+    } else {
+        mostrarHabitacionesPorEstado(db,'ocupado',(html)=>{
+            windowMain.webContents.send('informacion-general-habitaciones', html);
+        })
+    }
+
 });
 
 ipcMain.on('envioIdHabitacion', (e, dato) => {
@@ -273,13 +282,20 @@ ipcMain.on('guardar-en-historial', (e, data) => {
     });
 });
 
-ipcMain.on('cambiar-estado-habitacion',(e,info)=>{
-if(info.estado == 2){
-    cambiarEstadoHabitacion(db,2,info.id_habitacion)
-}else if(info.estado == 4){
-    cambiarEstadoHabitacion(db,4,info.id_habitacion)
-}else{
-    cambiarEstadoHabitacion(db,1,info.id_habitacion)
-}
+ipcMain.on('cambiar-estado-habitacion', (e, info) => {
+    if (info.estado == 2) {
+        cambiarEstadoHabitacion(db, 2, info.id_habitacion)
+    } else if (info.estado == 4) {
+        cambiarEstadoHabitacion(db, 4, info.id_habitacion)
+    } else {
+        cambiarEstadoHabitacion(db, 1, info.id_habitacion)
+    }
+
+})
+
+ipcMain.on('pedir-niveles', (e, respuesta) => {
+    niveles(db, (niveles) => {
+        windowMain.webContents.send('recibir-niveles', niveles);
+    })
 })
 
