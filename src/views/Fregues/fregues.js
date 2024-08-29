@@ -165,7 +165,7 @@ function createRows(numClientes) {
     }
 
         // Verificar si yesButtonConfirm existe antes de añadir el event listener
-if (yesButtonConfirm) {
+    if (yesButtonConfirm) {
     yesButtonConfirm.addEventListener('click', (e) => {
         let allFilled = true;
         let inputnombre = document.querySelectorAll(".input_obligatorio");
@@ -189,24 +189,24 @@ if (yesButtonConfirm) {
     });
 }
 
-// Función para mostrar el modal con auto-hide y recargar la página
-function showModalWithAutoHide(modal) {
-    showModal(modal);
-    setTimeout(() => {
-        hideModal(modal);
-        location.reload(); // Recargar la página después de cerrar el modal
-    }, 3000); // 3000 ms = 3 segundos
-}
+    // Función para mostrar el modal con auto-hide y recargar la página
+    function showModalWithAutoHide(modal) {
+        showModal(modal);
+        setTimeout(() => {
+            hideModal(modal);
+            location.reload(); // Recargar la página después de cerrar el modal
+        }, 3000); // 3000 ms = 3 segundos
+    }
 
-// Función para mostrar un modal
-function showModal(modal) {
-    modal.classList.add("block");
-}
+    // Función para mostrar un modal
+    function showModal(modal) {
+        modal.classList.add("block");
+    }
 
-// Función para ocultar un modal
-function hideModal(modal) {
-    modal.classList.remove("block");
-}
+    // Función para ocultar un modal
+    function hideModal(modal) {
+        modal.classList.remove("block");
+    }
 
 
 

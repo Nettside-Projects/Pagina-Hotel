@@ -6,12 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hotel MAyLU</title>
     <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="../../views/modales.css">
     <link rel="stylesheet" href="../sidebar.css">
     <link rel="stylesheet" href="../navbar.css">
     <link rel="stylesheet" href="inicio_habitacion.css" />
 </head>
 
 <body>
+    <div id="modalconfirmacion" class="modaladvertencia">
+        <div class="modal-contentadvertencia ">
+            <img src="../../../recursos/check.png" alt="" srcset="" style="width: 170px;" id="checkImage">
+            <p style="font-weight: bold;">Dados editados</p>
+        </div>
+    </div>
+    <!-- El Modal editar datos del cliente-->
+    <form id="modaleditar" class="modal">
+        <div class="modal-contenido">
+            <span class="closedos">&times;</span>
+            <div class="maineditar">
+                <span>Adicionar Reservas</span>
+                <div class="contentEditar">
+                    <div class="nome colum">
+                        <span>Nome <span style="color: red;">*</span>:</span>
+                        <input type="text" style="width: 95%;" class="input_obligatorio">
+                        <div id="name-error-nombre" class="name-error-nombre"></div>
+                    </div>
+                    <div class="datosCliente">
+                        <div class="columLeft">
+                                <div style="width: 100%;">
+                                    <div class="documento colum">
+                                        <span>N° de documento <span style="color: red;">*</span> :</span>
+                                        <input type="text" name="" id="" class="input_obligatorio">
+                                        <div id="name-error-nombre" class="name-error-nombre"></div>
+                                    </div>
+                                    <div class="telefono colum">
+                                        <span>Telefone:</span>
+                                        <input type="text" name="" id="">
+                                    </div>
+                                    <div class="nacimiento colum">
+                                        <span>Data de Reserva <span style="color: red;">*</span> :</span></span>
+                                        <input type="date" id="start-date" name="start-date" class="input_obligatorio">
+                                        <div id="name-error-nombre" class="name-error-nombre"></div>
+                                    </div>
+                                </div>
+                                    
+                    </div>
+                        <div class="columRigth">
+                            <div class="nacionalidad colum">
+                                <span>Nacionalidade:</span>
+                                <input type="text" name="" id="">
+                            </div>
+                            <div class="procedencia colum">
+                                <span>Procedência:</span>
+                                <input type="text" name="" id="">
+                            </div>
+                            <div class="nacimiento colum">
+                                <span>Data de Saida:</span>
+                                <input type="date" id="start-date" name="start-date">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="botones">
+                <button type="submit" id="cancelar">Cancelar</button>
+                <button type="submit" id="yesButtonConfirm">Adicionar</button>
+            </div>
+        </div>
+    </form>
     <!-- menu -->
     <div class="menu">
         <div class="rectangle-18">
@@ -155,6 +217,83 @@
                     <span class="xx">xX</span>
                 </div>
             </div>
+        </div>
+        <div class="wrapper">
+            <div class="buscador">
+                <div class="barra_buscar">Reserva
+                </div>
+            </div>
+        </div>
+        <div class="main_reserva">      
+                <div class="barraClientes">
+                    <span>Lista de Reservas</span>
+                    <button class="btnPdf">
+                        PDF
+                        <img src="../../../recursos/descarga.webp" alt="">
+                    </button>
+                </div>
+                <div class="barraFiltros">
+                    <div class="flitrohuespe">
+                        <span>Mostrar</span>
+                        <input type="number" id="numClientes" min="1" value="10" style="font-weight: bold;">
+                        <span>resgistros</span>
+                    </div>
+                    <div class="filtroAcompanante">
+                        <select>
+                            <option value="Activos">Reservado</option>
+                            <option value="Inactivos">Cancelado</option>
+                            <option value="Todos" selected>Não Cumprido</option>
+                        </select>
+                    </div>
+                    <div class="Buscador">
+                        <input class="buscar_lupa" name="text" placeholder="Buscar..." type="search">
+                    </div>
+                </div>
+                <div class="contenedorLista">
+                    <div class="encabezadoLista">
+                        <div class="number">
+                            <div class="tooltip">N°<img src="../../../recursos/flecha_abajo.webp" alt="">
+                                <span class="tooltiptext">
+                                    <div><a href="#">A/Z</a></div>
+                                    <div style="border-left: 1px solid black !important;"><a href="#">Z/A</a></div>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="nombreCliente">
+                            <div class="tooltip">Nome completo<img src="../../../recursos/flecha_abajo.webp" alt="">
+                                <span class="tooltiptext">
+                                    <div><a href="#">A/Z</a></div>
+                                    <div style="border-left: 1px solid black !important;"><a href="#">Z/A</a></div>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="Ndocumento">N° de Identidade<img src="../../../recursos/flecha_abajo.webp" alt=""></div>
+                        <div class="widthDiv">
+                            <div class="tooltip">Data de Reserva<img src="../../../recursos/flecha_abajo.webp" alt="">
+                                <span class="tooltiptext">
+                                    <div><a href="#">A/Z</a></div>
+                                    <div style="border-left: 1px solid black !important;"><a href="#">Z/A</a></div>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="widthDiv">Ação</div>
+                    </div>
+                </div>
+                <div class="contenedorFilas" id="contenedorFilas">
+                </div>
+                <div class="footer">
+                    <p>Mostrando a lista <span></span> a <span id="clientCountDisplay">10</span> de um total de
+                        <span>xxx</span> registro
+                    </p>
+                    <div class="contendorBtn">
+                        <button style="color: #4B4B4B; background-color: #d9d9d9;">Anterior</button>
+                        <button class="vistaActiva">1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>4</button>
+                        <button style="color: #0B6660;">Próximo</button>
+                    </div>
+                </div>
         </div>
     </div>
     <script src="inicio_habitacion.js"></script>

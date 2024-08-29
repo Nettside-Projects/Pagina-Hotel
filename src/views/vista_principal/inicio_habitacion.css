@@ -88,3 +88,334 @@
 .total-ocupados .header {
     background: #B74D00;
 }
+.main-container{
+    overflow-y: scroll !important;
+}
+.main_reserva{
+    display: flex;
+    background:#fff;
+    height: auto;
+    width: 98%;
+    margin-top: 50px;
+    flex-direction: column;
+    margin-right: 17px;
+}
+.wrapper{
+    width: 98%;
+}
+.main-container{
+    padding-right: 0 !important;
+}
+.barraClientes{
+    display: flex;
+    height: 45px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 0 20px ;
+    
+}
+.barraClientes span{
+    font-size: 20px;
+}
+.btnPdf{
+    width: 70px;
+    height: 30px;
+    background: #ff0000;
+    border-radius: 3px;
+    border: none;
+    font-weight: bold;
+    font-size: 19px;
+    display: flex;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.barraFiltros{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    height: 50px;
+    align-items: center;
+}
+.flitrohuespe input{
+    width: 50px;
+}
+.filtroAcompanante{
+    display: flex;
+    align-items: center;
+}
+.Buscador {
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+.buscar_lupa {
+    display: flex;
+    background: #d9d9d9;
+    color: hsla(0, 0%, 0%, 0.664);
+    margin: 0 20px 0 0;
+    height: 75%;
+    justify-content: center;
+    align-items: center;
+    width: 190px;
+    border: solid 2px;
+    border-color: transparent;
+    border-radius: 40px;
+    padding-left: 20px;
+}
+.buscar_lupa:focus {
+    border-color: #464646dc;
+}
+
+.buscar_lupa:hover {
+    outline: 1px solid lightgrey;
+}
+.footer{
+    display: flex;
+    width: 100%;
+    height: 80px;
+    justify-content:space-between ;
+    align-items: center;
+}
+.footer p{
+    margin-left: 20px;
+}
+.contenedorLista{
+    width: 100%;
+    height: 40px;
+    justify-content: center;
+    padding-right: 17px;
+    background: #fff;
+}
+.encabezadoLista{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    border-bottom: 1px solid #4B4B4B;
+}
+.encabezadoLista div {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+.nombreCliente{
+    min-width: 350px !important;
+    
+}
+.number {
+    width: 45% !important;
+    border-left: 1px solid #ffffff;
+}
+.number select{
+    border: none;
+}
+select{
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+.Ndocumento{
+    min-width: 170px !important;
+} 
+.encabezadoLista div{
+    border-top: 1px solid #4B4B4B;
+    border-right: 1px solid #4B4B4B;
+ }
+ .encabezadoLista img{
+    cursor: pointer;
+    width: 17px;
+}
+ .contenedorFilas{
+    width: 100%;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+.filas{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 40px;
+    background: rgb(243 100 100);
+    margin-bottom: 5px;
+    
+}
+.filas div {
+    width: 90%;
+    height: 100%;
+    /* border-bottom: 1px solid #4B4B4B; */
+    border-right: 1px solid #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.widthDiv, .accion{
+    min-width: 100px;
+}
+.contendorBtn{
+    margin-right: 50px;
+}
+.contendorBtn button{
+    cursor: pointer;
+    border: 1px solid #4B4B4B;
+}
+.vistaActiva{
+    background: #71D64E;
+}
+.footer span{
+    font-weight: bold;
+}
+.par {
+    background-color: #a9a9a9;
+  /*   background: rgb(186 225 249); */
+}
+
+.contendorbtneliminar, .contendorbtneditar{
+    border: none  !important;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px !important; 
+    height: 38px !important;
+    border-radius: 2px;
+}
+.contendorbtneliminar{
+    background: red;
+}
+.contendorbtneditar{
+    background: #5293CE;
+    margin-right: 15px;
+    
+}
+.accion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.accion img {
+    width: 26px;
+    height: 26px;
+}
+.number{
+    min-width: 45px;
+}
+.block{
+    display: block !important;
+    }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border: none !important;
+  }
+.tooltip div {
+    border: none;
+    padding: 1px;
+    
+}
+.tooltip div a{
+  text-decoration: none;
+  color: #5c5c5c;
+}
+.tooltip div a:hover{
+    color: #000000;
+    font-weight: bold;
+  }
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    border: 1px solid black;
+    background: #fefefe;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    display: flex;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+  }
+  
+    .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }  
+  .modal-contenido {
+    background-color: #fff;
+    margin: 6% auto; 
+    padding: 20px;
+    height: 60%;
+    border-radius: 7px;
+    flex-direction: column;
+    width: 40%;
+    border: 1px solid #888;
+    display: flex;
+    align-items: flex-end;
+}
+.columRigth{
+    width: 50% !important;
+}
+.botones{
+    display: flex;
+    width: 100%;
+    height: 80px;
+    justify-content: space-around;
+    align-items: center;
+   
+}
+.botones button{
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 7px;
+}
+.name-error-nombre {
+    color: red;
+    font-weight: 600;
+    font-size: 17px;
+    height: 20px;
+}
+ /* Estilos iniciales para el modal */
+ .modaladvertencia {
+    display: none; /* Ocultar inicialmente */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-contentadvertencia {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+    animation: slideIn 0.5s; /* Animación para aparecer */
+}
+/* Animación para la imagen de check */
+@keyframes pulse {
+    0% {transform: scale(0.95);}
+    50% {transform: scale(1.1);}
+    100% {transform: scale(1);}
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#checkImage {
+    animation: rotate 1s ease-in-out, pulse 1s ease-in-out 1s; /* rotar primero, luego pulsar */
+}
