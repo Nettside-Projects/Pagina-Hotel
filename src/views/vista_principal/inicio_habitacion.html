@@ -13,16 +13,29 @@
 </head>
 
 <body>
-    <div id="modalconfirmacion" class="modaladvertencia">
+    <div class="modal" id="modalhabitacion" >
+        <div class="modal-contenido">
+            <span class="close salir">&times;</span>
+            <span style="display: flex; justify-content: center; align-items: center; width: 100%;">Quartos Disponiveis</span>
+            <div class="mainhabitacion">
+                <h1 >Aqui van a ir las habitaciones disponibles</h1>
+                
+            </div> 
+            <div style="display: flex; width: 100%; justify-content: center;"> 
+                <button>Voltar</button>
+            </div>
+        </div>
+    </div>
+    <div id="modalconfirmacion" class="modaladvertencia" style="z-index: 40 !important;">
         <div class="modal-contentadvertencia ">
             <img src="../../../recursos/check.png" alt="" srcset="" style="width: 170px;" id="checkImage">
-            <p style="font-weight: bold;">Dados editados</p>
+            <p style="font-weight: bold;">Reserva Adicionado</p>
         </div>
     </div>
     <!-- El Modal editar datos del cliente-->
     <form id="modaleditar" class="modal">
         <div class="modal-contenido">
-            <span class="closedos">&times;</span>
+            <span class="close salir">&times;</span>
             <div class="maineditar">
                 <span>Adicionar Reservas</span>
                 <div class="contentEditar">
@@ -69,8 +82,10 @@
                 </div>
             </div>
             <div class="botones">
-                <button type="submit" id="cancelar">Cancelar</button>
-                <button type="submit" id="yesButtonConfirm">Adicionar</button>
+                <button type="submit" id="cancelar" class="salir">Cancelar</button>
+                <button type="submit" id="agregar">Adicionar</button>
+                <button type="submit" id="guardar" class="modaleditareseva">Editar</button>
+                <button type="submit" id="cuartos" class="modaleditareseva">Quarto</button>
             </div>
         </div>
     </form>
@@ -221,6 +236,7 @@
         <div class="wrapper">
             <div class="buscador">
                 <div class="barra_buscar">Reserva
+                    <img class="btn_add" src="../../../recursos/icons8-añadir-lista-50.webp" alt="" srcset="">
                 </div>
             </div>
         </div>

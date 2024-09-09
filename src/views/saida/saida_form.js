@@ -465,15 +465,15 @@ function mostrarRegistroDePagos(
             suma la "cuenta_total" + "registro_pago"
             */
             html += `<tr class="fila_pago">
-                            <td>R$ <input type="number" disabled value="${element.registro_pago
+                            <td class="currency-input-container"><span class="currency-symbol">R$ </span><input class="cuadro" type="number" disabled value="${element.registro_pago
                 }"></td>
                             <td>
-                                <select disabled>
+                                <select class="cuadro" disabled>
                                     <option select>${element.metodo_pago
                 }</option>
                                 </select>
                             </td>
-                            <td>R$ <input type="number" disabled value="${element.extra
+                            <td class="currency-input-container"><span class="currency-symbol">R$ </span><input class="cuadro" type="number" disabled value="${element.extra
                 }"></td>
                             <td>R$ ${element.cuenta_actual /* - element.registro_pago */
                 }</td>
@@ -487,15 +487,15 @@ function mostrarRegistroDePagos(
         //Si la cuenta total es mayor a 0, asignará una fila lista para ingresar el valor a pagar y así efectuar el pago
         if (cuenta_total > 0) {
             document.querySelector('tbody').innerHTML += `<tr class="fila_pago">
-                            <td>R$ <input type="number" class="registro_pago"></td>
+                            <td>R$ <input class="cuadro" type="number" class="registro_pago"></td>
                             <td>
-                                <select>
+                                <select class="cuadro">
                                     <option>Pix</option>
                                     <option>Cartão</option>
                                     <option>Dinheiro</option>
                                 </select>
                             </td>
-                            <td>R$ <input type="number" class="extra"></td>
+                            <td>R$ <input class="cuadro" type="number" class="extra"></td>
                             <td>R$ ${cuenta_total /*  -
                     info[info.length - 1].registro_pago */
                 }</td>
@@ -583,15 +583,15 @@ function mostrarRegistroDePagos(
         el primer registro de pago del huesped
         */
         document.querySelector('tbody').innerHTML += `<tr class="fila_pago">
-                            <td>R$ <input type="number" class="registro_pago"></td>
+                            <td class="currency-input-container"><span class="currency-symbol">R$ </span><input type="number" class="registro_pago"></td>
                             <td>
-                                <select>
+                                <select class="cuadro">
                                     <option>Pix</option>
                                     <option>Cartão</option>
                                     <option>Dinheiro</option>
                                 </select>
                             </td>
-                            <td>R$ <input type="number" class="extra"></td>
+                            <td class="currency-input-container"><span class="currency-symbol">R$ </span><input type="number" class="extra"></td>
                             <td>R$ ${cuenta_total}</td>
                             <td>R$ ${cuenta_total}</td>
                             <td></td>

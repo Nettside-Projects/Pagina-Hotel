@@ -124,6 +124,7 @@
 
 table {
 	position: relative;
+	width: 100%;
 	border-collapse: collapse;
 }
 
@@ -150,12 +151,14 @@ table {
     transform: translateY(-50%);
     pointer-events: none;
     color: black;
+	z-index: 100;
 }
 
-.registro_pago, .tipo_de_pago, .extra {
+.cuadro, .registro_pago, .tipo_de_pago, .extra {
+	position: relative;
     padding-left: 34px;
 	width: 100%;
-	height: 100%;
+	height: 50px
 }
 
 select {

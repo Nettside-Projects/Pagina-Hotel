@@ -56,138 +56,114 @@ function createRows(numClientes) {
         filasArray.push(fila); // Agregar la fila al array
        
     }
+// Definir los modales y botones
+var btnsEditar = document.querySelectorAll('.contendorbtneditar');
+var btnadd = document.querySelector('.btn_add');
+var modaleditareseva = document.querySelectorAll('.modaleditareseva');
+var salir = document.querySelectorAll('.salir');
+var guardar = document.getElementById('guardar');
+var modalhabitacion = document.getElementById('modalhabitacion');
+var cuartos = document.getElementById('cuartos');
+var agregar = document.getElementById('agregar');
+var modalconfirmacion = document.getElementById('modalconfirmacion');
+var modaleditar = document.getElementById('modaleditar'); // Definir modaleditar
+
+// Función para mostrar un modal
+function showModal(modal) {
+    modal.classList.add('block'); // Asegúrate de que esta clase esté definida en CSS
+}
+// Función para ocultar un modal
+function hideModal(modal) {
+    modal.classList.remove('block');
+}
+
+// Función para mostrar un modal y ocultarlo automáticamente después de X segundos
+function showModalWithAutoHide(modal, duration = 3000) {
+    showModal(modal); // Mostrar el modal
+    setTimeout(() => {
+        hideModal(modal); // Ocultar el modal después del tiempo especificado
+    }, duration);
+}
 
 
-       // Obtener todos los botones que abren los modales
-       var btnsEditar = document.querySelectorAll('.contendorbtneditar');
-   
-      /*  // Obtener el botón "No" y "Sí" dentro del modal de edición
-       var noButton = document.getElementById('noButton');
-       var yesButton = document.getElementById('yesButton');
-   
-       // Obtener el botón "No" y "Sí" dentro del modal de eliminación
-       var noButtontres = document.getElementById('noButtontres');
-       var yesButtontres = document.getElementById('yesButtontres');
-   
-       // Obtener el botón "No" y "Sí" dentro del modal de confirmación
-       var noButtonConfirm = document.getElementById('noButtonConfirm');  */
-       var yesButtonConfirm = document.getElementById('yesButtonConfirm');
-   /*
-       // Obtener los elementos <span> que cierran los modales
-       var spans = document.querySelectorAll('.closedos, .closeinfo');
-   
-       // Obtener los modales
-       var modalEditarcliente = document.getElementById('modalEditarcliente');
-        var modaleditar = document.getElementById('modaleditar'); 
-       var modalEliminarcliente = document.getElementById('modalELiminarcliente');*/
-       var modalconfirmacion = document.getElementById('modalconfirmacion'); 
-      /*  var modalInformacionEliminar = document.getElementById('modalInformacionEliminar'); */
-       // Función para mostrar un modal
-       function showModal(modal) {
-           modal.classList.add('block');
-       }
-   
-       // Función para ocultar un modal
-       function hideModal(modal) {
-           modal.classList.remove('block');
-       }
-   
-       // Función para mostrar un modal y ocultarlo automáticamente después de 3 segundos
-        function showModalWithAutoHide(modal, duration = 3000) {
-           showModal(modal);
-           setTimeout(() => {
-               hideModal(modal);
-           }, duration);
-       } 
-       
-       // Añadir evento de click a cada botón para abrir el modal de edición
-         btnsEditar.forEach((element) => {
-           element.addEventListener('click', (e) => {
-               showModal(modaleditar);
-           });
-       });  
-    
-       // Añadir evento de click al botón "No" para cerrar el modal de edición
-     /*   noButton.addEventListener('click', (e) => {
-           hideModal(modalEditarcliente);
-       }); */
-   
-       // Añadir evento de click al botón "Sí" para cerrar el modal de edición y abrir el modal de confirmación
-     /*   yesButton.addEventListener('click', (e) => {
-           hideModal(modalEditarcliente);
-           showModal(modalConfirmar);
-       }); */
-   
-       // Añadir evento de click a cada botón para abrir el modal de eliminación
-/*        btnsEliminar.forEach((element) => {
-           element.addEventListener('click', (e) => {
-               showModal(modalEliminarcliente);
-           });
-       });
-   
-       // Añadir evento de click al botón "No" para cerrar el modal de eliminación
-       noButtontres.addEventListener('click', (e) => {
-           hideModal(modalEliminarcliente);
-           
-       });
-   
-       // Añadir evento de click al botón "Sí" para cerrar el modal de eliminación y abrir el modal de información
-       yesButtontres.addEventListener('click', (e) => {
-           hideModal(modalEliminarcliente);
-           showModalWithAutoHide(modalInformacionEliminar);
-       });
-    */
-       // Verificar si noButtonConfirm existe antes de añadir el event listener
-  /*      if (noButtonConfirm) {
-           noButtonConfirm.addEventListener('click', (e) => {
-               hideModal(modalConfirmar);
-               location.reload();
-           });
-           
-       }
-   */
-           // Verificar si yesButtonConfirm existe antes de añadir el event listener
-   if (yesButtonConfirm) {
-       yesButtonConfirm.addEventListener('click', (e) => {
-           let allFilled = true;
-           let inputnombre = document.querySelectorAll(".input_obligatorio");
-   
-           inputnombre.forEach((element) => {
-               if (element.value === '') {
-                   element.nextElementSibling.textContent = 'Por favor llenar el campo';
-                   setTimeout(() => {
-                       element.nextElementSibling.textContent = '';
-                   }, 5000);
-                   allFilled = false;
-               } else {
-                   element.nextElementSibling.textContent = '';
-               }
-           });
-   
-        /*    if (allFilled) {
-               hideModal(modaleditar);
-               showModalWithAutoHide(modalconfirmacion);
-           } */
-       });
-   }
-    
-    // Función para mostrar el modal con auto-hide y recargar la página
-/*    function showModalWithAutoHide(modal) {
-       showModal(modal);
-       setTimeout(() => {
-           hideModal(modal);
-           location.reload(); // Recargar la página después de cerrar el modal
-       }, 3000); // 3000 ms = 3 segundos
-   }  */
+btnadd.addEventListener('click', (e) => {
+    guardar.style.display = "none";
+    cuartos.style.display = "none";
+    agregar.style.display = "flex"; 
+    showModal(modaleditar);
+});
 
-   /*     // Añadir evento de click a los elementos <span> para cerrar los modales
-       spans.forEach((element) => {
-           element.addEventListener('click', (e) => {
-               hideModal(element.closest('.modal'));
-               location.reload();
-           });
-       }); */
-}    
+salir.forEach((element) => {
+    element.addEventListener('click', (e) => {
+        hideModal(element.closest('.modal'));
+        location.reload();
+    });
+});
+
+cuartos.addEventListener('click', (e) => {
+    e.preventDefault();
+    hideModal(modaleditar)
+    showModal(modalhabitacion) 
+})
+
+btnsEditar.forEach((element) => {
+    element.addEventListener('click', (e) => {
+        agregar.style.display = "none";
+        showModal(modaleditar);
+        modaleditareseva.forEach((modal) => {
+            modal.style.display = "flex";
+        });
+    });
+});
+// Función que maneja la validación y el comportamiento dependiendo de qué botón se presionó
+function handleButtonClick(e, actionType) {
+    e.preventDefault(); // Evita el comportamiento predeterminado del formulario
+    let allFilled = true;
+    let inputnombre = document.querySelectorAll(".input_obligatorio");
+
+    inputnombre.forEach((element) => {
+        if (element.value === '') {
+            element.nextElementSibling.textContent = 'Por favor llenar el campo';
+            setTimeout(() => {
+                element.nextElementSibling.textContent = '';
+            }, 5000);
+            allFilled = false;
+        } else {
+            element.nextElementSibling.textContent = '';
+        }
+    });
+
+    // Solo procede si todos los campos obligatorios están llenos
+    if (allFilled) {
+        hideModal(modaleditar);
+
+        // Diferenciamos el comportamiento dependiendo de si es "agregar" o "guardar"
+        if (actionType === 'agregar') {
+            showModalWithAutoHide(modalconfirmacion, 3000); // Mostrar modal por 3 segundos
+            setTimeout(() => {
+                location.reload(); // Recargar después de que se oculta el modal
+            }, 3000); // Esperar 3 segundos antes de recargar
+        } else if (actionType === 'guardar') {
+            showModalWithAutoHide(modalconfirmacion, 3000); // Mostrar modal por 3 segundos
+            setTimeout(() => {
+                location.reload(); // Recargar después de que se oculta el modal
+            }, 3000); // Esperar 3 segundos antes de recargar
+        }
+    }
+}
+
+// Verifica si existen 'agregar' y 'guardar' y asigna el evento a ambos
+if (agregar) {
+    agregar.addEventListener('click', (e) => handleButtonClick(e, 'agregar'));
+}
+
+if (guardar) {
+    guardar.addEventListener('click', (e) => handleButtonClick(e, 'guardar'));
+}
+
+ 
+
+}
        document.getElementById('numClientes').addEventListener('input', function () {
         const numClientes = Math.max(this.value, 1); // Asegurarse de que el valor mínimo sea 1
         createRows(numClientes);

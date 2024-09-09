@@ -74,8 +74,8 @@ async function emialHuespedRegistrado(datos) {
                 <span>Pago adelantado: ${element.pago_adelantado}</span><br></br><br></br>
                 <span>Fecha de entrada: ${element.fecha_entrada}</span><br></br>
                 <span>Fecha de salida: ${element.fecha_salida}</span><br></br>
-                <span>Cuenta total: ${datos.cuentaTotal}</span>
-                <span>Desconto: ${datos.desconto}</span>
+                <span>Cuenta total: ${datos.cuentaTotal  == 0 ? "Indeterminado" : datos.cuentaTotal}</span>
+                <span>Desconto: ${ datos.descuento != 0 ? datos.descuento * 100 : "No se aplico descuento"}</span>
             </div>`
                 )
                 .join('')}
@@ -87,7 +87,7 @@ async function emialHuespedRegistrado(datos) {
     // send mail with defined transport object
     const info = await transporter.sendMail({
         from: '"Mensaje desde el programa" <salgadocanga@gmail.com>',
-        to: 'salgadocanga@gmail.com',
+        to: 'ocampixx@gmail.com',
         subject: 'nuevos huespedes registrados',
         html: html,
     });
@@ -129,6 +129,7 @@ async function emialPagoCompletado(datos) {
                 border-bottom: none;
             }
             .guest span, .payment span {
+                font-size: 12px;
                 color: #333;
                 margin-bottom: 5px;
             }
@@ -174,7 +175,7 @@ async function emialPagoCompletado(datos) {
 
     const info = await transporter.sendMail({
         from: '"Front end developer en Nettside" <mnunexaraujo@gmail.com>',
-        to: 'salgadocanga@gmail.com',
+        to: 'ocampixx@gmail.com',
         subject: 'Pago completado en la habitación',
         html: html,
     });
