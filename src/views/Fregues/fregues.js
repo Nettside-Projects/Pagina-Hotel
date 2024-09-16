@@ -1,77 +1,116 @@
-function createRows(numClientes) {
+/* Logica con la db */
+
+document.addEventListener("DOMContentLoaded", () => {
+    window.preload.listaDeHuespedesSend("listado-huespedes")
+    window.preload.listaDeHuespedesOn((e, info) => {
+        console.log(info)
+        let total = 0
+        for (const key in info) {
+            total += info[key][0].length
+            console.log(total)
+        }
+        createRows(total, info);
+
+
+
+        document.getElementById('numClientes').addEventListener('input', function () {
+         /*    this.value = total */
+            const numClientes = Math.max(this.value, 1); // Asegurarse de que el valor mínimo sea 10
+            createRows(numClientes, info);
+        });
+
+
+
+    })
+})
+
+
+
+
+function createRows(numClientes, info) {
+    let contador = 0
     const contenedorFilas = document.getElementById('contenedorFilas');
     contenedorFilas.innerHTML = ''; // Limpiar las filas existentes
     const filasArray = []; // Array para almacenar las filas
+    info["actuales"][0].forEach(element => {
+        contador++
+        if (contador <= numClientes) {
+            console.log(element)
+            /*   for (let i = 1; i <= numClientes; i++) { */
+            const fila = document.createElement('div');
+            fila.classList.add('filas');
 
-    for (let i = 1; i <= numClientes; i++) {
-        const fila = document.createElement('div');
-        fila.classList.add('filas');
+            if (contador % 2 === 0) {
+                fila.classList.add('par'); // Agregar clase para filas pares
+            }
 
-        if (i % 2 === 0) {
-            fila.classList.add('par'); // Agregar clase para filas pares
+            const number = document.createElement('div');
+            number.classList.add('number');
+            number.textContent = contador;
+
+            const nombreCliente = document.createElement('div');
+            nombreCliente.classList.add('nombreCliente');
+            nombreCliente.textContent = element.nombre_completo
+
+            const Ndocumento = document.createElement('div');
+            Ndocumento.classList.add('Ndocumento');
+
+            const habitacion = document.createElement('div');
+            habitacion.classList.add('widthDiv');
+
+            const papel = document.createElement('div');
+            papel.classList.add('widthDiv');
+
+            const entrada = document.createElement('div');
+            entrada.classList.add('widthDiv');
+
+            const estado = document.createElement('div');
+            estado.className = 'estado';
+
+            const verde = document.createElement('div');
+            verde.className = 'azul';
+
+            const accion = document.createElement('div');
+            accion.classList.add('accion');
+
+            const contendorbtneditar = document.createElement('div');
+            contendorbtneditar.classList.add('contendorbtneditar');
+            // Crear el primer img
+            const imgCirculadoX = document.createElement('img');
+            imgCirculadoX.src = '../../../recursos/editar.webp';
+            imgCirculadoX.alt = '';
+
+            const contendorbtneliminar = document.createElement('div');
+            contendorbtneliminar.classList.add('contendorbtneliminar');
+            // Crear el segundo img
+            const imgEditarArchivo = document.createElement('img');
+            imgEditarArchivo.src = '../../../recursos/icons8-circulado-x-50.webp';
+            imgEditarArchivo.alt = '';
+
+            // Añadir las imágenes al contenedor principal div
+            accion.appendChild(contendorbtneditar);
+            accion.appendChild(contendorbtneliminar);
+            contendorbtneditar.appendChild(imgCirculadoX);
+            contendorbtneliminar.appendChild(imgEditarArchivo);
+
+            fila.appendChild(number);
+            fila.appendChild(nombreCliente);
+            fila.appendChild(Ndocumento);
+            fila.appendChild(habitacion);
+            fila.appendChild(papel);
+            fila.appendChild(entrada);
+            entrada.appendChild(estado);
+            estado.appendChild(verde);
+            fila.appendChild(accion);
+
+            contenedorFilas.appendChild(fila);
+            filasArray.push(fila); // Agregar la fila al array
+            /*   } */
         }
+    })
 
-        const number = document.createElement('div');
-        number.classList.add('number');
-        number.textContent = i;
 
-        const nombreCliente = document.createElement('div');
-        nombreCliente.classList.add('nombreCliente');
 
-        const Ndocumento = document.createElement('div');
-        Ndocumento.classList.add('Ndocumento');
-
-        const habitacion = document.createElement('div');
-        habitacion.classList.add('widthDiv');
-
-        const papel = document.createElement('div');
-        papel.classList.add('widthDiv');
-
-        const entrada = document.createElement('div');
-        entrada.classList.add('widthDiv');
-
-        const estado = document.createElement('div');
-        estado.className = 'estado';
-
-        const verde = document.createElement('div');
-        verde.className = 'azul';
-
-        const accion = document.createElement('div');
-        accion.classList.add('accion');
-
-        const contendorbtneditar = document.createElement('div');
-        contendorbtneditar.classList.add('contendorbtneditar');
-        // Crear el primer img
-        const imgCirculadoX = document.createElement('img');
-        imgCirculadoX.src = '../../../recursos/editar.webp';
-        imgCirculadoX.alt = '';
-
-        const contendorbtneliminar = document.createElement('div');
-        contendorbtneliminar.classList.add('contendorbtneliminar');
-        // Crear el segundo img
-        const imgEditarArchivo = document.createElement('img');
-        imgEditarArchivo.src = '../../../recursos/icons8-circulado-x-50.webp';
-        imgEditarArchivo.alt = '';
-
-        // Añadir las imágenes al contenedor principal div
-        accion.appendChild(contendorbtneditar);
-        accion.appendChild(contendorbtneliminar);
-        contendorbtneditar.appendChild(imgCirculadoX);
-        contendorbtneliminar.appendChild(imgEditarArchivo);
-
-        fila.appendChild(number);
-        fila.appendChild(nombreCliente);
-        fila.appendChild(Ndocumento);
-        fila.appendChild(habitacion);
-        fila.appendChild(papel);
-        fila.appendChild(entrada);
-        entrada.appendChild(estado);
-        estado.appendChild(verde);
-        fila.appendChild(accion);
-
-        contenedorFilas.appendChild(fila);
-        filasArray.push(fila); // Agregar la fila al array
-    }
 
     // Obtener todos los botones que abren los modales
     var btnsEditar = document.querySelectorAll('.contendorbtneditar');
@@ -147,7 +186,7 @@ function createRows(numClientes) {
     // Añadir evento de click al botón "No" para cerrar el modal de eliminación
     noButtontres.addEventListener('click', (e) => {
         hideModal(modalEliminarcliente);
-        
+
     });
 
     // Añadir evento de click al botón "Sí" para cerrar el modal de eliminación y abrir el modal de información
@@ -164,31 +203,30 @@ function createRows(numClientes) {
         });
     }
 
-        // Verificar si yesButtonConfirm existe antes de añadir el event listener
+    // Verificar si yesButtonConfirm existe antes de añadir el event listener
     if (yesButtonConfirm) {
-    yesButtonConfirm.addEventListener('click', (e) => {
-        e.preventDefault();
-        let allFilled = true;
-        let inputnombre = document.querySelectorAll(".input_obligatorio");
+        yesButtonConfirm.addEventListener('click', (e) => {
+            let allFilled = true;
+            let inputnombre = document.querySelectorAll(".input_obligatorio");
 
-        inputnombre.forEach((element) => {
-            if (element.value === '') {
-                element.nextElementSibling.textContent = 'Por favor llenar el campo';
-                setTimeout(() => {
+            inputnombre.forEach((element) => {
+                if (element.value === '') {
+                    element.nextElementSibling.textContent = 'Por favor llenar el campo';
+                    setTimeout(() => {
+                        element.nextElementSibling.textContent = '';
+                    }, 5000);
+                    allFilled = false;
+                } else {
                     element.nextElementSibling.textContent = '';
-                }, 5000);
-                allFilled = false;
-            } else {
-                element.nextElementSibling.textContent = '';
+                }
+            });
+
+            if (allFilled) {
+                hideModal(modalConfirmar);
+                showModalWithAutoHide(modalInformacion);
             }
         });
-
-        if (allFilled) {
-            hideModal(modalConfirmar);
-            showModalWithAutoHide(modalInformacion);
-        }
-    });
-}
+    }
 
 
 
@@ -204,15 +242,12 @@ function createRows(numClientes) {
     return filasArray; // Devolver el array con las filas
 }
 
-document.getElementById('numClientes').addEventListener('input', function () {
-    const numClientes = Math.max(this.value, 1); // Asegurarse de que el valor mínimo sea 10
-    createRows(numClientes);
-});
+
 
 // Ejecutar la función al cargar la página con el valor inicial de 10
-window.onload = function () {
-    createRows(10);
-};
+/* window.onload = function () {
+    
+}; */
 document.querySelectorAll('.contendorBtn button').forEach((button) => {
     if (!isNaN(button.innerText)) {
         // Verifica que el texto del botón es un número

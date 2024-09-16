@@ -810,12 +810,33 @@ guardarEnHistorial(db, data)
 
  */
 
-function niveles(db,callback) {
-    db.all('SELECT * FROM nivel', (err,row) => {
+function niveles(db, callback) {
+    db.all('SELECT * FROM nivel', (err, row) => {
         callback(row)
     })
 }
 
+function listadoDeHuespedes(db, callback) {
+    let listaHuespedes = {
+        actuales: [],
+        viejos: []
+    }
+    db.all("SELECT * FROM huesped", (err, huespedes_actuales) => {
+        if (err) {
+            console.log("Error", err)
+        } 
+        db.all("SELECT * FROM historial_huesped",(err,huesped_viejos)=>{
+            if(err){
+                console.log("Error",err)
+            }
+            listaHuespedes.actuales.push(huespedes_actuales)
+            listaHuespedes.viejos.push(huesped_viejos)
+            callback(listaHuespedes)
+        })
+      
+
+    })
+}
 
 module.exports = {
     validarUsuario: validarUsuario,
@@ -834,6 +855,7 @@ module.exports = {
     registrarPago: registrarPago,
     actualizarCostoTotal: actualizarCostoTotal,
     guardarEnHistorial: guardarEnHistorial,
-    niveles: niveles
+    niveles: niveles,
+    listadoDeHuespedes: listadoDeHuespedes
 
 };

@@ -24,7 +24,8 @@ const {
     registrarPago,
     actualizarCostoTotal,
     guardarEnHistorial,
-    niveles
+    niveles,
+    listadoDeHuespedes
 } = require('./crud');
 const db = new sqlite3.Database(
     path.join(path.join(__dirname, '/db', 'data6.db'))
@@ -297,5 +298,12 @@ ipcMain.on('pedir-niveles', (e, respuesta) => {
     niveles(db, (niveles) => {
         windowMain.webContents.send('recibir-niveles', niveles);
     })
+})
+
+ipcMain.on('listado-huespedes',(e,mensaje)=>{
+    listadoDeHuespedes(db,(listado)=>{
+        windowMain.webContents.send('recibir-listado-huespedes',listado)
+    })
+   
 })
 

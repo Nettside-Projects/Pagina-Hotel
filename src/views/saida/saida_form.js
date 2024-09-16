@@ -826,7 +826,8 @@ function enviarRegistroDePago(numero_documento) {
     const anioActual = fecha_actual_obj.getFullYear();
     const diaActual = fecha_actual_obj.getDate();
     const mesActual = fecha_actual_obj.getMonth() + 1;
-    let fecha_actual = new Date(`${anioActual}-${mesActual}-${diaActual}`);
+    let fecha_actual = `${anioActual}-${mesActual}-${diaActual}`;
+    console.log(fecha_actual)
     let filas = document.querySelectorAll('.fila_pago');
     let btnEnviarPago = document.querySelectorAll('.btn-pagamento')[1];
     btnEnviarPago.addEventListener('click', (e) => {

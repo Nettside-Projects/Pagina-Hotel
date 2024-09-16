@@ -100,6 +100,8 @@ contextBridge.exposeInMainWorld('preload', {
         ipcRenderer.send("pedir-niveles",respuesta)
     },
     nivelesOn: (callback) => ipcRenderer.on("recibir-niveles",(e,info) => callback(e,info)),
+    listaDeHuespedesSend: (mensaje) => ipcRenderer.send("listado-huespedes",mensaje),
+    listaDeHuespedesOn: (callback) => ipcRenderer.on("recibir-listado-huespedes",(e,info)=>callback(e,info)),
     i18n: {
         onTranslate: (callback) =>
             ipcRenderer.on('i18n', (event, data) => callback(data)),
